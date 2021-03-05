@@ -1,3 +1,4 @@
+-- database name "freehand"
 
 -- USER is a reserved keyword with Postgres
 -- You must use double quotes in every query that user is in:
@@ -9,7 +10,7 @@ CREATE TABLE "user" (
 	"username" varchar(255) NOT NULL UNIQUE,
 	"password" varchar(1000) NOT NULL,
 	"isadmin" BOOLEAN NOT NULL,
-	CONSTRAINT "users_pk" PRIMARY KEY ("id")
+	CONSTRAINT "user_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -31,7 +32,7 @@ CREATE TABLE "events" (
 
 CREATE TABLE "occasions" (
 	"id" serial NOT NULL,
-	"occasion" serial(255) NOT NULL,
+	"occasion" varchar(255) NOT NULL,
 	CONSTRAINT "occasions_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -78,4 +79,4 @@ ALTER TABLE "events" ADD CONSTRAINT "events_fk3" FOREIGN KEY ("card_id") REFEREN
 ALTER TABLE "cards" ADD CONSTRAINT "cards_fk0" FOREIGN KEY ("occasion_id") REFERENCES "occasions"("id");
 ALTER TABLE "cards" ADD CONSTRAINT "cards_fk1" FOREIGN KEY ("category_id") REFERENCES "categories"("id");
 
-ALTER TABLE "persons" ADD CONSTRAINT "persons_fk0" FOREIGN KEY ("user_id") REFERENCES "users"("id");
+ALTER TABLE "persons" ADD CONSTRAINT "persons_fk0" FOREIGN KEY ("user_id") REFERENCES "user"("id");
