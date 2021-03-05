@@ -9,7 +9,7 @@ CREATE TABLE "user" (
 	"id" serial NOT NULL,
 	"username" varchar(255) NOT NULL UNIQUE,
 	"password" varchar(1000) NOT NULL,
-	"isadmin" BOOLEAN NOT NULL,
+	"isadmin" BOOLEAN DEFAULT FALSE NOT NULL,
 	CONSTRAINT "user_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
