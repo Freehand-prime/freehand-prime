@@ -42,7 +42,6 @@ export default function NavDrawer({ open, setOpen }) {
 
   // User and Login stores
   const user = useSelector((store) => store.user);
-  const login = useSelector((store) => store.login)
 
   // Hooks
   const classes = useStyles();
