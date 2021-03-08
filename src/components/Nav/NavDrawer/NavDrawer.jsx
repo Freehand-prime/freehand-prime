@@ -37,9 +37,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function NavDrawer({ open, setOpen }) {
-  // Logout/Login dialog state
+  // Logout dialog state
   const [logout, setLogout] = useState(false);
-  // const [login, setLogin] = useState(false);
 
   // User and Login stores
   const user = useSelector((store) => store.user);
