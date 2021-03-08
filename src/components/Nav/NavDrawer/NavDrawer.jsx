@@ -14,7 +14,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import PeopleIcon from "@material-ui/icons/People";
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
@@ -57,7 +57,7 @@ export default function NavDrawer({ open, setOpen }) {
     },
     {
       text: "View People",
-      icon: <PeopleIcon />,
+      icon: <SupervisedUserCircleIcon />,
       onClick: () => history.push("/persons"),
     },
     {
