@@ -13,17 +13,18 @@ import Footer from "../Footer/Footer";
 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import EnterPerson from "../EnterPerson/EnterPerson"
-import EnterOccasion from "../EnterOccasion/EnterOccasion"
-import SelectCategory from "../SelectCategory/SelectCategory"
-import Dashboard from "../Dashboard/Dashboard"
-import ViewPersons from "../ViewPersons/ViewPersons"
-import ViewPersonsEvents from "../ViewPersonsEvents/ViewPersonsEvents"
-import EditEvent from "../EditEvent/EditEvent"
-import PickACard from "../PickACard/PickACard"
-import ShippingConfirm from "../ShippingConfirm/ShippingConfirm"
-import AdminCards from "../AdminCards/AdminCards"
-import AdminOccasions from "../AdminOccasions/AdminOccasions"
+import LandingPage from "../LandingPage/LandingPage";
+import EnterPerson from "../EnterPerson/EnterPerson";
+import EnterOccasion from "../EnterOccasion/EnterOccasion";
+import SelectCategory from "../SelectCategory/SelectCategory";
+import Dashboard from "../Dashboard/Dashboard";
+import ViewPersons from "../ViewPersons/ViewPersons";
+import ViewPersonsEvents from "../ViewPersonsEvents/ViewPersonsEvents";
+import EditEvent from "../EditEvent/EditEvent";
+import PickACard from "../PickACard/PickACard";
+import ShippingConfirm from "../ShippingConfirm/ShippingConfirm";
+import AdminCards from "../AdminCards/AdminCards";
+import AdminOccasions from "../AdminOccasions/AdminOccasions";
 
 import "./App.css";
 
@@ -42,6 +43,10 @@ export default function App() {
         <Nav />
         <Switch>
           <Redirect exact from="/" to="/home" />
+
+          <Route exact path="/home">
+            <LandingPage />
+          </Route>
 
           <Route exact path="/person">
             <EnterPerson />
