@@ -20,7 +20,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 
 // Component
-import LogoutDialog from "../LogoutDialog/LogoutDialog";
+import LogoutDialog from "../../LogoutDialog/LogoutDialog"
 import LoginDialog from "../../LoginDialog/LoginDialog";
 
 // MUI styling
@@ -69,16 +69,12 @@ export default function NavDrawer({ open, setOpen }) {
 
   // Drawer open
   const handleDrawerOpen = () => {
-    if (user.id != null) {
       setOpen(true);
-    }
   };
 
   // Drawer close
   const handleDrawerClose = () => {
-    if (user.id != null) {
       setOpen(false);
-    }
   };
 
   // Open logout dialog
