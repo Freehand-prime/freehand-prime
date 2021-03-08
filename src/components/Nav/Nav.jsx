@@ -4,7 +4,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import {useSelector} from 'react-redux';
 
-function Nav() {
+export default function Nav() {
   const user = useSelector((store) => store.user);
 
   let loginLinkData = {
@@ -43,5 +43,3 @@ function Nav() {
     </div>
   );
 }
-
-export default Nav;

@@ -26,7 +26,7 @@ import "./App.css";
 
 
 
-function App() {
+export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -92,5 +92,3 @@ function App() {
     </Router>
   );
 }
-
-export default App;

@@ -5,7 +5,7 @@ import './LandingPage.css';
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
 
-function LandingPage() {
+export default function LandingPage() {
   const [heading, setHeading] = useState('Welcome');
   const history = useHistory();
 
@@ -65,5 +65,3 @@ function LandingPage() {
     </div>
   );
 }
-
-export default LandingPage;
