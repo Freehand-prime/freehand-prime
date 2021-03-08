@@ -80,7 +80,7 @@ function App() {
 
           <Route>
             <img
-              src="https://http.cat/404.jpg"
+              src="https://http.cat/404"
               alt="404 Cat Not Found"
               style={{ width: "100%" }}
             />{" "}
