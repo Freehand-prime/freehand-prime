@@ -1,11 +1,28 @@
-import React from 'react';
-import './Footer.css';
+// React, Router
+import React from "react";
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
+// MUI
+import { makeStyles } from "@material-ui/core/styles";
+
+// MUI styling
+const useStyles = makeStyles({
+  root: {
+    marginTop: 40,
+    padding: 20,
+    textAlign: "center",
+    left: 0,
+    bottom: 0,
+    right: 0,
+  },
+});
 
 export default function Footer() {
-  return <footer>&copy; Prime Digital Academy</footer>;
+
+  const classes = useStyles();
+
+  return (
+    <footer className={classes.root}>
+      Copyright &copy; 2021 Freehand Cards. All Rights Reserved
+    </footer>
+  );
 }
