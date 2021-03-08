@@ -18,7 +18,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function LoginDialog({ login, setLogin }) {
+export default function LoginDialog() {
   
   // State
   const [username, setUsername] = useState("");
@@ -26,6 +26,7 @@ export default function LoginDialog({ login, setLogin }) {
 
   // Redux store
   const errors = useSelector((store) => store.errors);
+  const login = useSelector((store) => store.login)
 
   // Hooks
   const dispatch = useDispatch();
@@ -39,10 +40,9 @@ export default function LoginDialog({ login, setLogin }) {
         payload: {
           username: username,
           password: password,
-        },
+        }, 
+        history: history,
       });
-      setLogin(false);
-      history.push("/user");
     } else {
       dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
@@ -50,7 +50,7 @@ export default function LoginDialog({ login, setLogin }) {
 
   // Login cancel handler
   const handleLoginCancel = () => {
-    setLogin(false);
+    dispatch({type: "LOGIN_CLOSE"})
   };
 
   return (
@@ -76,10 +76,11 @@ export default function LoginDialog({ login, setLogin }) {
             autoFocus
             margin="dense"
             id="name"
-            label="Username"
+            label="Email"
             type="text"
             onChange={(event) => setUsername(event.target.value)}
           />
+          <br/>
           <TextField
             required
             margin="dense"

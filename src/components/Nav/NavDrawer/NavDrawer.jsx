@@ -1,6 +1,6 @@
 // React, Redux, Router
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 // MUI
@@ -39,14 +39,16 @@ const useStyles = makeStyles((theme) => ({
 export default function NavDrawer({ open, setOpen }) {
   // Logout/Login dialog state
   const [logout, setLogout] = useState(false);
-  const [login, setLogin] = useState(false);
+  // const [login, setLogin] = useState(false);
 
-  // User store
+  // User and Login stores
   const user = useSelector((store) => store.user);
+  const login = useSelector((store) => store.login)
 
   // Hooks
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   // Link list for drawer - pushes the user to places
   const linkList = [
@@ -84,7 +86,7 @@ export default function NavDrawer({ open, setOpen }) {
 
   // Open login dialog
   const handleLoginOpen = () => {
-    setLogin(true);
+    dispatch({type: "LOGIN_OPEN"})
   };
 
   return (
@@ -134,7 +136,7 @@ export default function NavDrawer({ open, setOpen }) {
         </div>
       </SwipeableDrawer>
       <LogoutDialog logout={logout} setLogout={setLogout} />
-      <LoginDialog login={login} setLogin={setLogin} />
+      <LoginDialog />
     </>
   );
 }
