@@ -38,10 +38,10 @@ function RegisterDialog({ register, setRegister }) {
         payload: {
           username: username,
           password: password,
-        },
+        }
       });
       setRegister(false);
-      history.push("/user");
+      history.push("/user")
     } else {
       dispatch({ type: "REGISTRATION_INPUT_ERROR" });
     }
@@ -61,6 +61,7 @@ function RegisterDialog({ register, setRegister }) {
         onClose={handleRegisterCancel}
       >
         <DialogTitle id="alert-dialog-slide-title">{"Register"}</DialogTitle>
+        <form onSubmit={handleRegister}>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             {errors.registrationMessage && (
@@ -91,10 +92,11 @@ function RegisterDialog({ register, setRegister }) {
           <Button onClick={handleRegisterCancel} color="inherit">
             Cancel
           </Button>
-          <Button onClick={handleRegister} color="inherit">
+          <Button type="submit" color="inherit">
             Register
           </Button>
         </DialogActions>
+        </form>
       </Dialog>
     </>
   );
