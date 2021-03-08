@@ -62,6 +62,7 @@ export default function LoginDialog({ login, setLogin }) {
         onClose={handleLoginCancel}
       >
         <DialogTitle id="alert-dialog-slide-title">{"Log In"}</DialogTitle>
+        <form onSubmit={handleLogin}>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             {errors.loginMessage && (
@@ -92,10 +93,11 @@ export default function LoginDialog({ login, setLogin }) {
           <Button onClick={handleLoginCancel} color="inherit">
             Cancel
           </Button>
-          <Button onClick={handleLogin} color="inherit">
+          <Button type="submit" color="inherit">
             Log In
           </Button>
         </DialogActions>
+        </form>
       </Dialog>
     </>
   );
