@@ -21,6 +21,7 @@ import ViewPersons from "../ViewPersons/ViewPersons"
 import ViewPersonsEvents from "../ViewPersonsEvents/ViewPersonsEvents"
 import EditEvent from "../EditEvent/EditEvent"
 import PickACard from "../PickACard/PickACard"
+import ShippingConfirm from "../ShippingConfirm/ShippingConfirm"
 import AdminCards from "../AdminCards/AdminCards"
 import AdminOccasions from "../AdminOccasions/AdminOccasions"
 
