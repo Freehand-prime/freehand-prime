@@ -57,10 +57,10 @@ export default function Nav() {
         case "/admincards":
           return "Admin";
         default:
-          return "Freehand";
+          return "Freehand Cards";
       }
     } else {
-      return "Freehand";
+      return "Freehand Cards";
     }
   };
 
