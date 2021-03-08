@@ -12,7 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 
 // Component
-import NavDrawer from "../NavDrawer/NavDrawer";
+import NavDrawer from "./NavDrawer/NavDrawer";
 
 // MUI styling
 const useStyles = makeStyles((theme) => ({
@@ -45,9 +45,7 @@ export default function Nav() {
 
   // Drawer open handler
   const handleDrawerOpen = () => {
-    if (user.id != null) {
       setOpen(true);
-    }
   };
 
   // Appbar title switch statement
@@ -71,9 +69,8 @@ export default function Nav() {
 
   return (
     <div className={classes.root}>
-      <AppBar color="secondary">
+      <AppBar color="primary">
         <Toolbar>
-          {user.id ? (
             <>
               <IconButton
                 onClick={handleDrawerOpen}
@@ -88,11 +85,6 @@ export default function Nav() {
                 {title}
               </Typography>
             </>
-          ) : (
-            <Typography variant="h6" className={classes.title}>
-              <center>{title}</center>
-            </Typography>
-          )}
         </Toolbar>
       </AppBar>
       <Toolbar />
