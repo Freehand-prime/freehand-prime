@@ -21,6 +21,8 @@ import ViewPersons from "../ViewPersons/ViewPersons"
 import ViewPersonsEvents from "../ViewPersonsEvents/ViewPersonsEvents"
 import EditEvent from "../EditEvent/EditEvent"
 import PickACard from "../PickACard/PickACard"
+import AdminCards from "../AdminCards/AdminCards"
+import AdminOccasions from "../AdminOccasions/AdminOccasions"
 
 import "./App.css";
 
@@ -76,7 +78,13 @@ function App() {
             <ShippingConfirm />
           </ProtectedRoute>
 
-          {/* ADMIN GOES HERE */}
+          <ProtectedRoute exact path="/admin" notAdminRedirect="/home">
+            <AdminOccasions />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/adminCards" notAdminRedirect="/home">
+            <AdminCards />
+          </ProtectedRoute>
 
           <Route>
             <img
