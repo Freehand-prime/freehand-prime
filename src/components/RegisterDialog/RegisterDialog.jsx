@@ -75,7 +75,7 @@ function RegisterDialog({ register, setRegister }) {
             margin="dense"
             id="regName"
             label="Email"
-            type="text"
+            type="email"
             onChange={(event) => setUsername(event.target.value)}
           />
           <TextField

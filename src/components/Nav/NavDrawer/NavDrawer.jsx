@@ -22,6 +22,7 @@ import LockOpenIcon from "@material-ui/icons/LockOpen";
 // Component
 import LogoutDialog from "../../LogoutDialog/LogoutDialog"
 import LoginDialog from "../../LoginDialog/LoginDialog";
+import RegisterDialog from "../../RegisterDialog/RegisterDialog"
 
 // MUI styling
 const useStyles = makeStyles((theme) => ({
@@ -39,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
 export default function NavDrawer({ open, setOpen }) {
   // Logout dialog state
   const [logout, setLogout] = useState(false);
+  const [register, setRegister] = useState(false);
 
   // User and Login stores
   const user = useSelector((store) => store.user);
@@ -81,6 +83,10 @@ export default function NavDrawer({ open, setOpen }) {
   const handleLogoutOpen = () => {
     setLogout(true);
   };
+
+  const handleRegisterOpen = () => {
+    setRegister(true);
+  }
 
   // Open login dialog
   const handleLoginOpen = () => {
@@ -130,11 +136,18 @@ export default function NavDrawer({ open, setOpen }) {
                 <ListItemText primary="Log In" />
               </ListItem>
             )}
+            <ListItem button key="register" onClick={handleRegisterOpen}>
+                <ListItemIcon>
+                  <LockOpenIcon />
+                </ListItemIcon>
+                <ListItemText primary="Register" />
+              </ListItem>
           </List>
         </div>
       </SwipeableDrawer>
       <LogoutDialog logout={logout} setLogout={setLogout} />
       <LoginDialog />
+      <RegisterDialog register={register} setRegister={setRegister} />
     </>
   );
 }
