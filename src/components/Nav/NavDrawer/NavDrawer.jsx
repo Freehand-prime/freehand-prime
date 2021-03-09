@@ -53,7 +53,7 @@ export default function NavDrawer({ open, setOpen }) {
     {
       text: "Dashboard",
       icon: <AccountCircleIcon />,
-      onClick: () => history.push("/user"),
+      onClick: () => history.push("/dashboard"),
     },
     {
       text: "View People",

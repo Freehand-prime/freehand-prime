@@ -10,7 +10,7 @@ export default function ProtectedRoute(props) {
   // prop and grabs all other props to pass them along to Route
   const {
     // redirect path to be used if the user is authorized
-    authRedirect,
+    authRedirect, notAdminRedirect, 
     ...otherProps
   } = props;
 
