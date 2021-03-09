@@ -38,11 +38,11 @@ export default function ProtectedRoute(props) {
   }
   
     //redirect a non-admin, logged in user for admin paths. otherwise, set the component.
-  // if (!user.isadmin && notAdminRedirect != null) {
-  //   return <Redirect exact from={otherProps.path} to={notAdminRedirect} />;
-  // } else if (user.isadmin){
-  //   ComponentToShow = ComponentToProtect;
-  // }
+  if (!user.isadmin && notAdminRedirect != null) {
+    return <Redirect exact from={otherProps.path} to={notAdminRedirect} />;
+  } else if (user.isadmin){
+    ComponentToShow = ComponentToProtect;
+  }
 
     // We return a Route component that gets added to our list of routes
   return (
