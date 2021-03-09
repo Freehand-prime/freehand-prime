@@ -13,18 +13,19 @@ import Footer from "../Footer/Footer";
 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import EnterPerson from "../EnterPerson/EnterPerson"
-import EnterOccasion from "../EnterOccasion/EnterOccasion"
-import SelectCategory from "../SelectCategory/SelectCategory"
-import Dashboard from "../Dashboard/Dashboard"
-import ViewPersons from "../ViewPersons/ViewPersons"
-import ViewPersonsEvents from "../ViewPersonsEvents/ViewPersonsEvents"
-import EditEvent from "../EditEvent/EditEvent"
-import PickACard from "../PickACard/PickACard"
-import ShippingConfirm from "../ShippingConfirm/ShippingConfirm"
-import AdminCards from "../AdminCards/AdminCards"
-import AdminOccasions from "../AdminOccasions/AdminOccasions"
-
+import LandingPage from "../LandingPage/LandingPage";
+import EnterPerson from "../EnterPerson/EnterPerson";
+import EnterOccasion from "../EnterOccasion/EnterOccasion";
+import SelectCategory from "../SelectCategory/SelectCategory";
+import Dashboard from "../Dashboard/Dashboard";
+import ViewPersons from "../ViewPersons/ViewPersons";
+import ViewPersonsEvents from "../ViewPersonsEvents/ViewPersonsEvents";
+import EditEvent from "../EditEvent/EditEvent";
+import PickACard from "../PickACard/PickACard";
+import ShippingConfirm from "../ShippingConfirm/ShippingConfirm";
+import AdminCards from "../AdminCards/AdminCards";
+import AdminOccasions from "../AdminOccasions/AdminOccasions";
+import RegisterPage from "../RegisterPage/RegisterPage";
 import "./App.css";
 
 
@@ -43,6 +44,14 @@ export default function App() {
         <Switch>
           <Redirect exact from="/" to="/home" />
 
+          <Route exact path="/home">
+            <LandingPage />
+          </Route>
+
+          <Route exact path="/register">
+            <RegisterPage />
+          </Route>
+
           <Route exact path="/person">
             <EnterPerson />
           </Route>
@@ -55,27 +64,27 @@ export default function App() {
             <SelectCategory />
           </Route>
 
-          <ProtectedRoute exact path="/dashboard" authRedirect="/home">
+          <ProtectedRoute exact path="/dashboard" notAuthRedirect="/home">
             <Dashboard />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/persons" authRedirect="/home">
+          <ProtectedRoute exact path="/persons" notAuthRedirect="/home">
             <ViewPersons />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/events" authRedirect="/home">
+          <ProtectedRoute exact path="/events" notAuthRedirect="/home">
             <ViewPersonsEvents />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/editevent" authRedirect="/home">
+          <ProtectedRoute exact path="/editevent" notAuthRedirect="/home">
             <EditEvent />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/card" authRedirect="/home">
+          <ProtectedRoute exact path="/card" notAuthRedirect="/home">
             <PickACard />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/shipping" authRedirect="/home">
+          <ProtectedRoute exact path="/shipping" notAuthRedirect="/home">
             <ShippingConfirm />
           </ProtectedRoute>
 

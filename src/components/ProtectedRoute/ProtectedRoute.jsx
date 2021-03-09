@@ -10,7 +10,7 @@ export default function ProtectedRoute(props) {
   // prop and grabs all other props to pass them along to Route
   const {
     // redirect path to be used if the user is authorized
-    authRedirect,
+    notAuthRedirect, notAdminRedirect, 
     ...otherProps
   } = props;
 
@@ -30,10 +30,10 @@ export default function ProtectedRoute(props) {
   }
   
   
-    // redirect a logged in user if an authRedirect prop has been provided
-  if (user.id && authRedirect != null) {
-    return <Redirect exact from={otherProps.path} to={authRedirect} />;
-  } else if (!user.id && authRedirect != null) {
+    // redirect a non-login user if a notAuthRedirect prop has been provided
+  if (!user.id && notAuthRedirect != null) {
+    return <Redirect exact from={otherProps.path} to={notAuthRedirect} />;
+  } else if (user.id && notAuthRedirect != null) {
     ComponentToShow = ComponentToProtect;
   }
   
