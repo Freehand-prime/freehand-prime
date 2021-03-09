@@ -47,10 +47,10 @@ export default function EnterOccasion() {
 
         switch(key) {
             case 'occasion':
-                setNewEvent({ ...newEvent, name: event.target.value })
+                setNewEvent({ ...newEvent, occasion: event.target.value })
                 break;
             case 'date':
-                setNewEvent({ ...newEvent, relationship: event.target.value })
+                setNewEvent({ ...newEvent, date: event.target.value })
                 break;
 
         }
