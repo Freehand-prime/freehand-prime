@@ -33,7 +33,8 @@ export default function LoginDialog() {
   const history = useHistory();
 
   // Login handler and validation
-  const handleLogin = () => {
+  const handleLogin = (event) => {
+    event.preventDefault();
     if (username && password) {
       dispatch({
         type: "LOGIN",
@@ -43,6 +44,8 @@ export default function LoginDialog() {
         }, 
         history: history,
       });
+      setUsername("");
+      setPassword("");
     } else {
       dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
@@ -78,6 +81,7 @@ export default function LoginDialog() {
             id="name"
             label="Email"
             type="text"
+            value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
           <br/>
@@ -87,6 +91,7 @@ export default function LoginDialog() {
             id="password"
             label="Password"
             type="password"
+            value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
         </DialogContent>
