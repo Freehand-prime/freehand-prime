@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 
 // Component
-import CardCard from "../CardCard/CardCard";
+// import CardCard from "../CardCard/CardCard";
 
 // MUI styling
 const useStyles = makeStyles((theme) => ({
