@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSeletor } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { 
     Grid,
     Typography,
