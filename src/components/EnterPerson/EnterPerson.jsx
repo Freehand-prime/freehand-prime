@@ -43,10 +43,7 @@ export default function EnterPerson() {
     
 
     //onClick function to submit person & relationship details
-    const handleContinue = (event) => {
-        console.log('clicked handleContinue');
-
-
+    const handleContinue = () => {
         history.push('/occasion');
 
     }; //end handleContinue
