@@ -16,12 +16,12 @@ function* addPerson(action) {
     }
 }; // end addPerson
 
-//generator functon to GET persons details from database. Will be fired on FETCH_PERSONS
+//generator function to GET persons details from database. Will be fired on FETCH_PERSONS
 
 function* fetchPersons() {
     try {
         const persons = yield axios.get('/api/person');
-        console.log('GET ALL:', persons.data);
+        console.log('GET ALL PERSONS:', persons.data);
         yield put({ type: 'SET_PERSONS', payload: persons.data})
     } catch (error) {
         console.error('ERROR in getting persons', error)
