@@ -33,6 +33,8 @@ export default function Dashboard() {
   // const events = useSelector((store) => store.events);
 
   // do we not need a useState bc we are setting state after registration / login?
+  // right now the nav drawer routes to '/user' when dashboard is clicked instead of dashboard
+
   const dummyEvent = {
     date: '3/14/2021',
     person: 'Brian',
@@ -72,7 +74,13 @@ export default function Dashboard() {
           <Paper>
             <ButtonGroup orientation="vertical" color="primary" variant="text">
               <Button>Who Do You Appreciate?</Button>
-              <Button>View People</Button>
+              <Button
+                onClick={() => {
+                  history.push('/persons');
+                }}
+              >
+                View People
+              </Button>
               <Button>View Calendar</Button>
             </ButtonGroup>
           </Paper>
