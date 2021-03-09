@@ -26,6 +26,7 @@ export default function LandingPage() {
   };
 
   return (
+    <div className={classes.root}>
     <Grid container spacing={3}>
       <Grid item xs={6} sm={3}></Grid>
       <Grid item xs={12} sm={6}>
@@ -43,5 +44,6 @@ export default function LandingPage() {
       </Grid>
       <Grid item xs={6} sm={3}></Grid>
     </Grid>
+    </div>
   );
 }
