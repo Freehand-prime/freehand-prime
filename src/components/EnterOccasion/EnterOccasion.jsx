@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSeletor } from 'react-redux';
 import { 
     Grid,
     Typography,
@@ -9,6 +9,7 @@ import {
     InputLabel,
     FormControl,
     Select,
+    Paper,
     Button,
 } from '@material-ui/core';
 
@@ -32,51 +33,20 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnterOccasion() {
 
-    
+    const classes = useStyles();
+
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const [newEvent, setNewEvent] = React.useState({
-        occasion: '',
-        date: '',
-    })
-
-    //function to update state from input fields
-    const handleChange = (key, event) => {
-        console.log('in handleChange');
-
-        switch(key) {
-            case 'occasion':
-                setNewEvent({ ...newEvent, occasion: event.target.value })
-                break;
-            case 'date':
-                setNewEvent({ ...newEvent, date: event.target.value })
-                break;
-
-        }
-    }; //end handleChange
-
+    const events = useSelector((store) => store.events);
+    
     //onClick function to go back to EnterPerson
     const handleBack = () => {
         history.push('/person');
     }; //end handleBack
 
     //onClick function to submit occasion & date details
-    const handleContinue = (event) => {
-        console.log('clicked handleContinue');
-
-        //dispatch to reducer:
-        dispatch({
-            type: 'ADD_OCCASION_DATE',
-            payload: newEvent
-        });
-
-        //adding newPerson
-        setNewEvent({
-            occasion: '',
-            date: '',
-        });
-
+    const handleContinue = () => {
         history.push('/category');
 
     }; //end handleContinue
@@ -102,8 +72,8 @@ export default function EnterOccasion() {
                                 label= "occasion"
                                 placeholder="enter occasion"
                                 type="text"
-                                value={newEvent.occasion}
-                                onChange={(event) => handleChange('occasion', event)}
+                                value={events.occasion}
+                                onChange={(event) => dispatch({ type: 'SET_OCCASION', payload: event.target.value })}
                                 variant="outlined"
                             />
                         </FormControl>
@@ -113,8 +83,8 @@ export default function EnterOccasion() {
                                 label= "date"
                                 placeholder="enter date"
                                 type="date"
-                                value={newEvent.date}
-                                onChange={(event) => handleChange('date', event)}
+                                value={events.date}
+                                onChange={(event) => dispatch({ type: 'SET_DATE', payload: event.target.value })}
                                 variant="outlined"
                             />
                         </FormControl>
