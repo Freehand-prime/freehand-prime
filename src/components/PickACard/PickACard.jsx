@@ -86,17 +86,27 @@ const allCards = [
   },
 ];
 
+// Durstenfeld shuffle, optimized Fisher Yates
+function shuffleCards(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return [...array];
+};
+
 export default function PickACard() {
   // Cards selector
   // const allCards = useSelector((store) => store?.cards);
+  const [cards, setCards] = useState(allCards);
 
   // Hooks
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const history = useHistory();
+  // const dispatch = useDispatch();
+  // const history = useHistory();
 
   // Card button title
-  const buttonTitle = "Select";
+  // const buttonTitle = "Select";
 
   // UseEffect for GET cards
   // useEffect(() => {
@@ -105,16 +115,12 @@ export default function PickACard() {
   //   });
   // }, []);
 
+  console.log(allCards)
 
-  // Durstenfeld shuffle, optimized Fisher Yates
-  const shuffleCards = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  };
-
-  const cards = shuffleCards(allCards);
+  const handleShuffle = () => {
+    setCards(shuffleCards(allCards));
+  }
+  console.log(cards);
 
   return (
     <div className={classes.gridDiv}>
@@ -125,7 +131,7 @@ export default function PickACard() {
         alignItems="center"
         className={classes.root}
       >
-        {cards?.map((card, i) => {
+        {cards.map((card, i) => {
           return (
             <Grow in={true} key={i}>
               <Grid item key={i}>
@@ -135,6 +141,7 @@ export default function PickACard() {
           );
         })}
       </Grid>
+      <button onClick={handleShuffle}>shuffle</button>
     </div>
   );
 }
