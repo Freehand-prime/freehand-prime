@@ -22,7 +22,7 @@ function* loginUser(action) {
     yield put({ type: 'FETCH_USER' });
 
     if(action.history) {
-      action.history.push("/user");
+      action.history.push("/dashboard");
       yield put({type: "LOGIN_CLOSE"})
     }
   } catch (error) {

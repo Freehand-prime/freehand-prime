@@ -41,7 +41,7 @@ function RegisterDialog({ register, setRegister }) {
         }
       });
       setRegister(false);
-      history.push("/user")
+      history.push("/dashboard")
     } else {
       dispatch({ type: "REGISTRATION_INPUT_ERROR" });
     }
