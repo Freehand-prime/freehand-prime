@@ -72,7 +72,7 @@ export default function EnterOccasion() {
                                 label= "occasion"
                                 placeholder="enter occasion"
                                 type="text"
-                                value={events.occasion}
+                                value={events?.occasion}
                                 onChange={(event) => dispatch({ type: 'SET_OCCASION', payload: event.target.value })}
                                 variant="outlined"
                             />
@@ -83,7 +83,7 @@ export default function EnterOccasion() {
                                 label= "date"
                                 placeholder="enter date"
                                 type="date"
-                                value={events.date}
+                                value={events?.date}
                                 onChange={(event) => dispatch({ type: 'SET_DATE', payload: event.target.value })}
                                 variant="outlined"
                             />
