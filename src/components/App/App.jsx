@@ -80,7 +80,7 @@ export default function App() {
             <EditEvent />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/card" notAuthRedirect="/home">
+          <ProtectedRoute exact path="/card" >
             <PickACard />
           </ProtectedRoute>
 
