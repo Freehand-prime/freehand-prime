@@ -29,7 +29,7 @@ function* fetchPersons() {
 }; //end fetchPersons
 
 
-function personsSaga() {
+function* personsSaga() {
     yield takeEvery('ADD_PERSON', addPerson);
     yield takeEvery('FETCH_PERSONS', fetchPersons);
 }

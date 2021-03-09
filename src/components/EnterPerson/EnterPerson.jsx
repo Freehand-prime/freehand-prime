@@ -9,6 +9,7 @@ import {
     InputLabel,
     FormControl,
     Select,
+    Paper,
     Button,
 } from '@material-ui/core';
 
@@ -32,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnterPerson() {
 
-    
+    const classes = useStyles();
+
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -44,17 +46,6 @@ export default function EnterPerson() {
     const handleContinue = (event) => {
         console.log('clicked handleContinue');
 
-        //dispatch to reducer:
-        dispatch({
-            type: 'ADD_PERSON',
-            payload: newPerson
-        });
-
-        //adding newPerson
-        setNewPerson({
-            name: '',
-            relationship: '',
-        });
 
         history.push('/occasion');
 
@@ -83,7 +74,7 @@ export default function EnterPerson() {
                                 placeholder="enter name"
                                 type="text"
                                 value={ person?.name || '' }
-                                onChange={(event) => dispatch({ type: 'SET_NAME', payload: { event.target.value }})}
+                                onChange={(event) => dispatch({ type: 'SET_NAME', payload: event.target.value })}
                                 variant="outlined"
                             />
                         </FormControl>
@@ -94,7 +85,7 @@ export default function EnterPerson() {
                                 placeholder="enter your relationship"
                                 type="text"
                                 value={ person?.relationship || '' }
-                                onChange={(event) => dispatch({ type: 'SET_RELATIONSHIP', payload: { event.target.value }})}
+                                onChange={(event) => dispatch({ type: 'SET_RELATIONSHIP', payload: event.target.value })}
                                 variant="outlined"
                             />
                         </FormControl>

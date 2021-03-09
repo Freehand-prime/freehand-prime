@@ -11,3 +11,5 @@ const personReducer = (state = {name: '', relationship: '', address: '',}, actio
             return state;
     }
 }; //end personReducer
+
+export default personReducer;
