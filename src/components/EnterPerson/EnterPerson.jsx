@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { 
     Grid,
     Typography,
@@ -36,25 +36,9 @@ export default function EnterPerson() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const [newPerson, setNewPerson] = React.useState({
-        name: '',
-        relationship: '',
-    })
+    const person = useSelector((store) => store.person)
 
-    //function to update state from input fields
-    const handleChange = (key, event) => {
-        console.log('in handleChange');
-
-        switch(key) {
-            case 'name':
-                setNewPerson({ ...newPerson, name: event.target.value })
-                break;
-            case 'relationship':
-                setNewPerson({ ...newPerson, relationship: event.target.value })
-                break;
-
-        }
-    }; //end handleChange
+    
 
     //onClick function to submit person & relationship details
     const handleContinue = (event) => {
@@ -98,8 +82,8 @@ export default function EnterPerson() {
                                 label= "name"
                                 placeholder="enter name"
                                 type="text"
-                                value={newPerson.name}
-                                onChange={(event) => handleChange('name', event)}
+                                value={ person?.name || '' }
+                                onChange={(event) => dispatch({ type: 'SET_NAME', payload: { event.target.value }})}
                                 variant="outlined"
                             />
                         </FormControl>
@@ -109,8 +93,8 @@ export default function EnterPerson() {
                                 label= "relationship"
                                 placeholder="enter your relationship"
                                 type="text"
-                                value={newPerson.relationship}
-                                onChange={(event) => handleChange('relationship', event)}
+                                value={ person?.relationship || '' }
+                                onChange={(event) => dispatch({ type: 'SET_RELATIONSHIP', payload: { event.target.value }})}
                                 variant="outlined"
                             />
                         </FormControl>
