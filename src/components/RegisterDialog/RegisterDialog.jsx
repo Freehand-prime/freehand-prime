@@ -31,7 +31,8 @@ function RegisterDialog({ register, setRegister }) {
   const history = useHistory();
 
   // Registration handler function and error catch
-  const handleRegister = () => {
+  const handleRegister = (event) => {
+    event.preventDefault();
     if (username && password) {
       dispatch({
         type: "REGISTER",
@@ -41,7 +42,9 @@ function RegisterDialog({ register, setRegister }) {
         }
       });
       setRegister(false);
-      history.push("/dashboard")
+      history.push("/dashboard");
+      setUsername("");
+      setPassword("");
     } else {
       dispatch({ type: "REGISTRATION_INPUT_ERROR" });
     }
@@ -77,6 +80,7 @@ function RegisterDialog({ register, setRegister }) {
             id="regName"
             label="Email"
             type="email"
+            value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
           <TextField
@@ -85,6 +89,7 @@ function RegisterDialog({ register, setRegister }) {
             id="regPassword"
             label="Password"
             type="password"
+            value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
         </DialogContent>
