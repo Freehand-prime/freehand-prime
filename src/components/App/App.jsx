@@ -64,27 +64,27 @@ export default function App() {
             <SelectCategory />
           </Route>
 
-          <ProtectedRoute exact path="/dashboard" authRedirect="/home">
+          <ProtectedRoute exact path="/dashboard" notAuthRedirect="/home">
             <Dashboard />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/persons" authRedirect="/home">
+          <ProtectedRoute exact path="/persons" notAuthRedirect="/home">
             <ViewPersons />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/events" authRedirect="/home">
+          <ProtectedRoute exact path="/events" notAuthRedirect="/home">
             <ViewPersonsEvents />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/editevent" authRedirect="/home">
+          <ProtectedRoute exact path="/editevent" notAuthRedirect="/home">
             <EditEvent />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/card" authRedirect="/home">
+          <ProtectedRoute exact path="/card" notAuthRedirect="/home">
             <PickACard />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/shipping" authRedirect="/home">
+          <ProtectedRoute exact path="/shipping" notAuthRedirect="/home">
             <ShippingConfirm />
           </ProtectedRoute>
 
