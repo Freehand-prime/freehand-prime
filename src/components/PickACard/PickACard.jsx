@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+// Dummy data for testing - Remove after wiring
 const allCards = [
   {
     id: 0,
