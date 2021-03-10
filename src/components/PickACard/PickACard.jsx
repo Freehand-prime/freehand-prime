@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 // Component
 import CardCard from "../CardCard/CardCard";
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     margin: 10,
-  }
+  },
 }));
 
 // Dummy data for testing - Remove after wiring
@@ -130,6 +131,9 @@ export default function PickACard() {
 
   return (
     <div className={classes.gridDiv}>
+      <Typography gutterBottom align="center" variant="h5" component="h2">
+        Tap a card Image to see the inside view
+      </Typography>
       <Grid
         container
         spacing={3}
