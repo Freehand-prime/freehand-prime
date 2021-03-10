@@ -18,7 +18,7 @@ import ConfirmDialog from './ConfirmDialog/ConfirmDialog'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    maxWidth: 400,
+    maxWidth: 300,
   },
 }));
 
@@ -40,7 +40,8 @@ export default function CardCard({card, buttonTitle}) {
           <CardMedia
             component="img"
             alt={card.details}
-            height="240"
+            height="100%"
+            width="100%"
             image={card.image_inside}
             title="Card Inside"
           />
@@ -48,7 +49,8 @@ export default function CardCard({card, buttonTitle}) {
           <CardMedia
             component="img"
             alt={card.details}
-            height="240"
+            height="100%"
+            width="100%"
             image={card.image_front}
             title="Card Front"
           />
