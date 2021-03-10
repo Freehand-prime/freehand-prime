@@ -1,5 +1,5 @@
 import { put, takeEvery } from "redux-saga/effects";
-import { axios } from 'axios';
+import axios from 'axios';
 
 //SAGA
 //generator function to POST person details to database. Will be fired on ADD_PERSON

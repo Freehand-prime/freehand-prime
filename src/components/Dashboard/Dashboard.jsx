@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -7,7 +8,6 @@ import {
   Button,
   ButtonGroup,
   Card,
-  CardActions,
   CardContent,
   Container,
   Grid,
@@ -29,19 +29,16 @@ const useStyles = makeStyles({
 
 export default function Dashboard() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const classes = useStyles();
-  // const events = useSelector((store) => store.events);
+  const recentEvent = useSelector((store) => store.events);
 
-  // do we not need a useState bc we are setting state after registration / login?
+  // do we not need a useEffect bc we are setting state after registration / login?
   // right now the nav drawer routes to '/user' when dashboard is clicked instead of dashboard
 
-  const dummyEvent = {
-    date: '3/14/2021',
-    person: 'Brian',
-    occasion: 'birthday',
-    category: 'memes',
-    card_id: null,
-  };
+  useEffect(() => {
+    dispatch({ type: 'FETCH_RECENT_EVENT' });
+  }, []);
 
   return (
     <>
@@ -57,13 +54,13 @@ export default function Dashboard() {
                 color="textSecondary"
                 gutterBottom
               >
-                Next Event - {dummyEvent.date}
+                Next Event - {recentEvent.date}
               </Typography>
               <Typography variant="h5" component="h2">
-                {dummyEvent.person}
+                {recentEvent.name}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
-                {dummyEvent.occasion} | {dummyEvent.category}
+                {recentEvent.occasion} | {recentEvent.category}
               </Typography>
               <Button size="small">Edit Event</Button>
             </CardContent>
