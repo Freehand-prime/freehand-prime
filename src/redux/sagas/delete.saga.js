@@ -3,7 +3,7 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 //SAGA
 //generator function to DELETE item: will be fired on 'DELETE_EVENT'
-function* deleteEVENT(action) {
+function* deleteEvent(action) {
     try {
         const mediaId = action.payload;
         yield axios.delete(`/api/event/all/${mediaId}`);
@@ -15,7 +15,7 @@ function* deleteEVENT(action) {
 
 
 function* deleteSaga() {
-    yield takeEvery('FETCH_EVENTS', fetchEvents);
+    yield takeEvery('DELETE_EVENT', deleteEvent);
   }
 
 export default deleteSaga;

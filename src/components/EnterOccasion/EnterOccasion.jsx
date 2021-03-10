@@ -61,7 +61,7 @@ export default function EnterOccasion() {
                 <Grid item xs={6} sm={3}></Grid>
                 <Grid item xs={12} sm={6}>
                     <Paper align="center" elevation={4} className={classes.paper}>
-                        <Typography variant="subtitle1">Tell Us The Occasion!</Typography>
+                        <Typography variant="h6">Tell Us The Occasion!</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} sm={3}></Grid>
@@ -71,9 +71,12 @@ export default function EnterOccasion() {
                         <FormControl>
                             <TextField
                                 id="event-occasion"
-                                label= "occasion"
-                                placeholder="enter occasion"
+                                label= "enter occasion"
                                 type="text"
+                                InputLabelProps={{
+                                    shrink: true,
+                                  }}
+                                style={{ width: 250, margin: 8 }}
                                 value={events?.occasion}
                                 onChange={(event) => dispatch({ type: 'SET_OCCASION', payload: event.target.value })}
                                 variant="outlined"
@@ -82,9 +85,12 @@ export default function EnterOccasion() {
                         <FormControl>
                             <TextField
                                 id="event-date"
-                                label= "date"
-                                placeholder="enter date"
+                                label= "enter date"
                                 type="date"
+                                InputLabelProps={{
+                                    shrink: true,
+                                  }}
+                                style={{ width: 250, margin: 8 }}
                                 value={events?.date}
                                 onChange={(event) => dispatch({ type: 'SET_DATE', payload: event.target.value })}
                                 variant="outlined"

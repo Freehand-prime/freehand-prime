@@ -82,7 +82,7 @@ export default function EditEvent() {
                 <Grid item xs={6} sm={3}></Grid>
                 <Grid item xs={12} sm={6}>
                     <Paper align="center" elevation={4} className={classes.paper}>
-                    <Typography variant="subtitle1">Edit Event</Typography>
+                    <Typography variant="h6">Edit Event</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} sm={3}></Grid>
@@ -93,8 +93,11 @@ export default function EditEvent() {
                             <TextField
                                 id="edit-person-name"
                                 label= "name"
-                                placeholder="enter name"
                                 type="text"
+                                InputLabelProps={{
+                                    shrink: true,
+                                  }}
+                                style={{ width: 250, margin: 8 }}
                                 value={ editInput?.name }
                                 onChange={(event) => dispatch({ type: 'EDIT_NAME', payload: event.target.value })}
                                 variant="outlined"
@@ -104,8 +107,11 @@ export default function EditEvent() {
                             <TextField
                                 id="edit-event-occasion"
                                 label= "occasion"
-                                placeholder="enter occasion"
                                 type="text"
+                                InputLabelProps={{
+                                    shrink: true,
+                                  }}
+                                style={{ width: 250, margin: 8 }}
                                 value={ editInput?.occasion }
                                 onChange={(event) => dispatch({ type: 'EDIT_OCCASION', payload: event.target.value })}
                                 variant="outlined"
@@ -115,8 +121,11 @@ export default function EditEvent() {
                             <TextField
                                 id="edit-event-date"
                                 label= "date"
-                                placeholder="enter date"
                                 type="date"
+                                InputLabelProps={{
+                                    shrink: true,
+                                  }}
+                                style={{ width: 250, margin: 8 }}
                                 value={ editInput?.date }
                                 onChange={(event) => dispatch({ type: 'EDIT_DATE', payload: event.target.value })}
                                 variant="outlined"
@@ -126,8 +135,11 @@ export default function EditEvent() {
                             <Select
                                 id="edit-event-category"
                                 label= "category"
-                                placeholder="select catagory"
                                 type="text"
+                                InputLabelProps={{
+                                    shrink: true,
+                                  }}
+                                style={{ width: 250, margin: 8 }}
                                 value={ editInput?.category }
                                 onChange={(event) => dispatch({ type: 'EDIT_CATEGORY', payload: event.target.value })}
                                 variant="outlined"
@@ -141,7 +153,19 @@ export default function EditEvent() {
                                 
                             </Select>
                         </FormControl>
-                        
+                        {/* conditionally rendered Select Card Button */}
+                        <div>
+
+                            <Button variant="outlined" onClick={handleDelete}>
+                            SELECT NEW CARD
+                            </Button>
+
+                            <Button variant="outlined" onClick={handleUpdate}>
+                            PICK A CARD
+                            </Button>
+                            
+                        </div>
+                        {/* Delete, Update, and Cancel Buttons */}
                         <div>
                             <Button variant="outlined" onClick={handleDelete}>
                             DELETE
