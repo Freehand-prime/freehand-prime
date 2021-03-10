@@ -68,8 +68,8 @@ export default function ShippingConfirm() {
               <FormControl>
                 <FormLabel component="legend">Ship To:</FormLabel>
                 <RadioGroup aria-label="shipping" name="shipping1" value={"changeMe"} onChange={handleChange}>
-                  <FormControlLabel value="Ship to Them" control={<Radio />} label="Them" />
-                  <FormControlLabel value="Ship to Alternate Address" control={<Radio />} label="Alternate Address" />
+                  <FormControlLabel value="changeMe" control={<Radio />} label="Ship to Them" />
+                  <FormControlLabel value="changeMe" control={<Radio />} label="Ship to Another Address" />
                     <TextField
                       id="address_field"
                       label= "address"
