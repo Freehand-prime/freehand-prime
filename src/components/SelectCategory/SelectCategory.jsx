@@ -62,7 +62,7 @@ export default function SelectCategory() {
                 <Grid item xs={6} sm={3}></Grid>
                 <Grid item xs={12} sm={6}>
                     <Paper align="center" elevation={4} className={classes.paper}>
-                    <Typography variant="h5">What type of cards would you like to consider for this occasion?</Typography>
+                    <Typography variant="subtitle1">What type of cards would you like to consider for this occasion?</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} sm={3}></Grid>

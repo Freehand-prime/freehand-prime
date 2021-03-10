@@ -61,7 +61,7 @@ export default function EnterOccasion() {
                 <Grid item xs={6} sm={3}></Grid>
                 <Grid item xs={12} sm={6}>
                     <Paper align="center" elevation={4} className={classes.paper}>
-                        <Typography variant="h5">Tell Us The Occasion!</Typography>
+                        <Typography variant="subtitle1">Tell Us The Occasion!</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} sm={3}></Grid>

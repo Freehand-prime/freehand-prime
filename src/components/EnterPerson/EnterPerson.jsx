@@ -57,8 +57,8 @@ export default function EnterPerson() {
                 <Grid item xs={6} sm={3}></Grid>
                 <Grid item xs={12} sm={6}>
                     <Paper align="center" elevation={4} className={classes.paper}>
-                    <Typography variant="h5">Who Do You Appreciate?</Typography>
-                        <Typography variant="h5">Tell Us Below</Typography>
+                    <Typography variant="subtitle1">Who Do You Appreciate?</Typography>
+                        <Typography variant="subtitle2">Tell Us Below</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} sm={3}></Grid>
