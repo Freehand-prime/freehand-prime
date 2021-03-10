@@ -4,6 +4,7 @@ import user from './user.reducer';
 import login from './login.reducer';
 import person from './person.reducer';
 import persons from './persons.reducer';
+import event from './event.reducer';
 import events from './events.reducer';
 
 // rootReducer is the primary reducer for our entire project
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   login,
   person,
   persons,
+  event,
   events,
 });
 

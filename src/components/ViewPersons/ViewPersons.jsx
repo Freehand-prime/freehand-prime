@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -28,29 +29,14 @@ const useStyles = makeStyles({
 });
 
 export default function ViewPersons() {
-  const history = useHistory();
-  const classes = useStyles();
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const classes = useStyles();
+    const persons = useSelector((store) => store.persons);
 
-  const dummyPersons = [
-    {
-      name: 'Brian',
-      relationship: 'Brother',
-      num_events: 2,
-      address: '2010 Scott Ave N',
-    },
-    {
-      name: 'Tavis',
-      relationship: 'Roommate',
-      num_events: 1,
-      address: '628 Adams St NE',
-    },
-    {
-      name: 'Paige',
-      relationship: 'Friend',
-      num_events: 3,
-      address: null,
-    },
-  ];
+    useEffect(() => {
+        dispatch({ type: 'FETCH_PERSONS' });
+      }, []);
 
   return (
     <>
@@ -59,8 +45,8 @@ export default function ViewPersons() {
         <Typography variant="h5">Your People</Typography>
         <br></br>
         <Paper>
-          {dummyPersons &&
-            dummyPersons.map((person) => (
+          {persons &&
+            persons.map((person) => (
               <Box>
                 <Card className={classes.root}>
                   <CardContent>

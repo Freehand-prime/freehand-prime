@@ -1,15 +1,11 @@
-//reducer to POST new event
-const eventsReducer = (state = {occasion: '', date: '', category: ''}, action) => {
+//reducer to GET all persons
+const eventsReducer = (state = [], action) => {
     switch (action.type) {
-        case 'SET_OCCASION':
-            return { ...state, occasion: action.payload };
-        case 'SET_DATE':
-            return { ...state, date: action.payload };
-        case 'SET_CATEGORY':
-            return { ...state, category: action.payload };
+        case 'SET_EVENTS':
+            return action.payload
         default:
             return state;
     }
-}; //end eventsReducer
+} // end personsReducer
 
 export default eventsReducer;

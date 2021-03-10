@@ -1,5 +1,5 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import { axios } from 'axios';
+import axios from 'axios';
 
 //SAGA
 //generator function to POST event details to database. Will be fired on ADD_EVENT
@@ -14,7 +14,7 @@ function* addEvent(action) {
   }
 } // end addEvent
 
-//generator function to GET persons details from database. Will be fired on FETCH_EVENTS
+//generator function to GET events details from database. Will be fired on FETCH_EVENTS
 function* fetchEvents() {
     try {
         const events = yield axios.get('/api/event');
@@ -25,9 +25,21 @@ function* fetchEvents() {
     }
 } // end fetchEvents
 
+//generator function to GET most recent event details from database. Will be fired on FETCH_RECENT_EVENT
+function* fetchRecentEvent() {
+    try {
+        const event = yield axios.get('/api/event/recent');
+        console.log('GET RECENT EVENT:', event.data);
+        yield put({ type: 'SET_EVENTS', payload: event.data[0]})
+    } catch (error) {
+        console.error('ERROR in getting recent event', error);
+    }
+} // end fetchRecentEvent
+
 function* eventsSaga() {
     yield takeEvery('ADD_EVENT', addEvent);
     yield takeEvery('FETCH_EVENTS', fetchEvents);
+    yield takeEvery('FETCH_RECENT_EVENT', fetchRecentEvent);
 }
 
 export default eventsSaga;
