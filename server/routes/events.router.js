@@ -21,8 +21,7 @@ router.get('/recent', rejectUnauthenticated, (req, res) => {
     JOIN "occasions" ON "events".occasion_id = "occasions".id
     JOIN "categories" ON "events".category_id = "categories".id
     WHERE "user_id" = $1
-    ORDER BY "date"
-    LIMIT 1;`;
+    ORDER BY "date";`;
   pool
     .query(queryText, [req.user.id])
     .then((result) => {
