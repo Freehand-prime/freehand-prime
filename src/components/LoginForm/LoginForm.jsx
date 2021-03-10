@@ -1,65 +1,109 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import {useSelector} from 'react-redux';
+// React, Redux
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function LoginForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const errors = useSelector(store => store.errors);
+// MUI
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
+import TextField from "@material-ui/core/TextField";
+
+// Transition for mount
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+export default function LoginDialog({login, setLogin}) {
+  
+  // State
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  // Redux store
+  const errors = useSelector((store) => store.errors);
+
+  // Hooks
   const dispatch = useDispatch();
 
-  const login = (event) => {
+  // Login handler and validation
+  const handleLogin = (event) => {
     event.preventDefault();
-
     if (username && password) {
       dispatch({
-        type: 'LOGIN',
+        type: "LOGIN",
         payload: {
           username: username,
           password: password,
-        },
+        }, 
       });
+      setUsername("");
+      setPassword("");
+      setLogin(false)
     } else {
-      dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
-  }; // end login
+  };
+
+  // Login cancel handler
+  const handleLoginCancel = () => {
+    setLogin(false)
+  };
 
   return (
-    <form className="formPanel" onSubmit={login}>
-      <h2>Login</h2>
-      {errors.loginMessage && (
-        <h3 className="alert" role="alert">
-          {errors.loginMessage}
-        </h3>
-      )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
+    <>
+      <Dialog
+        open={login}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleLoginCancel}
+      >
+        <DialogTitle id="alert-dialog-slide-title">{"Log In"}</DialogTitle>
+        <form onSubmit={handleLogin}>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            {errors.loginMessage && (
+              <h3 className="alert" role="alert">
+                {errors.loginMessage}
+              </h3>
+            )}
+          </DialogContentText>
+          <TextField
             required
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email"
+            type="text"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
           />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
+          <br/>
+          <TextField
             required
+            margin="dense"
+            id="password"
+            label="Password"
+            type="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
-      </div>
-    </form>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleLoginCancel} color="inherit">
+            Cancel
+          </Button>
+          <Button type="submit" color="inherit">
+            Log In
+          </Button>
+        </DialogActions>
+        </form>
+      </Dialog>
+    </>
   );
 }
+
 
