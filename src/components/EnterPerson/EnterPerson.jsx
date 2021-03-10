@@ -44,6 +44,7 @@ export default function EnterPerson() {
 
     //onClick function to submit person & relationship details
     const handleContinue = () => {
+        // sends user to EnterOccasion page
         history.push('/occasion');
 
     }; //end handleContinue

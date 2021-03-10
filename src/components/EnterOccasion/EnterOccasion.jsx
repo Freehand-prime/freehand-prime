@@ -42,11 +42,13 @@ export default function EnterOccasion() {
     
     //onClick function to go back to EnterPerson
     const handleBack = () => {
+        // sends user to EnterPerson page
         history.push('/person');
     }; //end handleBack
 
     //onClick function to submit occasion & date details
     const handleContinue = () => {
+        // sends user to SelectCategory page
         history.push('/category');
 
     }; //end handleContinue
