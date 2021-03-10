@@ -26,7 +26,7 @@ export default function LoginDialog() {
 
   // Redux store
   const errors = useSelector((store) => store.errors);
-  const login = useSelector((store) => store.login)
+  const login = useSelector((store) => store.login);
 
   // Hooks
   const dispatch = useDispatch();
