@@ -14,7 +14,7 @@ function* deleteEVENT(action) {
 }
 
 
-function* mediaSaga() {
+function* deleteSaga() {
     yield takeEvery('FETCH_EVENTS', fetchEvents);
   }
 
