@@ -6,9 +6,13 @@ import { useHistory } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
+import Button from '@material-ui/core/Button';
 
 // Component
-// import CardCard from "../CardCard/CardCard";
+import CardCard from "../CardCard/CardCard";
+
+import front from "./front.jpeg"
+import inside from "./inside.jpeg"
 
 // MUI styling
 const useStyles = makeStyles((theme) => ({
@@ -21,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     padding: 20,
   },
+  button: {
+    margin: 10,
+  }
 }));
 
 const allCards = [
@@ -28,8 +35,8 @@ const allCards = [
     id: 0,
     occasion_id: 0,
     category_id: 0,
-    image_front: "./front.jpeg",
-    image_inside: "./inside.jpeg",
+    image_front: front,
+    image_inside: inside,
     likes: 27,
     artist: "Bean",
     details: "A card by a bean, with a fox, and some words. So artisan.",
@@ -38,8 +45,8 @@ const allCards = [
     id: 1,
     occasion_id: 1,
     category_id: 1,
-    image_front: "./front.jpeg",
-    image_inside: "./inside.jpeg",
+    image_front: front,
+    image_inside: inside,
     likes: 0,
     artist: "Bean",
     details: "A card by a bean, with a fox, and some words. So artisan.",
@@ -48,8 +55,8 @@ const allCards = [
     id: 2,
     occasion_id: 2,
     category_id: 2,
-    image_front: "./front.jpeg",
-    image_inside: "./inside.jpeg",
+    image_front: front,
+    image_inside: inside,
     likes: 12,
     artist: "Bean",
     details: "A card by a bean, with a fox, and some words. So artisan.",
@@ -58,8 +65,8 @@ const allCards = [
     id: 3,
     occasion_id: 3,
     category_id: 3,
-    image_front: "./front.jpeg",
-    image_inside: "./inside.jpeg",
+    image_front: front,
+    image_inside: inside,
     likes: 4,
     artist: "Bean",
     details: "A card by a bean, with a fox, and some words. So artisan.",
@@ -68,8 +75,8 @@ const allCards = [
     id: 4,
     occasion_id: 4,
     category_id: 4,
-    image_front: "./front.jpeg",
-    image_inside: "./inside.jpeg",
+    image_front: front,
+    image_inside: inside,
     likes: 9,
     artist: "Bean",
     details: "A card by a bean, with a fox, and some words. So artisan.",
@@ -78,8 +85,8 @@ const allCards = [
     id: 5,
     occasion_id: 5,
     category_id: 5,
-    image_front: "./front.jpeg",
-    image_inside: "./inside.jpeg",
+    image_front: front,
+    image_inside: inside,
     likes: 42,
     artist: "Bean",
     details: "A card by a bean, with a fox, and some words. So artisan.",
@@ -96,17 +103,18 @@ function shuffleCards(array) {
 };
 
 export default function PickACard() {
+
   // Cards selector
   // const allCards = useSelector((store) => store?.cards);
   const [cards, setCards] = useState(allCards);
 
   // Hooks
   const classes = useStyles();
-  // const dispatch = useDispatch();
-  // const history = useHistory();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   // Card button title
-  // const buttonTitle = "Select";
+  const buttonTitle = "Choose this card";
 
   // UseEffect for GET cards
   // useEffect(() => {
@@ -115,12 +123,9 @@ export default function PickACard() {
   //   });
   // }, []);
 
-  console.log(allCards)
-
   const handleShuffle = () => {
     setCards(shuffleCards(allCards));
   }
-  console.log(cards);
 
   return (
     <div className={classes.gridDiv}>
@@ -131,17 +136,18 @@ export default function PickACard() {
         alignItems="center"
         className={classes.root}
       >
-        {cards.map((card, i) => {
+        {cards.slice(0,3).map((card, i) => {
           return (
             <Grow in={true} key={i}>
               <Grid item key={i}>
-                <p>{card.id}</p>
+                <CardCard card={card} buttonTitle={buttonTitle} />
               </Grid>
             </Grow>
           );
         })}
       </Grid>
-      <button onClick={handleShuffle}>shuffle</button>
+      <br/>
+      <Button className={classes.button} variant="contained" color="primary" onClick={handleShuffle}>Show me new cards</Button>
     </div>
   );
 }
