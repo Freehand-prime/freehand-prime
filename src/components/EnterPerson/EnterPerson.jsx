@@ -44,6 +44,7 @@ export default function EnterPerson() {
 
     //onClick function to submit person & relationship details
     const handleContinue = () => {
+        // sends user to EnterOccasion page
         history.push('/occasion');
 
     }; //end handleContinue
@@ -56,8 +57,8 @@ export default function EnterPerson() {
                 <Grid item xs={6} sm={3}></Grid>
                 <Grid item xs={12} sm={6}>
                     <Paper align="center" elevation={4} className={classes.paper}>
-                    <Typography variant="h5">Who Do You Appreciate?</Typography>
-                        <Typography variant="h5">Tell Us Below</Typography>
+                    <Typography variant="h6">Who Do You Appreciate?</Typography>
+                        <Typography variant="h6">Tell Us Below</Typography>
                     </Paper>
                 </Grid>
                 <Grid item xs={6} sm={3}></Grid>
@@ -67,9 +68,12 @@ export default function EnterPerson() {
                         <FormControl>
                             <TextField
                                 id="person-name"
-                                label= "name"
-                                placeholder="enter name"
+                                label= "enter name"
                                 type="text"
+                                InputLabelProps={{
+                                    shrink: true,
+                                  }}
+                                style={{ width: 250, margin: 8 }}
                                 value={ person?.name || '' }
                                 onChange={(event) => dispatch({ type: 'SET_NAME', payload: event.target.value })}
                                 variant="outlined"
@@ -78,9 +82,12 @@ export default function EnterPerson() {
                         <FormControl>
                             <TextField
                                 id="person-relationship"
-                                label= "relationship"
-                                placeholder="enter your relationship"
+                                label= "enter your relationship"
                                 type="text"
+                                InputLabelProps={{
+                                    shrink: true,
+                                  }}
+                                style={{ width: 250, margin: 8 }}
                                 value={ person?.relationship || '' }
                                 onChange={(event) => dispatch({ type: 'SET_RELATIONSHIP', payload: event.target.value })}
                                 variant="outlined"
