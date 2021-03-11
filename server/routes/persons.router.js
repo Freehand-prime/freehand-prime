@@ -21,11 +21,26 @@ router.get('/', (req, res) => {
     });
 });
 
-/**
- * POST route template
- */
+// POST route for adding a new person to the database
 router.post('/', (req, res) => {
-  // POST route code here
-});
+  console.log(req.body)
+  const insertPersonQuery = `
+    INSERT INTO "persons" ("user_id", "name", "relationship", "address")
+    VALUES ($1, $2, $3, $4);`;
+
+  pool
+  .query(insertPersonQuery, [req.body.user_id, 
+                                req.body.name, 
+                                req.body.relationship,
+                                req.body.address])
+  .then( result => {
+    console.log('New Person Entry:', result.rows);
+    res.sendStatus(201);
+  })
+  .catch( error => {
+    console.log('Error in posting person at the Router', error);
+    res.sendStatus(500);
+  })
+}); //end POST for persons
 
 module.exports = router;
