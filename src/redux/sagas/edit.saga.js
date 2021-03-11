@@ -12,7 +12,7 @@ function* getEvent(action) {
         console.log(response.data[0]);
         yield put({ type: 'SET_EDIT_EVENT', payload: response.data[0]})
     } catch (error) {
-        console.error('ERROR in get ENTRY', error)
+        console.error('ERROR in getEVENT', error)
     }
 }; //end getEntry
 
