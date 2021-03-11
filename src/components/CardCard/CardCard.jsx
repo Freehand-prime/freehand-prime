@@ -68,9 +68,9 @@ export default function CardCard({card, buttonTitle}) {
         <Button size="small" color="primary" onClick={() => setOpenConfirm(!openConfirm)}>
           {buttonTitle}
         </Button>
-        <Typography variant="body2" color="textSecondary" component="p">
+        {/* <Typography variant="body2" color="textSecondary" component="p">
             Likes: {card.likes}
-        </Typography>
+        </Typography> */}
       </CardActions>
     </Card>
     <ConfirmDialog openConfirm={openConfirm} setOpenConfirm={setOpenConfirm} cardId={card.id}/>
