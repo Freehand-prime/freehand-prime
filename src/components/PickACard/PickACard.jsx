@@ -12,9 +12,6 @@ import Typography from '@material-ui/core/Typography';
 // Component
 import CardCard from "../CardCard/CardCard";
 
-import front from "./front.jpeg"
-import inside from "./inside.jpeg"
-
 // MUI styling
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,69 +28,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// Dummy data for testing - Remove after wiring
-const allCards = [
-  {
-    id: 0,
-    occasion_id: 0,
-    category_id: 0,
-    image_front: front,
-    image_inside: inside,
-    likes: 27,
-    artist: "Bean",
-    details: "A card by a bean, with a fox, and some words. So artisan.",
-  },
-  {
-    id: 1,
-    occasion_id: 1,
-    category_id: 1,
-    image_front: front,
-    image_inside: inside,
-    likes: 0,
-    artist: "Bean",
-    details: "A card by a bean, with a fox, and some words. So artisan.",
-  },
-  {
-    id: 2,
-    occasion_id: 2,
-    category_id: 2,
-    image_front: front,
-    image_inside: inside,
-    likes: 12,
-    artist: "Bean",
-    details: "A card by a bean, with a fox, and some words. So artisan.",
-  },
-  {
-    id: 3,
-    occasion_id: 3,
-    category_id: 3,
-    image_front: front,
-    image_inside: inside,
-    likes: 4,
-    artist: "Bean",
-    details: "A card by a bean, with a fox, and some words. So artisan.",
-  },
-  {
-    id: 4,
-    occasion_id: 4,
-    category_id: 4,
-    image_front: front,
-    image_inside: inside,
-    likes: 9,
-    artist: "Bean",
-    details: "A card by a bean, with a fox, and some words. So artisan.",
-  },
-  {
-    id: 5,
-    occasion_id: 5,
-    category_id: 5,
-    image_front: front,
-    image_inside: inside,
-    likes: 42,
-    artist: "Bean",
-    details: "A card by a bean, with a fox, and some words. So artisan.",
-  },
-];
 
 // Durstenfeld shuffle, optimized Fisher Yates
 function shuffleCards(array) {
@@ -107,27 +41,33 @@ function shuffleCards(array) {
 export default function PickACard() {
 
   // Cards selector
-  // const allCards = useSelector((store) => store?.cards);
-  const [cards, setCards] = useState(allCards);
+  const allCards = useSelector((store) => store?.cards);
 
+  console.log(allCards);
+  // Shuffled Cards state
+  const [cards, setCards] = useState([]);
+
+  console.log(cards)
   // Hooks
   const classes = useStyles();
   const dispatch = useDispatch();
-  const history = useHistory();
 
   // Card button title
   const buttonTitle = "Choose this card";
 
-  // UseEffect for GET cards
-  // useEffect(() => {
-  //   dispatch({
-  //     type: "FETCH_CARDS",
-  //   });
-  // }, []);
-
+  // Shuffle function call
   const handleShuffle = () => {
     setCards(shuffleCards(allCards));
   }
+
+  // UseEffect for GET cards
+  useEffect(() => {
+    dispatch({type: 'FETCH_CARDS'});
+  }, []);
+
+  useEffect(() => {
+    handleShuffle();
+  }, [allCards]);
 
   return (
     <div className={classes.gridDiv}>
@@ -141,7 +81,7 @@ export default function PickACard() {
         alignItems="center"
         className={classes.root}
       >
-        {cards.slice(0,3).map((card, i) => {
+        {cards?.slice(0,3).map((card, i) => {
           return (
             <Grow in={true} key={i}>
               <Grid item key={i}>
