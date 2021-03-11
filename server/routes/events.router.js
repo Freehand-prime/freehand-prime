@@ -26,11 +26,39 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
-/**
- * POST route template
- */
+// POST route for adding event details
 router.post('/', (req, res) => {
-  // POST route code here
+  console.log(req.body);
+  const insertEventQuery = `
+  INSERT INTO "events" ("category_id", "occasion_id", "date")
+  VALUES ($1, $2, $3);`;
+
+  pool
+  .query(insertEventQuery, [req.body.category_id,
+                            req.body.occasion_id,
+                            req.body.date])
+  .then( result => {
+    console.log('New Event Entry:', result.rows)
+    res.sendStatus(201);
+  })
+  .catch( error => {
+    console.log('Error in posting event at the Router', error);
+    res.sendStatus(500);
+  })
+}); // end POST for event
+
+/**
+ * DELETE route template
+ */
+router.delete('/', (req, res) => {
+  // DELETE route code here
+});
+
+/**
+ * PUT route template
+ */
+router.put('/', (req, res) => {
+  // PUT route code here
 });
 
 module.exports = router;
