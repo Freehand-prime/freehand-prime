@@ -4,7 +4,6 @@ const router = express.Router();
 
 // route for getting user's persons
 router.get('/', (req, res) => {
-  // GET route code here
   console.log('in get persons');
   queryText = `SELECT "persons".*, COUNT("events".person_id) as "num_events" FROM "persons"
   JOIN "events" ON "persons".id = "events".person_id

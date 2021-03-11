@@ -31,13 +31,11 @@ export default function Dashboard() {
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
-  const recentEvent = useSelector((store) => store.events);
+  const events = useSelector((store) => store.events);
 
   // do we not need a useEffect bc we are setting state after registration / login?
-  // right now the nav drawer routes to '/user' when dashboard is clicked instead of dashboard
-
   useEffect(() => {
-    dispatch({ type: 'FETCH_RECENT_EVENT' });
+    dispatch({ type: 'FETCH_EVENTS' });
   }, []);
 
   return (
@@ -54,13 +52,13 @@ export default function Dashboard() {
                 color="textSecondary"
                 gutterBottom
               >
-                Next Event - {recentEvent.date}
+                Next Event - {events[0]?.date}
               </Typography>
               <Typography variant="h5" component="h2">
-                {recentEvent.name}
+                {events[0]?.name}
               </Typography>
               <Typography className={classes.pos} color="textSecondary">
-                {recentEvent.occasion} | {recentEvent.category}
+                {events[0]?.occasion} | {events[0]?.category}
               </Typography>
               <Button size="small">Edit Event</Button>
             </CardContent>
@@ -70,7 +68,13 @@ export default function Dashboard() {
         <Box justifyContent="center">
           <Paper>
             <ButtonGroup orientation="vertical" color="primary" variant="text">
-              <Button>Who Do You Appreciate?</Button>
+              <Button
+                onClick={() => {
+                  history.push('/person');
+                }}
+              >
+                Who Do You Appreciate?
+              </Button>
               <Button
                 onClick={() => {
                   history.push('/persons');

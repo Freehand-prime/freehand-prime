@@ -29,14 +29,14 @@ const useStyles = makeStyles({
 });
 
 export default function ViewPersons() {
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const classes = useStyles();
-    const persons = useSelector((store) => store.persons);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const classes = useStyles();
+  const persons = useSelector((store) => store.persons);
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_PERSONS' });
-      }, []);
+  useEffect(() => {
+    dispatch({ type: 'FETCH_PERSONS' });
+  }, []);
 
   return (
     <>
@@ -47,7 +47,7 @@ export default function ViewPersons() {
         <Paper>
           {persons &&
             persons.map((person) => (
-              <Box>
+              <Box key={person.id}>
                 <Card className={classes.root}>
                   <CardContent>
                     <Typography variant="h5" component="h2">
@@ -65,7 +65,7 @@ export default function ViewPersons() {
                     </Typography>
                     <Button
                       onClick={() => {
-                        history.push('/events');
+                        history.push(`/events/${person.id}`);
                       }}
                       size="small"
                     >
