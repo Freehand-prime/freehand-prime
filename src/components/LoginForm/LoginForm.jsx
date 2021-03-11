@@ -53,8 +53,7 @@ export default function LoginDialog({login, setLogin}) {
         open={login}
         TransitionComponent={Transition}
         keepMounted
-        disableBackdropClick="true"
-        disableEscapeKey="true"
+        disableBackdropClick={true}
       >
         <DialogTitle id="alert-dialog-slide-title">{"Log In"}</DialogTitle>
         <form onSubmit={handleLogin}>
