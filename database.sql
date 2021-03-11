@@ -22,9 +22,9 @@ CREATE TABLE "events" (
 	"occasion_id" int NOT NULL,
 	"card_id" int,
 	"date" DATE NOT NULL,
-	"inscription" varchar(1000) NOT NULL,
-	"is_shipped" BOOLEAN NOT NULL,
-	"ship_to_me" BOOLEAN NOT NULL,
+	"inscription" varchar(1000),
+	"is_shipped" BOOLEAN DEFAULT FALSE NOT NULL,
+	"ship_to_me" BOOLEAN DEFAULT FALSE NOT NULL,
 	CONSTRAINT "events_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -52,7 +52,7 @@ CREATE TABLE "cards" (
 	"category_id" int NOT NULL,
 	"image_front" varchar(1000) NOT NULL,
 	"image_inside" varchar(1000) NOT NULL,
-	"likes" int NOT NULL,
+	"likes" int DEFAULT 0 NOT NULL,
 	"artist" varchar(255) NOT NULL,
 	"details" varchar(1000) NOT NULL,
 	CONSTRAINT "cards_pk" PRIMARY KEY ("id")
@@ -65,7 +65,7 @@ CREATE TABLE "persons" (
 	"user_id" int NOT NULL,
 	"name" varchar(255) NOT NULL,
 	"relationship" varchar(255) NOT NULL,
-	"address" varchar(255) NOT NULL,
+	"address" varchar(255),
 	CONSTRAINT "persons_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
