@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 import {
@@ -30,33 +30,21 @@ const useStyles = makeStyles({
 export default function ViewPersonsEvent() {
   const history = useHistory();
   const classes = useStyles();
-
-  const dummyEvents = [
-    {
-      date: '3/14/2021',
-      person: 'Brian',
-      occasion: 'birthday',
-      category: 'memes',
-      card_id: null,
-    },
-    {
-      date: '4/5/2021',
-      person: 'Brian',
-      occasion: 'promotion',
-      category: 'congratulations',
-      card_id: null,
-    },
-  ];
+  const page = useParams();
+  const events = useSelector((store) => store.events);
+  const personsEvents = events.filter(function (event) {
+    return event.id == page.id;
+  });
 
   return (
     <>
       <Container>
         <br></br>
-        <Typography variant="h5">{dummyEvents.name}'s Events</Typography>
+        <Typography variant="h5">{personsEvents[0]?.name}'s Events</Typography>
         <br></br>
         <Paper>
-          {dummyEvents &&
-            dummyEvents.map((event) => (
+          {personsEvents &&
+            personsEvents.map((event) => (
               <Box>
                 <Card className={classes.root}>
                   <CardContent>

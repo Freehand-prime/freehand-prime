@@ -16,30 +16,19 @@ function* addEvent(action) {
 
 //generator function to GET events details from database. Will be fired on FETCH_EVENTS
 function* fetchEvents() {
-    try {
-        const events = yield axios.get('/api/event');
-        console.log('GET ALL EVENTS:', events.data);
-        yield put({ type: 'SET_EVENTS', payload: events.data})
-    } catch (error) {
-        console.error('ERROR in getting events', error)
-    }
+  try {
+    console.log('in get all events');
+    const events = yield axios.get('/api/event');
+    console.log('GET ALL EVENTS:', events.data);
+    yield put({ type: 'SET_EVENTS', payload: events.data });
+  } catch (error) {
+    console.error('ERROR in getting events', error);
+  }
 } // end fetchEvents
 
-//generator function to GET most recent event details from database. Will be fired on FETCH_RECENT_EVENT
-function* fetchRecentEvent() {
-    try {
-        const event = yield axios.get('/api/event/recent');
-        console.log('GET RECENT EVENT:', event.data);
-        yield put({ type: 'SET_EVENTS', payload: event.data[0]})
-    } catch (error) {
-        console.error('ERROR in getting recent event', error);
-    }
-} // end fetchRecentEvent
-
 function* eventsSaga() {
-    yield takeEvery('ADD_EVENT', addEvent);
-    yield takeEvery('FETCH_EVENTS', fetchEvents);
-    yield takeEvery('FETCH_RECENT_EVENT', fetchRecentEvent);
+  yield takeEvery('ADD_EVENT', addEvent);
+  yield takeEvery('FETCH_EVENTS', fetchEvents);
 }
 
 export default eventsSaga;
