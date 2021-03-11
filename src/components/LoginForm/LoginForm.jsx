@@ -42,15 +42,9 @@ export default function LoginDialog({login, setLogin}) {
       });
       setUsername("");
       setPassword("");
-      setLogin(false)
     } else {
       dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
-  };
-
-  // Login cancel handler
-  const handleLoginCancel = () => {
-    setLogin(false)
   };
 
   return (
@@ -59,7 +53,8 @@ export default function LoginDialog({login, setLogin}) {
         open={login}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleLoginCancel}
+        disableBackdropClick="true"
+        disableEscapeKey="true"
       >
         <DialogTitle id="alert-dialog-slide-title">{"Log In"}</DialogTitle>
         <form onSubmit={handleLogin}>
@@ -93,9 +88,6 @@ export default function LoginDialog({login, setLogin}) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleLoginCancel} color="inherit">
-            Cancel
-          </Button>
           <Button type="submit" color="inherit">
             Log In
           </Button>
