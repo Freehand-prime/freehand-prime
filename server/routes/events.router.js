@@ -42,23 +42,51 @@ router.post('/', (req, res) => {
     res.sendStatus(201);
   })
   .catch( error => {
-    console.log('Error in posting event at the Router', error);
+    console.error('Error in posting event at the Router', error);
     res.sendStatus(500);
   })
 }); // end POST for event
 
-/**
- * DELETE route template
- */
-router.delete('/', (req, res) => {
-  // DELETE route code here
-});
+// DELETE route to remove event from database
+router.delete('/:id', (req, res) => {
+  const queryText = `DELETE FROM "events" WHERE id=$1;`;
+  pool
+  .query(queryText, [req.params.id])
+  .then(() => {
+    res.sendStatus(200)
+  })
+  .catch( error => {
+    console.error('ERROR in DELETE', error);
+    res.sendStatus(500);
+  })
+}); // end DELETE for event
 
-/**
- * PUT route template
- */
-router.put('/', (req, res) => {
-  // PUT route code here
+// PUT route to UPDATE person name in persons database then UPDATE event details in events database
+router.put('/:id', (req, res) => {
+  // Update this entry
+  try {
+    //const idToUpdate = req.params.id;
+    const personsQuery = `
+      UPDATE "persons"
+      SET "name" = $1
+      WHERE id = $2;`;
+
+    const personsResult = await pool.query(personsQuery, [req.body.name]);
+
+    const eventsQuery = `
+      UPDATE "events"
+      SET ("occasion_id", "category_id", "date") = ($1, $2, $3)
+      WHERE id = $4;`;
+    
+    await req.body.events.forEach(async (event) => {
+      const eventsResult = await pool.query(eventsQuery, [event.occasion_id,
+                                                          event.category_id,
+                                                          event.date])
+    })
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
 });
 
 module.exports = router;
