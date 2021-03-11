@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
+  //MUI
 import { 
     Grid,
     Typography,
@@ -17,7 +19,10 @@ import {
     RadioGroup
 } from '@material-ui/core';
 
+  // Component
+import ShipConfirmDialog from './ShipConfirmDialog/ShipConfirmDialog';
 
+  //MUI Styling
 const useStyles = makeStyles((theme) => ({
     root: {
       '& .MuiTextField-root': {
@@ -35,21 +40,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ShippingConfirm() {
+      //state
+    const [openSubmit, setOpenSubmit] = useState(false);
+
       //hooks
     const classes = useStyles(); 
     const dispatch = useDispatch();
     const history = useHistory();
-    const selectedCard = useSelector((store) => store);
+    const selectedEvent = useSelector((store) => store);
 
-      //handler functions
+      //click handlers
     const handleChange = () => {
       console.log('In handleChange');
     }
     const handleBack = () => {
       console.log('In handleBack');
-    }
-    const handleSubmit = () => {
-      console.log('In handleSubmit');
+        //return to pick a card view on back
+      history.push("/card")
     }
 
     return (
@@ -85,7 +92,7 @@ export default function ShippingConfirm() {
                       <Button variant="outlined" onClick={handleBack}>
                           Back
                       </Button>
-                      <Button variant="outlined" onClick={handleSubmit}>
+                      <Button variant="outlined" onClick={() => setOpenSubmit(!openSubmit)}>
                           Submit
                       </Button>
                   </div>
@@ -93,6 +100,7 @@ export default function ShippingConfirm() {
             </Grid>
           <Grid item xs={6} sm={3}></Grid>
         </Grid>
+        <ShipConfirmDialog openSubmit={openSubmit} setOpenSubmit={setOpenSubmit} />
       </div>
     )
 }
