@@ -4,23 +4,23 @@ import { useDispatch, useSelector } from 'react-redux';
 
   //MUI
 import { 
-    Grid,
-    Typography,
-    TextField, 
-    makeStyles,
-    InputLabel,
-    FormControl,
-    FormLabel,
-    FormControlLabel,
-    Select,
-    Paper,
-    Button,
-    Radio,
-    RadioGroup
+  Grid,
+  Typography,
+  TextField, 
+  makeStyles,
+  InputLabel,
+  FormControl,
+  FormLabel,
+  FormControlLabel,
+  Select,
+  Paper,
+  Button,
+  Radio,
+  RadioGroup
 } from '@material-ui/core';
 
   // Component
-import ShipConfirmDialog from './ShipConfirmDialog/ShipConfirmDialog';
+import ShipSubmitDialog from './ShipSubmitDialog/ShipSubmitDialog';
 
   //MUI Styling
 const useStyles = makeStyles((theme) => ({
@@ -100,7 +100,7 @@ export default function ShippingConfirm() {
             </Grid>
           <Grid item xs={6} sm={3}></Grid>
         </Grid>
-        <ShipConfirmDialog openSubmit={openSubmit} setOpenSubmit={setOpenSubmit} />
+        <ShipSubmitDialog openSubmit={openSubmit} setOpenSubmit={setOpenSubmit} />
       </div>
     )
 }
