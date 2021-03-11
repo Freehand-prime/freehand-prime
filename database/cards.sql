@@ -9,4 +9,4 @@ VALUES (8, 5, 'https://freehand-prime.s3.us-east-2.amazonaws.com/card1front.jpeg
 (4, 2, 'https://freehand-prime.s3.us-east-2.amazonaws.com/card6front.jpg', 'https://freehand-prime.s3.us-east-2.amazonaws.com/card6inside.png', 'Natasha Romanoff', 'Girl stretching for a fight, dedicated and focused'),
 (11, 4, 'https://freehand-prime.s3.us-east-2.amazonaws.com/card7front.jpg', 'https://freehand-prime.s3.us-east-2.amazonaws.com/card7inside.png', 'Anthony Stark', 'Mother and children'),
 (9, 4, 'https://freehand-prime.s3.us-east-2.amazonaws.com/card8front.jpeg', 'https://freehand-prime.s3.us-east-2.amazonaws.com/card8inside.png', 'Pepper Potts', 'Elegant women in dresses'),
-(9, 9, 'https://freehand-prime.s3.us-east-2.amazonaws.com/card4front.jpg', 'https://freehand-prime.s3.us-east-2.amazonaws.com/card9inside.jpg', 'Carol Danvers', 'Superhero woman wants some quality time');
+(9, 9, 'https://freehand-prime.s3.us-east-2.amazonaws.com/card9front.jpg', 'https://freehand-prime.s3.us-east-2.amazonaws.com/card9inside.jpg', 'Carol Danvers', 'Superhero woman wants some quality time');
