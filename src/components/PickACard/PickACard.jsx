@@ -96,7 +96,7 @@ export default function PickACard() {
           return (
             <Grow in={true} key={i}>
               <Grid item key={i}>
-                <CardCard card={card} buttonTitle={buttonTitle} />
+                <CardCard card={card} buttonTitle={buttonTitle} eventId={id}/>
               </Grid>
             </Grow>
           );
