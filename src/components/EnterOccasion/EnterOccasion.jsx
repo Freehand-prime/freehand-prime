@@ -38,9 +38,8 @@ export default function EnterOccasion() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const add = useSelector((store) => store.event);
+    const newEvent = useSelector((store) => store.event);
     const occasions = useSelector((store) => store.occasions)
-    const user = useSelector((store) => store.user)
 
     useEffect(() => {
         dispatch({ type: 'FETCH_OCCASIONS' });
@@ -84,7 +83,7 @@ export default function EnterOccasion() {
                                   }}
                                 style={{ width: 250, margin: 8 }}
                                 variant="outlined"
-                                value={add?.occasion}
+                                value={newEvent?.occasion}
                                 onChange={(event) => dispatch({ type: 'SET_OCCASION', payload: event.target.value })}
                             >
                                     <option value="">Choose an Occasion:</option>
@@ -105,7 +104,7 @@ export default function EnterOccasion() {
                                     shrink: true,
                                   }}
                                 style={{ width: 250, margin: 8 }}
-                                value={event?.date}
+                                value={newEvent?.date}
                                 onChange={(event) => dispatch({ type: 'SET_DATE', payload: event.target.value })}
                                 variant="outlined"
                             />

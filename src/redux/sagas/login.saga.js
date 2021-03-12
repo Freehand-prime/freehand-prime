@@ -24,6 +24,14 @@ function* loginUser(action) {
     if(action.history) {
       yield put({type: "LOGIN_CLOSE"})
     }
+
+    if (action.person && action.event) {
+      yield put({
+        type: 'ADD_PERSON_AND_EVENT',
+        payload: { person: action.person, event: action.event },
+      });
+      // yield put({type: 'CLEAR_PERSON'})
+    };
     
   } catch (error) {
     console.log('Error with user login:', error);

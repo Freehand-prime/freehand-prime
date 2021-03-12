@@ -39,7 +39,7 @@ export default function SelectCategory() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const event = useSelector((store) => store.event);
+  const newEvent = useSelector((store) => store.event);
   const person = useSelector((store) => store.person);
   const categories = useSelector((store) => store.categories);
   const user = useSelector((store) => store.user);
@@ -93,7 +93,7 @@ export default function SelectCategory() {
                 }}
                 style={{ width: 250, margin: 8 }}
                 variant="outlined"
-                value={event?.category}
+                value={newEvent?.category}
                 onChange={(event) =>
                   dispatch({
                     type: 'SET_CATEGORY',
@@ -125,7 +125,7 @@ export default function SelectCategory() {
         </Grid>
         <Grid item xs={6} sm={3}></Grid>
       </Grid>
-      <RegisterDialog register={register} setRegister={setRegister} />
+      <RegisterDialog register={register} setRegister={setRegister}/>
     </div>
   );
 } // end SelectCategory
