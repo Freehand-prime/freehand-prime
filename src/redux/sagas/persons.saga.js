@@ -5,14 +5,14 @@ import axios from 'axios';
 //generator function to POST person details to database. Will be fired on ADD_PERSON
 
 
-function* addPerson(action) {
+function* addPersonAndEvent(action) {
     try {
-        console.log('post new person');
-        const newPerson = action.payload;
-        const response = yield axios.post('/api/person', newPerson);
-        console.log('NEW PERSON ADDED:', response);
+        console.log('post new person and event');
+        const newPersonAndEvent = action.payload;
+        const response = yield axios.post('/api/person', newPersonAndEvent);
+        console.log('NEW PERSON AND EVENT ADDED:', response);
     } catch (error) {
-        console.error('ERROR in adding new person', error);
+        console.error('ERROR in adding new person and event', error);
     }
 }; // end addPerson
 
@@ -30,7 +30,7 @@ function* fetchPersons() {
 
 
 function* personsSaga() {
-    yield takeEvery('ADD_PERSON', addPerson);
+    yield takeEvery('ADD_PERSON_AND_EVENT', addPersonAndEvent);
     yield takeEvery('FETCH_PERSONS', fetchPersons);
 }
 
