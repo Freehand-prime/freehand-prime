@@ -6,7 +6,7 @@ const {
 const router = express.Router();
 
 // route for getting all occasions
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/', (req, res) => {
   console.log('in get all occasions');
   const queryText = `SELECT * FROM "occasions";`;
   pool
