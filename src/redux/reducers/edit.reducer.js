@@ -12,7 +12,7 @@ const editEvent = (state = {}, action) => {
         case 'EDIT_CATEGORY':
             return {...state, category: action.payload};
         case 'PICK_CARD':
-            return {...state, card_id: action.payload}; // need to sort out this array business
+            return {...state, card_id: action.payload};
         default:
             return state
     }
