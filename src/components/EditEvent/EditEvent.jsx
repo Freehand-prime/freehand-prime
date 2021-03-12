@@ -44,6 +44,7 @@ export default function EditEvent() {
     const dispatch = useDispatch();
 
     const editInput = useSelector((store) => store.edit);
+    const personInput = useSelector((store) => store.person);
 
     //onClick function DELETE an event
     const handleDelete = (id) => {
@@ -98,7 +99,7 @@ export default function EditEvent() {
                                     shrink: true,
                                   }}
                                 style={{ width: 250, margin: 8 }}
-                                value={ editInput?.name }
+                                value={ person?.name }
                                 onChange={(event) => dispatch({ type: 'EDIT_NAME', payload: event.target.value })}
                                 variant="outlined"
                             />
