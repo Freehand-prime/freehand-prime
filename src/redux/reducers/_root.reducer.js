@@ -8,6 +8,8 @@ import event from './event.reducer';
 import events from './events.reducer';
 import edit from './edit.reducer';
 import cards from './cards.reducer';
+import occasions from './occasions.reducer';
+import categories from './categories.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -25,6 +27,8 @@ const rootReducer = combineReducers({
   events,
   edit,
   cards,
+  occasions,
+  categories,
 });
 
 export default rootReducer;
