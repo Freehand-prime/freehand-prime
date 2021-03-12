@@ -26,6 +26,22 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
+// GET route for single event
+router.get('/:id', rejectUnauthenticated, (req, res) => {
+  const idToGet = req.params.id;
+  const queryText = `SELECT * FROM "events"
+      WHERE "events".id = $1;`;
+  pool
+    .query(queryText, [idToGet])
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+});
+
 // POST route for adding event details
 router.post('/', (req, res) => {
   console.log(req.body);

@@ -6,6 +6,7 @@ import personsSaga from './persons.saga';
 import eventsSaga from './events.saga';
 import deleteSaga from './delete.saga';
 import cardsSaga from './cards.saga';
+import editSaga from './edit.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     eventsSaga(),
     deleteSaga(),
     cardsSaga(),
+    editSaga(),
   ]);
 }
