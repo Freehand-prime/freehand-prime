@@ -1,6 +1,8 @@
 //reducer to POST new person
 const personReducer = (state = {name: '', relationship: '', address: '',}, action) => {
     switch (action.type) {
+        case 'SET_EDIT_PERSON':
+            return action.payload;
         case 'SET_NAME':
             return { ...state, name: action.payload };
         case 'SET_RELATIONSHIP':

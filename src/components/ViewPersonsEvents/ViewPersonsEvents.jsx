@@ -61,7 +61,7 @@ export default function ViewPersonsEvent() {
                     <Typography className={classes.pos} color="textSecondary">
                       {event.occasion} | {event.category}
                     </Typography>
-                    <Button size="small">Edit Event</Button>
+                    <Button size="small" onClick={() => history.push(`/edit/${event.event_id}`)}>Edit Event</Button>
                   </CardContent>
                 </Card>
                 <br></br>
