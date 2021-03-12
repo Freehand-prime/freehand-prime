@@ -74,7 +74,7 @@ export default function App() {
             <ViewPersonsEvents />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/editevent">
+          <ProtectedRoute exact path="/edit/:id">
             <EditEvent />
           </ProtectedRoute>
 

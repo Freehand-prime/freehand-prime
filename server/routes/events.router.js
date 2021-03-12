@@ -8,12 +8,12 @@ const router = express.Router();
 // route for getting all events
 router.get('/', rejectUnauthenticated, (req, res) => {
   console.log('in get all events');
-  const queryText = `SELECT "date", "persons".*, "occasion", "category" FROM "events"
-      JOIN "persons" ON "events".person_id = "persons".id
-      JOIN "occasions" ON "events".occasion_id = "occasions".id
-      JOIN "categories" ON "events".category_id = "categories".id
-      WHERE "user_id" = $1
-      ORDER BY "date";`;
+  const queryText = `SELECT "date", "persons".*, "events".id AS "event_id", "occasion", "category" FROM "events"
+  JOIN "persons" ON "events".person_id = "persons".id
+  JOIN "occasions" ON "events".occasion_id = "occasions".id
+  JOIN "categories" ON "events".category_id = "categories".id
+  WHERE "user_id" = $1
+  ORDER BY "date";`;
   pool
     .query(queryText, [req.user.id])
     .then((result) => {
@@ -29,8 +29,9 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // GET route for single event
 router.get('/:id', rejectUnauthenticated, (req, res) => {
   const idToGet = req.params.id;
-  const queryText = `SELECT * FROM "events"
-      WHERE "events".id = $1;`;
+  const queryText = `SELECT "events".*, "persons".name, "persons".relationship FROM "events"
+  JOIN "persons" ON "events".person_id = "persons".id
+  WHERE "events".id = $1`;
   pool
     .query(queryText, [idToGet])
     .then((result) => {
@@ -50,35 +51,36 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   VALUES ($1, $2, $3);`;
 
   pool
-  .query(insertEventQuery, [req.body.category_id,
-                            req.body.occasion_id,
-                            req.body.date])
-  .then( result => {
-    console.log('New Event Entry:', result.rows)
-    res.sendStatus(201);
-  })
-  .catch( error => {
-    console.error('Error in posting event at the Router', error);
-    res.sendStatus(500);
-  })
+    .query(insertEventQuery, [
+      req.body.category_id,
+      req.body.occasion_id,
+      req.body.date,
+    ])
+    .then((result) => {
+      console.log('New Event Entry:', result.rows);
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.error('Error in posting event at the Router', error);
+      res.sendStatus(500);
+    });
 }); // end POST for event
 
 // DELETE route to remove event from database
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const queryText = `DELETE FROM "events" WHERE id=$1;`;
   pool
-  .query(queryText, [req.params.id])
-  .then(() => {
-    res.sendStatus(200)
-  })
-  .catch( error => {
-    console.error('ERROR in DELETE', error);
-    res.sendStatus(500);
-  })
+    .query(queryText, [req.params.id])
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.error('ERROR in DELETE', error);
+      res.sendStatus(500);
+    });
 }); // end DELETE for event
 
 // PUT route to UPDATE person name in persons database then UPDATE event details in events database
-
 
 router.put('/:id', rejectUnauthenticated, async (req, res) => {
   // Update this entry
@@ -87,27 +89,30 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
     const personIdQuery = `
       SELECT "person_id"
       FROM "events"
-      WHERE id = $1;`
+      WHERE id = $1;`;
 
     const personId = await pool.query(personIdQuery, [idToUpdate]);
     const editPersonQuery = `
       UPDATE "persons"
       SET ("name") = ($1)
-      WHERE id = $2`
-    
-    const personResult = await pool.query(editPersonQuery, [req.body.name, personId])
+      WHERE id = $2`;
 
+    const personResult = await pool.query(editPersonQuery, [
+      req.body.name,
+      personId,
+    ]);
 
     const eventsQuery = `
       UPDATE "events"
       SET ("occasion_id", "category_id", "date") = ($1, $2, $3)
       WHERE id = $4;`;
-    
-    const eventsResult = await pool.query(eventsQuery, [req.body.event.occasion_id,
-                                                          req.body.event.category_id,
-                                                          req.body.event.date,
-                                                          idToUpdate])
-    
+
+    const eventsResult = await pool.query(eventsQuery, [
+      req.body.event.occasion_id,
+      req.body.event.category_id,
+      req.body.event.date,
+      idToUpdate,
+    ]);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
