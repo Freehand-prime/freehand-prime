@@ -24,26 +24,52 @@ router.get('/', (req, res) => {
     });
 });
 
-// POST route for adding a new person to the database
+// POST route for adding a new person and event to the database
 router.post('/', rejectUnauthenticated, (req, res) => {
-  console.log(req.body)
+  console.log('received person and event', req.body);
+
   const insertPersonQuery = `
-    INSERT INTO "persons" ("user_id", "name", "relationship", "address")
-    VALUES ($1, $2, $3, $4);`;
+    INSERT INTO "persons" ("user_id", "name", "relationship")
+    VALUES ($1, $2, $3)
+    RETURNING "id";`;
 
   pool
-  .query(insertPersonQuery, [req.user.id, 
-                                req.body.name, 
-                                req.body.relationship,
-                                req.body.address])
-  .then( result => {
-    console.log('New Person Entry:', result.rows);
-    res.sendStatus(201);
-  })
-  .catch( error => {
-    console.error('Error in posting person at the Router', error);
-    res.sendStatus(500);
-  })
+    .query(insertPersonQuery, [
+      req.user.id,
+      req.body.person.name,
+      req.body.person.relationship,
+    ])
+    .then((result) => {
+      const newPersonId = result.rows[0].id;
+
+      console.log('New Person Entry:', result.rows);
+      console.log('New Person ID:', newPersonId);
+
+      const insertEventQuery = `
+      INSERT INTO "events" ("person_id", "category_id", "occasion_id", "date")
+      VALUES ($1, $2, $3, $4);`;
+
+      pool
+        .query(insertEventQuery, [
+          newPersonId,
+          req.body.event.category,
+          req.body.event.occasion,
+          req.body.event.date,
+        ])
+        .then((result) => {
+          console.log('new event entry:', result.rows);
+          res.sendStatus(201);
+        })
+        .catch((error) => {
+          console.error('Error in posting event', error);
+          res.sendStatus(500);
+        });
+      // res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.error('Error in posting person at the Router', error);
+      res.sendStatus(500);
+    });
 }); //end POST for persons
 
 module.exports = router;
