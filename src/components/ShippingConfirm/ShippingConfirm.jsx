@@ -88,7 +88,6 @@ export default function ShippingConfirm() {
                       label= "address"
                       placeholder="enter address"
                       type="text"
-                      value={"changeMeAddress"}
                       onChange={(event) => dispatch({ type: 'SET_ADDRESS', payload: event.target.value })}
                       variant="outlined"
                 />
@@ -99,7 +98,6 @@ export default function ShippingConfirm() {
                       label= "inscription"
                       placeholder="enter inscription"
                       type="text"
-                      value={"changeMeInscription"}
                       onChange={(event) => dispatch({ type: 'SET_ADDRESS', payload: event.target.value })}
                       variant="outlined"
                 />

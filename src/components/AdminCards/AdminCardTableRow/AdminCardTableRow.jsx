@@ -33,7 +33,7 @@ export default function AdminCardTableRow({card}) {
     return(
         <>
         {/*This component will render each row of cards and handle edit and delete*/}
-            <TableCell>
+            <TableCell className={classes.root}>
                 <AdminCardTableRowCard image={card.image_front}/>
             </TableCell>
             <TableCell>

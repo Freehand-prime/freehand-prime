@@ -29,6 +29,9 @@ import {
 
   //MUI Styling
 const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
     addCardForm: {
       '& .MuiTextField-addCardForm': {
         margin: theme.spacing(1),
@@ -50,7 +53,15 @@ const useStyles = makeStyles((theme) => ({
     },
     tableRow: {
         justifyContent: "center"
-    }
+    },
+    textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: '25ch',
+    },
+    button: {
+        margin: 10,
+    },
 }));
 
 /*
@@ -83,24 +94,60 @@ export default function AdminCards() {
         dispatch({type: 'FETCH_CARDS'});
     }, [dispatch]);
     return (
-    <>
+    <div className={classes.root}>
         <form className={classes.addCardForm}>   
             <Button 
                 variant="outlined" 
                 onClick={handleImageUploadFront}
+                className={classes.button}
             >
                 Upload Front Image
             </Button>
             <Button 
                 variant="outlined" 
                 onClick={handleImageUploadInside}
+                className={classes.button}
             >
                 Upload Inside Image
             </Button>
             {/*Form Fields go Here*/}
+            <FormControl>
+                <TextField 
+                    label="Occasion"
+                    id="filled-margin-dense"
+                    placeholder="enter occasion"
+                    className={classes.textField}
+                    helperText="Required"
+                    margin="dense"
+                    variant="filled"
+                />
+            </FormControl>
+            <FormControl>
+                <TextField 
+                    label="Category"
+                    id="filled-margin-dense"
+                    placeholder="enter category"
+                    className={classes.textField}
+                    helperText="Required"
+                    margin="dense"
+                    variant="filled"
+                />
+            </FormControl>
+            <FormControl>
+                <TextField 
+                    label="Artist Name"
+                    id="filled-margin-dense"
+                    placeholder="enter artist name"
+                    className={classes.textField}
+                    helperText="Required"
+                    margin="dense"
+                    variant="filled"
+                />
+            </FormControl>
             <Button 
                 variant="outlined" 
                 onClick={handleSubmit}
+                className={classes.button}
             >
                 SUBMIT
             </Button>
@@ -130,6 +177,6 @@ export default function AdminCards() {
             </Table>
             </TableContainer>
         </div>
-    </>
+    </div>
     )
 }
