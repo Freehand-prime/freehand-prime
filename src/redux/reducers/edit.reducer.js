@@ -11,6 +11,8 @@ const editEvent = (state = {}, action) => {
             return {...state, date: action.payload};
         case 'EDIT_CATEGORY':
             return {...state, category: action.payload};
+        case 'PICK_CARD':
+            return {...state[0], card_id: action.payload}; // need to sort out this array business
         default:
             return state
     }
