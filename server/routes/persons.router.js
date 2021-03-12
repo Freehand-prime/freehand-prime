@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
     res.sendStatus(201);
   })
   .catch( error => {
-    console.log('Error in posting person at the Router', error);
+    console.error('Error in posting person at the Router', error);
     res.sendStatus(500);
   })
 }); //end POST for persons
