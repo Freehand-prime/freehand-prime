@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import AdminImageUploadDialog from './AdminImageUploadDialog/AdminImageUploadDialog';
 import AdminCardTableRow from './AdminCardTableRow/AdminCardTableRow';
-import classes from '*.module.css';
 
   //MUI
 import { 
@@ -67,6 +66,8 @@ export default function AdminCards() {
         //state
         //hooks
     const allCards = useSelector((store) => store?.cards);
+    const dispatch = useDispatch();
+    const classes = useStyles();
         //functions
     const handleImageUploadFront = () => {
         console.log('handleImageUploadFront Clicked');
@@ -120,7 +121,7 @@ export default function AdminCards() {
                 {allCards.map((card) => (
                     <>
                         <TableRow key={ card.id } className={classes.tableRow}>
-                            <AdminCardTableRow card={card}/>
+                            <AdminCardTableRow card={card} key={ card.id }/>
                         </TableRow> 
                     </>
                     )
