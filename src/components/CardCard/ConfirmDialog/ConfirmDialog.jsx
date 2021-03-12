@@ -25,7 +25,7 @@ export default function ConfirmDialog({ openConfirm, setOpenConfirm, cardId, eve
   // Confirm card handler
   const handleConfirm = () => {
     setOpenConfirm(false);
-    // dispatch for card selected here
+    dispatch({type: 'PICK_CARD', payload: cardId})
     history.push(`/shipping/${eventId}`);
   };
 
