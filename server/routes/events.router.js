@@ -43,7 +43,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 // POST route for adding event details
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   console.log(req.body);
   const insertEventQuery = `
   INSERT INTO "events" ("category_id", "occasion_id", "date")
@@ -64,7 +64,7 @@ router.post('/', (req, res) => {
 }); // end POST for event
 
 // DELETE route to remove event from database
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const queryText = `DELETE FROM "events" WHERE id=$1;`;
   pool
   .query(queryText, [req.params.id])
