@@ -78,7 +78,7 @@ export default function App() {
             <EditEvent />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/card">
+          <ProtectedRoute exact path="/card/:id">
             <PickACard />
           </ProtectedRoute>
 
