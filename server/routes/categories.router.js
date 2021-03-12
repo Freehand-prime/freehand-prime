@@ -6,7 +6,7 @@ const {
 const router = express.Router();
 
 // route for getting all categories
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/', (req, res) => {
   console.log('in get all categories');
   const queryText = `SELECT * FROM "categories";`;
   pool
