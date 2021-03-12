@@ -97,14 +97,16 @@ export default function AdminCards() {
     <div className={classes.root}>
         <form className={classes.addCardForm}>   
             <Button 
-                variant="outlined" 
+                variant="contained"
+                color="default"
                 onClick={handleImageUploadFront}
                 className={classes.button}
             >
                 Upload Front Image
             </Button>
             <Button 
-                variant="outlined" 
+                variant="contained"
+                color="default"
                 onClick={handleImageUploadInside}
                 className={classes.button}
             >
@@ -145,7 +147,8 @@ export default function AdminCards() {
                 />
             </FormControl>
             <Button 
-                variant="outlined" 
+                variant="contained"
+                color="primary" 
                 onClick={handleSubmit}
                 className={classes.button}
             >

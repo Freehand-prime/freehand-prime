@@ -44,7 +44,7 @@ export default function AdminCardTableRow({card}) {
             <TableCell>{card.artist}</TableCell>
             <TableCell>
                 <Button 
-                    variant="outlined"
+                    variant="contained"
                     color="primary"
                     onClick={handleEdit}
                 >
@@ -53,7 +53,7 @@ export default function AdminCardTableRow({card}) {
             </TableCell>
             <TableCell>
                 <Button 
-                    variant="outlined"
+                    variant="contained"
                     color="secondary"
                     onClick={handleDelete}
                 >
