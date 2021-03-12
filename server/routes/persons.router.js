@@ -52,9 +52,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       pool
         .query(insertEventQuery, [
           newPersonId,
-          req.body.event.category,
-          req.body.event.occasion,
-          req.body.event.date,
+          req.body.newEvent.category,
+          req.body.newEvent.occasion,
+          req.body.newEvent.date,
         ])
         .then((result) => {
           console.log('new event entry:', result.rows);

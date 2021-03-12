@@ -6,10 +6,10 @@ import { put, takeEvery } from 'redux-saga/effects';
 function* deleteEvent(action) {
     try {
         const eventId = action.payload;
-        yield axios.delete(`/api/event/all/${eventId}`);
+        yield axios.delete(`/api/event/${eventId}`);
         yield put({ type: 'FETCH_EVENTS' });
     } catch (error) {
-        console.log('error in deleting media', error)
+        console.log('Error in DELETE event', error)
     }
 }
 

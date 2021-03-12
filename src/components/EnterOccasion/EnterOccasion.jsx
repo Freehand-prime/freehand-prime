@@ -8,6 +8,7 @@ import {
     makeStyles,
     InputLabel,
     FormControl,
+    MenuItem,
     Select,
     Paper,
     Button,
@@ -86,10 +87,9 @@ export default function EnterOccasion() {
                                 value={newEvent?.occasion}
                                 onChange={(event) => dispatch({ type: 'SET_OCCASION', payload: event.target.value })}
                             >
-                                    <option value="">Choose an Occasion:</option>
                                 {occasions.map((occasion) => {
                                     return (
-                                        <option value = {occasion.id} key = {occasion.id}>{occasion.occasion}</option>
+                                        <MenuItem value = {occasion.id} key = {occasion.id}>{occasion.occasion}</MenuItem>
                                     );
                                 })}
                                 

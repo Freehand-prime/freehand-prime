@@ -49,9 +49,9 @@ export default function EditEvent() {
   //onClick function DELETE an event
   const handleDelete = (id) => {
     console.log('clicked handleDelete');
-    dispatch({ type: 'DELETE_MEDIA', payload: id });
+    dispatch({ type: 'DELETE_EVENT', payload: page.id });
     // sends user to PersonsEvents page
-    history.push('/events');
+    history.push('/dashboard');
   }; //end handleBack
 
   //onClick function to UPDATE an event
@@ -63,13 +63,13 @@ export default function EditEvent() {
     });
 
     // sends user to PersonsEvents page
-    history.push('/events');
+    history.push('/dashboard');
   }; //end handleBack
 
   //onClick function to CANCEL and go back to PersonsEvents
   const handleCancel = () => {
     // sends user to PersonsEvents page
-    history.push('/events');
+    history.push(`/events/${editInput.person_id}`);
   }; //end handleContinue
 
   console.log(editInput?.date)
@@ -96,7 +96,7 @@ export default function EditEvent() {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  style={{ width: 250, margin: 8 }}
+                  style={{width: 250, margin: 8}}
                   value={editInput?.name}
                   onChange={(event) =>
                     dispatch({ type: 'EDIT_NAME', payload: event.target.value })
@@ -107,12 +107,12 @@ export default function EditEvent() {
               <FormControl>
                 <Select
                   id="event-occasion"
-                  label="selectssss occasion"
+                  label="select occasion"
                   type="text"
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  style={{ width: 250, margin: 8 }}
+                  style={{width: 250, margin: 8}}
                   variant="outlined"
                   value={editInput?.occasion_id || ''}
                   onChange={(event) =>
@@ -122,12 +122,11 @@ export default function EditEvent() {
                     })
                   }
                 >
-                  <option value="">Choose an Occasion:</option>
                   {occasions.map((occasion) => {
                     return (
-                      <option value={occasion.id} key={occasion.id}>
+                      <MenuItem value={occasion.id} key={occasion.id}>
                         {occasion.occasion}
-                      </option>
+                      </MenuItem>
                     );
                   })}
                 </Select>
@@ -140,7 +139,7 @@ export default function EditEvent() {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  style={{ width: 250, margin: 8 }}
+                  style={{width: 250, margin: 8}}
                   value={new Date(editInput?.date).toISOString().split('T')[0]}
                   onChange={(event) =>
                     dispatch({ type: 'EDIT_DATE', payload: event.target.value })
@@ -156,7 +155,7 @@ export default function EditEvent() {
                   InputLabelProps={{
                     shrink: true,
                   }}
-                  style={{ width: 250, margin: 8 }}
+                  style={{width: 250, margin: 8}}
                   variant="outlined"
                   value={editInput?.category_id || ''}
                   onChange={(event) =>
@@ -166,12 +165,11 @@ export default function EditEvent() {
                     })
                   }
                 >
-                  <option value="">Choose a Category:</option>
                   {categories.map((category) => {
                     return (
-                      <option value={category.id} key={category.id}>
+                      <MenuItem value={category.id} key={category.id}>
                         {category.category}
-                      </option>
+                      </MenuItem>
                     );
                   })}
                 </Select>
