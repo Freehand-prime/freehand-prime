@@ -40,7 +40,7 @@ function shuffleCards(array) {
 export default function PickACard() {
   // Cards selector
   const unsortedCards = useSelector((store) => store?.cards);
-  const event = useSelector((store) => store?.edit[0]);
+  const event = useSelector((store) => store?.edit);
 
   // Sort cards by category and occasion for event
   const sortedCards = unsortedCards?.filter((card) => {
