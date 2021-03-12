@@ -43,7 +43,8 @@ export default function SelectCategory() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const events = useSelector((store) => store.events);
+    const event = useSelector((store) => store.event);
+    const person = useSelector((store) => store.persons)
     const categories = useSelector((store) => store.categories)
     const user = useSelector((store) => store.user)
 
@@ -60,9 +61,25 @@ export default function SelectCategory() {
     //onClick function to submit person & relationship details
     const handleContinue = () => {
         if (user.id ){
+            dispatch({
+                type: 'ADD_PERSON',
+                payload: person
+            });
+            dispatch({
+                type: 'ADD_EVENT',
+                payload: event
+            });
             history.push('/dashboard');
         } else {
             setRegister(true)
+            dispatch({
+                type: 'ADD_PERSON',
+                payload: person
+            });
+            dispatch({
+                type: 'ADD_EVENT',
+                payload: event
+            });
         }
         
         //else go to register/login
@@ -94,7 +111,7 @@ export default function SelectCategory() {
                                   }}
                                 style={{ width: 250, margin: 8 }}
                                 variant="outlined"
-                                value={ events?.category}
+                                value={ event?.category}
                                 onChange={(event) => dispatch({ type: 'SET_CATEGORY', payload: event.target.value })}
                             >
                                     <option value="">Choose a Category:</option>
