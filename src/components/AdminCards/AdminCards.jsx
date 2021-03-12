@@ -54,6 +54,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+/*
+Two image upload buttons, one for the front of the card and one for the inside of the card, 
+drop downs to select an occasion and category for the card, and text fields for the artist 
+name and a brief description. The submit button adds the new card to the database. 
+
+The table below shows all available cards, with buttons to edit and delete each card. 
+Clicking the Delete button deletes the card from the database. Clicking the Edit button 
+populates the input fields with the card information. The Submit button saves changes.
+*/
 export default function AdminCards() {
         //state
         //hooks
