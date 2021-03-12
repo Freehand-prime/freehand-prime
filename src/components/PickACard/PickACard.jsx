@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 // MUI
 import { makeStyles } from "@material-ui/core/styles";
@@ -42,15 +42,17 @@ export default function PickACard() {
 
   // Cards selector
   const allCards = useSelector((store) => store?.cards);
+  const event = useSelector((store) => store?.edit);
 
-  console.log(allCards);
+  console.log(event);
+
   // Shuffled Cards state
   const [cards, setCards] = useState([]);
 
-  console.log(cards)
   // Hooks
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { id } = useParams();
 
   // Card button title
   const buttonTitle = "Choose this card";
@@ -58,11 +60,12 @@ export default function PickACard() {
   // Shuffle function call
   const handleShuffle = () => {
     setCards(shuffleCards(allCards));
-  }
+  };
 
-  // UseEffect for GET cards
+  // UseEffect for GET cards and GET event
   useEffect(() => {
     dispatch({type: 'FETCH_CARDS'});
+    dispatch({type: 'GET_EVENT', payload: id})
   }, []);
 
   useEffect(() => {
