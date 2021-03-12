@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
       },
     },
+    headPaper: {
+        
+    }
 }));
 
 export default function ShippingConfirm() {
@@ -64,7 +67,7 @@ export default function ShippingConfirm() {
         <Grid container spacing={3}>
           <Grid item xs={6} sm={3}></Grid>
             <Grid item xs={12} sm={6}>
-              <Paper align="center" elevation={4} className={classes.paper}>
+              <Paper align="center" elevation={4} className={classes.headPaper}>
                 <Typography variant="h5">Does Everything Look Correct?</Typography>
               </Paper>
             </Grid>
@@ -77,17 +80,28 @@ export default function ShippingConfirm() {
                 <RadioGroup aria-label="shipping" name="shipping1" value={"changeMe"} onChange={handleChange}>
                   <FormControlLabel value="changeMe" control={<Radio />} label="Ship to Them" />
                   <FormControlLabel value="changeMe" control={<Radio />} label="Ship to Another Address" />
-                    <TextField
+                </RadioGroup>
+              </FormControl>
+              <FormControl>
+                <TextField
                       id="address_field"
                       label= "address"
                       placeholder="enter address"
                       type="text"
-                      value={"changeMe"}
                       onChange={(event) => dispatch({ type: 'SET_ADDRESS', payload: event.target.value })}
                       variant="outlined"
-                    />
-                </RadioGroup>
+                />
               </FormControl>
+              <FormControl>
+              <TextField
+                      id="inscription_field"
+                      label= "inscription"
+                      placeholder="enter inscription"
+                      type="text"
+                      onChange={(event) => dispatch({ type: 'SET_ADDRESS', payload: event.target.value })}
+                      variant="outlined"
+                />
+                </FormControl>
                   <div>
                       <Button variant="outlined" onClick={handleBack}>
                           Back
