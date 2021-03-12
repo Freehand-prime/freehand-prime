@@ -43,29 +43,6 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     });
 });
 
-// POST route for adding event details
-router.post('/', rejectUnauthenticated, (req, res) => {
-  console.log(req.body);
-  const insertEventQuery = `
-  INSERT INTO "events" ("category_id", "occasion_id", "date")
-  VALUES ($1, $2, $3);`;
-
-  pool
-    .query(insertEventQuery, [
-      req.body.category_id,
-      req.body.occasion_id,
-      req.body.date,
-    ])
-    .then((result) => {
-      console.log('New Event Entry:', result.rows);
-      res.sendStatus(201);
-    })
-    .catch((error) => {
-      console.error('Error in posting event at the Router', error);
-      res.sendStatus(500);
-    });
-}); // end POST for event
-
 // DELETE route to remove event from database
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const queryText = `DELETE FROM "events" WHERE id=$1;`;

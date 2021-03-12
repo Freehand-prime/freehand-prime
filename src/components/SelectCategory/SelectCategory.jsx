@@ -58,7 +58,7 @@ export default function SelectCategory() {
     if (user.id) {
       dispatch({
         type: 'ADD_PERSON_AND_EVENT',
-        payload: { person, event },
+        payload: { person, newEvent },
       });
       history.push('/dashboard');
     } else {
@@ -101,12 +101,11 @@ export default function SelectCategory() {
                   })
                 }
               >
-                <option value="">Choose a Category:</option>
                 {categories.map((category) => {
                   return (
-                    <option value={category.id} key={category.id}>
+                    <MenuItem value={category.id} key={category.id}>
                       {category.category}
-                    </option>
+                    </MenuItem>
                   );
                 })}
               </Select>
