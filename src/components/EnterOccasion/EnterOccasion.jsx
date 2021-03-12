@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { 
@@ -39,6 +39,12 @@ export default function EnterOccasion() {
     const dispatch = useDispatch();
 
     const events = useSelector((store) => store.events);
+    const occasions = useSelector((store) => store.occasions)
+    const user = useSelector((store) => store.user)
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_OCCASIONS' });
+      }, []);
     
     //onClick function to go back to EnterPerson
     const handleBack = () => {
@@ -69,18 +75,26 @@ export default function EnterOccasion() {
                 <Grid align="center" item xs={12} sm={6}>
                     <Paper elevation={4}>
                         <FormControl>
-                            <TextField
+                            <Select
                                 id="event-occasion"
-                                label= "enter occasion"
+                                label= "select occasion"
                                 type="text"
                                 InputLabelProps={{
                                     shrink: true,
                                   }}
                                 style={{ width: 250, margin: 8 }}
+                                variant="outlined"
                                 value={events?.occasion}
                                 onChange={(event) => dispatch({ type: 'SET_OCCASION', payload: event.target.value })}
-                                variant="outlined"
-                            />
+                            >
+                                    <option value="">Choose an Occasion:</option>
+                                {occasions.map((occasion) => {
+                                    return (
+                                        <option value = {occasion.id} key = {occasion.id}>{occasion.occasion}</option>
+                                    );
+                                })}
+                                
+                            </Select>
                         </FormControl>
                         <FormControl>
                             <TextField
@@ -111,4 +125,4 @@ export default function EnterOccasion() {
             </Grid>
         </div>
 )
-}; //EnterOccasion
+}; // end EnterOccasion

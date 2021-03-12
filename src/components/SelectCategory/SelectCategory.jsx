@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import RegisterDialog from '../RegisterDialog/RegisterDialog';
 import { 
     Grid,
     Typography,
@@ -37,26 +38,33 @@ export default function SelectCategory() {
 
     const classes = useStyles();
 
+    const [register, setRegister] = useState(false);
+
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const events = useSelector((store) => store.events);
     const categories = useSelector((store) => store.categories)
-    const event = useSelector((store) => store.event)
+    const user = useSelector((store) => store.user)
 
     useEffect(() => {
         dispatch({ type: 'FETCH_CATEGORIES' });
       }, []);
 
-    //onClick function to go back to EnterPerson
+    //onClick function to go back to EnterOccasion
     const handleBack = () => {
-        history.push('/person');
+        history.push('/occasion');
     }; //end handleBack
 
 
     //onClick function to submit person & relationship details
     const handleContinue = () => {
-        //conditional if logged in go to dashboard
-        history.push('/dashboard');
+        if (user.id ){
+            history.push('/dashboard');
+        } else {
+            setRegister(true)
+        }
+        
         //else go to register/login
 
     }; //end handleContinue
@@ -86,10 +94,10 @@ export default function SelectCategory() {
                                   }}
                                 style={{ width: 250, margin: 8 }}
                                 variant="outlined"
-                                value={ event?.category || '' }
+                                value={ events?.category}
                                 onChange={(event) => dispatch({ type: 'SET_CATEGORY', payload: event.target.value })}
                             >
-                                    <option value="">Choose a category:</option>
+                                    <option value="">Choose a Category:</option>
                                 {categories.map((category) => {
                                     return (
                                         <option value = {category.id} key = {category.id}>{category.category}</option>
@@ -112,6 +120,7 @@ export default function SelectCategory() {
                 </Grid>
                 <Grid item xs={6} sm={3}></Grid>
             </Grid>
+            <RegisterDialog register={register} setRegister={setRegister} />
         </div>
     )
-}
+}; // end SelectCategory
