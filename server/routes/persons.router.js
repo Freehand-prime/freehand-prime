@@ -1,5 +1,8 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 const router = express.Router();
 
 // route for getting user's persons
@@ -22,14 +25,14 @@ router.get('/', (req, res) => {
 });
 
 // POST route for adding a new person to the database
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   console.log(req.body)
   const insertPersonQuery = `
     INSERT INTO "persons" ("user_id", "name", "relationship", "address")
     VALUES ($1, $2, $3, $4);`;
 
   pool
-  .query(insertPersonQuery, [req.body.user_id, 
+  .query(insertPersonQuery, [req.user.id, 
                                 req.body.name, 
                                 req.body.relationship,
                                 req.body.address])

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import RegisterDialog from '../RegisterDialog/RegisterDialog';
 import { 
     Grid,
     Typography,
@@ -37,20 +38,34 @@ export default function SelectCategory() {
 
     const classes = useStyles();
 
+    const [register, setRegister] = useState(false);
+
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const events = useSelector((store) => store.events)
+    const events = useSelector((store) => store.events);
+    const categories = useSelector((store) => store.categories)
+    const user = useSelector((store) => store.user)
 
-    //onClick function to go back to EnterPerson
+    useEffect(() => {
+        dispatch({ type: 'FETCH_CATEGORIES' });
+      }, []);
+
+    //onClick function to go back to EnterOccasion
     const handleBack = () => {
-        history.push('/person');
+        history.push('/occasion');
     }; //end handleBack
 
 
     //onClick function to submit person & relationship details
     const handleContinue = () => {
-        history.push('/dashboard');
+        if (user.id ){
+            history.push('/dashboard');
+        } else {
+            setRegister(true)
+        }
+        
+        //else go to register/login
 
     }; //end handleContinue
 
@@ -78,17 +93,17 @@ export default function SelectCategory() {
                                     shrink: true,
                                   }}
                                 style={{ width: 250, margin: 8 }}
-                                value={ events?.category || '' }
-                                onChange={(event) => dispatch({ type: 'SET_CATEGORY', payload: event.target.value })}
                                 variant="outlined"
+                                value={ events?.category}
+                                onChange={(event) => dispatch({ type: 'SET_CATEGORY', payload: event.target.value })}
                             >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
-                                <MenuItem value={'funny'}>Funny</MenuItem>
-                                <MenuItem value={'romantic'}>Romantic</MenuItem>
-                                <MenuItem value={'depressing'}>Depressing</MenuItem>
-                                
+                                    <option value="">Choose a Category:</option>
+                                {categories.map((category) => {
+                                    return (
+                                        <option value = {category.id} key = {category.id}>{category.category}</option>
+                                    );
+                                })}
+                                    
                             </Select>
                         </FormControl>
                         
@@ -105,6 +120,7 @@ export default function SelectCategory() {
                 </Grid>
                 <Grid item xs={6} sm={3}></Grid>
             </Grid>
+            <RegisterDialog register={register} setRegister={setRegister} />
         </div>
     )
-}
+}; // end SelectCategory
