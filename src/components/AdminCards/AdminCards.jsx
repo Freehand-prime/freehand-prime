@@ -119,11 +119,10 @@ export default function AdminCards() {
                 </TableHead>
                 <TableBody >
                 {allCards.map((card) => (
-                    <>
+
                         <TableRow key={ card.id } className={classes.tableRow}>
-                            <AdminCardTableRow card={card} key={ card.id }/>
+                            <AdminCardTableRow card={card} />
                         </TableRow> 
-                    </>
                     )
                 )}
                 </TableBody>
