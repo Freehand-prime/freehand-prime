@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { 
@@ -40,7 +40,12 @@ export default function SelectCategory() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const events = useSelector((store) => store.events)
+    const categories = useSelector((store) => store.categories)
+    const event = useSelector((store) => store.event)
+
+    useEffect(() => {
+        dispatch({ type: 'FETCH_CATEGORIES' });
+      }, []);
 
     //onClick function to go back to EnterPerson
     const handleBack = () => {
@@ -50,7 +55,9 @@ export default function SelectCategory() {
 
     //onClick function to submit person & relationship details
     const handleContinue = () => {
+        //conditional if logged in go to dashboard
         history.push('/dashboard');
+        //else go to register/login
 
     }; //end handleContinue
 
@@ -78,17 +85,17 @@ export default function SelectCategory() {
                                     shrink: true,
                                   }}
                                 style={{ width: 250, margin: 8 }}
-                                value={ events?.category || '' }
-                                onChange={(event) => dispatch({ type: 'SET_CATEGORY', payload: event.target.value })}
                                 variant="outlined"
+                                value={ event?.category || '' }
+                                onChange={(event) => dispatch({ type: 'SET_CATEGORY', payload: event.target.value })}
                             >
-                                <MenuItem value="">
-                                    <em>None</em>
-                                </MenuItem>
-                                <MenuItem value={'funny'}>Funny</MenuItem>
-                                <MenuItem value={'romantic'}>Romantic</MenuItem>
-                                <MenuItem value={'depressing'}>Depressing</MenuItem>
-                                
+                                    <option value="">Choose a category:</option>
+                                {categories.map((category) => {
+                                    return (
+                                        <option value = {category.id} key = {category.id}>{category.category}</option>
+                                    );
+                                })}
+                                    
                             </Select>
                         </FormControl>
                         

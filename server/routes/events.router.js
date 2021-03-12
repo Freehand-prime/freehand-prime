@@ -98,10 +98,10 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
     const personResult = await pool.query(editPersonQuery, [req.body.name, personId])
 
 
-//     const eventsQuery = `
-//       UPDATE "events"
-//       SET ("occasion_id", "category_id", "date") = ($1, $2, $3)
-//       WHERE id = $4;`;
+    const eventsQuery = `
+      UPDATE "events"
+      SET ("occasion_id", "category_id", "date") = ($1, $2, $3)
+      WHERE id = $4;`;
     
     const eventsResult = await pool.query(eventsQuery, [req.body.event.occasion_id,
                                                           req.body.event.category_id,
