@@ -26,6 +26,10 @@ function RegisterDialog({ register, setRegister }) {
   // Error selector
   const errors = useSelector((store) => store.errors);
 
+  // Person and Event Reducers
+  const newEvent = useSelector((store) => store.event);
+  const person = useSelector((store) => store.person);
+
   // Hooks
   const dispatch = useDispatch();
   const history = useHistory();
@@ -39,7 +43,9 @@ function RegisterDialog({ register, setRegister }) {
         payload: {
           username: username,
           password: password,
-        }
+        },
+        person: person,
+        event: newEvent,
       });
       setRegister(false);
       history.push("/dashboard");

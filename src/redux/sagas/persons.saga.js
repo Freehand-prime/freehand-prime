@@ -8,6 +8,7 @@ import axios from 'axios';
 function* addPersonAndEvent(action) {
     try {
         console.log('post new person and event');
+        console.log(action.payload);
         const newPersonAndEvent = action.payload;
         const response = yield axios.post('/api/person', newPersonAndEvent);
         console.log('NEW PERSON AND EVENT ADDED:', response);
