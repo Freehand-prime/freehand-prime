@@ -4,13 +4,13 @@ const editEvent = (state = {}, action) => {
         case 'SET_EDIT_EVENT':
             return action.payload;
         case 'EDIT_NAME':
-            return {...state, date: action.payload};
+            return {...state, name: action.payload};
         case 'EDIT_OCCASION':
-            return {...state, title: action.payload};
+            return {...state, occasion: action.payload};
         case 'EDIT_DATE':
-            return {...state, author: action.payload};
+            return {...state, date: action.payload};
         case 'EDIT_CATEGORY':
-            return {...state, year: action.payload};
+            return {...state, category: action.payload};
         default:
             return state
     }

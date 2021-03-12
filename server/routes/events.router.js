@@ -62,27 +62,34 @@ router.delete('/:id', (req, res) => {
 }); // end DELETE for event
 
 // PUT route to UPDATE person name in persons database then UPDATE event details in events database
-router.put('/:id', (req, res) => {
+router.put('/:id', rejectUnauthenticated, async (req, res) => {
   // Update this entry
   try {
-    //const idToUpdate = req.params.id;
-    const personsQuery = `
-      UPDATE "persons"
-      SET "name" = $1
-      WHERE id = $2;`;
+    const idToUpdate = req.params.id;
+    const personIdQuery = `
+      SELECT "person_id"
+      FROM "events"
+      WHERE id = $1;`
 
-    const personsResult = await pool.query(personsQuery, [req.body.name]);
+    const personId = await pool.query(personIdQuery, [idToUpdate]);
+    const editPersonQuery = `
+      UPDATE "persons"
+      SET ("name") = ($1)
+      WHERE id = $2`
+    
+    const personResult = await pool.query(editPersonQuery, [req.body.name, personId])
 
     const eventsQuery = `
       UPDATE "events"
       SET ("occasion_id", "category_id", "date") = ($1, $2, $3)
       WHERE id = $4;`;
     
-    await req.body.events.forEach(async (event) => {
-      const eventsResult = await pool.query(eventsQuery, [event.occasion_id,
-                                                          event.category_id,
-                                                          event.date])
-    })
+    
+    const eventsResult = await pool.query(eventsQuery, [req.body.event.occasion_id,
+                                                          req.body.event.category_id,
+                                                          req.body.event.date,
+                                                          idToUpdate])
+    
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
