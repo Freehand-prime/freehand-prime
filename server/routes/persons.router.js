@@ -72,4 +72,49 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     });
 }); //end POST for persons
 
+// PUT route for editing person and event
+router.put('/', rejectUnauthenticated, (req, res) => {
+  console.log('received person and event', req.body);
+
+  const updatePersonQuery = `
+    UPDATE "persons" SET ("user_id", "name", "relationship")
+    = ($1, $2, $3)
+    WHERE id = $4`;
+
+  pool
+    .query(updatePersonQuery, [
+      req.user.id,
+      req.body.name,
+      req.body.relationship,
+      req.body.person_id
+    ])
+    .then((result) => {
+
+      const updateEventQuery = `
+      UPDATE "events" SET ("category_id", "occasion_id", "date")
+      = ($1, $2, $3)
+      WHERE id = $4;`;
+
+      pool
+        .query(updateEventQuery, [
+          req.body.category_id,
+          req.body.occasion_id,
+          req.body.date,
+          req.body.id,
+        ])
+        .then((result) => {
+          console.log('updated event entry:', result.rows);
+          res.sendStatus(201);
+        })
+        .catch((error) => {
+          console.error('Error in updating event', error);
+          res.sendStatus(500);
+        });
+    })
+    .catch((error) => {
+      console.error('Error in updating person at the Router', error);
+      res.sendStatus(500);
+    });
+}); //end PUT for persons
+
 module.exports = router;

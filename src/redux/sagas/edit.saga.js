@@ -19,8 +19,7 @@ function* getEvent(action) {
 //generator PUT function to save changes from EDIT: will be fired on SAVE_EDIT
 function* saveEdit(action) {
     console.log(action);
-    yield axios.put(`/api/persons/${action.payload.id}`, action.payload)
-    yield axios.put(`/api/event/${action.payload.id}`, action.payload)
+    yield axios.put(`/api/persons`, action.payload)
 }; //end saveEdit
 
 function* editSaga() {
