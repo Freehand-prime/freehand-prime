@@ -29,7 +29,7 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/event', eventsRouter);
-app.use('/api/person', personsRouter);
+app.use('/api/persons', personsRouter);
 app.use('/api/cards', cardsRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/occasions', occasionsRouter);
