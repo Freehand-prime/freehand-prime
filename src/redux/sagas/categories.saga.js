@@ -12,7 +12,17 @@ function* fetchCategories() {
   }
 }
 
+function* addCategory(action) {
+  try {
+    console.log(action.payload);
+    yield axios.post('/api/categories', { category: action.payload });
+    yield put({ type: 'FETCH_CATEGORIES' });
+  } catch (error) {
+    console.error('occasion post error', error);
+  }
+}
 
 export default function* categoriesSaga() {
   yield takeEvery("FETCH_CATEGORIES", fetchCategories);
+  yield takeEvery('ADD_CATEGORY', addCategory);
 }
