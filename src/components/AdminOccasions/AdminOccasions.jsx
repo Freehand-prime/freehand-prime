@@ -70,12 +70,14 @@ export default function AdminOccasions() {
   };
 
   const handleDeleteOccasion = (id) => {
-    console.log('clicked delette occasion, occasionID is', id);
+    console.log('clicked delete occasion, occasionID is', id);
+    dispatch({ type: 'DELETE_OCCASION', payload: id })
 
   }
 
   const handleDeleteCategory = (id) => {
     console.log('clicked delete category, categoryID is', id);
+    dispatch({ type: 'DELETE_CATEGORY', payload: id })
   }
 
   return (

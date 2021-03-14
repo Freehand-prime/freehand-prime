@@ -44,6 +44,28 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   }
 });
 
+// route for deleting category
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+  console.log('in delete category', req.params.id);
+  if (req.user.isadmin) {
+    const queryText = `DELETE FROM "categories"
+    WHERE "categories".id = ($1);`;
+    pool
+      .query(queryText, [req.params.id])
+      .then((result) => {
+        console.log('deleted category');
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log('error in delete category', error);
+        res.sendStatus(500);
+      });
+  } else {
+    console.log('not admin');
+    res.sendStatus(403);
+  }
+});
+
 // MAKE SURE TO ADD ADMIN AUTH FOR POST, DELETE, UPDATE
 
 
