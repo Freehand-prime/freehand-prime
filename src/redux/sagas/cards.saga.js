@@ -57,9 +57,29 @@ function* deleteCard(action) {
   }
 }
 
+function* fetchAdminCards() {
+    //debug log to user console
+  console.log(`In fetchAdminCards`);
+    //triple-threat GET for admin-cards
+  try {
+      //GET cards and set cards reducer
+    const cards = yield axios.get("/api/cards");
+    yield put({ type: "SET_CARDS", payload: cards.data });
+      //GET occasions and set occasions reducer
+    const occasions = yield axios.get("/api/occasions");
+    yield put({ type: "SET_OCCASIONS", payload: occasions.data });
+      //GET categories and set categories reducer
+    const categories = yield axios.get("/api/categories");
+    yield put({ type: "SET_CARDS", payload: categories.data });   
+  } catch (error) {
+    console.error(`ERROR in fetchAdminCards: ${error}`);
+  }
+}
+
 export default function* cardsSaga() {
   yield takeEvery("FETCH_CARDS", fetchCards);
   yield takeEvery("ADD_CARD", addCard);
   yield takeEvery("EDIT_CARD", editCard);
   yield takeEvery("DELETE_CARD", deleteCard);
+  yield takeEvery("FETCH_ADMIN_CARDS", fetchAdminCards);
 }
