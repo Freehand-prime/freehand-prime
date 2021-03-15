@@ -1,5 +1,5 @@
 // reducer to hold single card object being edited
-const editEvent = (state = {}, action) => {
+const editCard = (state = {}, action) => {
     switch (action.type) {
         case 'SET_EDIT_CARD':
             return action.payload;
@@ -18,4 +18,4 @@ const editEvent = (state = {}, action) => {
     }
 }; //end editEvent
 
-export default editEvent;
+export default editCard;
