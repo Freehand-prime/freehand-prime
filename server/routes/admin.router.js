@@ -17,42 +17,62 @@ router.post('/card', rejectUnauthenticated, (req, res) => {
     const newCardData = req.body;
         //store query string in route scope
     const cardToAddQuery = `
-
+        INSERT INTO "cards" (
+        'occasion_id', 
+        'category_id', 
+        'image_front', 
+        'image_inside', 
+        'likes', 
+        'artist', 
+        'details') = ($1, $2, $3, $4, $5, $6, $7);
         `;
-    try {
-
-    } catch(error) {
-        console.error(error);
-            //send response 500 'Internal Server Error' on pool query error 
-        res.sendStatus(500);
-    }
+    pool
+        .query(cardToAddQuery, [
+            newCardData.occasion_id,
+            newCardData.category_id,
+            newCardData.image_front,
+            newCardData.image_inside,
+            newCardData.likes,
+            newCardData.artist,
+            newCardData.details
+        ])
+        .then(() => {
+                //send response 201 'Created' on pool query success
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.error(error);
+                //send response 500 'Internal Server Error' on pool query error 
+            res.sendStatus(500);
+        });
 });
 
-router.put('/card/', rejectUnauthenticated, (req, res) => {
+router.put('/card', rejectUnauthenticated, (req, res) => {
     // POST route code here
         //store data on body in route scope
     const updateCardData = req.body;
         //store query string in route scope
     const cardToUpdateQuery = `
         UPDATE "cards"
-        SET ("occasion_id", 
-        "category_id", 
-        "image_front", 
-        "image_inside", 
-        "likes", "artist", 
-        "details") = ($1, $2, $3, $4, $5, $6, $7)
+        SET ('occasion_id', 
+        'category_id', 
+        'image_front', 
+        'image_inside', 
+        'likes', 
+        'artist', 
+        'details') = ($1, $2, $3, $4, $5, $6, $7)
         WHERE id = $8;
         `;
     pool
         .query(cardToUpdateQuery, [
-        updateCardData.occasion_id,
-        updateCardData.category_id,
-        updateCardData.image_front,
-        updateCardData.image.inside,
-        updateCardData.likes,
-        updateCardData.artist,
-        updateCardData.details,
-        updateCardData.id
+            updateCardData.occasion_id,
+            updateCardData.category_id,
+            updateCardData.image_front,
+            updateCardData.image_inside,
+            updateCardData.likes,
+            updateCardData.artist,
+            updateCardData.details,
+            updateCardData.id
         ])
         .then(() => {
                 //send response 200 'OK' on pool query success 
@@ -76,7 +96,7 @@ router.delete('/card/:id', rejectUnauthenticated, (req, res) => {
         `;
     pool
         .query(cardToDeleteQuery, [
-        cardToDeleteID
+            cardToDeleteID
         ])
         .then(() => {
                 //send response 200 'OK' on pool query success 
