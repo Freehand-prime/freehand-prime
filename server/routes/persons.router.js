@@ -111,15 +111,16 @@ router.put('/', rejectUnauthenticated, (req, res) => {
     ])
     .then((result) => {
       const updateEventQuery = `
-      UPDATE "events" SET ("category_id", "occasion_id", "date")
-      = ($1, $2, $3)
-      WHERE id = $4;`;
+      UPDATE "events" SET ("category_id", "occasion_id", "date", "card_id")
+      = ($1, $2, $3, $4)
+      WHERE id = $5;`;
 
       pool
         .query(updateEventQuery, [
           req.body.category_id,
           req.body.occasion_id,
           req.body.date,
+          req.body.card_id,
           req.body.id,
         ])
         .then((result) => {

@@ -1,6 +1,7 @@
 // React
 import React, { useState } from "react";
-
+import { useDispatch } from "react-redux";
+ 
 // MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -35,8 +36,14 @@ export default function CardCard({ card, buttonTitle, eventId }) {
 
   // Swap image state
   const [showInside, setShowInside] = useState(false);
+  const dispatch = useDispatch();
 
   const classes = useStyles();
+
+  const handleConfirm = () => {
+    dispatch({type: 'PICK_CARD', payload: card.id});
+    setOpenConfirm(!openConfirm);
+  }
 
   return (
     <>
@@ -85,7 +92,7 @@ export default function CardCard({ card, buttonTitle, eventId }) {
                 <Button
                   size="small"
                   color="primary"
-                  onClick={() => setOpenConfirm(!openConfirm)}
+                  onClick={handleConfirm}
                 >
                   {buttonTitle}
                 </Button>

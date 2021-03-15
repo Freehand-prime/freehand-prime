@@ -1,6 +1,6 @@
 // React, Redux, Router
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 // MUI
@@ -21,11 +21,12 @@ export default function ConfirmDialog({ openConfirm, setOpenConfirm, cardId, eve
   // Hooks
   const dispatch = useDispatch();
   const history = useHistory();
+  const selectedEvent = useSelector((store) => store.edit);
 
   // Confirm card handler
   const handleConfirm = () => {
     setOpenConfirm(false);
-    dispatch({type: 'PICK_CARD', payload: cardId})
+    dispatch({ type: "SAVE_EDIT", payload: selectedEvent });
     history.push(`/shipping/${eventId}`);
   };
 

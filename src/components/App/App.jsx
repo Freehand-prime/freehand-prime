@@ -82,7 +82,7 @@ export default function App() {
             <PickACard />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/shipping">
+          <ProtectedRoute exact path="/shipping/:id">
             <ShippingConfirm />
           </ProtectedRoute>
 
