@@ -13,7 +13,18 @@ function* fetchCards() {
 }
 
 function* addCard(action) {
-
+    //store data of card to create
+    const newCardInfo = action.payload;
+    //debug log to user console
+  console.log(`In addCard: ${newCardInfo}`);
+  try{
+      //POST request to admin API
+    yield axios.post(`/api/admin/card`, newCardInfo);
+      //GET updated cards data.
+    yield put({type: 'FETCH_CARDS'});
+  } catch(error) {
+    console.error(`ERROR in addCard: ${error}`);
+  }
 }
 
 function* editCard(action) {
