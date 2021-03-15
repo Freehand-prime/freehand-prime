@@ -34,15 +34,35 @@ router.put('/card/', rejectUnauthenticated, (req, res) => {
     const updateCardData = req.body;
         //store query string in route scope
     const cardToUpdateQuery = `
-    
+        UPDATE "cards"
+        SET ("occasion_id", 
+        "category_id", 
+        "image_front", 
+        "image_inside", 
+        "likes", "artist", 
+        "details") = ($1, $2, $3, $4, $5, $6, $7)
+        WHERE id = $8;
         `;
-    try {
-
-    } catch(error) {
-        console.error(error);
-            //send response 500 'Internal Server Error' on pool query error 
-        res.sendStatus(500);
-    }
+    pool
+        .query(cardToUpdateQuery, [
+        updateCardData.occasion_id,
+        updateCardData.category_id,
+        updateCardData.image_front,
+        updateCardData.image.inside,
+        updateCardData.likes,
+        updateCardData.artist,
+        updateCardData.details,
+        updateCardData.id
+        ])
+        .then(() => {
+                //send response 200 'OK' on pool query success 
+            res.sendStatus(200);
+        })
+        .catch((error) => {
+            console.error(error);
+                //send response 500 'Internal Server Error' on pool query error 
+            res.sendStatus(500);
+        });
 });
 
 router.delete('/card/:id', rejectUnauthenticated, (req, res) => {
@@ -56,7 +76,7 @@ router.delete('/card/:id', rejectUnauthenticated, (req, res) => {
         `;
     pool
         .query(cardToDeleteQuery, [
-        cardToDeleteID,
+        cardToDeleteID
         ])
         .then(() => {
                 //send response 200 'OK' on pool query success 
