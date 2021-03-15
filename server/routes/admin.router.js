@@ -5,14 +5,13 @@ const {
     rejectUnauthenticated,
 } = require("../modules/authentication-middleware.js");
 
+//TODO: change rejectUnauthenticated middleware to handle rejectAdminUnauthenticated
+
 /**
  * adminCards routes for cards
  */
 
-//TODO: change rejectUnauthenticated middleware to handle rejectAdminUnauthenticated
-
 router.post('/card', rejectUnauthenticated, (req, res) => {
-    // POST route code here
         //store data on body in route scope
     const newCardData = req.body;
         //store query string in route scope
@@ -48,7 +47,6 @@ router.post('/card', rejectUnauthenticated, (req, res) => {
 });
 
 router.put('/card', rejectUnauthenticated, (req, res) => {
-    // POST route code here
         //store data on body in route scope
     const updateCardData = req.body;
         //store query string in route scope
@@ -86,7 +84,6 @@ router.put('/card', rejectUnauthenticated, (req, res) => {
 });
 
 router.delete('/card/:id', rejectUnauthenticated, (req, res) => {
-    // POST route code here
         //store ID in route scope
     const cardToDeleteID = req.params.id;
         //store query string in route scope
@@ -117,12 +114,12 @@ router.post('/occasion', rejectUnauthenticated, (req, res) => {
     // POST route code here
 });
 
-router.put('/occasion/', rejectUnauthenticated, (req, res) => {
-    // POST route code here
+router.put('/occasion', rejectUnauthenticated, (req, res) => {
+    // PUT route code here
 });
 
 router.delete('/occasion/:id', rejectUnauthenticated, (req, res) => {
-    // POST route code here
+    // DELETE route code here
 });
 
 /**
@@ -133,12 +130,12 @@ router.post('/category', rejectUnauthenticated, (req, res) => {
     // POST route code here
 });
 
-router.put('/category/', rejectUnauthenticated, (req, res) => {
-    // POST route code here
+router.put('/category', rejectUnauthenticated, (req, res) => {
+    // PUT route code here
 });
 
 router.delete('/category/:id', rejectUnauthenticated, (req, res) => {
-    // POST route code here
+    // DELETE route code here
 });
 
 module.exports = router;
