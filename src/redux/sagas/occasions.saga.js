@@ -22,6 +22,16 @@ function* addOccasion(action) {
   }
 }
 
+function* updateOccasion(action) {
+  try {
+    console.log('received to update', action.payload);
+    yield axios.put(`/api/occasions/${action.payload[0]}`, { occasion: action.payload[1] } );
+    yield put({ type: 'FETCH_OCCASIONS' });
+  } catch (error) {
+    console.error('occasion update error in saga', error);
+  }
+}
+
 function* deleteOccasion(action) {
   try {
     console.log('in delete occasion for id', action.payload);
@@ -35,5 +45,6 @@ function* deleteOccasion(action) {
 export default function* occasionsSaga() {
   yield takeEvery('FETCH_OCCASIONS', fetchOccasions);
   yield takeEvery('ADD_OCCASION', addOccasion);
+  yield takeEvery('UPDATE_OCCASION', updateOccasion);
   yield takeEvery('DELETE_OCCASION', deleteOccasion);
 }

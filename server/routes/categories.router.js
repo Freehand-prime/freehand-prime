@@ -8,7 +8,7 @@ const router = express.Router();
 // route for getting all categories
 router.get('/', (req, res) => {
   console.log('in get all categories');
-  const queryText = `SELECT * FROM "categories";`;
+  const queryText = `SELECT * FROM "categories" ORDER BY "id" ASC;;`;
   pool
     .query(queryText)
     .then((result) => {
@@ -36,6 +36,29 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       })
       .catch((error) => {
         console.log('error in update categories', error);
+        res.sendStatus(500);
+      });
+  } else {
+    console.log('not admin');
+    res.sendStatus(403);
+  }
+});
+
+// route for updating category
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  console.log('in update category', req.params.id, req.body.category);
+  if (req.user.isadmin) {
+    const queryText = `UPDATE "categories"
+    SET "category" = $2
+    WHERE "id" = $1;`;
+    pool
+      .query(queryText, [req.params.id, req.body.category])
+      .then((result) => {
+        console.log('updated category');
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log('error in update category', error);
         res.sendStatus(500);
       });
   } else {

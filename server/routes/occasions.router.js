@@ -8,7 +8,7 @@ const router = express.Router();
 // route for getting all occasions
 router.get('/', (req, res) => {
   console.log('in get all occasions');
-  const queryText = `SELECT * FROM "occasions";`;
+  const queryText = `SELECT * FROM "occasions" ORDER BY "id" ASC;`;
   pool
     .query(queryText)
     .then((result) => {
@@ -32,6 +32,29 @@ router.post('/', rejectUnauthenticated, (req, res) => {
       .query(queryText, [req.body.occasion])
       .then((result) => {
         console.log('updated occasions');
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log('error in update occasion', error);
+        res.sendStatus(500);
+      });
+  } else {
+    console.log('not admin');
+    res.sendStatus(403);
+  }
+});
+
+// route for updating occasion
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+  console.log('in update occasion', req.params.id, req.body.occasion);
+  if (req.user.isadmin) {
+    const queryText = `UPDATE "occasions"
+    SET "occasion" = $2
+    WHERE "id" = $1;`;
+    pool
+      .query(queryText, [req.params.id, req.body.occasion])
+      .then((result) => {
+        console.log('updated occasion');
         res.sendStatus(200);
       })
       .catch((error) => {

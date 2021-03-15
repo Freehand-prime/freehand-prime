@@ -46,39 +46,50 @@ export default function AdminOccasions() {
   const categories = useSelector((store) => store.categories);
   const [addOccasion, setAddOccasion] = useState('');
   const [addCategory, setAddCategory] = useState('');
-  const [editOccasion, setEditOccasion] = [0, ''];
-  const [editCategory, setEditCategory] = [0, ''];
+  const [editOccasion, setEditOccasion] = useState(0);
+  const [editCategory, setEditCategory] = useState(0);
+  const [editOccasionString, setEditOccasionString] = useState('');
+  const [editCategoryString, setEditCategoryString] = useState('');
 
-  // do we not need a useEffect bc we are setting state after registration / login?
   useEffect(() => {
     dispatch({ type: 'FETCH_OCCASIONS' });
     dispatch({ type: 'FETCH_CATEGORIES' });
   }, []);
 
+  // HOW TO HANDLE DELETES FOR CATEGORIES AND OCCASIONS THAT HAVE EXISTING CARDS AND EVENTS
+
   const handleAddOccasion = () => {
     console.log('clicked add occasion, addOccasion is', addOccasion);
     dispatch({ type: 'ADD_OCCASION', payload: addOccasion });
-    // post add occasion
     setAddOccasion('');
   };
 
   const handleAddCategory = () => {
     console.log('clicked add category, addCategory is', addCategory);
     dispatch({ type: 'ADD_CATEGORY', payload: addCategory });
-    // post add category
     setAddCategory('');
   };
 
   const handleDeleteOccasion = (id) => {
     console.log('clicked delete occasion, occasionID is', id);
-    dispatch({ type: 'DELETE_OCCASION', payload: id })
-
-  }
+    dispatch({ type: 'DELETE_OCCASION', payload: id });
+  };
 
   const handleDeleteCategory = (id) => {
     console.log('clicked delete category, categoryID is', id);
-    dispatch({ type: 'DELETE_CATEGORY', payload: id })
-  }
+    dispatch({ type: 'DELETE_CATEGORY', payload: id });
+  };
+
+  const handleOccasionEdit = (occasionToUpdate) => {
+    console.log('clicked save on occasion with string', occasionToUpdate);
+    dispatch({ type: 'UPDATE_OCCASION', payload: occasionToUpdate });
+    setEditOccasionString('');
+  };
+
+  const handleCategoryEdit = (categoryToUpdate) => {
+    console.log('clicked save on category with string', categoryToUpdate);
+    dispatch({ type: 'UPDATE_CATEGORY', payload: categoryToUpdate });
+  };
 
   return (
     <>
@@ -109,14 +120,45 @@ export default function AdminOccasions() {
               {occasions &&
                 occasions.map((occasion) => (
                   <ListItem key={occasion.id}>
-                    <ListItemText>{occasion.occasion}</ListItemText>
+                    {editOccasion == occasion.id ? (
+                      <TextField
+                        variant="outlined"
+                        size="small"
+                        value={editOccasionString}
+                        onChange={(event) => {
+                          setEditOccasionString(event.target.value);
+                        }}
+                        fullWidth
+                      />
+                    ) : (
+                      <ListItemText>{occasion.occasion}</ListItemText>
+                    )}
                     <ListItemIcon>
-                      <IconButton>
-                        <EditIcon />
+                      <IconButton
+                        onClick={() =>
+                          setEditOccasion(editOccasion > 0 ? 0 : occasion.id)
+                        }
+                      >
+                        {editOccasion == occasion.id ? (
+                          <SaveIcon
+                            onClick={() =>
+                              handleOccasionEdit([
+                                editOccasion,
+                                editOccasionString,
+                              ])
+                            }
+                          />
+                        ) : (
+                          <EditIcon />
+                        )}
                       </IconButton>
                     </ListItemIcon>
                     <ListItemIcon>
-                      <IconButton onClick={() => {handleDeleteOccasion(occasion.id)}}>
+                      <IconButton
+                        onClick={() => {
+                          handleDeleteOccasion(occasion.id);
+                        }}
+                      >
                         <DeleteIcon />
                       </IconButton>
                     </ListItemIcon>
@@ -144,14 +186,45 @@ export default function AdminOccasions() {
               {categories &&
                 categories.map((category) => (
                   <ListItem key={category.id}>
-                    <ListItemText>{category.category}</ListItemText>
+                    {editCategory == category.id ? (
+                      <TextField
+                        variant="outlined"
+                        size="small"
+                        value={editCategoryString}
+                        onChange={(event) => {
+                          setEditCategoryString(event.target.value);
+                        }}
+                        fullWidth
+                      />
+                    ) : (
+                      <ListItemText>{category.category}</ListItemText>
+                    )}
                     <ListItemIcon>
-                      <IconButton>
-                        <EditIcon />
+                      <IconButton
+                        onClick={() =>
+                          setEditCategory(editCategory > 0 ? 0 : category.id)
+                        }
+                      >
+                        {editCategory == category.id ? (
+                          <SaveIcon
+                            onClick={() =>
+                              handleCategoryEdit([
+                                editCategory,
+                                editCategoryString,
+                              ])
+                            }
+                          />
+                        ) : (
+                          <EditIcon />
+                        )}
                       </IconButton>
                     </ListItemIcon>
                     <ListItemIcon>
-                    <IconButton onClick={() => {handleDeleteCategory(category.id)}}>
+                      <IconButton
+                        onClick={() => {
+                          handleDeleteCategory(category.id);
+                        }}
+                      >
                         <DeleteIcon />
                       </IconButton>
                     </ListItemIcon>
