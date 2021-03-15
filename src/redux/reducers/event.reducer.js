@@ -7,6 +7,8 @@ const eventReducer = (state = {occasion: '', date: '', category: ''}, action) =>
             return { ...state, date: action.payload };
         case 'SET_CATEGORY':
             return { ...state, category: action.payload };
+        case 'SET_INSCRIPTION':
+            return { ...state, category: action.payload };   
         default:
             return state;
     }
