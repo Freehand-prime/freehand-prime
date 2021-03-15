@@ -6,7 +6,7 @@ import {
     Typography,
     TextField, 
     makeStyles,
-    InputLabel,
+    MenuItem,
     FormControl,
     Select,
     Paper,
@@ -33,26 +33,41 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnterPerson() {
 
+    const [selectedPerson, setSelectedPerson] = useState({});
+
     const classes = useStyles();
 
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const user = useSelector((store) => store.user)
     const person = useSelector((store) => store.person)
-    const persons = useSelector((store => store.persons))
+    const userPersons = useSelector((store => store.persons))
 
     useEffect(() => {
         dispatch({ type: 'FETCH_PERSONS' });
-      }, []);
+      }, [person]);
 
     //onClick function to submit person & relationship details
     const handleContinue = () => {
         // sends user to EnterOccasion page
+        if (selectedPerson.id) {
+          dispatch({type: 'SET_EDIT_PERSON', payload: selectedPerson})
+        }
         history.push('/occasion');
-
     }; //end handleContinue
 
+    const handleSelectPerson = (event) => {
+        event.preventDefault();
+        userPersons.forEach((person) => {
+            if(person.name == event.target.value) {
+                setSelectedPerson(person);
+ 
+            }
+        })
+    }
 
+    console.log(selectedPerson);
 
     return (
         <div className={classes.root}>
@@ -77,10 +92,32 @@ export default function EnterPerson() {
                                     shrink: true,
                                   }}
                                 style={{ width: 250, margin: 8 }}
-                                value={ person?.name || '' }
+                                value={ person?.name || selectedPerson.name }
                                 onChange={(event) => dispatch({ type: 'SET_NAME', payload: event.target.value })}
                                 variant="outlined"
                             />
+                            {user.id && (
+                                <Select
+                                id="select-person-name"
+                                label="select person"
+                                type="text"
+                                InputLabelProps={{
+                                  shrink: true,
+                                }}
+                                style={{ width: 250, margin: 8 }}
+                                variant="outlined"
+                                value={selectedPerson?.name || ''}
+                                onChange={handleSelectPerson}
+                              >
+                                {userPersons.map((person) => {
+                                  return (
+                                    <MenuItem value={person.name} key={person.id}>
+                                      {person.name}
+                                    </MenuItem>
+                                  );
+                                })}
+                              </Select>
+                            )}
                         </FormControl>
                         <FormControl>
                             <TextField
@@ -91,7 +128,7 @@ export default function EnterPerson() {
                                     shrink: true,
                                   }}
                                 style={{ width: 250, margin: 8 }}
-                                value={ person?.relationship || '' }
+                                value={ person?.relationship || selectedPerson.relationship }
                                 onChange={(event) => dispatch({ type: 'SET_RELATIONSHIP', payload: event.target.value })}
                                 variant="outlined"
                             />
