@@ -12,7 +12,39 @@ function* fetchCategories() {
   }
 }
 
+function* addCategory(action) {
+  try {
+    console.log(action.payload);
+    yield axios.post('/api/categories', { category: action.payload });
+    yield put({ type: 'FETCH_CATEGORIES' });
+  } catch (error) {
+    console.error('occasion post error', error);
+  }
+}
+
+function* updateCategory(action) {
+  try {
+    console.log('received to update', action.payload);
+    yield axios.put(`/api/categories/${action.payload[0]}`, { category: action.payload[1] } );
+    yield put({ type: 'FETCH_CATEGORIES' });
+  } catch (error) {
+    console.error('category update error in saga', error);
+  }
+}
+
+function* deleteCategory(action) {
+  try {
+    console.log('in delete category for id', action.payload);
+    yield axios.delete(`/api/categories/${action.payload}`);
+    yield put({ type: 'FETCH_CATEGORIES' });
+  } catch (error) {
+    console.error('delete category error', error);
+  }
+}
 
 export default function* categoriesSaga() {
   yield takeEvery("FETCH_CATEGORIES", fetchCategories);
+  yield takeEvery('ADD_CATEGORY', addCategory);
+  yield takeEvery('UPDATE_CATEGORY', updateCategory);
+  yield takeEvery('DELETE_CATEGORY', deleteCategory);
 }
