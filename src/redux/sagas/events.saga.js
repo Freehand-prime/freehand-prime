@@ -3,11 +3,11 @@ import axios from 'axios';
 
 //SAGA
 //generator function to POST event details to database. Will be fired on ADD_EVENT
-function* addEvent(action) {
+function* updateEvent(action) {
   try {
     console.log('post new event');
     const newEvent = action.payload;
-    const response = yield axios.post('/api/event', newEvent);
+    const response = yield axios.put('/api/event', newEvent);
     console.log('NEW EVENT ADDED:', response);
   } catch (error) {
     console.error('ERROR in adding new event', error);
@@ -27,7 +27,7 @@ function* fetchEvents() {
 } // end fetchEvents
 
 function* eventsSaga() {
-  yield takeEvery('ADD_EVENT', addEvent);
+  yield takeEvery('UPDATE_EVENT', updateEvent);
   yield takeEvery('FETCH_EVENTS', fetchEvents);
 }
 

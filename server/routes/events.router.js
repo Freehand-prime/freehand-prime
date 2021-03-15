@@ -57,7 +57,8 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     });
 }); // end DELETE for event
 
-// PUT route to UPDATE person name in persons database then UPDATE event details in events database
+// PUT route to UPDATE person address in persons database then 
+// UPDATE inscription, is_shipped, ship_to_me, in events database
 
 router.put('/:id', rejectUnauthenticated, async (req, res) => {
   // Update this entry
@@ -71,23 +72,23 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
     const personId = await pool.query(personIdQuery, [idToUpdate]);
     const editPersonQuery = `
       UPDATE "persons"
-      SET ("name") = ($1)
+      SET ("address") = ($1)
       WHERE id = $2`;
 
     const personResult = await pool.query(editPersonQuery, [
-      req.body.name,
+      req.body.address,
       personId,
     ]);
 
     const eventsQuery = `
       UPDATE "events"
-      SET ("occasion_id", "category_id", "date") = ($1, $2, $3)
+      SET ("inscription", "is_shipped", "ship_to_me") = ($1, $2, $3)
       WHERE id = $4;`;
 
     const eventsResult = await pool.query(eventsQuery, [
-      req.body.event.occasion_id,
-      req.body.event.category_id,
-      req.body.event.date,
+      req.bocy.event.inscription,
+      req.body.event.is_shipped,
+      req.body.event.ship_to_me,
       idToUpdate,
     ]);
   } catch (error) {
