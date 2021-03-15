@@ -17,17 +17,23 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function AdminCardTableRow({card}) {
+export default function AdminCardTableRow({card, categories, occasions}) {
         //state
         //hooks
     const dispatch = useDispatch();
     const classes = useStyles();
         //functions
     const handleEdit = () => {
+            //DEBUG: function status log to console
         console.log('handleEdit Clicked on:', card.id);
+            //dispatching to card.saga 
+        dispatch({type: 'EDIT_CARD', payload: card.id});
     }
     const handleDelete = () => {
+            //DEBUG: function status log to console
         console.log('handleDelete Clicked:', card.id);
+            //dispatching to card.saga 
+        dispatch({type: 'DELETE_CARD', payload: card.id});
     }
         //onRender
     return(
