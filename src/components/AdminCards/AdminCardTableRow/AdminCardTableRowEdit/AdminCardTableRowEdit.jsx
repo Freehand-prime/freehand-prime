@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
   //MUI
 import {
     makeStyles,
+    TableCell,
+    Button,
     Card,
     CardMedia,
     Typography
@@ -22,12 +24,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function AdminCardTableRowEdit({editFlag, categories, occasions}) {
+export default function AdminCardTableRowEdit({editFlag, card, categories, occasions}) {
         //state
         //hooks
     const dispatch = useDispatch();
     const classes = useStyles();
         //functions
+    const handleImageUploadFront = () => {
+        console.log('handleImageUploadFront Clicked');
+    }
+    const handleImageUploadInside = () => {
+        console.log('handleImageUploadInside Clicked');
+    }
     const handleSaveEdit = () => {
         //DEBUG: function status log to console
     console.log('handleEdit Clicked on:', card.id);
