@@ -195,7 +195,14 @@ export default function EditEvent() {
               </FormControl>
               {/* conditionally rendered Select Card Button */}
               <div>
-                {!card[0] && (
+                {card[0] ? (
+                  <Button
+                  variant="outlined"
+                  onClick={() => history.push(`/shipping/${editInput.id}`)}
+                >
+                  SHIPPING
+                </Button>
+                ) : (
                   <Button
                     variant="outlined"
                     onClick={() => history.push(`/card/${editInput.id}`)}
