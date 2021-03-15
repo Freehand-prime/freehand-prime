@@ -1,7 +1,7 @@
 import React, {useState}  from 'react';
 import { useDispatch } from 'react-redux';
 import AdminCardTableRowCard from './AdminCardTableRowCard/AdminCardTableRowCard';
-import AdminCardTableRowEdit from './AdminCardTableRowEdit';
+import AdminCardTableRowEdit from './AdminCardTableRowEdit/AdminCardTableRowEdit';
 
   //MUI
 import {
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AdminCardTableRow({card, categories, occasions}) {
         //state
-    const [editFlag, setEditFlag] = useState(FALSE);
+    const [editFlag, setEditFlag] = useState(false);
         //hooks
     const dispatch = useDispatch();
     const classes = useStyles();
