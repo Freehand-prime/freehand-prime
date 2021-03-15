@@ -25,6 +25,13 @@ const useStyles = makeStyles((theme) => ({
 export default function CardCard({ card, buttonTitle, eventId }) {
   // Confirm dialog state
   const [openConfirm, setOpenConfirm] = useState(false);
+  const [cardPicked, setCardPicked] = useState(false);
+
+  const checkCard = () => {
+    if (buttonTitle == "Pick a New Card") {
+      setCardPicked(true);
+    }
+  };
 
   // Swap image state
   const [showInside, setShowInside] = useState(false);
@@ -65,13 +72,25 @@ export default function CardCard({ card, buttonTitle, eventId }) {
         </CardActionArea>
         <CardActions>
           {buttonTitle && (
-            <Button
-              size="small"
-              color="primary"
-              onClick={() => setOpenConfirm(!openConfirm)}
-            >
-              {buttonTitle}
-            </Button>
+            <>
+              {cardPicked ? (
+                <Button
+                  size="small"
+                  color="primary"
+                  onClick={() => console.log("clicked")}
+                >
+                  {buttonTitle}
+                </Button>
+              ) : (
+                <Button
+                  size="small"
+                  color="primary"
+                  onClick={() => setOpenConfirm(!openConfirm)}
+                >
+                  {buttonTitle}
+                </Button>
+              )}
+            </>
           )}
         </CardActions>
       </Card>

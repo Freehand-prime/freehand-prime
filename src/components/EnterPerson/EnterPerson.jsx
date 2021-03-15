@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { 
@@ -39,8 +39,11 @@ export default function EnterPerson() {
     const dispatch = useDispatch();
 
     const person = useSelector((store) => store.person)
+    const persons = useSelector((store => store.persons))
 
-    
+    useEffect(() => {
+        dispatch({ type: 'FETCH_PERSONS' });
+      }, []);
 
     //onClick function to submit person & relationship details
     const handleContinue = () => {
