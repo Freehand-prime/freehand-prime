@@ -15,4 +15,7 @@ function* fetchCards() {
 
 export default function* cardsSaga() {
   yield takeEvery("FETCH_CARDS", fetchCards);
+  yield takeEvery("ADD_CARD", addCard);
+  yield takeEvery("EDIT_CARD", editCard);
+  yield takeEvery("DELETE_CARD", deleteCard);
 }
