@@ -52,9 +52,11 @@ export default function AdminCardTableRow({card, categories, occasions}) {
             <TableCell>
                 <AdminCardTableRowCard image={card.image_inside}/>
             </TableCell>
-            <TableCell>{card.occasion_id}</TableCell>
-            <TableCell>{card.category_id}</TableCell>
+            <TableCell>{occasions[card.occasion_id-1]?.occasion}</TableCell>
+            <TableCell>{categories[card.category_id-1]?.category}</TableCell>
+            <TableCell>{card.likes}</TableCell>
             <TableCell>{card.artist}</TableCell>
+            <TableCell>{card.details}</TableCell>
             <TableCell>
                 <Button 
                     variant="contained"

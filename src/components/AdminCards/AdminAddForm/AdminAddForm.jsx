@@ -85,19 +85,21 @@ export default function AdminAddForm({occasions, categories}) {
                 Upload Inside Image
             </Button>
             {/*Form Fields go Here*/}
+            {categories? 
+            <>
             <FormControl>
                 <InputLabel>Occasion</InputLabel>
                 <Select 
                     label="Occasion"
                     placeholder="enter occasion"
-                    helperText="Required"
+                    helpertext="Required"
                     required
-                    value={addCardData?.occasion_id}
+                    value={addCardData.occasion_id}
                     onChange={(event) => 
                         dispatch({ type: 'SET_ADD_CARD_OCCASION_ID', payload: event.target.value})
                     }
                 >
-                    {occasions.map((occasion) => (
+                    {occasions?.map((occasion) => (
                             <MenuItem 
                                 key={occasion.id} 
                                 value={occasion.id} 
@@ -113,14 +115,14 @@ export default function AdminAddForm({occasions, categories}) {
                 <Select 
                     label="Category"
                     placeholder="enter category"
-                    helperText="Required"
+                    helpertext="Required"
                     required
-                    value={addCardData?.category_id}
+                    value={addCardData.category_id}
                     onChange={(event) => 
                         dispatch({ type: 'SET_ADD_CARD_CATEGORY_ID', payload: event.target.value})
                     }
                 >
-                    {categories.map((category) => (
+                    {categories?.map((category) => (
                             <MenuItem 
                                 key={category.id} 
                                 value={category.id} 
@@ -138,11 +140,11 @@ export default function AdminAddForm({occasions, categories}) {
                     id="filled-margin-dense"
                     placeholder="enter artist name"
                     className={classes.textField}
-                    helperText="Required"
+                    helpertext="Required"
                     required
                     margin="dense"
                     variant="filled"
-                    value={addCardData?.artist}
+                    value={addCardData.artist}
                     onChange={(event) => 
                         dispatch({type: 'SET_ADD_CARD_ARTIST', payload: event.target.value})
                     }
@@ -155,16 +157,21 @@ export default function AdminAddForm({occasions, categories}) {
                     id="filled-margin-dense"
                     placeholder="enter artist name"
                     className={classes.textField}
-                    helperText="Required"
+                    helpertext="Required"
                     required
                     margin="dense"
                     variant="filled"
-                    value={addCardData?.details}
+                    value={addCardData.details}
                     onChange={(event) => 
                         dispatch({type: 'SET_ADD_CARD_DETAILS', payload: event.target.value})
                     }
                 />
             </FormControl>
+            </>
+            : 
+            <>
+            </>}
+            
             <Button 
                 type="submit"
                 variant="contained"

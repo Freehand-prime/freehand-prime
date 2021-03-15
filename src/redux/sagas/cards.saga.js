@@ -70,7 +70,7 @@ function* fetchAdminCards() {
     yield put({ type: "SET_OCCASIONS", payload: occasions.data });
       //GET categories and set categories reducer
     const categories = yield axios.get("/api/categories");
-    yield put({ type: "SET_CARDS", payload: categories.data });   
+    yield put({ type: "SET_CATEGORIES", payload: categories.data });   
   } catch (error) {
     console.error(`ERROR in fetchAdminCards: ${error}`);
   }
