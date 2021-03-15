@@ -8,9 +8,9 @@ const eventReducer = (state = {occasion: '', date: '', category: '', ship_to_me:
         case 'SET_CATEGORY':
             return { ...state, category: action.payload };
         case 'SET_SHIP_TO_ME':
-            return { ...state, category: action.payload };
+            return { ...state, ship_to_me: action.payload };
         case 'SET_INSCRIPTION':
-            return { ...state, category: action.payload };   
+            return { ...state, inscription: action.payload };   
         default:
             return state;
     }

@@ -125,7 +125,7 @@ router.put('/', rejectUnauthenticated, (req, res) => {
         ])
         .then((result) => {
           console.log('updated event entry:', result.rows);
-          res.sendStatus(201);
+          res.sendStatus(200);
         })
         .catch((error) => {
           console.error('Error in updating event', error);
