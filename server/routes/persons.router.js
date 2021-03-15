@@ -28,48 +28,69 @@ router.get('/', (req, res) => {
 router.post('/', rejectUnauthenticated, (req, res) => {
   console.log('received person and event', req.body);
 
-  const insertPersonQuery = `
+  if (req.body.person.id) {
+    const insertEventQuery = `
+  INSERT INTO "events" ("person_id", "category_id", "occasion_id", "date")
+  VALUES ($1, $2, $3, $4);`;
+
+    pool
+      .query(insertEventQuery, [
+        req.body.person.id,
+        req.body.newEvent.category,
+        req.body.newEvent.occasion,
+        req.body.newEvent.date,
+      ])
+      .then((result) => {
+        console.log('new event entry:', result.rows);
+        res.sendStatus(201);
+      })
+      .catch((error) => {
+        console.error('Error in posting event', error);
+        res.sendStatus(500);
+      });
+  } else {
+    const insertPersonQuery = `
     INSERT INTO "persons" ("user_id", "name", "relationship")
     VALUES ($1, $2, $3)
     RETURNING "id";`;
 
-  pool
-    .query(insertPersonQuery, [
-      req.user.id,
-      req.body.person.name,
-      req.body.person.relationship,
-    ])
-    .then((result) => {
-      const newPersonId = result.rows[0].id;
+    pool
+      .query(insertPersonQuery, [
+        req.user.id,
+        req.body.person.name,
+        req.body.person.relationship,
+      ])
+      .then((result) => {
+        const newPersonId = result.rows[0].id;
 
-      console.log('New Person Entry:', result.rows);
-      console.log('New Person ID:', newPersonId);
+        console.log('New Person Entry:', result.rows);
+        console.log('New Person ID:', newPersonId);
 
-      const insertEventQuery = `
+        const insertEventQuery = `
       INSERT INTO "events" ("person_id", "category_id", "occasion_id", "date")
       VALUES ($1, $2, $3, $4);`;
 
-      pool
-        .query(insertEventQuery, [
-          newPersonId,
-          req.body.newEvent.category,
-          req.body.newEvent.occasion,
-          req.body.newEvent.date,
-        ])
-        .then((result) => {
-          console.log('new event entry:', result.rows);
-          res.sendStatus(201);
-        })
-        .catch((error) => {
-          console.error('Error in posting event', error);
-          res.sendStatus(500);
-        });
-      // res.sendStatus(201);
-    })
-    .catch((error) => {
-      console.error('Error in posting person at the Router', error);
-      res.sendStatus(500);
-    });
+        pool
+          .query(insertEventQuery, [
+            newPersonId,
+            req.body.newEvent.category,
+            req.body.newEvent.occasion,
+            req.body.newEvent.date,
+          ])
+          .then((result) => {
+            console.log('new event entry:', result.rows);
+            res.sendStatus(201);
+          })
+          .catch((error) => {
+            console.error('Error in posting event', error);
+            res.sendStatus(500);
+          });
+      })
+      .catch((error) => {
+        console.error('Error in posting person at the Router', error);
+        res.sendStatus(500);
+      });
+  }
 }); //end POST for persons
 
 // PUT route for editing person and event
@@ -86,10 +107,9 @@ router.put('/', rejectUnauthenticated, (req, res) => {
       req.user.id,
       req.body.name,
       req.body.relationship,
-      req.body.person_id
+      req.body.person_id,
     ])
     .then((result) => {
-
       const updateEventQuery = `
       UPDATE "events" SET ("category_id", "occasion_id", "date")
       = ($1, $2, $3)

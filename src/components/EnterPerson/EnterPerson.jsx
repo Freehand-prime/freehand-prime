@@ -42,14 +42,7 @@ export default function EnterPerson() {
 
     const user = useSelector((store) => store.user)
     const person = useSelector((store) => store.person)
-    const allPersons = useSelector((store => store.persons))
-
-    const userPersons = allPersons.filter((person) => {
-        if (person.user_id === user.id)
-        return person; 
-    })
-
-    console.log(userPersons);
+    const userPersons = useSelector((store => store.persons))
 
     useEffect(() => {
         dispatch({ type: 'FETCH_PERSONS' });
@@ -58,8 +51,10 @@ export default function EnterPerson() {
     //onClick function to submit person & relationship details
     const handleContinue = () => {
         // sends user to EnterOccasion page
+        if (selectedPerson.id) {
+          dispatch({type: 'SET_EDIT_PERSON', payload: selectedPerson})
+        }
         history.push('/occasion');
-
     }; //end handleContinue
 
     const handleSelectPerson = (event) => {
@@ -67,7 +62,7 @@ export default function EnterPerson() {
         userPersons.forEach((person) => {
             if(person.name == event.target.value) {
                 setSelectedPerson(person);
-                dispatch({type: 'SET_EDIT_PERSON', payload: selectedPerson})
+ 
             }
         })
     }
