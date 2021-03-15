@@ -14,6 +14,7 @@ const personsRouter = require('./routes/persons.router');
 const cardsRouter = require('./routes/cards.router');
 const categoriesRouter = require('./routes/categories.router');
 const occasionsRouter = require('./routes/occasions.router');
+const adminRouter = require('./routes/admin.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -33,6 +34,7 @@ app.use('/api/persons', personsRouter);
 app.use('/api/cards', cardsRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/occasions', occasionsRouter);
+app.use('/api/admin', adminRouter);
 
 // Serve static files
 app.use(express.static('build'));
