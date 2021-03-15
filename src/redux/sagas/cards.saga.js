@@ -13,34 +13,36 @@ function* fetchCards() {
 }
 
 function* addCard(action) {
-  console.log(`In addCard: ${action.payload}`);
-  try{
 
-  } catch(error) {
-    console.log(`ERROR in addCard: ${error}`);
-  }
 }
 
 function* editCard(action) {
-  console.log(`In editCard: ${action.payload}`);
+    //store data of card to edit
+  const editCardInfo = action.payload;
+    //debug log to user console
+  console.log(`In editCard: ${editCardInfo}`);
   try{
-
+      //PUT request to admin API
+    yield axios.put(`/api/admin/card`, editCardInfo);
+      //GET updated cards data.
+    yield put({type: 'FETCH_CARDS'});
   } catch(error) {
-    console.log(`ERROR in editCard: ${error}`);
+    console.error(`ERROR in editCard: ${error}`);
   }
 }
 
 function* deleteCard(action) {
-  console.log(`In deleteCard: ${action.payload}`);
+    //store ID of card to delete
+  const deleteID = action.payload;
+    //debug log to user console
+  console.log(`In deleteCard: ${deleteID}`);
   try{
-      //store ID of card to delete
-    const cardId = action.payload;
       //DELETE request to admin API
-    yield axios.delete(`/api/admin/${cardId}`);
+    yield axios.delete(`/api/admin/card/${deleteID}`);
       //GET updated cards data.
     yield put({type: 'FETCH_CARDS'});
   } catch(error) {
-    console.log(`ERROR in deleteCard: ${error}`);
+    console.error(`ERROR in deleteCard: ${error}`);
   }
 }
 
