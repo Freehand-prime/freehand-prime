@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function AdminCardTableRow(props) {
+export default function AdminAddForm() {
         //state
         //hooks
     const dispatch = useDispatch();

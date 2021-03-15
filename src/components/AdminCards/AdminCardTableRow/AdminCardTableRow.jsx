@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState}  from 'react';
 import { useDispatch } from 'react-redux';
 import AdminCardTableRowCard from './AdminCardTableRowCard/AdminCardTableRowCard';
+import AdminCardTableRowEdit from './AdminCardTableRowEdit';
 
   //MUI
 import {
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AdminCardTableRow({card, categories, occasions}) {
         //state
+    const [editFlag, setEditFlag] = useState(FALSE);
         //hooks
     const dispatch = useDispatch();
     const classes = useStyles();
@@ -26,8 +28,8 @@ export default function AdminCardTableRow({card, categories, occasions}) {
     const handleEdit = () => {
             //DEBUG: function status log to console
         console.log('handleEdit Clicked on:', card.id);
-            //dispatching to card.saga 
-        dispatch({type: 'EDIT_CARD', payload: card.id});
+            //flip edit flag to render AdminCardTableRowEdit
+        setEditFlag(!editFlag);
     }
     const handleDelete = () => {
             //DEBUG: function status log to console
@@ -39,6 +41,11 @@ export default function AdminCardTableRow({card, categories, occasions}) {
     return(
         <>
         {/*This component will render each row of cards and handle edit and delete*/}
+            { editFlag ?
+            <AdminCardTableRowEdit editFlag={editFlag} categories={categories} occasions={occasions} />
+            :
+            //will a frag work here?
+            <>
             <TableCell className={classes.root}>
                 <AdminCardTableRowCard image={card.image_front}/>
             </TableCell>
@@ -66,6 +73,8 @@ export default function AdminCardTableRow({card, categories, occasions}) {
                     DELETE
                 </Button>
             </TableCell>
-        </>
+            </>
+            }
+        </>        
     )
 }
