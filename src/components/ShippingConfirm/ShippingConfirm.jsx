@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ShippingConfirm() {
       //state
     const [openSubmit, setOpenSubmit] = useState(false);
+    const [shipToMe, setShipToMe] = useState(true);
 
       //hooks
     const classes = useStyles(); 
@@ -53,14 +54,29 @@ export default function ShippingConfirm() {
     const selectedEvent = useSelector((store) => store);
 
       //click handlers
-    const handleChange = () => {
+    const handleChange = (event) => {
       console.log('In handleChange');
-    }
+      setShipToMe(event.target.value);
+      if (!shipToMe) {
+        dispatch({
+          type: 'SET_SHIP_TO_ME',
+          payload: false
+        })
+        
+      } else {
+        dispatch({
+          type: 'SET_SHIP_TO_ME',
+          payload: true
+        })
+      }
+
+    }; // end handleChange
+
     const handleBack = () => {
       console.log('In handleBack');
         //return to pick a card view on back
       history.push("/card")
-    }
+    }; // end handleBack
 
     return (
       <div className={classes.root}>
@@ -77,11 +93,13 @@ export default function ShippingConfirm() {
               <Paper elevation={4}>
               <FormControl>
                 <FormLabel component="legend">Ship To:</FormLabel>
-                <RadioGroup aria-label="shipping" name="shipping1" value={"changeMe"} onChange={handleChange}>
-                  <FormControlLabel value="changeMe" control={<Radio />} label="Ship to Them" />
-                  <FormControlLabel value="changeMe" control={<Radio />} label="Ship to Another Address" />
+                <RadioGroup aria-label="shipping" name="shipping1" value={shipToMe} onChange={handleChange}>
+                <FormControlLabel value= {setShipToMe} control={<Radio />} label="Ship to Me" />
+                  <FormControlLabel value= {!setShipToMe} control={<Radio />} label="Ship to Them" />
+                  
                 </RadioGroup>
               </FormControl>
+              {!setShipToMe ? (
               <FormControl>
                 <TextField
                       id="address_field"
@@ -92,13 +110,16 @@ export default function ShippingConfirm() {
                       variant="outlined"
                 />
               </FormControl>
+              ) : (
+                <div></div>
+              )}
               <FormControl>
               <TextField
                       id="inscription_field"
                       label= "inscription"
                       placeholder="enter inscription"
                       type="text"
-                      onChange={(event) => dispatch({ type: 'SET_ADDRESS', payload: event.target.value })}
+                      onChange={(event) => dispatch({ type: 'SET_INSCRIPTION', payload: event.target.value })}
                       variant="outlined"
                 />
                 </FormControl>
