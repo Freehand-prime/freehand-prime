@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
   //MUI
 import { 
   Grid,
+  Card,
+  CardContent,
   Typography,
   TextField, 
   makeStyles,
@@ -21,6 +23,7 @@ import {
 
   // Component
 import ShipSubmitDialog from './ShipSubmitDialog/ShipSubmitDialog';
+import CardCard from '../CardCard/CardCard';
 
   //MUI Styling
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +42,13 @@ const useStyles = makeStyles((theme) => ({
     },
     headPaper: {
         
-    }
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
 }));
 
 export default function ShippingConfirm() {
@@ -47,11 +56,40 @@ export default function ShippingConfirm() {
     const [openSubmit, setOpenSubmit] = useState(false);
     const [shipToMe, setShipToMe] = useState(true);
 
+    const page = useParams();
+
       //hooks
     const classes = useStyles(); 
     const dispatch = useDispatch();
     const history = useHistory();
-    const selectedEvent = useSelector((store) => store);
+    const selectedEvent = useSelector((store) => store.edit);
+    const cards = useSelector((store) => store.cards);
+    const occasions = useSelector((store) => store.occasions);
+    const categories = useSelector((store) => store.categories);
+
+    const card = cards.filter((card) => {
+      if (card.id === selectedEvent.card_id)
+        return card;
+    })
+
+    const occasion = occasions.filter((occasion) => {
+      if (occasion.id === selectedEvent.occasion_id)
+        return occasion;
+    })
+
+    const category = categories.filter((category) => {
+      if (category.id === selectedEvent.category_id)
+        return category;
+    })
+
+    // useEffect(() => {
+    //   dispatch({ type: "SAVE_EDIT", payload: selectedEvent });
+    // }, []);
+
+    useEffect(() => {
+      dispatch({ type: "GET_EVENT", payload: page.id });
+    }, []);
+    console.log('Card?', card[0])
 
       //click handlers
     const handleChange = (event) => {
@@ -85,6 +123,24 @@ export default function ShippingConfirm() {
             <Grid item xs={12} sm={6}>
               <Paper align="center" elevation={4} className={classes.headPaper}>
                 <Typography variant="h5">Does Everything Look Correct?</Typography>
+                <CardCard card={card[0]} />
+                <Card className={classes.root}>
+                  <CardContent>
+                    <Typography
+                      className={classes.title}
+                      color="textSecondary"
+                      gutterBottom
+                    >
+                      Next Event - {selectedEvent?.date}
+                    </Typography>
+                    <Typography variant="h5" component="h2">
+                      {selectedEvent?.name}
+                    </Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                      {occasion[0].occasion} | {category[0].category}
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Paper>
             </Grid>
             <Grid item xs={6} sm={3}></Grid>

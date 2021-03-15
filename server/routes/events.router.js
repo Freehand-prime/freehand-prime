@@ -86,7 +86,7 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
       WHERE id = $4;`;
 
     const eventsResult = await pool.query(eventsQuery, [
-      req.bocy.event.inscription,
+      req.body.event.inscription,
       req.body.event.is_shipped,
       req.body.event.ship_to_me,
       idToUpdate,
