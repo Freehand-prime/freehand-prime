@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
   //MUI
 import {
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AdminAddForm({occasions, categories}) {
         //state
         //hooks
-    const addCardData = useSelector(store => store.addCard);
+    const addCardData = useSelector((store) => store.addCard);
     const dispatch = useDispatch();
     const classes = useStyles();
         //functions
@@ -61,7 +61,7 @@ export default function AdminAddForm({occasions, categories}) {
     const handleSubmit = () => {
         console.log('handleSubmit Clicked');
             //dispatch POST to cards.saga with form data
-        dispatch({type: '', payload: });
+        dispatch({type: 'ADD_CARD', payload: addCardData});
     }
         //onRender
     return(
@@ -101,7 +101,7 @@ export default function AdminAddForm({occasions, categories}) {
                             <MenuItem 
                                 key={occasion.id} 
                                 value={occasion.id} 
-                                primaryText={occasion.occasion} 
+                                primarytext={occasion.occasion} 
                             />
                         )
                     )}
@@ -124,7 +124,7 @@ export default function AdminAddForm({occasions, categories}) {
                             <MenuItem 
                                 key={category.id} 
                                 value={category.id} 
-                                primaryText={category.category} 
+                                primarytext={category.category} 
                             />
                         )
                     )}
@@ -132,6 +132,7 @@ export default function AdminAddForm({occasions, categories}) {
                 <FormHelperText>Select</FormHelperText>
             </FormControl>
             <FormControl>
+                <InputLabel>Artist</InputLabel>
                 <TextField 
                     label="Artist Name"
                     id="filled-margin-dense"
@@ -141,9 +142,14 @@ export default function AdminAddForm({occasions, categories}) {
                     required
                     margin="dense"
                     variant="filled"
+                    value={addCardData?.artist}
+                    onChange={(event) => 
+                        dispatch({type: 'SET_ADD_CARD_ARTIST', payload: event.target.value})
+                    }
                 />
             </FormControl>
             <FormControl>
+                <InputLabel>Details</InputLabel>
                 <TextField 
                     label="Details"
                     id="filled-margin-dense"
@@ -153,6 +159,10 @@ export default function AdminAddForm({occasions, categories}) {
                     required
                     margin="dense"
                     variant="filled"
+                    value={addCardData?.details}
+                    onChange={(event) => 
+                        dispatch({type: 'SET_ADD_CARD_DETAILS', payload: event.target.value})
+                    }
                 />
             </FormControl>
             <Button 
