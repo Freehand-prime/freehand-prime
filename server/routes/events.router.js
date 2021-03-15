@@ -1,13 +1,12 @@
-const express = require('express');
-const pool = require('../modules/pool');
+const express = require("express");
+const pool = require("../modules/pool");
 const {
   rejectUnauthenticated,
-} = require('../modules/authentication-middleware');
+} = require("../modules/authentication-middleware");
 const router = express.Router();
 
 // route for getting all events
-router.get('/', rejectUnauthenticated, (req, res) => {
-  console.log('in get all events');
+router.get("/", rejectUnauthenticated, (req, res) => {
   const queryText = `SELECT "date", "persons".*, "events".id AS "event_id", "occasion", "category" FROM "events"
   JOIN "persons" ON "events".person_id = "persons".id
   JOIN "occasions" ON "events".occasion_id = "occasions".id
@@ -17,17 +16,16 @@ router.get('/', rejectUnauthenticated, (req, res) => {
   pool
     .query(queryText, [req.user.id])
     .then((result) => {
-      console.log('received all events:', result.rows);
       res.send(result.rows);
     })
     .catch((error) => {
-      console.log('error in get all events', error);
+      console.log("error in get all events", error);
       res.sendStatus(500);
     });
 });
 
 // GET route for single event
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get("/:id", rejectUnauthenticated, (req, res) => {
   const idToGet = req.params.id;
   const queryText = `SELECT "events".*, "persons".name, "persons".relationship FROM "events"
   JOIN "persons" ON "events".person_id = "persons".id
@@ -44,7 +42,7 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 });
 
 // DELETE route to remove event from database
-router.delete('/:id', rejectUnauthenticated, (req, res) => {
+router.delete("/:id", rejectUnauthenticated, (req, res) => {
   const queryText = `DELETE FROM "events" WHERE id=$1;`;
   pool
     .query(queryText, [req.params.id])
@@ -52,45 +50,52 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
       res.sendStatus(200);
     })
     .catch((error) => {
-      console.error('ERROR in DELETE', error);
+      console.error("ERROR in DELETE", error);
       res.sendStatus(500);
     });
 }); // end DELETE for event
 
-// PUT route to UPDATE person address in persons database then 
+// PUT route to UPDATE person address in persons database then
 // UPDATE inscription, is_shipped, ship_to_me, in events database
 
-router.put('/', rejectUnauthenticated, async (req, res) => {
+router.put("/", rejectUnauthenticated, (req, res) => {
   // Update this entry
-  console.log('received', req.body)
-  try {
-    const idToUpdate = req.body.personId;
+  const idToUpdate = req.body.personId;
 
-    const editAddressQuery = `
+  const editAddressQuery = `
       UPDATE "persons"
-      SET ("address") = ($1)
+      SET "address" = $1
       WHERE id = $2`;
 
-      const addressResult = await pool.query(editAddressQuery, [
-      req.body.person.address,
-      idToUpdate,
-    ]);
+  pool.query(editAddressQuery, [
+    req.body.person.address,
+    idToUpdate,
+  ])
+  .then(() => {
 
     const eventsQuery = `
       UPDATE "events"
       SET ("inscription", "ship_to_me") = ($1, $2)
       WHERE id = $3;`;
 
-    const eventResult = await pool.query(eventsQuery, [
-      req.body.event.inscription,
-      req.body.event.ship_to_me,
-      req.body.eventId,
-    ]);
-  } catch (error) {
-    console.error(error);
+    pool.query(eventsQuery, [
+        req.body.event.inscription,
+        req.body.event.ship_to_me,
+        req.body.eventId,
+    ])
+    .then((result) => {
+      console.log('Updated:', result.rows);
+      res.sendStatus(200)
+    })
+    .catch((error) => {
+      console.error('Error in UPDATE event and address', error);
+      res.sendStatus(500);
+    });
+  })
+  .catch((error) => {
+    console.error('Error in UPDATE address', error);
     res.sendStatus(500);
-  }
-  res.sendStatus(200);
+  });
 });
 
 module.exports = router;
