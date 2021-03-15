@@ -60,24 +60,20 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 // PUT route to UPDATE person address in persons database then 
 // UPDATE inscription, is_shipped, ship_to_me, in events database
 
-router.put('/:id', rejectUnauthenticated, async (req, res) => {
+router.put('/', rejectUnauthenticated, async (req, res) => {
   // Update this entry
+  console.log('received', req.body)
   try {
-    const idToUpdate = req.params.id;
-    const personIdQuery = `
-      SELECT "person_id"
-      FROM "events"
-      WHERE id = $1;`;
+    const idToUpdate = req.body.personId;
 
-    const personId = await pool.query(personIdQuery, [idToUpdate]);
-    const editPersonQuery = `
+    const editAddressQuery = `
       UPDATE "persons"
       SET ("address") = ($1)
       WHERE id = $2`;
 
-    const personResult = await pool.query(editPersonQuery, [
-      req.body.address,
-      personId,
+      const addressResult = await pool.query(editAddressQuery, [
+      req.body.person.address,
+      idToUpdate,
     ]);
 
     const eventsQuery = `
@@ -85,15 +81,16 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
       SET ("inscription", "ship_to_me") = ($1, $2)
       WHERE id = $3;`;
 
-    const eventsResult = await pool.query(eventsQuery, [
+    const eventResult = await pool.query(eventsQuery, [
       req.body.event.inscription,
       req.body.event.ship_to_me,
-      idToUpdate,
+      req.body.eventId,
     ]);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);
   }
+  res.sendStatus(200);
 });
 
 module.exports = router;
