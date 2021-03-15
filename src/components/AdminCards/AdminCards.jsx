@@ -91,7 +91,7 @@ export default function AdminCards() {
     }
         //onRender (need to call on every dispatch so we can continouously fetch changes to the cards database)
     useEffect(() => {
-        dispatch({type: 'FETCH_CARDS'});
+        dispatch({type: 'FETCH_ADMIN_CARDS'});
     }, [dispatch]);
     return (
     <div className={classes.root}>
