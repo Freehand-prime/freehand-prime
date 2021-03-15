@@ -14,6 +14,8 @@ import {
   Button,
 } from '@material-ui/core';
 
+import CardCard from '../CardCard/CardCard';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
@@ -39,12 +41,22 @@ export default function EditEvent() {
   const editInput = useSelector((store) => store.edit);
   const occasions = useSelector((store) => store.occasions);
   const categories = useSelector((store) => store.categories);
+  const cards = useSelector((store) => store.cards);
 
   useEffect(() => {
+    dispatch({ type: "FETCH_CARDS" });
     dispatch({ type: 'GET_EVENT', payload: page.id });
     dispatch({ type: 'FETCH_OCCASIONS' });
     dispatch({ type: 'FETCH_CATEGORIES' });
   }, []);
+
+  // filter for event card
+  const card = cards.filter((card) => {
+    if (card.id == editInput.card_id)
+    return card;
+  });
+
+  console.log(card);
 
   //onClick function DELETE an event
   const handleDelete = (id) => {
@@ -72,7 +84,7 @@ export default function EditEvent() {
     history.push(`/events/${editInput.person_id}`);
   }; //end handleContinue
 
-  console.log(editInput?.date)
+  const buttonTitle = "Pick a New Card";
 
   return (
     <div className={classes.root}>
@@ -84,7 +96,11 @@ export default function EditEvent() {
               <Typography variant="h6">Edit Event</Typography>
             </Paper>
           </Grid>
-          <Grid item xs={6} sm={3}></Grid>
+          <Grid item xs={6} sm={3}>
+            {card[0] && (
+              <CardCard card={card[0]} buttonTitle={buttonTitle} eventId={editInput.id}/>
+            )}
+          </Grid>
           <Grid item xs={6} sm={3}></Grid>
           <Grid align="center" item xs={12} sm={6}>
             <Paper elevation={4}>
@@ -176,13 +192,11 @@ export default function EditEvent() {
               </FormControl>
               {/* conditionally rendered Select Card Button */}
               <div>
-                <Button variant="outlined" onClick={handleDelete}>
-                  SELECT NEW CARD
-                </Button>
-
-                <Button variant="outlined" onClick={handleUpdate}>
+                {!card[0] && (
+                  <Button variant="outlined" onClick={handleUpdate}>
                   PICK A CARD
-                </Button>
+                  </Button>
+                )}
               </div>
               {/* Delete, Update, and Cancel Buttons */}
               <div>
