@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import AdminImageUploadDialog from './AdminImageUploadDialog/AdminImageUploadDialog';
 
   //MUI
 import {
@@ -8,6 +7,10 @@ import {
     Button,
     FormControl,
     TextField,
+    Select,
+    InputLabel,
+    FormHelperText,
+    MenuItem,
     Typography
 } from '@material-ui/core';
 
@@ -42,9 +45,10 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function AdminAddForm() {
+export default function AdminAddForm({occasions, categories}) {
         //state
         //hooks
+    const addCardData = useSelector(store => store.addCard);
     const dispatch = useDispatch();
     const classes = useStyles();
         //functions
@@ -56,6 +60,8 @@ export default function AdminAddForm() {
     }
     const handleSubmit = () => {
         console.log('handleSubmit Clicked');
+            //dispatch POST to cards.saga with form data
+        dispatch({type: '', payload: });
     }
         //onRender
     return(
@@ -63,6 +69,7 @@ export default function AdminAddForm() {
             <Button 
                 variant="contained"
                 color="default"
+                required
                 onClick={handleImageUploadFront}
                 className={classes.button}
             >
@@ -71,6 +78,7 @@ export default function AdminAddForm() {
             <Button 
                 variant="contained"
                 color="default"
+                required
                 onClick={handleImageUploadInside}
                 className={classes.button}
             >
@@ -78,26 +86,50 @@ export default function AdminAddForm() {
             </Button>
             {/*Form Fields go Here*/}
             <FormControl>
-                <TextField 
+                <InputLabel>Occasion</InputLabel>
+                <Select 
                     label="Occasion"
-                    id="filled-margin-dense"
                     placeholder="enter occasion"
-                    className={classes.textField}
                     helperText="Required"
-                    margin="dense"
-                    variant="filled"
-                />
+                    required
+                    value={addCardData?.occasion_id}
+                    onChange={(event) => 
+                        dispatch({ type: 'SET_ADD_CARD_OCCASION_ID', payload: event.target.value})
+                    }
+                >
+                    {occasions.map((occasion) => (
+                            <MenuItem 
+                                key={occasion.id} 
+                                value={occasion.id} 
+                                primaryText={occasion.occasion} 
+                            />
+                        )
+                    )}
+                </Select>
+                <FormHelperText>Select</FormHelperText>
             </FormControl>
             <FormControl>
-                <TextField 
+                <InputLabel>Category</InputLabel>
+                <Select 
                     label="Category"
-                    id="filled-margin-dense"
                     placeholder="enter category"
-                    className={classes.textField}
                     helperText="Required"
-                    margin="dense"
-                    variant="filled"
-                />
+                    required
+                    value={addCardData?.category_id}
+                    onChange={(event) => 
+                        dispatch({ type: 'SET_ADD_CARD_CATEGORY_ID', payload: event.target.value})
+                    }
+                >
+                    {categories.map((category) => (
+                            <MenuItem 
+                                key={category.id} 
+                                value={category.id} 
+                                primaryText={category.category} 
+                            />
+                        )
+                    )}
+                </Select>
+                <FormHelperText>Select</FormHelperText>
             </FormControl>
             <FormControl>
                 <TextField 
@@ -106,6 +138,19 @@ export default function AdminAddForm() {
                     placeholder="enter artist name"
                     className={classes.textField}
                     helperText="Required"
+                    required
+                    margin="dense"
+                    variant="filled"
+                />
+            </FormControl>
+            <FormControl>
+                <TextField 
+                    label="Details"
+                    id="filled-margin-dense"
+                    placeholder="enter artist name"
+                    className={classes.textField}
+                    helperText="Required"
+                    required
                     margin="dense"
                     variant="filled"
                 />
