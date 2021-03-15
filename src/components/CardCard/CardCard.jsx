@@ -41,7 +41,7 @@ export default function CardCard({ card, buttonTitle, eventId }) {
   const classes = useStyles();
 
   const handleConfirm = () => {
-    dispatch({type: 'PICK_CARD', payload: card.id});
+    dispatch({type: 'PICK_CARD', payload: card?.id});
     setOpenConfirm(!openConfirm);
   }
 
@@ -52,28 +52,28 @@ export default function CardCard({ card, buttonTitle, eventId }) {
           {showInside ? (
             <CardMedia
               component="img"
-              alt={card.details}
+              alt={card?.details}
               height="100%"
               width="100%"
-              image={card.image_inside}
+              image={card?.image_inside}
               title="Card Inside"
             />
           ) : (
             <CardMedia
               component="img"
-              alt={card.details}
+              alt={card?.details}
               height="100%"
               width="100%"
-              image={card.image_front}
+              image={card?.image_front}
               title="Card Front"
             />
           )}
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Card by {card.artist}
+              Card by {card?.artist}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              {card.details}
+              {card?.details}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -104,7 +104,6 @@ export default function CardCard({ card, buttonTitle, eventId }) {
       <ConfirmDialog
         openConfirm={openConfirm}
         setOpenConfirm={setOpenConfirm}
-        cardId={card.id}
         eventId={eventId}
       />
     </>

@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ShippingConfirm() {
       //state
     const [openSubmit, setOpenSubmit] = useState(false);
-    const [shipToMe, setShipToMe] = useState(true);
+    const [shipToMe, setShipToMe] = useState("false");
 
     const page = useParams();
 
@@ -82,32 +82,30 @@ export default function ShippingConfirm() {
         return category;
     })
 
-    // useEffect(() => {
-    //   dispatch({ type: "SAVE_EDIT", payload: selectedEvent });
-    // }, []);
-
     useEffect(() => {
+      dispatch({ type: "FETCH_CARDS" });
       dispatch({ type: "GET_EVENT", payload: page.id });
+      dispatch({ type: "FETCH_OCCASIONS" });
+      dispatch({ type: "FETCH_CATEGORIES" });
     }, []);
-    console.log('Card?', card[0])
 
       //click handlers
     const handleChange = (event) => {
-      console.log('In handleChange');
+      
       setShipToMe(event.target.value);
-      if (!shipToMe) {
-        dispatch({
-          type: 'SET_SHIP_TO_ME',
-          payload: false
-        })
+      // if (!shipToMe) {
+      //   dispatch({
+      //     type: 'SET_SHIP_TO_ME',
+      //     payload: false
+      //   })
         
-      } else {
-        dispatch({
-          type: 'SET_SHIP_TO_ME',
-          payload: true
-        })
-      }
-
+      // } else {
+      //   dispatch({
+      //     type: 'SET_SHIP_TO_ME',
+      //     payload: true
+      //   })
+      // }
+      console.log(shipToMe);
     }; // end handleChange
 
     const handleBack = () => {
@@ -137,7 +135,7 @@ export default function ShippingConfirm() {
                       {selectedEvent?.name}
                     </Typography>
                     <Typography className={classes.pos} color="textSecondary">
-                      {occasion[0].occasion} | {category[0].category}
+                      {occasion[0]?.occasion} | {category[0]?.category}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -147,15 +145,14 @@ export default function ShippingConfirm() {
             <Grid item xs={6} sm={3}></Grid>
             <Grid align="center" item xs={12} sm={6}>
               <Paper elevation={4}>
-              <FormControl>
+              <FormControl component="fieldset">
                 <FormLabel component="legend">Ship To:</FormLabel>
                 <RadioGroup aria-label="shipping" name="shipping1" value={shipToMe} onChange={handleChange}>
-                <FormControlLabel value= {setShipToMe} control={<Radio />} label="Ship to Me" />
-                  <FormControlLabel value= {!setShipToMe} control={<Radio />} label="Ship to Them" />
-                  
+                <FormControlLabel value="false" control={<Radio />} label="Ship to Me" />
+                <FormControlLabel value="true" control={<Radio />} label="Ship to Them" />
                 </RadioGroup>
               </FormControl>
-              {!setShipToMe ? (
+              {shipToMe === "true" ? (
               <FormControl>
                 <TextField
                       id="address_field"

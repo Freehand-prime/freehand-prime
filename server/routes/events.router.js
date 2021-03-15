@@ -82,12 +82,11 @@ router.put('/:id', rejectUnauthenticated, async (req, res) => {
 
     const eventsQuery = `
       UPDATE "events"
-      SET ("inscription", "is_shipped", "ship_to_me") = ($1, $2, $3)
-      WHERE id = $4;`;
+      SET ("inscription", "ship_to_me") = ($1, $2)
+      WHERE id = $3;`;
 
     const eventsResult = await pool.query(eventsQuery, [
       req.body.event.inscription,
-      req.body.event.is_shipped,
       req.body.event.ship_to_me,
       idToUpdate,
     ]);
