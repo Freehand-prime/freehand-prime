@@ -60,7 +60,7 @@ export default function Dashboard() {
               <Typography className={classes.pos} color="textSecondary">
                 {events[0]?.occasion} | {events[0]?.category}
               </Typography>
-              <Button size="small">Edit Event</Button>
+              <Button size="small" onClick={() => history.push(`/edit/${events[0].event_id}`)}>Edit Event</Button>
             </CardContent>
           </Card>
         </Paper>

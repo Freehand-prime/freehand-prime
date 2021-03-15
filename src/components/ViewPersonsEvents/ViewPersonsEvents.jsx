@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -31,10 +32,15 @@ export default function ViewPersonsEvent() {
   const history = useHistory();
   const classes = useStyles();
   const page = useParams();
+  const dispatch = useDispatch();
   const events = useSelector((store) => store.events);
   const personsEvents = events.filter(function (event) {
     return event.id == page.id;
   });
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_EVENTS' });
+  }, []);
 
   return (
     <>
@@ -61,7 +67,12 @@ export default function ViewPersonsEvent() {
                     <Typography className={classes.pos} color="textSecondary">
                       {event.occasion} | {event.category}
                     </Typography>
-                    <Button size="small" onClick={() => history.push(`/edit/${event.event_id}`)}>Edit Event</Button>
+                    <Button
+                      size="small"
+                      onClick={() => history.push(`/edit/${event.event_id}`)}
+                    >
+                      Edit Event
+                    </Button>
                   </CardContent>
                 </Card>
                 <br></br>
