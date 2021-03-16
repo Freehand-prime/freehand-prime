@@ -12,18 +12,19 @@ const {
  */
 
 router.post('/card', rejectUnauthenticated, (req, res) => {
+        //debug log
+    console.log(req.body);
         //store data on body in route scope
     const newCardData = req.body;
         //store query string in route scope
     const cardToAddQuery = `
         INSERT INTO "cards" (
-        'occasion_id', 
-        'category_id', 
-        'image_front', 
-        'image_inside', 
-        'likes', 
-        'artist', 
-        'details') = ($1, $2, $3, $4, $5, $6, $7);
+        "occasion_id", 
+        "category_id", 
+        "image_front", 
+        "image_inside",  
+        "artist", 
+        "details") VALUES ($1, $2, $3, $4, $5, $6);
         `;
     pool
         .query(cardToAddQuery, [
@@ -31,7 +32,6 @@ router.post('/card', rejectUnauthenticated, (req, res) => {
             newCardData.category_id,
             newCardData.image_front,
             newCardData.image_inside,
-            newCardData.likes,
             newCardData.artist,
             newCardData.details
         ])
@@ -55,11 +55,10 @@ router.put('/card', rejectUnauthenticated, (req, res) => {
         SET ('occasion_id', 
         'category_id', 
         'image_front', 
-        'image_inside', 
-        'likes', 
+        'image_inside',  
         'artist', 
-        'details') = ($1, $2, $3, $4, $5, $6, $7)
-        WHERE id = $8;
+        'details') = ($1, $2, $3, $4, $5, $6)
+        WHERE id = $7;
         `;
     pool
         .query(cardToUpdateQuery, [
