@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import RegisterDialog from '../RegisterDialog/RegisterDialog';
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import RegisterDialog from "../RegisterDialog/RegisterDialog";
 import {
   Grid,
   Typography,
@@ -13,13 +13,13 @@ import {
   Select,
   Paper,
   Button,
-} from '@material-ui/core';
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& .MuiTextField-root': {
+    "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: "25ch",
     },
     formControl: {
       margin: theme.spacing(1),
@@ -45,30 +45,34 @@ export default function SelectCategory() {
   const user = useSelector((store) => store.user);
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_CATEGORIES' });
+    dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
 
   //onClick function to go back to EnterOccasion
   const handleBack = () => {
-    history.push('/occasion');
+    history.push("/occasion");
   }; //end handleBack
 
   //onClick function to submit person & relationship details
   const handleContinue = () => {
     if (user.id) {
       dispatch({
-        type: 'ADD_PERSON_AND_EVENT',
+        type: "ADD_PERSON_AND_EVENT",
         payload: { person, newEvent },
       });
       dispatch({
-        type: 'SEND_MAIL',
+        type: "SEND_MAIL",
         payload: {
           email: `${user.username}`,
           subject: `You have an event for ${person.name} coming up in Freehand Cards!`,
-          message: 'Test message body',
-        }
+          message: `You have an event coming up for ${
+            person.name
+          } on ${new Date(newEvent.date).toLocaleDateString("en-US")}
+          To pick a card and confirm shipping options for this event, please visit:
+          http://localhost:3000/#/card/${}`,
+        },
       });
-      history.push('/dashboard');
+      history.push("/dashboard");
     } else {
       setRegister(true);
     }
@@ -104,7 +108,7 @@ export default function SelectCategory() {
                 value={newEvent?.category}
                 onChange={(event) =>
                   dispatch({
-                    type: 'SET_CATEGORY',
+                    type: "SET_CATEGORY",
                     payload: event.target.value,
                   })
                 }
@@ -132,7 +136,7 @@ export default function SelectCategory() {
         </Grid>
         <Grid item xs={6} sm={3}></Grid>
       </Grid>
-      <RegisterDialog register={register} setRegister={setRegister}/>
+      <RegisterDialog register={register} setRegister={setRegister} />
     </div>
   );
 } // end SelectCategory
