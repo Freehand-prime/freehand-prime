@@ -62,19 +62,8 @@ export default function AdminAddForm({occasions, categories}) {
     const dispatch = useDispatch();
     const classes = useStyles();
         //functions
-    const handleImageUploadFront = () => {
-        console.log('handleImageUploadFront Clicked');
-            //hard-coded to first card images until image upload implemented
-            //TODO: hook up AWS image upload API
-            //setAddCardData({...addCardData, image_front: `https://freehand-prime.s3.us-east-2.amazonaws.com/card1front.jpeg`});
-    }
-    const handleImageUploadInside = () => {
-        console.log('handleImageUploadInside Clicked');
-            //hard-coded to first card images until image upload implemented
-            //TODO: hook up AWS image upload API
-            //setAddCardData({...addCardData, image_inside: `https://freehand-prime.s3.us-east-2.amazonaws.com/card1inside.jpeg`});
-    }
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         console.log('handleSubmit Clicked');
             //dispatch POST to cards.saga with form data
         dispatch({type: 'ADD_CARD', payload: addCardData});
@@ -85,25 +74,9 @@ export default function AdminAddForm({occasions, categories}) {
     return(
         <form className={classes.addCardForm} noValidate onSubmit={handleSubmit}>   
             < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'front'}/>
-            <Button 
-                variant="contained"
-                color="default"
-                required
-                onClick={handleImageUploadFront}
-                className={classes.button}
-            >
-                Upload Front Image
-            </Button>
+
             < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'inside'}/>
-            <Button 
-                variant="contained"
-                color="default"
-                required
-                onClick={handleImageUploadInside}
-                className={classes.button}
-            >
-                Upload Inside Image
-            </Button>
+
             {/*Form Fields go Here*/}
             {categories? 
             <>
