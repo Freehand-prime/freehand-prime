@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, categories, occasions}) {
         //default state object to hold the data passed to the edit function.
     const defaultAddCard = {
+        id: card.id,
         image_front: card.image_front,
         image_inside: card.image_inside,
         category_id: card.category_id,
@@ -55,7 +56,7 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
     const handleSaveEdit = () => {
         //DEBUG: function status log to console
     console.log('handleEdit Clicked on:', card.id);
-        dispatch({type: '', payload: addCardData});
+        dispatch({type: 'EDIT_CARD', payload: addCardData});
         //flip edit flag to render AdminCardTableRowEdit
     setEditFlag(!editFlag);
     }

@@ -52,12 +52,12 @@ router.put('/card', rejectUnauthenticated, (req, res) => {
         //store query string in route scope
     const cardToUpdateQuery = `
         UPDATE "cards"
-        SET ('occasion_id', 
-        'category_id', 
-        'image_front', 
-        'image_inside',  
-        'artist', 
-        'details') = ($1, $2, $3, $4, $5, $6)
+        SET ("occasion_id", 
+        "category_id", 
+        "image_front", 
+        "image_inside",  
+        "artist", 
+        "details") = ($1, $2, $3, $4, $5, $6)
         WHERE id = $7;
         `;
     pool
@@ -66,7 +66,6 @@ router.put('/card', rejectUnauthenticated, (req, res) => {
             updateCardData.category_id,
             updateCardData.image_front,
             updateCardData.image_inside,
-            updateCardData.likes,
             updateCardData.artist,
             updateCardData.details,
             updateCardData.id
