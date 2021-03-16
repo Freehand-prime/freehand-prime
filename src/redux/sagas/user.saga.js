@@ -29,8 +29,17 @@ function* fetchUser(action) {
   }
 }
 
+function* sendMail(action) {
+  try {
+    yield axios.post('/send', action.payload)
+  } catch (error) {
+    console.log('Send mail error:', error)
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('SEND_MAIL', sendMail)
 }
 
 export default userSaga;
