@@ -64,12 +64,14 @@ export default function AdminAddForm({occasions, categories}) {
         //functions
     const handleImageUploadFront = () => {
         console.log('handleImageUploadFront Clicked');
-        //hard-coded to first card images until image upload implemented
+            //hard-coded to first card images until image upload implemented
+            //TODO: hook up AWS image upload API
         setAddCardData({...addCardData, image_front: `https://freehand-prime.s3.us-east-2.amazonaws.com/card1front.jpeg`});
     }
     const handleImageUploadInside = () => {
         console.log('handleImageUploadInside Clicked');
             //hard-coded to first card images until image upload implemented
+            //TODO: hook up AWS image upload API
         setAddCardData({...addCardData, image_inside: `https://freehand-prime.s3.us-east-2.amazonaws.com/card1inside.jpeg`});
     }
     const handleSubmit = () => {

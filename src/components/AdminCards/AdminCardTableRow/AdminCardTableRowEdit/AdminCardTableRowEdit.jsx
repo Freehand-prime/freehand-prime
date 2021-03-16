@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, categories, occasions}) {
-        //default state object to hold the data passed to the edit function.
+        //default state object to hold the data passed to the edit function on card prop.
     const defaultAddCard = {
         id: card.id,
         image_front: card.image_front,
@@ -47,10 +47,14 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
         //functions
     const handleImageUploadFront = () => {
         console.log('handleImageUploadFront Clicked');
+            //placeholder just sets the addcard to what it currently is
+            //TODO: hook up AWS image upload API
         setAddCardData({...addCardData, image_front: card.image_front});
     }
     const handleImageUploadInside = () => {
         console.log('handleImageUploadInside Clicked');
+            //placeholder just sets the addcard to what it currently is
+            //TODO: hook up AWS image upload API
         setAddCardData({...addCardData, image_front: card.image_inside});
     }
     const handleSaveEdit = () => {
