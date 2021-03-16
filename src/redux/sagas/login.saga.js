@@ -25,10 +25,10 @@ function* loginUser(action) {
       yield put({type: "LOGIN_CLOSE"})
     }
 
-    if (action.person && action.event) {
+    if (action.person && action.newEvent) {
       yield put({
         type: 'ADD_PERSON_AND_EVENT',
-        payload: { person: action.person, event: action.event },
+        payload: { person: action.person, newEvent: action.newEvent },
       });
       // yield put({type: 'CLEAR_PERSON'})
     };

@@ -45,7 +45,7 @@ function RegisterDialog({ register, setRegister }) {
           password: password,
         },
         person: person,
-        event: newEvent,
+        newEvent: newEvent,
       });
       setRegister(false);
       history.push("/dashboard");
