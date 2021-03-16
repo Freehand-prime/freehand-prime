@@ -60,6 +60,14 @@ export default function SelectCategory() {
         type: 'ADD_PERSON_AND_EVENT',
         payload: { person, newEvent },
       });
+      dispatch({
+        type: 'SEND_MAIL',
+        payload: {
+          email: 'dunnmj42@gmail.com',
+          subject: 'Test message',
+          message: 'Test message body',
+        }
+      });
       history.push('/dashboard');
     } else {
       setRegister(true);
