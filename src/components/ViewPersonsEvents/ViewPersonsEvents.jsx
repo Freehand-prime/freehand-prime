@@ -16,6 +16,8 @@ import {
   Typography,
 } from '@material-ui/core';
 
+import EventCard from '../EventCard/EventCard';
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -52,7 +54,9 @@ export default function ViewPersonsEvent() {
           {personsEvents &&
             personsEvents.map((event) => (
               <Box>
-                <Card className={classes.root}>
+                <EventCard event={event} />
+
+                {/* <Card className={classes.root}>
                   <CardContent>
                     <Typography
                       className={classes.title}
@@ -74,7 +78,7 @@ export default function ViewPersonsEvent() {
                       Edit Event
                     </Button>
                   </CardContent>
-                </Card>
+                </Card> */}
                 <br></br>
               </Box>
             ))}
