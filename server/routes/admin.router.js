@@ -11,7 +11,7 @@ const {
  * adminCards routes for cards
  */
 
-router.post('/card', rejectUnauthenticated, (req, res) => {
+router.post('/card', (req, res) => {
         //debug log
     console.log(req.body);
         //store data on body in route scope
