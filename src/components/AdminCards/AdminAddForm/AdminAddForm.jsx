@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-
+import S3Uploader from '../../S3Uploader/S3Uploader';
   //MUI
 import {
     makeStyles,
@@ -66,13 +66,13 @@ export default function AdminAddForm({occasions, categories}) {
         console.log('handleImageUploadFront Clicked');
             //hard-coded to first card images until image upload implemented
             //TODO: hook up AWS image upload API
-        setAddCardData({...addCardData, image_front: `https://freehand-prime.s3.us-east-2.amazonaws.com/card1front.jpeg`});
+            //setAddCardData({...addCardData, image_front: `https://freehand-prime.s3.us-east-2.amazonaws.com/card1front.jpeg`});
     }
     const handleImageUploadInside = () => {
         console.log('handleImageUploadInside Clicked');
             //hard-coded to first card images until image upload implemented
             //TODO: hook up AWS image upload API
-        setAddCardData({...addCardData, image_inside: `https://freehand-prime.s3.us-east-2.amazonaws.com/card1inside.jpeg`});
+            //setAddCardData({...addCardData, image_inside: `https://freehand-prime.s3.us-east-2.amazonaws.com/card1inside.jpeg`});
     }
     const handleSubmit = () => {
         console.log('handleSubmit Clicked');
@@ -84,6 +84,7 @@ export default function AdminAddForm({occasions, categories}) {
 
     return(
         <form className={classes.addCardForm} noValidate onSubmit={handleSubmit}>   
+            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'front'}/>
             <Button 
                 variant="contained"
                 color="default"
@@ -93,6 +94,7 @@ export default function AdminAddForm({occasions, categories}) {
             >
                 Upload Front Image
             </Button>
+            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'inside'}/>
             <Button 
                 variant="contained"
                 color="default"

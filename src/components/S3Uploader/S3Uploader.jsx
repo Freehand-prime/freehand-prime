@@ -1,15 +1,20 @@
 import DropzoneS3Uploader from 'react-dropzone-s3-uploader';
 
-export default function S3Uploader() {
+export default function S3Uploader({addCardData, setAddCardData, image}) {
 
   const uploadOptions = {
     server: 'http://localhost:5000',
   }
   const s3Url = 'https://freehand-prime.s3.amazonaws.com'
 
-  handleFinishedUpload = (info) => {
-    console.log('File uploaded with filename', info.filename)
-    console.log('Access it on s3 at', info.fileUrl)
+  const handleFinishedUpload = (info) => {
+    console.log('File uploaded with filename', info.filename);
+    console.log('Access it on s3 at', info.fileUrl);
+    if(image==='front'){
+      setAddCardData({...addCardData, image_front: info.fileUrl});
+    } else {
+      setAddCardData({...addCardData, image_inside: info.fileUrl});
+    }
   }
 
   return (
