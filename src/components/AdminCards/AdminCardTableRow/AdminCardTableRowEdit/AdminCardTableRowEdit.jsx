@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function AdminCardTableRowEdit({editFlag, card, categories, occasions}) {
+export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, categories, occasions}) {
         //state
         //hooks
     const dispatch = useDispatch();

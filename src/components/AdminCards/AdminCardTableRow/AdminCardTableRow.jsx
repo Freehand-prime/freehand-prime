@@ -42,7 +42,7 @@ export default function AdminCardTableRow({card, categories, occasions}) {
         <>
         {/*This component will render each row of cards and handle edit and delete*/}
             { editFlag ?
-            <AdminCardTableRowEdit card={card} categories={categories} occasions={occasions} editFlag={editFlag} />
+            <AdminCardTableRowEdit card={card} categories={categories} occasions={occasions} editFlag={editFlag} setEditFlag={setEditFlag} />
             :
             //will a frag work here?
             <>
