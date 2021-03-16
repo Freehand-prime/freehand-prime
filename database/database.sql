@@ -1,31 +1,9 @@
--- database name "freehand"
-
--- USER is a reserved keyword with Postgres
--- You must use double quotes in every query that user is in:
--- ex. SELECT * FROM "user";
--- Otherwise you will have errors!
-
 CREATE TABLE "user" (
 	"id" serial NOT NULL,
 	"username" varchar(255) NOT NULL UNIQUE,
 	"password" varchar(1000) NOT NULL,
 	"isadmin" BOOLEAN DEFAULT FALSE NOT NULL,
 	CONSTRAINT "user_pk" PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
-CREATE TABLE "events" (
-	"id" serial NOT NULL,
-	"person_id" int NOT NULL,
-	"category_id" int NOT NULL,
-	"occasion_id" int NOT NULL,
-	"card_id" int,
-	"date" DATE NOT NULL,
-	"inscription" varchar(1000),
-	"is_shipped" BOOLEAN DEFAULT FALSE NOT NULL,
-	"ship_to_me" BOOLEAN DEFAULT FALSE NOT NULL,
-	CONSTRAINT "events_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -46,10 +24,25 @@ CREATE TABLE "categories" (
   OIDS=FALSE
 );
 
+CREATE TABLE "events" (
+	"id" serial NOT NULL,
+	"person_id" int NOT NULL,
+	"category_id" INT DEFAULT 1 REFERENCES "categories" ON DELETE SET DEFAULT,
+	"occasion_id" INT DEFAULT 1 REFERENCES "occasions" ON DELETE SET DEFAULT,
+	"card_id" int,
+	"date" DATE NOT NULL,
+	"inscription" varchar(1000),
+	"is_shipped" BOOLEAN DEFAULT FALSE NOT NULL,
+	"ship_to_me" BOOLEAN DEFAULT FALSE NOT NULL,
+	CONSTRAINT "events_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
 CREATE TABLE "cards" (
 	"id" serial NOT NULL,
-	"occasion_id" int NOT NULL,
-	"category_id" int NOT NULL,
+	"occasion_id" INT DEFAULT 1 REFERENCES "occasions" ON DELETE SET DEFAULT,
+	"category_id" INT DEFAULT 1 REFERENCES "categories" ON DELETE SET DEFAULT,
 	"image_front" varchar(1000) NOT NULL,
 	"image_inside" varchar(1000) NOT NULL,
 	"likes" int DEFAULT 0 NOT NULL,

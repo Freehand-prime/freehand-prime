@@ -1,10 +1,11 @@
 INSERT INTO "occasions" ("occasion")
-VALUES ('Anniversary'),
+VALUES ('Not Specified'),
+('Anniversary'),
 ('Birthday'),
 ('Christmas'),
 ('Graduation'),
 ('Chanukkah'),
-('Thanksgiving'),
+('Kwanzaa'),
 ('Ramadan'),
 ('Just Because'),
 ('Valentines Day'),
