@@ -54,9 +54,9 @@ export default function ViewPersonsEvent() {
           {personsEvents &&
             personsEvents.map((event) => (
               <Box>
-                <EventCard event={event} />
+                {/* <EventCard event={event} /> */}
 
-                {/* <Card className={classes.root}>
+                <Card className={classes.root}>
                   <CardContent>
                     <Typography
                       className={classes.title}
@@ -78,7 +78,7 @@ export default function ViewPersonsEvent() {
                       Edit Event
                     </Button>
                   </CardContent>
-                </Card> */}
+                </Card>
                 <br></br>
               </Box>
             ))}
