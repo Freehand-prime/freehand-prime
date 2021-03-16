@@ -15,6 +15,8 @@ import {
   Typography,
 } from '@material-ui/core';
 
+import EventCard from '../EventCard/EventCard';
+
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -31,6 +33,8 @@ export default function Dashboard() {
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
+
+  // NOTE - still need logic fix for finding the next upcoming event
   const events = useSelector((store) => store.events);
 
   // do we not need a useEffect bc we are setting state after registration / login?
@@ -45,7 +49,8 @@ export default function Dashboard() {
         <Typography variant="h5">Dashboard</Typography>
         <br></br>
         <Paper>
-          <Card className={classes.root}>
+          {events[0] && <EventCard event={events[0]} />}
+          {/* <Card className={classes.root}>
             <CardContent>
               <Typography
                 className={classes.title}
@@ -60,9 +65,14 @@ export default function Dashboard() {
               <Typography className={classes.pos} color="textSecondary">
                 {events[0]?.occasion} | {events[0]?.category}
               </Typography>
-              <Button size="small" onClick={() => history.push(`/edit/${events[0].event_id}`)}>Edit Event</Button>
+              <Button
+                size="small"
+                onClick={() => history.push(`/edit/${events[0].event_id}`)}
+              >
+                Edit Event
+              </Button>
             </CardContent>
-          </Card>
+          </Card> */}
         </Paper>
         <br></br>
         <Box justifyContent="center">
