@@ -60,18 +60,18 @@ export default function SelectCategory() {
         type: "ADD_PERSON_AND_EVENT",
         payload: { person, newEvent },
       });
-      dispatch({
-        type: "SEND_MAIL",
-        payload: {
-          email: `${user.username}`,
-          subject: `You have an event for ${person.name} coming up in Freehand Cards!`,
-          message: `You have an event coming up for ${
-            person.name
-          } on ${new Date(newEvent.date).toLocaleDateString("en-US")}
-          To pick a card and confirm shipping options for this event, please visit:
-          http://localhost:3000/#/card/${}`,
-        },
-      });
+      // dispatch({
+      //   type: "SEND_MAIL",
+      //   payload: {
+      //     email: `${user.username}`,
+      //     subject: `You have an event for ${person.name} coming up in Freehand Cards!`,
+      //     message: `You have an event coming up for ${
+      //       person.name
+      //     } on ${new Date(newEvent.date).toLocaleDateString("en-US")}
+      //     To pick a card and confirm shipping options for this event, please visit:
+      //     http://localhost:3000/#/card/${}`,
+      //   },
+      // });
       history.push("/dashboard");
     } else {
       setRegister(true);

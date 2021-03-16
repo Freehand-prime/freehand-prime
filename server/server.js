@@ -7,8 +7,16 @@ const app = express();
 const sessionMiddleware = require("./modules/session-middleware");
 const passport = require("./strategies/user.strategy");
 const nodemailer = require("nodemailer");
-const cron = require("node-cron");
 const pool = require('./modules/pool');
+
+const cron = require("node-cron");
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.GMAIL_ADDRESS,
+    pass: process.env.GMAIL_PASS,
+  },
+});
 
 // Route includes
 const userRouter = require("./routes/user.router");
@@ -52,13 +60,7 @@ app.use(
 
 // nodemailer
 app.post("/send", function (req, res, next) {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.GMAIL_ADDRESS,
-      pass: process.env.GMAIL_PASS,
-    },
-  });
+
   const mailOptions = {
     from: `${process.env.GMAIL_ADDRESS}`,
     to: `${req.body.email}`,
@@ -108,8 +110,39 @@ cron.schedule('0 0 * * *', () => {
   pool
       .query(eventQuery)
       .then((result) => {
-        //map over the result rows to check dates
-        result.rows;
+        //loop over the result rows to check dates
+        const eventsToMap = result.rows;
+        const fortnightAway = new Date(Date.now() + 12096e5).toLocaleDateString('en-US');
+
+        eventsToMap.forEach((emailEvent) => {
+          
+          const dateToMatch = new Date(emailEvent.date).toLocaleDateString('en-US');
+          console.log(fortnightAway);
+          console.log(dateToMatch)
+
+          if (fortnightAway == dateToMatch) {
+            const mailOptions = {
+              from: `${process.env.GMAIL_ADDRESS}`,
+              to: `${emailEvent.username}`,
+              subject: `You have an event for ${emailEvent.name} coming up in Freehand Cards!`,
+              text: `You have an event coming up for ${
+                emailEvent.name
+              } on ${new Date(emailEvent.date).toLocaleDateString("en-US")}
+              To pick a card and confirm shipping options for this event, please visit:
+              http://localhost:3000/#/card/${emailEvent.id}`,
+              replyTo: `${process.env.GMAIL_ADDRESS}`,
+            };
+            transporter.sendMail(mailOptions, function (err, res) {
+              if (err) {
+                console.error("there was an error: ", err);
+                res.sendStatus(500)
+              } else {
+                console.log("here is the res: ", res);
+                res.sendStatus(200)
+              }
+            });
+          }
+        })
       })
       .catch((error) => {
           console.error(error);

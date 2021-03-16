@@ -13,14 +13,14 @@ function* registerUser(action) {
     // automatically log a user in after registration
     yield put({ type: 'LOGIN', payload: action.payload, person: action.person, newEvent: action.newEvent });
 
-    yield put({
-      type: 'SEND_MAIL',
-      payload: {
-        email: `${action.payload.username}`,
-        subject: `You have an event for ${action.person.name} coming up in Freehand Cards!`,
-        message: 'Test message body',
-      }
-    });
+    // yield put({
+    //   type: 'SEND_MAIL',
+    //   payload: {
+    //     email: `${action.payload.username}`,
+    //     subject: `You have an event for ${action.person.name} coming up in Freehand Cards!`,
+    //     message: 'Test message body',
+    //   }
+    // });
 
     // set to 'login' mode so they see the login screen
     // after registration or after they log out
