@@ -65,12 +65,12 @@ export default function AdminAddForm({occasions, categories}) {
     const handleImageUploadFront = () => {
         console.log('handleImageUploadFront Clicked');
         //hard-coded to first card images until image upload implemented
-        setAddCardData({...addCardData, image_front: `https://freehand-prime.s3.us-east-2.amazonaws.com/card1front.jpeg`})
+        setAddCardData({...addCardData, image_front: `https://freehand-prime.s3.us-east-2.amazonaws.com/card1front.jpeg`});
     }
     const handleImageUploadInside = () => {
         console.log('handleImageUploadInside Clicked');
             //hard-coded to first card images until image upload implemented
-        setAddCardData({...addCardData, image_inside: `https://freehand-prime.s3.us-east-2.amazonaws.com/card1inside.jpeg`})
+        setAddCardData({...addCardData, image_inside: `https://freehand-prime.s3.us-east-2.amazonaws.com/card1inside.jpeg`});
     }
     const handleSubmit = () => {
         console.log('handleSubmit Clicked');
@@ -148,7 +148,6 @@ export default function AdminAddForm({occasions, categories}) {
             <FormControl>
                 <InputLabel>Artist</InputLabel>
                 <TextField 
-                    id="filled-margin-dense"
                     className={classes.textField}
                     helpertext="Required"
                     required
@@ -159,11 +158,9 @@ export default function AdminAddForm({occasions, categories}) {
                 />
                 <FormHelperText>Enter Artist Name</FormHelperText>
             </FormControl>
-
             <FormControl>
                 <InputLabel>Details</InputLabel>
                 <TextField 
-                    id="filled-margin-dense"
                     className={classes.textField}
                     helpertext="Required"
                     required
