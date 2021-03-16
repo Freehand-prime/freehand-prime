@@ -67,8 +67,10 @@ app.post("/send", function (req, res, next) {
   transporter.sendMail(mailOptions, function (err, res) {
     if (err) {
       console.error("there was an error: ", err);
+      res.sendStatus(500)
     } else {
       console.log("here is the res: ", res);
+      res.sendStatus(200)
     }
   });
 });

@@ -63,8 +63,8 @@ export default function SelectCategory() {
       dispatch({
         type: 'SEND_MAIL',
         payload: {
-          email: 'dunnmj42@gmail.com',
-          subject: 'Test message',
+          email: `${user.username}`,
+          subject: `You have an event for ${person.name} coming up in Freehand Cards!`,
           message: 'Test message body',
         }
       });
