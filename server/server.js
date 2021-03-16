@@ -36,6 +36,14 @@ app.use('/api/categories', categoriesRouter);
 app.use('/api/occasions', occasionsRouter);
 app.use('/api/admin', adminRouter);
 
+// S3
+app.use('/s3', require('react-dropzone-s3-uploader/s3router')({
+  bucket: process.env.AWS_S3_BUCKET,
+  region: process.env.AWS_S3_REGION,
+  headers: {'Access-Control-Allow-Origin': '*'}, 
+  ACL: 'public-read',                                 
+}));
+
 // Serve static files
 app.use(express.static('build'));
 
