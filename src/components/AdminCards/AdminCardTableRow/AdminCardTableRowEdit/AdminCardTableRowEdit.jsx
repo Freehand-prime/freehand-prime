@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import S3Uploader from '../../S3Uploader/S3Uploader';
+import S3Uploader from '../../../S3Uploader/S3Uploader';
 
   //MUI
 import {
@@ -46,19 +46,8 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
     const dispatch = useDispatch();
     const classes = useStyles();
         //functions
-    const handleImageUploadFront = () => {
-        console.log('handleImageUploadFront Clicked');
-            //placeholder just sets the addcard to what it currently is
-            //TODO: hook up AWS image upload API
-        setAddCardData({...addCardData, image_front: card.image_front});
-    }
-    const handleImageUploadInside = () => {
-        console.log('handleImageUploadInside Clicked');
-            //placeholder just sets the addcard to what it currently is
-            //TODO: hook up AWS image upload API
-        setAddCardData({...addCardData, image_front: card.image_inside});
-    }
-    const handleSaveEdit = () => {
+    const handleSaveEdit = (event) => {
+        event.preventDefault();
         //DEBUG: function status log to console
     console.log('handleEdit Clicked on:', card.id);
         dispatch({type: 'EDIT_CARD', payload: addCardData});
@@ -75,26 +64,10 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
     return(
         <>
         <TableCell className={classes.root}>
-        < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'front'}/>
-            <Button 
-                variant="contained"
-                color="default"
-                onClick={handleImageUploadFront}
-                className={classes.button}
-            >
-                Upload Front Image
-            </Button>
+            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'front'}/>
         </TableCell>
-        < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'inside'}/>
         <TableCell>
-            <Button 
-                variant="contained"
-                color="default"
-                onClick={handleImageUploadInside}
-                className={classes.button}
-            >
-                Upload Inside Image
-            </Button>
+            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'inside'}/>
         </TableCell>
         <TableCell>
             <FormControl>
