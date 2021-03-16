@@ -54,7 +54,7 @@ populates the input fields with the card information. The Submit button saves ch
 */
 export default function AdminCards() {
         //state
-    
+    const [isLoaded, setIsLoaded] = useState(false);
         //hooks
     const allCards = useSelector((store) => store?.cards);
     const allCategories = useSelector((store) => store?.categories);
@@ -62,43 +62,55 @@ export default function AdminCards() {
     const dispatch = useDispatch();
     const classes = useStyles();
         //functions
-
+    const fetchData = async () => {
+        
+        dispatch({type: 'FETCH_ADMIN_CARDS'});
+        
+            setIsLoaded(true);
+        
+    }
         //onRender (need to call on every dispatch so we can continouously fetch changes to the cards database)
     useEffect(() => {
             //GET to fill cards, categories, and occasions
-        dispatch({type: 'FETCH_ADMIN_CARDS'});
+        fetchData();
         //rerender on every dispatch
     }, [dispatch]);
     return (
     <div className={classes.root}>
+        { isLoaded ? 
+        <>
             <AdminAddForm categories={allCategories} occasions={allOccasions}/>
-        <div className={classes.displayCardTable}>
-            <TableContainer component={Paper}>
-            <Table aria-label="simple table">
-                <TableHead>
-                <TableRow>
-                    <TableCell>Front Image</TableCell>
-                    <TableCell>Inside Image</TableCell>
-                    <TableCell>Occasion</TableCell>
-                    <TableCell>Category</TableCell>
-                    <TableCell>Likes</TableCell>
-                    <TableCell>Artist</TableCell>
-                    <TableCell>Details</TableCell>
-                    {/*If we really want to give the edit and delete rows titles add them here*/}
-                </TableRow>
-                </TableHead>
-                <TableBody >
-                {allCards.map((card) => (
-
-                        <TableRow key={ card.id } className={classes.tableRow}>
-                            <AdminCardTableRow card={card} categories={allCategories} occasions={allOccasions}/>
-                        </TableRow> 
-                    )
-                )}
-                </TableBody>
-            </Table>
-            </TableContainer>
-        </div>
+            <div className={classes.displayCardTable}>
+                <TableContainer component={Paper}>
+                <Table aria-label="simple table">
+                    <TableHead>
+                    <TableRow>
+                        <TableCell>Front Image</TableCell>
+                        <TableCell>Inside Image</TableCell>
+                        <TableCell>Occasion</TableCell>
+                        <TableCell>Category</TableCell>
+                        <TableCell>Likes</TableCell>
+                        <TableCell>Artist</TableCell>
+                        <TableCell>Details</TableCell>
+                        {/*If we really want to give the edit and delete rows titles add them here*/}
+                    </TableRow>
+                    </TableHead>
+                    <TableBody >
+                    {allCards.map((card) => (
+    
+                            <TableRow key={ card.id } className={classes.tableRow}>
+                                <AdminCardTableRow card={card} categories={allCategories} occasions={allOccasions}/>
+                            </TableRow> 
+                        )
+                    )}
+                    </TableBody>
+                </Table>
+                </TableContainer>
+            </div>
+        </> 
+        :
+        <h1>Loading {console.log(isLoaded)}</h1>
+        }
     </div>
     )
 }
