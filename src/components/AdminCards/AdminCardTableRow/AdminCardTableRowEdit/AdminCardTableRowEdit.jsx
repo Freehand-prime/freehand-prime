@@ -74,6 +74,7 @@ export default function AdminCardTableRowEdit({editFlag, card, categories, occas
         <TableCell>{card.occasion_id}</TableCell>
         <TableCell>{card.category_id}</TableCell>
         <TableCell>{card.artist}</TableCell>
+        <TableCell>{card.details}</TableCell>
         <TableCell>
             <Button 
                 variant="contained"
