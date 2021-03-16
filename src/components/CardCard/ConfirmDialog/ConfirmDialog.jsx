@@ -17,7 +17,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ConfirmDialog({ openConfirm, setOpenConfirm, cardId, eventId }) {
+export default function ConfirmDialog({ openConfirm, setOpenConfirm, eventId }) {
   // Hooks
   const dispatch = useDispatch();
   const history = useHistory();

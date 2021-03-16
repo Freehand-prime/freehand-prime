@@ -1,6 +1,7 @@
 // React
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom"
  
 // MUI
 import { makeStyles } from "@material-ui/core/styles";
@@ -29,19 +30,24 @@ export default function CardCard({ card, buttonTitle, eventId }) {
   const [cardPicked, setCardPicked] = useState(false);
 
   const checkCard = () => {
-    if (buttonTitle == "Pick a New Card") {
+    if (buttonTitle === "Pick a New Card") {
       setCardPicked(true);
     }
   };
 
+  useEffect(() => {
+    checkCard();
+  }, []);
+
   // Swap image state
   const [showInside, setShowInside] = useState(false);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
+  const history = useHistory();
   const classes = useStyles();
 
   const handleConfirm = () => {
-    dispatch({type: 'PICK_CARD', payload: card.id});
+    dispatch({type: 'PICK_CARD', payload: card?.id});
     setOpenConfirm(!openConfirm);
   }
 
@@ -52,28 +58,28 @@ export default function CardCard({ card, buttonTitle, eventId }) {
           {showInside ? (
             <CardMedia
               component="img"
-              alt={card.details}
+              alt={card?.details}
               height="100%"
               width="100%"
-              image={card.image_inside}
+              image={card?.image_inside}
               title="Card Inside"
             />
           ) : (
             <CardMedia
               component="img"
-              alt={card.details}
+              alt={card?.details}
               height="100%"
               width="100%"
-              image={card.image_front}
+              image={card?.image_front}
               title="Card Front"
             />
           )}
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              Card by {card.artist}
+              Card by {card?.artist}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              {card.details}
+              {card?.details}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -84,7 +90,7 @@ export default function CardCard({ card, buttonTitle, eventId }) {
                 <Button
                   size="small"
                   color="primary"
-                  onClick={() => console.log("clicked")}
+                  onClick={() => history.push(`/card/${eventId}`)}
                 >
                   {buttonTitle}
                 </Button>
@@ -104,7 +110,6 @@ export default function CardCard({ card, buttonTitle, eventId }) {
       <ConfirmDialog
         openConfirm={openConfirm}
         setOpenConfirm={setOpenConfirm}
-        cardId={card.id}
         eventId={eventId}
       />
     </>

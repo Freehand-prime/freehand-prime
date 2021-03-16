@@ -86,11 +86,11 @@ export default function App() {
             <ShippingConfirm />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/admin" notAdminRedirect="/home">
+          <ProtectedRoute exact path="/admin">
             <AdminOccasions />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/adminCards" notAdminRedirect="/home">
+          <ProtectedRoute exact path="/adminCards">
             <AdminCards />
           </ProtectedRoute>
 
