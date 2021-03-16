@@ -7,6 +7,8 @@ const app = express();
 const sessionMiddleware = require("./modules/session-middleware");
 const passport = require("./strategies/user.strategy");
 const nodemailer = require("nodemailer");
+const cron = require("node-cron");
+const pool = require('./modules/pool');
 
 // Route includes
 const userRouter = require("./routes/user.router");
@@ -73,6 +75,47 @@ app.post("/send", function (req, res, next) {
       res.sendStatus(200)
     }
   });
+});
+
+//node cron
+/*cron to schedule function run at midnight every day
+	function to check dates
+		parse the events
+		DATA:
+			SELECT "persons".name, "events".date, "events".id, "user".username FROM "events"
+      JOIN "persons" ON "persons".id = "events".person_id 
+      JOIN "user" ON "user".id = "persons".user_id;
+      
+
+		handling logic:
+		map over events =>
+			check the event.date
+			if current.date +14 === event.date =>
+				send email
+					email contains link to pick card*/
+
+  //check dates everyday at midnight
+cron.schedule('0 0 * * *', () => {
+  console.log('midnight queries');
+
+  //get data from database "persons".name, "events".date, "events".id, "user".username
+  const eventQuery = `
+  SELECT "persons".name, "events".date, "events".id, "user".username FROM "events"
+  JOIN "persons" ON "persons".id = "events".person_id 
+  JOIN "user" ON "user".id = "persons".user_id;
+  `;
+
+  pool
+      .query(eventQuery)
+      .then((result) => {
+        //map over the result rows to check dates
+        result.rows;
+      })
+      .catch((error) => {
+          console.error(error);
+          //send response 500 'Internal Server Error' on pool query error
+          //todo: how to handle error outside of an express function?
+      });
 });
 
 // Serve static files
