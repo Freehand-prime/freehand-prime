@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import AdminImageUploadDialog from './AdminImageUploadDialog/AdminImageUploadDialog';
 import AdminCardTableRow from './AdminCardTableRow/AdminCardTableRow';
+import AdminAddForm from './AdminAddForm/AdminAddForm';
 
   //MUI
 import { 
@@ -32,19 +32,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
-    addCardForm: {
-      '& .MuiTextField-addCardForm': {
-        margin: theme.spacing(1),
-        width: '25ch',
-      },
-      formControl: {
-        margin: theme.spacing(1),
-        minWidth: 400,
-      },
-      selectEmpty: {
-        marginTop: theme.spacing(2),
-      },
-    },
     displayCardTable: {
         display: "flex",
         flexWrap: "wrap",
@@ -53,14 +40,6 @@ const useStyles = makeStyles((theme) => ({
     },
     tableRow: {
         justifyContent: "center"
-    },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: '25ch',
-    },
-    button: {
-        margin: 10,
     },
 }));
 
@@ -75,86 +54,24 @@ populates the input fields with the card information. The Submit button saves ch
 */
 export default function AdminCards() {
         //state
+    
         //hooks
     const allCards = useSelector((store) => store?.cards);
+    const allCategories = useSelector((store) => store?.categories);
+    const allOccasions = useSelector((store) => store?.occasions);
     const dispatch = useDispatch();
     const classes = useStyles();
         //functions
-    const handleImageUploadFront = () => {
-        console.log('handleImageUploadFront Clicked');
-    }
-    const handleImageUploadInside = () => {
-        console.log('handleImageUploadInside Clicked');
-    }
-    const handleSubmit = () => {
-        console.log('handleSubmit Clicked');
-    }
+
         //onRender (need to call on every dispatch so we can continouously fetch changes to the cards database)
     useEffect(() => {
-        dispatch({type: 'FETCH_CARDS'});
+            //GET to fill cards, categories, and occasions
+        dispatch({type: 'FETCH_ADMIN_CARDS'});
+        //rerender on every dispatch
     }, [dispatch]);
     return (
     <div className={classes.root}>
-        <form className={classes.addCardForm}>   
-            <Button 
-                variant="contained"
-                color="default"
-                onClick={handleImageUploadFront}
-                className={classes.button}
-            >
-                Upload Front Image
-            </Button>
-            <Button 
-                variant="contained"
-                color="default"
-                onClick={handleImageUploadInside}
-                className={classes.button}
-            >
-                Upload Inside Image
-            </Button>
-            {/*Form Fields go Here*/}
-            <FormControl>
-                <TextField 
-                    label="Occasion"
-                    id="filled-margin-dense"
-                    placeholder="enter occasion"
-                    className={classes.textField}
-                    helperText="Required"
-                    margin="dense"
-                    variant="filled"
-                />
-            </FormControl>
-            <FormControl>
-                <TextField 
-                    label="Category"
-                    id="filled-margin-dense"
-                    placeholder="enter category"
-                    className={classes.textField}
-                    helperText="Required"
-                    margin="dense"
-                    variant="filled"
-                />
-            </FormControl>
-            <FormControl>
-                <TextField 
-                    label="Artist Name"
-                    id="filled-margin-dense"
-                    placeholder="enter artist name"
-                    className={classes.textField}
-                    helperText="Required"
-                    margin="dense"
-                    variant="filled"
-                />
-            </FormControl>
-            <Button 
-                variant="contained"
-                color="primary" 
-                onClick={handleSubmit}
-                className={classes.button}
-            >
-                SUBMIT
-            </Button>
-        </form>
+            <AdminAddForm categories={allCategories} occasions={allOccasions}/>
         <div className={classes.displayCardTable}>
             <TableContainer component={Paper}>
             <Table aria-label="simple table">
@@ -164,7 +81,9 @@ export default function AdminCards() {
                     <TableCell>Inside Image</TableCell>
                     <TableCell>Occasion</TableCell>
                     <TableCell>Category</TableCell>
+                    <TableCell>Likes</TableCell>
                     <TableCell>Artist</TableCell>
+                    <TableCell>Details</TableCell>
                     {/*If we really want to give the edit and delete rows titles add them here*/}
                 </TableRow>
                 </TableHead>
@@ -172,7 +91,7 @@ export default function AdminCards() {
                 {allCards.map((card) => (
 
                         <TableRow key={ card.id } className={classes.tableRow}>
-                            <AdminCardTableRow card={card} />
+                            <AdminCardTableRow card={card} categories={allCategories} occasions={allOccasions}/>
                         </TableRow> 
                     )
                 )}
