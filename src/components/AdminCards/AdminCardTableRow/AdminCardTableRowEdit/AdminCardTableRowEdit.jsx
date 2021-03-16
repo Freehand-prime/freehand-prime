@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import S3Uploader from '../../S3Uploader/S3Uploader';
 
   //MUI
 import {
@@ -74,6 +75,7 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
     return(
         <>
         <TableCell className={classes.root}>
+        < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'front'}/>
             <Button 
                 variant="contained"
                 color="default"
@@ -83,6 +85,7 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
                 Upload Front Image
             </Button>
         </TableCell>
+        < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'inside'}/>
         <TableCell>
             <Button 
                 variant="contained"
