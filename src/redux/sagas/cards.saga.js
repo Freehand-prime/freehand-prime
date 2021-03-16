@@ -13,10 +13,17 @@ function* fetchCards() {
 }
 
 function* addCard(action) {
-    //store data of card to create
+      //debug log to user console
+    console.log(`
+    Front: ${action.payload.image_front}
+    Inside: ${action.payload.image_inside}
+    Occasion: ${action.payload.occasion_id}
+    Category: ${action.payload.category_id}
+    Artist: ${action.payload.artist}
+    Description: ${action.payload.details}
+    `);
+      //store data of card to create
     const newCardInfo = action.payload;
-    //debug log to user console
-  console.log(`In addCard: ${newCardInfo}`);
   try{
       //POST request to admin API
     yield axios.post(`/api/admin/card`, newCardInfo);
@@ -28,10 +35,18 @@ function* addCard(action) {
 }
 
 function* editCard(action) {
-    //store data of card to edit
-  const editCardInfo = action.payload;
-    //debug log to user console
-  console.log(`In editCard: ${editCardInfo}`);
+      //debug log to user console
+    console.log(`
+    ID: ${action.payload.id}
+    Front: ${action.payload.image_front}
+    Inside: ${action.payload.image_inside}
+    Occasion: ${action.payload.occasion_id}
+    Category: ${action.payload.category_id}
+    Artist: ${action.payload.artist}
+    Description: ${action.payload.details}
+    `);
+      //store data of card to edit
+    const editCardInfo = action.payload;
   try{
       //PUT request to admin API
     yield axios.put(`/api/admin/card`, editCardInfo);
