@@ -1,19 +1,22 @@
+// React
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import RegisterDialog from "../RegisterDialog/RegisterDialog";
+
+// MUI
 import {
   Grid,
   Typography,
   MenuItem,
-  TextField,
   makeStyles,
-  InputLabel,
   FormControl,
   Select,
   Paper,
   Button,
 } from "@material-ui/core";
+
+// Component
+import RegisterDialog from "../RegisterDialog/RegisterDialog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,12 +35,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SelectCategory() {
-  const classes = useStyles();
-
+  // Confirm dialog state
   const [register, setRegister] = useState(false);
 
+  // Hooks
   const history = useHistory();
   const dispatch = useDispatch();
+  const classes = useStyles();
 
   const newEvent = useSelector((store) => store.event);
   const person = useSelector((store) => store.person);
@@ -48,30 +52,21 @@ export default function SelectCategory() {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
 
-  //onClick function to go back to EnterOccasion
+  // onClick function to go back to EnterOccasion
   const handleBack = () => {
     history.push("/occasion");
   }; //end handleBack
 
-  //onClick function to submit person & relationship details
+  // onClick function to submit person & relationship details
+  // Continue triggers addPersonAndEvent SAGA & dispatches collected form data if logged in
+  // or triggers Registration Dialog to register new user
   const handleContinue = () => {
     if (user.id) {
       dispatch({
         type: "ADD_PERSON_AND_EVENT",
         payload: { person, newEvent },
       });
-      // dispatch({
-      //   type: "SEND_MAIL",
-      //   payload: {
-      //     email: `${user.username}`,
-      //     subject: `You have an event for ${person.name} coming up in Freehand Cards!`,
-      //     message: `You have an event coming up for ${
-      //       person.name
-      //     } on ${new Date(newEvent.date).toLocaleDateString("en-US")}
-      //     To pick a card and confirm shipping options for this event, please visit:
-      //     http://localhost:3000/#/card/${}`,
-      //   },
-      // });
+      
       history.push("/dashboard");
     } else {
       setRegister(true);
@@ -95,6 +90,7 @@ export default function SelectCategory() {
         <Grid item xs={6} sm={3}></Grid>
         <Grid align="center" item xs={12} sm={6}>
           <Paper elevation={4}>
+            {/* Select input for category choice, maps categories reducer to display options */}
             <FormControl>
               <Select
                 id="event-category"
@@ -122,7 +118,7 @@ export default function SelectCategory() {
                 })}
               </Select>
             </FormControl>
-
+            {/* Buttons to return to occasions page and to continue the form process */}
             <div>
               <Button variant="outlined" onClick={handleBack}>
                 Back
