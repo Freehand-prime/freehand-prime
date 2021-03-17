@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function EnterOccasion() {
+export default function SelectOccasion() {
 
     const classes = useStyles();
 
@@ -124,4 +124,4 @@ export default function EnterOccasion() {
             </Grid>
         </div>
 )
-}; // end EnterOccasion
+}; // end SelectOccasion

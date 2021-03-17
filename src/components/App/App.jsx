@@ -15,7 +15,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import LandingPage from '../LandingPage/LandingPage';
 import EnterPerson from '../EnterPerson/EnterPerson';
-import EnterOccasion from '../EnterOccasion/EnterOccasion';
+import SelectOccasion from '../SelectOccasion/SelectOccasion';
 import SelectCategory from '../SelectCategory/SelectCategory';
 import Dashboard from '../Dashboard/Dashboard';
 import ViewPersons from '../ViewPersons/ViewPersons';
@@ -45,12 +45,13 @@ export default function App() {
             <LandingPage />
           </Route>
 
+
           <Route exact path="/person">
             <EnterPerson />
           </Route>
 
           <Route exact path="/occasion">
-            <EnterOccasion />
+            <SelectOccasion />
           </Route>
 
           <Route exact path="/category">
