@@ -8,6 +8,7 @@ import {
   makeStyles,
   Container,
   FormControl,
+  InputLabel,
   MenuItem,
   Select,
   Paper,
@@ -17,28 +18,37 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "25ch",
-    },
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 400,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
+      margin: theme.spacing(3),
+      width: 250,
     },
   },
+  titlePaper: {
+    margin: 10,
+    padding: 10,
+    marginTop: 20,
+  },
+  formPaper: {
+    margin: 8,
+    padding: 15,
+    marginTop: 100,
+    marginBottom: "14rem",
+  },
+  buttons: {
+    margin: 8
+  }
 }));
 
 export default function SelectOccasion() {
-  const classes = useStyles();
-
-  const history = useHistory();
-  const dispatch = useDispatch();
-
+  // Redux
   const newEvent = useSelector((store) => store.event);
   const occasions = useSelector((store) => store.occasions);
 
+  // Hooks
+  const classes = useStyles();
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  // UseEffect to fetch occasions
   useEffect(() => {
     dispatch({ type: "FETCH_OCCASIONS" });
   }, []);
@@ -57,75 +67,58 @@ export default function SelectOccasion() {
 
   return (
     <Container>
-      <div className={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={6} sm={3}></Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper align="center" elevation={4} className={classes.paper}>
-              <Typography variant="h6">Tell Us The Occasion!</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={6} sm={3}></Grid>
-          <Grid item xs={6} sm={3}></Grid>
-          <Grid align="center" item xs={12} sm={6}>
-            <Paper elevation={4}>
-              <FormControl>
-                <Select
-                  id="event-occasion"
-                  label="select occasion"
-                  type="text"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  style={{ width: 250, margin: 8 }}
-                  variant="outlined"
-                  value={newEvent?.occasion}
-                  onChange={(event) =>
-                    dispatch({
-                      type: "SET_OCCASION",
-                      payload: event.target.value,
-                    })
-                  }
-                >
-                  {occasions.map((occasion) => {
-                    return (
-                      <MenuItem value={occasion.id} key={occasion.id}>
-                        {occasion.occasion}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-              <FormControl>
-                <TextField
-                  id="event-date"
-                  label="enter date"
-                  type="date"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  style={{ width: 250, margin: 8 }}
-                  value={newEvent?.date}
-                  onChange={(event) =>
-                    dispatch({ type: "SET_DATE", payload: event.target.value })
-                  }
-                  variant="outlined"
-                />
-              </FormControl>
-              <div>
-                <Button variant="contained" color="secondary" onClick={handleBack}>
-                  Back
-                </Button>
+      <Paper align="center" elevation={4} className={classes.titlePaper}>
+        <Typography variant="h5">Tell Us The Occasion!</Typography>
+      </Paper>
 
-                <Button variant="contained" color="primary" onClick={handleContinue}>
-                  Continue
-                </Button>
-              </div>
-            </Paper>
-          </Grid>
-          <Grid item xs={6} sm={3}></Grid>
-        </Grid>
-      </div>
+      <Paper align="center" elevation={4} className={classes.formPaper}>
+        <FormControl variant="outlined" className={classes.root}>
+          <InputLabel id="select-label">Select Occasion</InputLabel>
+          <Select
+            labelId="select-label"
+            id="event-occasion"
+            label="Select Occasion"
+            type="text"
+            value={newEvent?.occasion}
+            onChange={(event) =>
+              dispatch({
+                type: "SET_OCCASION",
+                payload: event.target.value,
+              })
+            }
+          >
+            {occasions.map((occasion) => {
+              return (
+                <MenuItem value={occasion.id} key={occasion.id}>
+                  {occasion.occasion}
+                </MenuItem>
+              );
+            })}
+          </Select>
+
+          <TextField
+            id="event-date"
+            label="enter date"
+            type="date"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={newEvent?.date}
+            onChange={(event) =>
+              dispatch({ type: "SET_DATE", payload: event.target.value })
+            }
+            variant="outlined"
+          />
+        </FormControl>
+        <div>
+          <Button className={classes.buttons} variant="contained" color="secondary" onClick={handleBack}>
+            Back
+          </Button>
+          <Button className={classes.buttons} variant="contained" color="primary" onClick={handleContinue}>
+            Continue
+          </Button>
+        </div>
+      </Paper>
     </Container>
   );
 } // end SelectOccasion
