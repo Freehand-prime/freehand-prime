@@ -1,7 +1,9 @@
+// React
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import RegisterDialog from "../RegisterDialog/RegisterDialog";
+
+// MUI
 import {
   Grid,
   Typography,
@@ -13,6 +15,9 @@ import {
   Paper,
   Button,
 } from "@material-ui/core";
+
+// Component
+import RegisterDialog from "../RegisterDialog/RegisterDialog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,13 +36,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SelectCategory() {
-  const classes = useStyles();
-
+  // Confirm dialog state
   const [register, setRegister] = useState(false);
 
+  // Hooks
   const history = useHistory();
   const dispatch = useDispatch();
+  const classes = useStyles();
 
+  // State
   const newEvent = useSelector((store) => store.event);
   const person = useSelector((store) => store.person);
   const categories = useSelector((store) => store.categories);
@@ -47,20 +54,23 @@ export default function SelectCategory() {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
 
-  //onClick function to go back to SelectOccasion
+  // onClick function to go back to EnterOccasion
   const handleBack = () => {
     history.push("/occasion");
   }; //end handleBack
 
-  //onClick function to submit person & relationship details
+  // onClick function to submit person & relationship details
   const handleContinue = () => {
     if (user.id) {
+      // dispatches collected form data if user is logged in
       dispatch({
         type: "ADD_PERSON_AND_EVENT",
         payload: { person, newEvent },
       });
+      // Sends user to Dashboard with newly created Event
       history.push("/dashboard");
     } else {
+      // triggers Registration Dialog to register new user
       setRegister(true);
     } //else go to register/login
   }; //end handleContinue
@@ -113,7 +123,6 @@ export default function SelectCategory() {
                 <Button variant="contained" color="secondary" onClick={handleBack}>
                   Back
                 </Button>
-
                 <Button variant="contained" color="primary" onClick={handleContinue}>
                   Continue
                 </Button>
