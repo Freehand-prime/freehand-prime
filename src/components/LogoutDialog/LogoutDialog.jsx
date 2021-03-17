@@ -49,10 +49,10 @@ export default function LogoutDialog({ logout, setLogout }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleLogoutCancel} color="inherit">
+          <Button onClick={handleLogoutCancel} color="secondary">
             Cancel
           </Button>
-          <Button onClick={handleLogout} color="inherit">
+          <Button onClick={handleLogout} variant="filled" color="primary">
             Log Out
           </Button>
         </DialogActions>

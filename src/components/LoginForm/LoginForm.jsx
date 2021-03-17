@@ -86,7 +86,7 @@ export default function LoginDialog({ login, setLogin }) {
             />
           </DialogContent>
           <DialogActions>
-            <Button type="submit" color="inherit">
+            <Button type="submit" variant="filled" color="primary">
               Log In
             </Button>
           </DialogActions>

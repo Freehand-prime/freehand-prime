@@ -95,10 +95,10 @@ export default function LoginDialog() {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleLoginCancel} color="inherit">
+            <Button onClick={handleLoginCancel} color="secondary">
               Cancel
             </Button>
-            <Button type="submit" color="inherit">
+            <Button type="submit" variant="filled" color="primary">
               Log In
             </Button>
           </DialogActions>
