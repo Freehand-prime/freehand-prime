@@ -17,8 +17,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function LoginDialog({login, setLogin}) {
-  
+export default function LoginDialog({ login, setLogin }) {
   // State
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +28,7 @@ export default function LoginDialog({login, setLogin}) {
   // Hooks
   const dispatch = useDispatch();
 
-  // Login handler and validation
+  // Login handler and validation + clear state
   const handleLogin = (event) => {
     event.preventDefault();
     if (username && password) {
@@ -38,7 +37,7 @@ export default function LoginDialog({login, setLogin}) {
         payload: {
           username: username,
           password: password,
-        }, 
+        },
       });
       setUsername("");
       setPassword("");
@@ -57,44 +56,42 @@ export default function LoginDialog({login, setLogin}) {
       >
         <DialogTitle id="alert-dialog-slide-title">{"Log In"}</DialogTitle>
         <form onSubmit={handleLogin}>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            {errors.loginMessage && (
-              <h3 className="alert" role="alert">
-                {errors.loginMessage}
-              </h3>
-            )}
-          </DialogContentText>
-          <TextField
-            required
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email"
-            type="text"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-          <br/>
-          <TextField
-            required
-            margin="dense"
-            id="password"
-            label="Password"
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button type="submit" color="inherit">
-            Log In
-          </Button>
-        </DialogActions>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              {errors.loginMessage && (
+                <h3 className="alert" role="alert">
+                  {errors.loginMessage}
+                </h3>
+              )}
+            </DialogContentText>
+            <TextField
+              required
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Email"
+              type="text"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+            />
+            <br />
+            <TextField
+              required
+              margin="dense"
+              id="password"
+              label="Password"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button type="submit" color="inherit">
+              Log In
+            </Button>
+          </DialogActions>
         </form>
       </Dialog>
     </>
   );
 }
-
-

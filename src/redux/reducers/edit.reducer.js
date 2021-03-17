@@ -1,4 +1,5 @@
 // reducer to hold single entry object being edited
+
 const editEvent = (state = {}, action) => {
     switch (action.type) {
         case 'SET_EDIT_EVENT':

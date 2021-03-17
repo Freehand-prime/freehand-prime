@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 });
 
 export default function Footer() {
-
+  // Hook
   const classes = useStyles();
 
   return (
