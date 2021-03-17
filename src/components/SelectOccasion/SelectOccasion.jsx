@@ -31,11 +31,11 @@ const useStyles = makeStyles((theme) => ({
     margin: 8,
     padding: 15,
     marginTop: 100,
-    marginBottom: "14rem",
+    marginBottom: "15rem",
   },
   buttons: {
-    margin: 8
-  }
+    margin: 8,
+  },
 }));
 
 export default function SelectOccasion() {
@@ -70,7 +70,6 @@ export default function SelectOccasion() {
       <Paper align="center" elevation={4} className={classes.titlePaper}>
         <Typography variant="h5">Tell Us The Occasion!</Typography>
       </Paper>
-
       <Paper align="center" elevation={4} className={classes.formPaper}>
         <FormControl variant="outlined" className={classes.root}>
           <InputLabel id="select-label">Select Occasion</InputLabel>
@@ -95,7 +94,6 @@ export default function SelectOccasion() {
               );
             })}
           </Select>
-
           <TextField
             id="event-date"
             label="enter date"
@@ -111,10 +109,20 @@ export default function SelectOccasion() {
           />
         </FormControl>
         <div>
-          <Button className={classes.buttons} variant="contained" color="secondary" onClick={handleBack}>
+          <Button
+            className={classes.buttons}
+            variant="contained"
+            color="secondary"
+            onClick={handleBack}
+          >
             Back
           </Button>
-          <Button className={classes.buttons} variant="contained" color="primary" onClick={handleContinue}>
+          <Button
+            className={classes.buttons}
+            variant="contained"
+            color="primary"
+            onClick={handleContinue}
+          >
             Continue
           </Button>
         </div>
