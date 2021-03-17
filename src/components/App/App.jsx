@@ -25,7 +25,6 @@ import PickACard from '../PickACard/PickACard';
 import ShippingConfirm from '../ShippingConfirm/ShippingConfirm';
 import AdminCards from '../AdminCards/AdminCards';
 import AdminOccasions from '../AdminOccasions/AdminOccasions';
-import RegisterPage from '../RegisterPage/RegisterPage';
 import './App.css';
 
 export default function App() {
@@ -44,10 +43,6 @@ export default function App() {
 
           <Route exact path="/home">
             <LandingPage />
-          </Route>
-
-          <Route exact path="/register">
-            <RegisterPage />
           </Route>
 
           <Route exact path="/person">
