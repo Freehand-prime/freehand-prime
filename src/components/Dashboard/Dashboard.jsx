@@ -1,8 +1,10 @@
+// hooks
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
+// MUI
 import {
   Box,
   Button,
@@ -14,9 +16,6 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
-
-import EventCard from '../EventCard/EventCard';
-
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -29,15 +28,18 @@ const useStyles = makeStyles({
   },
 });
 
+import EventCard from '../EventCard/EventCard';
+
+// this component renders the next upcoming event, and allows users to navigate to see their people and add new events
 export default function Dashboard() {
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  // NOTE - still need logic fix for finding the next upcoming event
+  // SEAN NOTE - still need logic fix for finding the next upcoming event 3/17
   const events = useSelector((store) => store.events);
 
-  // do we not need a useEffect bc we are setting state after registration / login?
+  // fetches the most recent events from the database
   useEffect(() => {
     dispatch({ type: 'FETCH_EVENTS' });
   }, []);
@@ -50,6 +52,7 @@ export default function Dashboard() {
         <br></br>
         <Paper>
           {events[0] && <EventCard event={events[0]} />}
+          {/* SEAN NOTE DON'T DELETE YET 3/17 <EventCard event={event} /> */}
           {/* <Card className={classes.root}>
             <CardContent>
               <Typography

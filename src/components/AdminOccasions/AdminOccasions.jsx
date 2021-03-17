@@ -1,8 +1,10 @@
+// react, redux, routing
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 
+// MUI styling and components
+import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
   Button,
@@ -20,12 +22,10 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import AddIcon from '@material-ui/icons/Add';
-
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -38,12 +38,19 @@ const useStyles = makeStyles({
   },
 });
 
+// this component allows admin users to manage the categories and occasions available for cards in the database
+// they can add new entries, edit existing entries, or delete entries
 export default function AdminOccasions() {
+  // hooks
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
+
+  // state
   const occasions = useSelector((store) => store.occasions);
   const categories = useSelector((store) => store.categories);
+
+  // state for new entries, which entry is being edited, and edited occasion's new value
   const [addOccasion, setAddOccasion] = useState('');
   const [addCategory, setAddCategory] = useState('');
   const [editOccasion, setEditOccasion] = useState(0);
@@ -51,44 +58,44 @@ export default function AdminOccasions() {
   const [editOccasionString, setEditOccasionString] = useState('');
   const [editCategoryString, setEditCategoryString] = useState('');
 
+  // fetches most recent occasions and categories from database
   useEffect(() => {
     dispatch({ type: 'FETCH_OCCASIONS' });
     dispatch({ type: 'FETCH_CATEGORIES' });
   }, []);
 
-  // HOW TO HANDLE DELETES FOR CATEGORIES AND OCCASIONS THAT HAVE EXISTING CARDS AND EVENTS
-
+  // click listener handles adding new occasion
   const handleAddOccasion = () => {
-    console.log('clicked add occasion, addOccasion is', addOccasion);
     dispatch({ type: 'ADD_OCCASION', payload: addOccasion });
     setAddOccasion('');
   };
 
+  // click listener handles adding new category
   const handleAddCategory = () => {
-    console.log('clicked add category, addCategory is', addCategory);
     dispatch({ type: 'ADD_CATEGORY', payload: addCategory });
     setAddCategory('');
   };
 
+  // click listener deletes occasion
   const handleDeleteOccasion = (id) => {
-    console.log('clicked delete occasion, occasionID is', id);
     dispatch({ type: 'DELETE_OCCASION', payload: id });
   };
 
+  // click listener deletes occasion
   const handleDeleteCategory = (id) => {
-    console.log('clicked delete category, categoryID is', id);
     dispatch({ type: 'DELETE_CATEGORY', payload: id });
   };
 
+  // click listener handles sending updated state of edited occasion to db
   const handleOccasionEdit = (occasionToUpdate) => {
-    console.log('clicked save on occasion with string', occasionToUpdate);
     dispatch({ type: 'UPDATE_OCCASION', payload: occasionToUpdate });
     setEditOccasionString('');
   };
 
+  // click listener handles sending updated state of edited category to db
   const handleCategoryEdit = (categoryToUpdate) => {
-    console.log('clicked save on category with string', categoryToUpdate);
     dispatch({ type: 'UPDATE_CATEGORY', payload: categoryToUpdate });
+    setEditCategoryString('');
   };
 
   return (
@@ -116,10 +123,12 @@ export default function AdminOccasions() {
                 <AddIcon />
               </IconButton>
             </Box>
+            {/* maps over occasions to render list items for each */}
             <List>
               {occasions &&
                 occasions.map((occasion) => (
                   <ListItem key={occasion.id}>
+                    {/* renders a textfield if editOccasion matches the occasion.id, else renders a listitem */}
                     {editOccasion == occasion.id ? (
                       <TextField
                         variant="outlined"
@@ -134,11 +143,13 @@ export default function AdminOccasions() {
                       <ListItemText>{occasion.occasion}</ListItemText>
                     )}
                     <ListItemIcon>
+                      {/* sets editOccasion to the id of this list entry if clicked, otherwise sets it to 0 */}
                       <IconButton
                         onClick={() =>
                           setEditOccasion(editOccasion > 0 ? 0 : occasion.id)
                         }
                       >
+                        {/* sends the edit occasion ID and the edited occasion new value to the update click handler */}
                         {editOccasion == occasion.id ? (
                           <SaveIcon
                             onClick={() =>
@@ -154,6 +165,7 @@ export default function AdminOccasions() {
                       </IconButton>
                     </ListItemIcon>
                     <ListItemIcon>
+                      {/* deletes occasion */}
                       <IconButton
                         onClick={() => {
                           handleDeleteOccasion(occasion.id);
@@ -182,10 +194,12 @@ export default function AdminOccasions() {
                 <AddIcon />
               </IconButton>
             </Box>
+            {/* maps over categories to render list items for each */}
             <List>
               {categories &&
                 categories.map((category) => (
                   <ListItem key={category.id}>
+                    {/* renders a textfield if editCategory matches the category.id, else renders a listitem */}
                     {editCategory == category.id ? (
                       <TextField
                         variant="outlined"
@@ -200,11 +214,13 @@ export default function AdminOccasions() {
                       <ListItemText>{category.category}</ListItemText>
                     )}
                     <ListItemIcon>
+                      {/* sets editCategory to the id of this list entry if clicked, otherwise sets it to 0 */}
                       <IconButton
                         onClick={() =>
                           setEditCategory(editCategory > 0 ? 0 : category.id)
                         }
                       >
+                        {/* sends the edit category ID and the edited category new value to the update click handler */}
                         {editCategory == category.id ? (
                           <SaveIcon
                             onClick={() =>
@@ -220,6 +236,7 @@ export default function AdminOccasions() {
                       </IconButton>
                     </ListItemIcon>
                     <ListItemIcon>
+                      {/* deletes category */}
                       <IconButton
                         onClick={() => {
                           handleDeleteCategory(category.id);

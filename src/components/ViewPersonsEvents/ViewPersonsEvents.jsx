@@ -1,8 +1,10 @@
+// react, redux, routing
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
+// MUI
 import {
   Box,
   Button,
@@ -15,9 +17,6 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
-
-import EventCard from '../EventCard/EventCard';
-
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -30,16 +29,23 @@ const useStyles = makeStyles({
   },
 });
 
+import EventCard from '../EventCard/EventCard';
+
+// this component shows the user the events of a single person
 export default function ViewPersonsEvent() {
+  // hooks
   const history = useHistory();
   const classes = useStyles();
   const page = useParams();
   const dispatch = useDispatch();
+
+  // state
   const events = useSelector((store) => store.events);
   const personsEvents = events.filter(function (event) {
     return event.id == page.id;
   });
 
+  // fetches the most recent events from the database
   useEffect(() => {
     dispatch({ type: 'FETCH_EVENTS' });
   }, []);
@@ -54,8 +60,7 @@ export default function ViewPersonsEvent() {
           {personsEvents &&
             personsEvents.map((event) => (
               <Box>
-                {/* <EventCard event={event} /> */}
-
+                {/* SEAN NOTE DON'T DELETE YET 3/17 <EventCard event={event} /> */}
                 <Card className={classes.root}>
                   <CardContent>
                     <Typography
