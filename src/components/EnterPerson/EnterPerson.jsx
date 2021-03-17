@@ -1,6 +1,9 @@
+// React, Redux, Router
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
+// MUI
 import { 
     Grid,
     Typography,
@@ -13,7 +16,7 @@ import {
     Button,
 } from '@material-ui/core';
 
-
+// MUI style
 const useStyles = makeStyles((theme) => ({
     root: {
       '& .MuiTextField-root': {
@@ -33,13 +36,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnterPerson() {
 
-    const [selectedPerson, setSelectedPerson] = useState({});
-
-    const classes = useStyles();
-
+    // Hooks
     const history = useHistory();
     const dispatch = useDispatch();
+    const classes = useStyles();
 
+    const [selectedPerson, setSelectedPerson] = useState({});
+
+    // State
     const user = useSelector((store) => store.user)
     const person = useSelector((store) => store.person)
     const userPersons = useSelector((store => store.persons))
@@ -65,9 +69,8 @@ export default function EnterPerson() {
  
             }
         })
-    }
+    }; //end handleSelectPerson
 
-    console.log(selectedPerson);
 
     return (
         <div className={classes.root}>
@@ -83,6 +86,9 @@ export default function EnterPerson() {
                 <Grid item xs={6} sm={3}></Grid>
                 <Grid align="center" item xs={12} sm={6}>
                     <Paper elevation={4}>
+                      {/* If new user: Input for adding a new person,  
+                      if logged in user: also displays selector to choose an existing person,
+                      onChange dispatches to event reducer */}
                         <FormControl>
                             <TextField
                                 id="person-name"
@@ -120,6 +126,7 @@ export default function EnterPerson() {
                             )}
                         </FormControl>
                         <FormControl>
+                          {/* Input to enter relationship to person, dispatches to event reducer */}
                             <TextField
                                 id="person-relationship"
                                 label= "enter your relationship"
@@ -133,6 +140,7 @@ export default function EnterPerson() {
                                 variant="outlined"
                             />
                         </FormControl>
+                        {/* Button to continue to EnterOccasion */}
                         <div>
                             <Button variant="outlined" onClick={handleContinue}>
                                 Continue

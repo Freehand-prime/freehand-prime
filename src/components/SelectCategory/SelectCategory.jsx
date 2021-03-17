@@ -43,6 +43,7 @@ export default function SelectCategory() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
+  // State
   const newEvent = useSelector((store) => store.event);
   const person = useSelector((store) => store.person);
   const categories = useSelector((store) => store.categories);

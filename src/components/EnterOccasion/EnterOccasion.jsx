@@ -1,6 +1,9 @@
+// React, Redux, Router
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
+// MUI
 import { 
     Grid,
     Typography,
@@ -14,7 +17,7 @@ import {
     Button,
 } from '@material-ui/core';
 
-
+// MUI style
 const useStyles = makeStyles((theme) => ({
     root: {
       '& .MuiTextField-root': {
@@ -38,6 +41,7 @@ export default function EnterOccasion() {
     const dispatch = useDispatch();
     const classes = useStyles();
 
+    // State
     const newEvent = useSelector((store) => store.event);
     const occasions = useSelector((store) => store.occasions)
 
