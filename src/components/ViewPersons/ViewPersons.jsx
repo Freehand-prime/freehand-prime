@@ -1,8 +1,10 @@
+// react, redux, routing
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
+// MUI
 import {
   Box,
   Button,
@@ -15,7 +17,6 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
-
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -28,12 +29,17 @@ const useStyles = makeStyles({
   },
 });
 
+// this component shows the user the people they have entered events for
 export default function ViewPersons() {
+  // hooks
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
+
+  // state
   const persons = useSelector((store) => store.persons);
 
+  // fetches most recent persons from database
   useEffect(() => {
     dispatch({ type: 'FETCH_PERSONS' });
   }, []);
@@ -45,6 +51,7 @@ export default function ViewPersons() {
         <Typography variant="h5">Your People</Typography>
         <br></br>
         <Paper>
+          {/* maps over persons and creates a card for each */}
           {persons &&
             persons.map((person) => (
               <Box key={person.id}>
