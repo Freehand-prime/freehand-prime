@@ -46,7 +46,7 @@ export default function EnterPerson() {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_PERSONS' });
-      }, [userPersons]);
+      }, []);
 
     //onClick function to submit person & relationship details
     const handleContinue = () => {
