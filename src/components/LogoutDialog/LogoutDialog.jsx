@@ -18,7 +18,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function LogoutDialog({ logout, setLogout }) {
-  
   // Hooks
   const dispatch = useDispatch();
   const history = useHistory();
@@ -61,5 +60,3 @@ export default function LogoutDialog({ logout, setLogout }) {
     </>
   );
 }
-
-

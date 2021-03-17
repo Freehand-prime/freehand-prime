@@ -14,13 +14,13 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
+import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 
 // Component
-import LogoutDialog from "../../LogoutDialog/LogoutDialog"
+import LogoutDialog from "../../LogoutDialog/LogoutDialog";
 import LoginDialog from "../../LoginDialog/LoginDialog";
 
 // MUI styling
@@ -69,12 +69,12 @@ export default function NavDrawer({ open, setOpen }) {
 
   // Drawer open
   const handleDrawerOpen = () => {
-      setOpen(true);
+    setOpen(true);
   };
 
   // Drawer close
   const handleDrawerClose = () => {
-      setOpen(false);
+    setOpen(false);
   };
 
   // Open logout dialog
@@ -84,7 +84,7 @@ export default function NavDrawer({ open, setOpen }) {
 
   // Open login dialog
   const handleLoginOpen = () => {
-    dispatch({type: "LOGIN_OPEN"})
+    dispatch({ type: "LOGIN_OPEN" });
   };
 
   return (

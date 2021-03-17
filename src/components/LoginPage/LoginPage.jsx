@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import LoginForm from "../LoginForm/LoginForm";
 
 export default function LoginPage() {
-
   // State
   const [login, setLogin] = useState(true);
 

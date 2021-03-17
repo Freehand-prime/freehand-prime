@@ -38,9 +38,16 @@ function shuffleCards(array) {
 }
 
 export default function PickACard() {
+  // Shuffled Cards state
+  const [cards, setCards] = useState([]);
+
   // Cards selector
   const unsortedCards = useSelector((store) => store?.cards);
+  // Event selector
   const event = useSelector((store) => store?.edit);
+
+  // Card button title
+  const buttonTitle = "Choose this card";
 
   // Sort cards by category and occasion for event
   const sortedCards = unsortedCards?.filter((card) => {
@@ -51,16 +58,10 @@ export default function PickACard() {
       return card;
   });
 
-  // Shuffled Cards state
-  const [cards, setCards] = useState([]);
-
   // Hooks
   const classes = useStyles();
   const dispatch = useDispatch();
   const { id } = useParams();
-
-  // Card button title
-  const buttonTitle = "Choose this card";
 
   // Shuffle function call
   const handleShuffle = () => {
@@ -73,12 +74,10 @@ export default function PickACard() {
     dispatch({ type: "GET_EVENT", payload: id });
   }, []);
 
-  // useEffect for truffle shuffle
+  // UseEffect for truffle shuffle
   useEffect(() => {
     handleShuffle();
   }, [event]);
-
-    
 
   return (
     <div className={classes.gridDiv}>
@@ -96,7 +95,7 @@ export default function PickACard() {
           return (
             <Grow in={true} key={i}>
               <Grid item key={i}>
-                <CardCard card={card} buttonTitle={buttonTitle} eventId={id}/>
+                <CardCard card={card} buttonTitle={buttonTitle} eventId={id} />
               </Grid>
             </Grow>
           );
