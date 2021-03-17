@@ -76,17 +76,15 @@ export default function EnterPerson() {
 
   return (
     <Container>
-
-        <Paper align="center" elevation={4} className={classes.titlePaper}>
-          <Typography variant="h5">Who Do You Appreciate?</Typography>
-          <br/>
-          <Typography variant="h6">Tell Us Below:</Typography>
-        </Paper>
-
-        <Paper align="center" elevation={4} className={classes.formPaper}>
-          <FormControl variant="outlined" className={classes.root}>
-            {user.id && (
-              <>
+      <Paper align="center" elevation={4} className={classes.titlePaper}>
+        <Typography variant="h5">Who Do You Appreciate?</Typography>
+        <br />
+        <Typography variant="h6">Tell Us Below:</Typography>
+      </Paper>
+      <Paper align="center" elevation={4} className={classes.formPaper}>
+        <FormControl variant="outlined" className={classes.root}>
+          {user.id && (
+            <>
               <InputLabel id="select-label">Select Existing Person</InputLabel>
               <Select
                 labelId="select-label"
@@ -103,48 +101,47 @@ export default function EnterPerson() {
                   );
                 })}
               </Select>
-              <br/>
-              <br/>
-              </>
-            )}
-            <TextField
-              className={classes.inputField}
-              id="person-name"
-              label="Enter Name"
-              type="text"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={person?.name || selectedPerson.name}
-              onChange={(event) =>
-                dispatch({ type: "SET_NAME", payload: event.target.value })
-              }
-              variant="outlined"
-            />
-            <TextField
-              className={classes.inputField}
-              id="person-relationship"
-              label="Enter Your Relationship"
-              type="text"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={person?.relationship || selectedPerson.relationship}
-              onChange={(event) =>
-                dispatch({
-                  type: "SET_RELATIONSHIP",
-                  payload: event.target.value,
-                })
-              }
-              variant="outlined"
-            />
-          </FormControl>
-          <br/>
-          <Button variant="contained" color="primary" onClick={handleContinue}>
-            Continue
-          </Button>
-        </Paper>
-
+              <br />
+              <br />
+            </>
+          )}
+          <TextField
+            className={classes.inputField}
+            id="person-name"
+            label="Enter Name"
+            type="text"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={person?.name || selectedPerson.name}
+            onChange={(event) =>
+              dispatch({ type: "SET_NAME", payload: event.target.value })
+            }
+            variant="outlined"
+          />
+          <TextField
+            className={classes.inputField}
+            id="person-relationship"
+            label="Enter Your Relationship"
+            type="text"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            value={person?.relationship || selectedPerson.relationship}
+            onChange={(event) =>
+              dispatch({
+                type: "SET_RELATIONSHIP",
+                payload: event.target.value,
+              })
+            }
+            variant="outlined"
+          />
+        </FormControl>
+        <br />
+        <Button variant="contained" color="primary" onClick={handleContinue}>
+          Continue
+        </Button>
+      </Paper>
     </Container>
   );
 } //end EnterPerson
