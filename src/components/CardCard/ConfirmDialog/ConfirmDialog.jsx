@@ -56,7 +56,7 @@ export default function ConfirmDialog({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel} color="inherit">
+          <Button onClick={handleCancel} color="secondary">
             Go Back
           </Button>
           <Button onClick={handleConfirm} color="primary" variant="contained">

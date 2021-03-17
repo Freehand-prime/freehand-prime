@@ -1,23 +1,18 @@
-// React
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-
-// MUI
 import {
   Grid,
   Typography,
-  MenuItem,
+  TextField,
   makeStyles,
   Container,
   FormControl,
+  MenuItem,
   Select,
   Paper,
   Button,
 } from "@material-ui/core";
-
-// Component
-import RegisterDialog from "../RegisterDialog/RegisterDialog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,44 +30,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SelectCategory() {
-  // Confirm dialog state
-  const [register, setRegister] = useState(false);
-
-  // Hooks
-  const history = useHistory();
-  const dispatch = useDispatch();
+export default function SelectOccasion() {
   const classes = useStyles();
 
-  // State
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   const newEvent = useSelector((store) => store.event);
-  const person = useSelector((store) => store.person);
-  const categories = useSelector((store) => store.categories);
-  const user = useSelector((store) => store.user);
+  const occasions = useSelector((store) => store.occasions);
 
   useEffect(() => {
-    dispatch({ type: "FETCH_CATEGORIES" });
+    dispatch({ type: "FETCH_OCCASIONS" });
   }, []);
 
-  // onClick function to go back to EnterOccasion
+  //onClick function to go back to EnterPerson
   const handleBack = () => {
-    history.push("/occasion");
+    // sends user to EnterPerson page
+    history.push("/person");
   }; //end handleBack
 
-  // onClick function to submit person & relationship details
+  //onClick function to submit occasion & date details
   const handleContinue = () => {
-    if (user.id) {
-      // dispatches collected form data if user is logged in
-      dispatch({
-        type: "ADD_PERSON_AND_EVENT",
-        payload: { person, newEvent },
-      });
-      // Sends user to Dashboard with newly created Event
-      history.push("/dashboard");
-    } else {
-      // triggers Registration Dialog to register new user
-      setRegister(true);
-    } //else go to register/login
+    // sends user to SelectCategory page
+    history.push("/category");
   }; //end handleContinue
 
   return (
@@ -82,9 +62,7 @@ export default function SelectCategory() {
           <Grid item xs={6} sm={3}></Grid>
           <Grid item xs={12} sm={6}>
             <Paper align="center" elevation={4} className={classes.paper}>
-              <Typography variant="h6">
-                What type of cards would you like to consider for this occasion?
-              </Typography>
+              <Typography variant="h6">Tell Us The Occasion!</Typography>
             </Paper>
           </Grid>
           <Grid item xs={6} sm={3}></Grid>
@@ -93,36 +71,52 @@ export default function SelectCategory() {
             <Paper elevation={4}>
               <FormControl>
                 <Select
-                  id="event-category"
-                  label="select category"
+                  id="event-occasion"
+                  label="select occasion"
                   type="text"
                   InputLabelProps={{
                     shrink: true,
                   }}
                   style={{ width: 250, margin: 8 }}
                   variant="outlined"
-                  value={newEvent?.category}
+                  value={newEvent?.occasion}
                   onChange={(event) =>
                     dispatch({
-                      type: "SET_CATEGORY",
+                      type: "SET_OCCASION",
                       payload: event.target.value,
                     })
                   }
                 >
-                  {categories.map((category) => {
+                  {occasions.map((occasion) => {
                     return (
-                      <MenuItem value={category.id} key={category.id}>
-                        {category.category}
+                      <MenuItem value={occasion.id} key={occasion.id}>
+                        {occasion.occasion}
                       </MenuItem>
                     );
                   })}
                 </Select>
               </FormControl>
-
+              <FormControl>
+                <TextField
+                  id="event-date"
+                  label="enter date"
+                  type="date"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  style={{ width: 250, margin: 8 }}
+                  value={newEvent?.date}
+                  onChange={(event) =>
+                    dispatch({ type: "SET_DATE", payload: event.target.value })
+                  }
+                  variant="outlined"
+                />
+              </FormControl>
               <div>
                 <Button variant="contained" color="secondary" onClick={handleBack}>
                   Back
                 </Button>
+
                 <Button variant="contained" color="primary" onClick={handleContinue}>
                   Continue
                 </Button>
@@ -131,8 +125,7 @@ export default function SelectCategory() {
           </Grid>
           <Grid item xs={6} sm={3}></Grid>
         </Grid>
-        <RegisterDialog register={register} setRegister={setRegister} />
       </div>
     </Container>
   );
-} // end SelectCategory
+} // end SelectOccasion

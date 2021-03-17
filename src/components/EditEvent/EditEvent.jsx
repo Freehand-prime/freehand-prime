@@ -7,7 +7,7 @@ import {
   MenuItem,
   TextField,
   makeStyles,
-  InputLabel,
+  Container,
   FormControl,
   Select,
   Paper,
@@ -86,148 +86,160 @@ export default function EditEvent() {
   const buttonTitle = "Pick a New Card";
 
   return (
-    <div className={classes.root}>
-      {editInput.date && (
-        <Grid container spacing={3}>
-          <Grid item xs={6} sm={3}></Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper align="center" elevation={4} className={classes.paper}>
-              <Typography variant="h6">Edit Event</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={6} sm={3}>
-            {card[0] && (
-              <CardCard
-                card={card[0]}
-                buttonTitle={buttonTitle}
-                eventId={editInput.id}
-              />
-            )}
-          </Grid>
-          <Grid item xs={6} sm={3}></Grid>
-          <Grid align="center" item xs={12} sm={6}>
-            <Paper elevation={4}>
-              <FormControl>
-                <TextField
-                  id="edit-person-name"
-                  label="name"
-                  type="text"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  style={{ width: 250, margin: 8 }}
-                  value={editInput?.name}
-                  onChange={(event) =>
-                    dispatch({ type: "EDIT_NAME", payload: event.target.value })
-                  }
-                  variant="outlined"
+    <Container>
+      <div className={classes.root}>
+        {editInput.date && (
+          <Grid container spacing={3}>
+            <Grid item xs={6} sm={3}></Grid>
+            <Grid item xs={12} sm={6}>
+              <Paper align="center" elevation={4} className={classes.paper}>
+                <Typography variant="h6">Edit Event</Typography>
+              </Paper>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              {card[0] && (
+                <CardCard
+                  card={card[0]}
+                  buttonTitle={buttonTitle}
+                  eventId={editInput.id}
                 />
-              </FormControl>
-              <FormControl>
-                <Select
-                  id="event-occasion"
-                  label="select occasion"
-                  type="text"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  style={{ width: 250, margin: 8 }}
-                  variant="outlined"
-                  value={editInput?.occasion_id || ""}
-                  onChange={(event) =>
-                    dispatch({
-                      type: "SET_OCCASION",
-                      payload: event.target.value,
-                    })
-                  }
-                >
-                  {occasions.map((occasion) => {
-                    return (
-                      <MenuItem value={occasion.id} key={occasion.id}>
-                        {occasion.occasion}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-              <FormControl>
-                <TextField
-                  id="edit-event-date"
-                  label="date"
-                  type="date"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  style={{ width: 250, margin: 8 }}
-                  value={new Date(editInput?.date).toISOString().split("T")[0]}
-                  onChange={(event) =>
-                    dispatch({ type: "EDIT_DATE", payload: event.target.value })
-                  }
-                  variant="outlined"
-                />
-              </FormControl>
-              <FormControl>
-                <Select
-                  id="event-category"
-                  label="select category"
-                  type="text"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  style={{ width: 250, margin: 8 }}
-                  variant="outlined"
-                  value={editInput?.category_id || ""}
-                  onChange={(event) =>
-                    dispatch({
-                      type: "SET_CATEGORY",
-                      payload: event.target.value,
-                    })
-                  }
-                >
-                  {categories.map((category) => {
-                    return (
-                      <MenuItem value={category.id} key={category.id}>
-                        {category.category}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-              {/* conditionally rendered Select Card Button */}
-              <div>
-                {card[0] ? (
-                  <Button
-                  variant="outlined"
-                  onClick={() => history.push(`/shipping/${editInput.id}`)}
-                >
-                  SHIPPING
-                </Button>
-                ) : (
-                  <Button
+              )}
+            </Grid>
+            <Grid item xs={6} sm={3}></Grid>
+            <Grid align="center" item xs={12} sm={6}>
+              <Paper elevation={4}>
+                <FormControl>
+                  <TextField
+                    id="edit-person-name"
+                    label="name"
+                    type="text"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    style={{ width: 250, margin: 8 }}
+                    value={editInput?.name}
+                    onChange={(event) =>
+                      dispatch({
+                        type: "EDIT_NAME",
+                        payload: event.target.value,
+                      })
+                    }
                     variant="outlined"
-                    onClick={() => history.push(`/card/${editInput.id}`)}
+                  />
+                </FormControl>
+                <FormControl>
+                  <Select
+                    id="event-occasion"
+                    label="select occasion"
+                    type="text"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    style={{ width: 250, margin: 8 }}
+                    variant="outlined"
+                    value={editInput?.occasion_id || ""}
+                    onChange={(event) =>
+                      dispatch({
+                        type: "SET_OCCASION",
+                        payload: event.target.value,
+                      })
+                    }
                   >
-                    PICK A CARD
+                    {occasions.map((occasion) => {
+                      return (
+                        <MenuItem value={occasion.id} key={occasion.id}>
+                          {occasion.occasion}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+                <FormControl>
+                  <TextField
+                    id="edit-event-date"
+                    label="date"
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    style={{ width: 250, margin: 8 }}
+                    value={
+                      new Date(editInput?.date).toISOString().split("T")[0]
+                    }
+                    onChange={(event) =>
+                      dispatch({
+                        type: "EDIT_DATE",
+                        payload: event.target.value,
+                      })
+                    }
+                    variant="outlined"
+                  />
+                </FormControl>
+                <FormControl>
+                  <Select
+                    id="event-category"
+                    label="select category"
+                    type="text"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    style={{ width: 250, margin: 8 }}
+                    variant="outlined"
+                    value={editInput?.category_id || ""}
+                    onChange={(event) =>
+                      dispatch({
+                        type: "SET_CATEGORY",
+                        payload: event.target.value,
+                      })
+                    }
+                  >
+                    {categories.map((category) => {
+                      return (
+                        <MenuItem value={category.id} key={category.id}>
+                          {category.category}
+                        </MenuItem>
+                      );
+                    })}
+                  </Select>
+                </FormControl>
+                {/* conditionally rendered Select Card Button */}
+                <div>
+                  {card[0] ? (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => history.push(`/shipping/${editInput.id}`)}
+                    >
+                      SHIPPING
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => history.push(`/card/${editInput.id}`)}
+                    >
+                      PICK A CARD
+                    </Button>
+                  )}
+                </div>
+                {/* Delete, Update, and Cancel Buttons */}
+                <div>
+                  <Button variant="contained" color="secondary" onClick={handleDelete}>
+                    DELETE
                   </Button>
-                )}
-              </div>
-              {/* Delete, Update, and Cancel Buttons */}
-              <div>
-                <Button variant="outlined" onClick={handleDelete}>
-                  DELETE
-                </Button>
-                <Button variant="outlined" onClick={handleUpdate}>
-                  UPDATE
-                </Button>
-                <Button variant="outlined" onClick={handleCancel}>
-                  CANCEL
-                </Button>
-              </div>
-            </Paper>
+                  <Button variant="contained" color="primary" onClick={handleUpdate}>
+                    UPDATE
+                  </Button>
+                  <Button variant="contained" color="secondary" onClick={handleCancel}>
+                    CANCEL
+                  </Button>
+                </div>
+              </Paper>
+            </Grid>
+            <Grid item xs={6} sm={3}></Grid>
           </Grid>
-          <Grid item xs={6} sm={3}></Grid>
-        </Grid>
-      )}
-    </div>
+        )}
+      </div>
+    </Container>
   );
 }
