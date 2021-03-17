@@ -48,29 +48,33 @@ export default function ViewPersons() {
     <>
       <Container>
         <br></br>
-        <Typography variant="h5">Your People</Typography>
+        <Typography align="center" variant="h5">
+          Your People
+        </Typography>
         <br></br>
-        <Paper>
-          {/* maps over persons and creates a card for each */}
-          {persons &&
-            persons.map((person) => (
-              <Box key={person.id}>
-                <Card className={classes.root}>
-                  <CardContent>
-                    <Typography variant="h5" component="h2">
-                      {person.name}
-                    </Typography>
-                    <Typography
-                      className={classes.title}
-                      color="textSecondary"
-                      gutterBottom
-                    >
-                      Your {person.relationship}
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                      {person.num_events} events
-                    </Typography>
+        {/* maps over persons and creates a card for each */}
+        {persons &&
+          persons.map((person) => (
+            <Box key={person.id}>
+              <Card className={classes.root}>
+                <CardContent>
+                  <Typography variant="h5" component="h2">
+                    {person.name}
+                  </Typography>
+                  <Typography
+                    className={classes.title}
+                    color="textSecondary"
+                    gutterBottom
+                  >
+                    Your {person.relationship}
+                  </Typography>
+                  <Typography className={classes.pos} color="textSecondary">
+                    {person.num_events} events
+                  </Typography>
+                  <Box align="right">
                     <Button
+                      variant="contained"
+                      color="primary"
                       onClick={() => {
                         history.push(`/events/${person.id}`);
                       }}
@@ -78,19 +82,23 @@ export default function ViewPersons() {
                     >
                       See Events
                     </Button>
-                  </CardContent>
-                </Card>
-                <br></br>
-              </Box>
-            ))}
-        </Paper>
-        <Button
-          onClick={() => {
-            history.push('/dashboard');
-          }}
-        >
-          Dashboard
-        </Button>
+                  </Box>
+                </CardContent>
+              </Card>
+              <br></br>
+            </Box>
+          ))}
+        <Box align="center">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => {
+              history.push('/dashboard');
+            }}
+          >
+            Dashboard
+          </Button>
+        </Box>
       </Container>
     </>
   );

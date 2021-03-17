@@ -102,152 +102,156 @@ export default function AdminOccasions() {
     <>
       <Container>
         <br></br>
-        <Typography variant="h5">
+        <Typography align="center" variant="h5">
           Admin - Manage Occasions and Categories
         </Typography>
         <br></br>
         <Grid container spacing={3}>
           <Grid xs={12} sm={6}>
-            <Box display="flex" alignItems="center">
-              <Typography variant="h6">Occasions</Typography>
-              <TextField
-                variant="outlined"
-                size="small"
-                value={addOccasion}
-                onChange={(event) => {
-                  setAddOccasion(event.target.value);
-                }}
-                fullWidth
-              />
-              <IconButton onClick={handleAddOccasion}>
-                <AddIcon />
-              </IconButton>
-            </Box>
-            {/* maps over occasions to render list items for each */}
-            <List>
-              {occasions &&
-                occasions.map((occasion) => (
-                  <ListItem key={occasion.id}>
-                    {/* renders a textfield if editOccasion matches the occasion.id, else renders a listitem */}
-                    {editOccasion == occasion.id ? (
-                      <TextField
-                        variant="outlined"
-                        size="small"
-                        value={editOccasionString}
-                        onChange={(event) => {
-                          setEditOccasionString(event.target.value);
-                        }}
-                        fullWidth
-                      />
-                    ) : (
-                      <ListItemText>{occasion.occasion}</ListItemText>
-                    )}
-                    <ListItemIcon>
-                      {/* sets editOccasion to the id of this list entry if clicked, otherwise sets it to 0 */}
-                      <IconButton
-                        onClick={() =>
-                          setEditOccasion(editOccasion > 0 ? 0 : occasion.id)
-                        }
-                      >
-                        {/* sends the edit occasion ID and the edited occasion new value to the update click handler */}
-                        {editOccasion == occasion.id ? (
-                          <SaveIcon
-                            onClick={() =>
-                              handleOccasionEdit([
-                                editOccasion,
-                                editOccasionString,
-                              ])
-                            }
-                          />
-                        ) : (
-                          <EditIcon />
-                        )}
-                      </IconButton>
-                    </ListItemIcon>
-                    <ListItemIcon>
-                      {/* deletes occasion */}
-                      <IconButton
-                        onClick={() => {
-                          handleDeleteOccasion(occasion.id);
-                        }}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </ListItemIcon>
-                  </ListItem>
-                ))}
-            </List>
+            <Paper>
+              <Box display="flex" alignItems="center">
+                <Typography variant="h6">Occasions</Typography>
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  value={addOccasion}
+                  onChange={(event) => {
+                    setAddOccasion(event.target.value);
+                  }}
+                  fullWidth
+                />
+                <IconButton onClick={handleAddOccasion}>
+                  <AddIcon />
+                </IconButton>
+              </Box>
+              {/* maps over occasions to render list items for each */}
+              <List>
+                {occasions &&
+                  occasions.map((occasion) => (
+                    <ListItem key={occasion.id}>
+                      {/* renders a textfield if editOccasion matches the occasion.id, else renders a listitem */}
+                      {editOccasion == occasion.id ? (
+                        <TextField
+                          variant="outlined"
+                          size="small"
+                          value={editOccasionString}
+                          onChange={(event) => {
+                            setEditOccasionString(event.target.value);
+                          }}
+                          fullWidth
+                        />
+                      ) : (
+                        <ListItemText>{occasion.occasion}</ListItemText>
+                      )}
+                      <ListItemIcon>
+                        {/* sets editOccasion to the id of this list entry if clicked, otherwise sets it to 0 */}
+                        <IconButton
+                          onClick={() =>
+                            setEditOccasion(editOccasion > 0 ? 0 : occasion.id)
+                          }
+                        >
+                          {/* sends the edit occasion ID and the edited occasion new value to the update click handler */}
+                          {editOccasion == occasion.id ? (
+                            <SaveIcon
+                              onClick={() =>
+                                handleOccasionEdit([
+                                  editOccasion,
+                                  editOccasionString,
+                                ])
+                              }
+                            />
+                          ) : (
+                            <EditIcon />
+                          )}
+                        </IconButton>
+                      </ListItemIcon>
+                      <ListItemIcon>
+                        {/* deletes occasion */}
+                        <IconButton
+                          onClick={() => {
+                            handleDeleteOccasion(occasion.id);
+                          }}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </ListItemIcon>
+                    </ListItem>
+                  ))}
+              </List>
+            </Paper>
           </Grid>
           <Grid xs={12} sm={6}>
-            <Box display="flex" alignItems="center">
-              <Typography variant="h6">Categories</Typography>
-              <TextField
-                variant="outlined"
-                size="small"
-                value={addCategory}
-                onChange={(event) => {
-                  setAddCategory(event.target.value);
-                }}
-                fullWidth
-              />
-              <IconButton onClick={handleAddCategory}>
-                <AddIcon />
-              </IconButton>
-            </Box>
-            {/* maps over categories to render list items for each */}
-            <List>
-              {categories &&
-                categories.map((category) => (
-                  <ListItem key={category.id}>
-                    {/* renders a textfield if editCategory matches the category.id, else renders a listitem */}
-                    {editCategory == category.id ? (
-                      <TextField
-                        variant="outlined"
-                        size="small"
-                        value={editCategoryString}
-                        onChange={(event) => {
-                          setEditCategoryString(event.target.value);
-                        }}
-                        fullWidth
-                      />
-                    ) : (
-                      <ListItemText>{category.category}</ListItemText>
-                    )}
-                    <ListItemIcon>
-                      {/* sets editCategory to the id of this list entry if clicked, otherwise sets it to 0 */}
-                      <IconButton
-                        onClick={() =>
-                          setEditCategory(editCategory > 0 ? 0 : category.id)
-                        }
-                      >
-                        {/* sends the edit category ID and the edited category new value to the update click handler */}
-                        {editCategory == category.id ? (
-                          <SaveIcon
-                            onClick={() =>
-                              handleCategoryEdit([
-                                editCategory,
-                                editCategoryString,
-                              ])
-                            }
-                          />
-                        ) : (
-                          <EditIcon />
-                        )}
-                      </IconButton>
-                    </ListItemIcon>
-                    <ListItemIcon>
-                      {/* deletes category */}
-                      <IconButton
-                        onClick={() => {
-                          handleDeleteCategory(category.id);
-                        }}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </ListItemIcon>
-                  </ListItem>
-                ))}
-            </List>
+            <Paper>
+              <Box display="flex" alignItems="center">
+                <Typography variant="h6">Categories</Typography>
+                <TextField
+                  variant="outlined"
+                  size="small"
+                  value={addCategory}
+                  onChange={(event) => {
+                    setAddCategory(event.target.value);
+                  }}
+                  fullWidth
+                />
+                <IconButton onClick={handleAddCategory}>
+                  <AddIcon />
+                </IconButton>
+              </Box>
+              {/* maps over categories to render list items for each */}
+              <List>
+                {categories &&
+                  categories.map((category) => (
+                    <ListItem key={category.id}>
+                      {/* renders a textfield if editCategory matches the category.id, else renders a listitem */}
+                      {editCategory == category.id ? (
+                        <TextField
+                          variant="outlined"
+                          size="small"
+                          value={editCategoryString}
+                          onChange={(event) => {
+                            setEditCategoryString(event.target.value);
+                          }}
+                          fullWidth
+                        />
+                      ) : (
+                        <ListItemText>{category.category}</ListItemText>
+                      )}
+                      <ListItemIcon>
+                        {/* sets editCategory to the id of this list entry if clicked, otherwise sets it to 0 */}
+                        <IconButton
+                          onClick={() =>
+                            setEditCategory(editCategory > 0 ? 0 : category.id)
+                          }
+                        >
+                          {/* sends the edit category ID and the edited category new value to the update click handler */}
+                          {editCategory == category.id ? (
+                            <SaveIcon
+                              onClick={() =>
+                                handleCategoryEdit([
+                                  editCategory,
+                                  editCategoryString,
+                                ])
+                              }
+                            />
+                          ) : (
+                            <EditIcon />
+                          )}
+                        </IconButton>
+                      </ListItemIcon>
+                      <ListItemIcon>
+                        {/* deletes category */}
+                        <IconButton
+                          onClick={() => {
+                            handleDeleteCategory(category.id);
+                          }}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </ListItemIcon>
+                    </ListItem>
+                  ))}
+              </List>
+            </Paper>
           </Grid>
         </Grid>
       </Container>

@@ -8,7 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
   Button,
-  ButtonGroup,
   Card,
   CardContent,
   Container,
@@ -48,10 +47,12 @@ export default function Dashboard() {
     <>
       <Container>
         <br></br>
-        <Typography variant="h5">Dashboard</Typography>
+        <Typography align="center" variant="h5">
+          Dashboard
+        </Typography>
         <br></br>
         <Paper>
-          {events[0] && <EventCard event={events[0]} />}
+          {events[0] && <EventCard event={events[0]} includeName={true} />}
           {/* SEAN NOTE DON'T DELETE YET 3/17 <EventCard event={event} /> */}
           {/* <Card className={classes.root}>
             <CardContent>
@@ -78,26 +79,31 @@ export default function Dashboard() {
           </Card> */}
         </Paper>
         <br></br>
-        <Box justifyContent="center">
-          <Paper>
-            <ButtonGroup orientation="vertical" color="primary" variant="text">
-              <Button
-                onClick={() => {
-                  history.push('/person');
-                }}
-              >
-                Who Do You Appreciate?
-              </Button>
-              <Button
-                onClick={() => {
-                  history.push('/persons');
-                }}
-              >
-                View People
-              </Button>
-              <Button>View Calendar</Button>
-            </ButtonGroup>
-          </Paper>
+        <Box justifyContent="center" >
+          <Box align="center" m={2}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                history.push('/person');
+              }}
+            >
+              Who Do You Appreciate?
+            </Button>
+          </Box>
+          <Box align="center" m={2}>
+            <Button
+              align="center"
+              color="primary"
+              variant="contained"
+              size="small"
+              onClick={() => {
+                history.push('/persons');
+              }}
+            >
+              View People
+            </Button>
+          </Box>
         </Box>
       </Container>
     </>
