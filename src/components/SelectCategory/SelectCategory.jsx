@@ -58,21 +58,19 @@ export default function SelectCategory() {
   }; //end handleBack
 
   // onClick function to submit person & relationship details
-  // Continue triggers addPersonAndEvent SAGA & dispatches collected form data if logged in
-  // or triggers Registration Dialog to register new user
   const handleContinue = () => {
     if (user.id) {
+      // dispatches collected form data if user is logged in
       dispatch({
         type: "ADD_PERSON_AND_EVENT",
         payload: { person, newEvent },
       });
-      
+      // Sends user to Dashboard with newly created Event
       history.push("/dashboard");
     } else {
+      // triggers Registration Dialog to register new user
       setRegister(true);
     }
-
-    //else go to register/login
   }; //end handleContinue
 
   return (
@@ -118,7 +116,7 @@ export default function SelectCategory() {
                 })}
               </Select>
             </FormControl>
-            {/* Buttons to return to occasions page and to continue the form process */}
+            {/* Buttons to return to EnterOccasions page and to continue the form process */}
             <div>
               <Button variant="outlined" onClick={handleBack}>
                 Back

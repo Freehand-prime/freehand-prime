@@ -33,11 +33,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function EnterOccasion() {
-
-    const classes = useStyles();
-
+    // Hooks
     const history = useHistory();
     const dispatch = useDispatch();
+    const classes = useStyles();
 
     const newEvent = useSelector((store) => store.event);
     const occasions = useSelector((store) => store.occasions)
@@ -74,6 +73,8 @@ export default function EnterOccasion() {
                 <Grid item xs={6} sm={3}></Grid>
                 <Grid align="center" item xs={12} sm={6}>
                     <Paper elevation={4}>
+                        {/* Select input for occasion choice, maps occasion reducer to display options, 
+                        onChange dispatches to event reducer */}
                         <FormControl>
                             <Select
                                 id="event-occasion"
@@ -95,6 +96,7 @@ export default function EnterOccasion() {
                                 
                             </Select>
                         </FormControl>
+                        {/* Input to select date for new event, onChange dispatches to event reducer */}
                         <FormControl>
                             <TextField
                                 id="event-date"
@@ -109,6 +111,7 @@ export default function EnterOccasion() {
                                 variant="outlined"
                             />
                         </FormControl>
+                        {/* Buttons to send user back to EnterPerson page and to continue to SelectCategory */}
                         <div>
                             <Button variant="outlined" onClick={handleBack}>
                             Back
