@@ -98,7 +98,7 @@ export default function LoginDialog() {
             <Button onClick={handleLoginCancel} color="secondary">
               Cancel
             </Button>
-            <Button type="submit" variant="filled" color="primary">
+            <Button type="submit" variant="contained" color="primary">
               Log In
             </Button>
           </DialogActions>

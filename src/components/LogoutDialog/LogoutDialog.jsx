@@ -52,7 +52,7 @@ export default function LogoutDialog({ logout, setLogout }) {
           <Button onClick={handleLogoutCancel} color="secondary">
             Cancel
           </Button>
-          <Button onClick={handleLogout} variant="filled" color="primary">
+          <Button onClick={handleLogout} variant="contained" color="primary">
             Log Out
           </Button>
         </DialogActions>

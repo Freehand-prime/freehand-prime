@@ -103,7 +103,7 @@ export default function RegisterDialog({ register, setRegister }) {
             <Button onClick={handleRegisterCancel} color="secondary">
               Cancel
             </Button>
-            <Button type="submit" variant="filled" color="primary">
+            <Button type="submit" variant="contained" color="primary">
               Register
             </Button>
           </DialogActions>
