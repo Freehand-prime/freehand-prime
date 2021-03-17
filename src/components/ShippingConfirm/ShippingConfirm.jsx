@@ -122,7 +122,7 @@ export default function ShippingConfirm() {
                   color="textSecondary"
                   gutterBottom
                 >
-                  Next Event - {selectedEvent?.date}
+                  Event Date - {new Date(selectedEvent?.date).toLocaleDateString('en-US')}
                 </Typography>
                 <Typography variant="h5" component="h2">
                   {selectedEvent?.name}

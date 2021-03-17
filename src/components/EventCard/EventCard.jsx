@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 // MUI
 import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
 });
 
 // this component renders a card with event details based on the props passed to it
-export default function EventCard({ event }) {
+export default function EventCard({ event, includeName }) {
   //hooks
   const history = useHistory();
   const classes = useStyles();
@@ -34,20 +35,26 @@ export default function EventCard({ event }) {
             color="textSecondary"
             gutterBottom
           >
-            Next Event - {event.date}
+            Next Event - {new Date(event.date).toLocaleDateString('en-US')}
           </Typography>
-          <Typography variant="h5" component="h2">
-            {event.name}
-          </Typography>
+          {includeName && (
+            <Typography variant="h5" component="h2">
+              {event.name}
+            </Typography>
+          )}
           <Typography className={classes.pos} color="textSecondary">
             {event.occasion} | {event.category}
           </Typography>
-          <Button
-            size="small"
-            onClick={() => history.push(`/edit/${event.event_id}`)}
-          >
-            Edit Event
-          </Button>
+          <Box align="right">
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              onClick={() => history.push(`/edit/${event.event_id}`)}
+            >
+              Edit Event
+            </Button>
+          </Box>
         </CardContent>
       </Card>
     </>

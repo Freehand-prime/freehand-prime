@@ -54,47 +54,26 @@ export default function ViewPersonsEvent() {
     <>
       <Container>
         <br></br>
-        <Typography variant="h5">{personsEvents[0]?.name}'s Events</Typography>
+        <Typography align="center" variant="h5">{personsEvents[0]?.name}'s Events</Typography>
         <br></br>
-        <Paper>
-          {personsEvents &&
-            personsEvents.map((event) => (
-              <Box>
-                {/* SEAN NOTE DON'T DELETE YET 3/17 <EventCard event={event} /> */}
-                <Card className={classes.root}>
-                  <CardContent>
-                    <Typography
-                      className={classes.title}
-                      color="textSecondary"
-                      gutterBottom
-                    >
-                      {event.date}
-                    </Typography>
-                    <Typography variant="h5" component="h2">
-                      {event.person}
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                      {event.occasion} | {event.category}
-                    </Typography>
-                    <Button
-                      size="small"
-                      onClick={() => history.push(`/edit/${event.event_id}`)}
-                    >
-                      Edit Event
-                    </Button>
-                  </CardContent>
-                </Card>
-                <br></br>
-              </Box>
-            ))}
-        </Paper>
-        <Button
-          onClick={() => {
-            history.push('/persons');
-          }}
-        >
-          Your People
-        </Button>
+        {personsEvents &&
+          personsEvents.map((event) => (
+            <Box>
+              <EventCard event={event} includeName={false} />
+              <br></br>
+            </Box>
+          ))}
+        <Box align="center">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => {
+              history.push('/persons');
+            }}
+          >
+            Your People
+          </Button>
+        </Box>
       </Container>
     </>
   );
