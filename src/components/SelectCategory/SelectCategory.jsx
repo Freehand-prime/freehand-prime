@@ -6,9 +6,8 @@ import {
   Grid,
   Typography,
   MenuItem,
-  TextField,
   makeStyles,
-  InputLabel,
+  Container,
   FormControl,
   Select,
   Paper,
@@ -48,7 +47,7 @@ export default function SelectCategory() {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
 
-  //onClick function to go back to EnterOccasion
+  //onClick function to go back to SelectOccasion
   const handleBack = () => {
     history.push("/occasion");
   }; //end handleBack
@@ -60,83 +59,71 @@ export default function SelectCategory() {
         type: "ADD_PERSON_AND_EVENT",
         payload: { person, newEvent },
       });
-      // dispatch({
-      //   type: "SEND_MAIL",
-      //   payload: {
-      //     email: `${user.username}`,
-      //     subject: `You have an event for ${person.name} coming up in Freehand Cards!`,
-      //     message: `You have an event coming up for ${
-      //       person.name
-      //     } on ${new Date(newEvent.date).toLocaleDateString("en-US")}
-      //     To pick a card and confirm shipping options for this event, please visit:
-      //     http://localhost:3000/#/card/${}`,
-      //   },
-      // });
       history.push("/dashboard");
     } else {
       setRegister(true);
-    }
-
-    //else go to register/login
+    } //else go to register/login
   }; //end handleContinue
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={6} sm={3}></Grid>
-        <Grid item xs={12} sm={6}>
-          <Paper align="center" elevation={4} className={classes.paper}>
-            <Typography variant="h6">
-              What type of cards would you like to consider for this occasion?
-            </Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}></Grid>
-        <Grid item xs={6} sm={3}></Grid>
-        <Grid align="center" item xs={12} sm={6}>
-          <Paper elevation={4}>
-            <FormControl>
-              <Select
-                id="event-category"
-                label="select category"
-                type="text"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                style={{ width: 250, margin: 8 }}
-                variant="outlined"
-                value={newEvent?.category}
-                onChange={(event) =>
-                  dispatch({
-                    type: "SET_CATEGORY",
-                    payload: event.target.value,
-                  })
-                }
-              >
-                {categories.map((category) => {
-                  return (
-                    <MenuItem value={category.id} key={category.id}>
-                      {category.category}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
+    <Container>
+      <div className={classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={6} sm={3}></Grid>
+          <Grid item xs={12} sm={6}>
+            <Paper align="center" elevation={4} className={classes.paper}>
+              <Typography variant="h6">
+                What type of cards would you like to consider for this occasion?
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={6} sm={3}></Grid>
+          <Grid item xs={6} sm={3}></Grid>
+          <Grid align="center" item xs={12} sm={6}>
+            <Paper elevation={4}>
+              <FormControl>
+                <Select
+                  id="event-category"
+                  label="select category"
+                  type="text"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  style={{ width: 250, margin: 8 }}
+                  variant="outlined"
+                  value={newEvent?.category}
+                  onChange={(event) =>
+                    dispatch({
+                      type: "SET_CATEGORY",
+                      payload: event.target.value,
+                    })
+                  }
+                >
+                  {categories.map((category) => {
+                    return (
+                      <MenuItem value={category.id} key={category.id}>
+                        {category.category}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
 
-            <div>
-              <Button variant="outlined" onClick={handleBack}>
-                Back
-              </Button>
+              <div>
+                <Button variant="contained" color="secondary" onClick={handleBack}>
+                  Back
+                </Button>
 
-              <Button variant="outlined" onClick={handleContinue}>
-                Continue
-              </Button>
-            </div>
-          </Paper>
+                <Button variant="contained" color="primary" onClick={handleContinue}>
+                  Continue
+                </Button>
+              </div>
+            </Paper>
+          </Grid>
+          <Grid item xs={6} sm={3}></Grid>
         </Grid>
-        <Grid item xs={6} sm={3}></Grid>
-      </Grid>
-      <RegisterDialog register={register} setRegister={setRegister} />
-    </div>
+        <RegisterDialog register={register} setRegister={setRegister} />
+      </div>
+    </Container>
   );
 } // end SelectCategory
