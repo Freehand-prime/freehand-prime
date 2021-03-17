@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 // MUI
 import {
-  Grid,
   Typography,
   TextField,
   makeStyles,
+  Container,
+  InputLabel,
   MenuItem,
   FormControl,
   Select,
@@ -20,13 +21,20 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "25ch",
+      margin: theme.spacing(3),
+      width: 250,
     },
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 400,
-    },
+  },
+  titlePaper: {
+    margin: 10,
+    padding: 10,
+    marginTop: 20,
+  },
+  formPaper: {
+    margin: 8,
+    padding: 15,
+    marginTop: 80,
+    marginBottom: "6rem",
   },
 }));
 
@@ -67,90 +75,76 @@ export default function EnterPerson() {
   }; //end handleSelectPerson
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs={6} sm={3}></Grid>
-        <Grid item xs={12} sm={6}>
-          <Paper align="center" elevation={4} className={classes.paper}>
-            <Typography variant="h6">Who Do You Appreciate?</Typography>
-            <Typography variant="h6">Tell Us Below</Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}></Grid>
-        <Grid item xs={6} sm={3}></Grid>
-        <Grid align="center" item xs={12} sm={6}>
-          <Paper elevation={4}>
-            {/* If new user: Input for adding a new person,  
-                      if logged in user: also displays selector to choose an existing person,
-                      onChange dispatches to event reducer */}
-            <FormControl>
-              <TextField
-                id="person-name"
-                label="enter name"
-                type="text"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                style={{ width: 250, margin: 8 }}
-                value={person?.name || selectedPerson.name}
-                onChange={(event) =>
-                  dispatch({ type: "SET_NAME", payload: event.target.value })
-                }
-                variant="outlined"
-              />
-              {user.id && (
-                <Select
-                  id="select-person-name"
-                  label="select person"
-                  type="text"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  style={{ width: 250, margin: 8 }}
-                  variant="outlined"
-                  value={selectedPerson?.name || ""}
-                  onChange={handleSelectPerson}
-                >
-                  {userPersons.map((person) => {
-                    return (
-                      <MenuItem value={person.name} key={person.id}>
-                        {person.name}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              )}
-            </FormControl>
-            <FormControl>
-              {/* Input to enter relationship to person, dispatches to event reducer */}
-              <TextField
-                id="person-relationship"
-                label="enter your relationship"
-                type="text"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                style={{ width: 250, margin: 8 }}
-                value={person?.relationship || selectedPerson.relationship}
-                onChange={(event) =>
-                  dispatch({
-                    type: "SET_RELATIONSHIP",
-                    payload: event.target.value,
-                  })
-                }
-                variant="outlined"
-              />
-            </FormControl>
-            {/* Button to continue to EnterOccasion */}
-            <div>
-              <Button variant="outlined" onClick={handleContinue}>
-                Continue
-              </Button>
-            </div>
-          </Paper>
-        </Grid>
-        <Grid item xs={6} sm={3}></Grid>
-      </Grid>
-    </div>
+    <Container>
+
+        <Paper align="center" elevation={4} className={classes.titlePaper}>
+          <Typography variant="h5">Who Do You Appreciate?</Typography>
+          <br/>
+          <Typography variant="h6">Tell Us Below:</Typography>
+        </Paper>
+
+        <Paper align="center" elevation={4} className={classes.formPaper}>
+          <FormControl variant="outlined" className={classes.root}>
+            {user.id && (
+              <>
+              <InputLabel id="select-label">Select Existing Person</InputLabel>
+              <Select
+                labelId="select-label"
+                id="select-person-name"
+                label="Select Existing Person"
+                value={selectedPerson?.name || ""}
+                onChange={handleSelectPerson}
+              >
+                {userPersons.map((person) => {
+                  return (
+                    <MenuItem value={person.name} key={person.id}>
+                      {person.name}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+              <br/>
+              <br/>
+              </>
+            )}
+            <TextField
+              className={classes.inputField}
+              id="person-name"
+              label="Enter Name"
+              type="text"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={person?.name || selectedPerson.name}
+              onChange={(event) =>
+                dispatch({ type: "SET_NAME", payload: event.target.value })
+              }
+              variant="outlined"
+            />
+            <TextField
+              className={classes.inputField}
+              id="person-relationship"
+              label="Enter Your Relationship"
+              type="text"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={person?.relationship || selectedPerson.relationship}
+              onChange={(event) =>
+                dispatch({
+                  type: "SET_RELATIONSHIP",
+                  payload: event.target.value,
+                })
+              }
+              variant="outlined"
+            />
+          </FormControl>
+          <br/>
+          <Button variant="contained" color="primary" onClick={handleContinue}>
+            Continue
+          </Button>
+        </Paper>
+
+    </Container>
   );
 } //end EnterPerson
