@@ -103,12 +103,13 @@ export default function SelectCategory() {
       </Paper>
       <Paper align="center" elevation={4} className={classes.formPaper}>
         <FormControl variant="outlined" className={classes.root}>
-          <InputLabel id="select-label">Select Category</InputLabel>
+          <InputLabel color="secondary" id="select-label">Select Category</InputLabel>
           <Select
             labelId="select-label"
             id="event-category"
             label="Select Category"
             type="text"
+            color="secondary"
             value={newEvent?.category}
             onChange={(event) =>
               dispatch({
