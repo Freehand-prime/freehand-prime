@@ -74,7 +74,7 @@ export default function SelectOccasion() {
                   id="event-occasion"
                   label="select occasion"
                   type="text"
-                  InputLabelProps={{
+                  inputLabelProps={{
                     shrink: true,
                   }}
                   style={{ width: 250, margin: 8 }}
@@ -101,7 +101,7 @@ export default function SelectOccasion() {
                   id="event-date"
                   label="enter date"
                   type="date"
-                  InputLabelProps={{
+                  inputLabelProps={{
                     shrink: true,
                   }}
                   style={{ width: 250, margin: 8 }}
