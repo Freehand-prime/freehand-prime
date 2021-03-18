@@ -39,11 +39,17 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 80,
     marginBottom: "6rem",
   },
+  buttons: {
+    margin: 8,
+  },
 }));
 
 export default function EnterPerson() {
   // State
-  const [selectedPerson, setSelectedPerson] = useState({name: '', relationship: ''});
+  const [selectedPerson, setSelectedPerson] = useState({
+    name: "",
+    relationship: "",
+  });
 
   // Hooks
   const history = useHistory();
@@ -56,9 +62,9 @@ export default function EnterPerson() {
   const userPersons = useSelector((store) => store.persons);
 
   useEffect(() => {
-    if(user.id){
+    if (user.id) {
       dispatch({ type: "FETCH_PERSONS" });
-    }  
+    }
   }, []);
 
   //onClick function to submit person & relationship details
@@ -69,7 +75,6 @@ export default function EnterPerson() {
     }
     history.push("/occasion");
   }; //end handleContinue
-
 
   const handleSelectPerson = (event) => {
     event.preventDefault();
@@ -82,12 +87,11 @@ export default function EnterPerson() {
 
   // onClick function to go back to Dashboard
   const handleBack = () => {
-    if(user.id){
+    if (user.id) {
       history.push("/dashboard");
     } else {
-      history.push("/home")
+      history.push("/home");
     }
-    
   }; //end handleBack
 
   return (
@@ -129,7 +133,7 @@ export default function EnterPerson() {
             label="Enter Name"
             type="text"
             InputLabelProps={{
-              shrink: selectedPerson.name,
+              shrink: selectedPerson?.name,
             }}
             value={person?.name || selectedPerson.name}
             onChange={(event) =>
@@ -158,12 +162,24 @@ export default function EnterPerson() {
           />
         </FormControl>
         <br />
-        <Button variant="contained" color="secondary" onClick={handleBack}>
-          Back
-        </Button>
-        <Button variant="contained" color="primary" onClick={handleContinue}>
-          Continue
-        </Button>
+        <div>
+          <Button
+            className={classes.buttons}
+            variant="contained"
+            color="secondary"
+            onClick={handleBack}
+          >
+            Back
+          </Button>
+          <Button
+            className={classes.buttons}
+            variant="contained"
+            color="primary"
+            onClick={handleContinue}
+          >
+            Continue
+          </Button>
+        </div>
       </Paper>
     </Container>
   );

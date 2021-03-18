@@ -54,6 +54,15 @@ theme.overrides = {
       backgroundColor: theme.palette.primary.light
     }
   },
+
+  MuiFab: {
+    primary: {
+      backgroundColor: theme.palette.secondary.main
+    },
+    secondary: {
+      backgroundColor: "#f50057"
+    },
+  }
 };
 
 const sagaMiddleware = createSagaMiddleware();

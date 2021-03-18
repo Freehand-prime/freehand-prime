@@ -1,55 +1,69 @@
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Grid, Paper, Button, makeStyles, Typography } from '@material-ui/core';
+import {
+  Paper,
+  Button,
+  makeStyles,
+  Typography,
+  Container,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    },
-  })
-);
+  titlePaper: {
+    margin: 15,
+    padding: 10,
+    marginTop: 25,
+    marginBottom: 10,
+  },
+  buttons: {
+    margin: 14,
+  },
+}));
 
 export default function LandingPage() {
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
-  
+
   const enterPersonRedirect = () => {
-      //debug
+    //debug
     console.log(`Who do you Appreciate?' - Clicked.`);
-      //redirect`'
-    history.push('/person');
+    //redirect`'
+    history.push("/person");
   };
 
   //clear the person and event redux stores whenever we return to landing page
   useEffect(() => {
-    dispatch({ type: 'CLEAR_INPUT_STORE' });
+    dispatch({ type: "CLEAR_INPUT_STORE" });
   }, []);
   return (
-    <div className={classes.root}>
-    <Grid container spacing={3}>
-      <Grid item xs={6} sm={3}></Grid>
-      <Grid item xs={12} sm={6}>
-        <Paper align="center" elevation={4} className={classes.paper}>
-          <Typography variant="h5">Landing Page</Typography>
-          <Button 
-            align="center" 
-            variant="contained" 
-            color="primary" 
-            onClick={enterPersonRedirect}
-          >
-            Who Do You Appreciate?
-          </Button>
-        </Paper>
-      </Grid>
-      <Grid item xs={6} sm={3}></Grid>
-    </Grid>
-    </div>
+    <Container>
+      <Paper align="center" elevation={4} className={classes.titlePaper}>
+        <img
+          src="https://freehand-prime.s3.us-east-2.amazonaws.com/tplogo.png"
+          alt="Freehand Cards Logo"
+        />
+        <Typography variant="h6">
+          We all lead busy lives with so many things competing for our
+          attention. We all have people that we appreciate with important
+          occasions that we want to celebrate.
+        </Typography>
+        <Typography variant="h6">
+        Freehand Cards makes sure you
+          never miss another occasion.
+        </Typography>
+        <br/>
+        <Button
+          className={classes.buttons}
+          align="center"
+          variant="contained"
+          color="primary"
+          onClick={enterPersonRedirect}
+        >
+          Who Do You Appreciate?
+        </Button>
+      </Paper>
+    </Container>
   );
 }
