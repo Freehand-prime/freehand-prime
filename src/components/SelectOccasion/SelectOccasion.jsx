@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(3),
       width: 250,
     },
+    "& .MuiSelect-outlined": {
+        width: 250,
+      },
   },
   titlePaper: {
     margin: 10,
@@ -94,6 +97,8 @@ export default function SelectOccasion() {
               );
             })}
           </Select>
+          </FormControl>
+          <FormControl className={classes.root}>
           <TextField
             id="event-date"
             label="enter date"
