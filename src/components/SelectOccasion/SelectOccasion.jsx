@@ -89,7 +89,7 @@ export default function SelectOccasion() {
               })
             }
           >
-            {occasions.map((occasion) => {
+            {occasions.slice(1).map((occasion) => {
               return (
                 <MenuItem value={occasion.id} key={occasion.id}>
                   {occasion.occasion}

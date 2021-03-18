@@ -104,7 +104,7 @@ export default function SelectCategory() {
               })
             }
           >
-            {categories.map((category) => {
+            {categories.slice(1).map((category) => {
               return (
                 <MenuItem value={category.id} key={category.id}>
                   {category.category}

@@ -152,7 +152,7 @@ export default function EditEvent() {
                   })
                 }
               >
-                {occasions.map((occasion) => {
+                {occasions.slice(1).map((occasion) => {
                   return (
                     <MenuItem value={occasion.id} key={occasion.id}>
                       {occasion.occasion}
@@ -198,7 +198,7 @@ export default function EditEvent() {
                   })
                 }
               >
-                {categories.map((category) => {
+                {categories.slice(1).map((category) => {
                   return (
                     <MenuItem value={category.id} key={category.id}>
                       {category.category}
