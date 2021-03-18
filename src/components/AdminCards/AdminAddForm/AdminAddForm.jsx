@@ -13,6 +13,7 @@ import {
     MenuItem,
     Typography
 } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
     root: {

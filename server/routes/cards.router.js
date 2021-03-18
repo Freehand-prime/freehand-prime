@@ -15,7 +15,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     // store query string in route scope
     const query = `
       SELECT * FROM "cards"
-      `;
+      ORDER BY "id" ASC`;
     pool
       .query(query)
       .then((result) => {
