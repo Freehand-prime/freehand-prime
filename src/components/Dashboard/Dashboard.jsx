@@ -26,9 +26,14 @@ const useStyles = makeStyles({
     marginBottom: 12,
   },
   titlePaper: {
-    margin: 20,
+    margin: 40,
     padding: 10,
+    marginBottom: 110,
   },
+  buttonBox: {
+    marginTop: "6rem",
+    marginBottom: "7rem",
+  }
 });
 
 import EventCard from '../EventCard/EventCard';
@@ -85,11 +90,12 @@ export default function Dashboard() {
           </Card> */}
         </Paper>
         <br></br>
-        <Box justifyContent="center" >
+        <Box justifyContent="center" className={classes.buttonBox}>
           <Box align="center" m={2}>
             <Button
               variant="contained"
               color="primary"
+              size="large"
               onClick={() => {
                 history.push('/person');
               }}
@@ -97,7 +103,7 @@ export default function Dashboard() {
               Who Do You Appreciate?
             </Button>
           </Box>
-          <Box align="center" m={2}>
+          <Box align="center" m={4}>
             <Button
               align="center"
               color="primary"
