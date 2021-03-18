@@ -9,6 +9,8 @@ const personReducer = (state = {name: '', relationship: '', address: '',}, actio
             return { ...state, relationship: action.payload };
         case 'SET_ADDRESS':
             return { ...state, address: action.payload };
+        case 'UNSET_PERSON':
+            return {};
         default:
             return state;
     }

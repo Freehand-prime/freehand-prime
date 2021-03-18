@@ -16,8 +16,6 @@ import {
   TableRow
 } from '@material-ui/core';
 
-
-
   //MUI Styling
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,6 +41,7 @@ The table below shows all available cards, with buttons to edit and delete each 
 Clicking the Delete button deletes the card from the database. Clicking the Edit button 
 populates the input fields with the card information. The Submit button saves changes.
 */
+
 export default function AdminCards() {
         //state
     const [isLoaded, setIsLoaded] = useState(false);

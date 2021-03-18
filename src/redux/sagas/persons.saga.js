@@ -12,6 +12,7 @@ function* addPersonAndEvent(action) {
         const newPersonAndEvent = action.payload;
         const response = yield axios.post('/api/persons', newPersonAndEvent);
         console.log('NEW PERSON AND EVENT ADDED:', response);
+        yield put({type: 'CLEAR_INPUT_STORE', undefined});
     } catch (error) {
         console.error('ERROR in adding new person and event', error);
     }

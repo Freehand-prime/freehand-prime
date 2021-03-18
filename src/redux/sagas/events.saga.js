@@ -25,9 +25,19 @@ function* fetchEvents() {
   }
 } // end fetchEvents
 
+function* clearInputs() {
+  try {
+    yield put({type: 'UNSET_EVENT', undefined});
+    yield put({type: 'UNSET_PERSON', undefined});
+  } catch (error) {
+    console.error('ERROR in clearing inputs', error);
+  }
+} // end fetchEvents
+
 function* eventsSaga() {
   yield takeEvery('UPDATE_SHIPPING', updateShipping);
   yield takeEvery('FETCH_EVENTS', fetchEvents);
+  yield takeEvery('CLEAR_INPUT_STORE', clearInputs);
 }
 
 export default eventsSaga;
