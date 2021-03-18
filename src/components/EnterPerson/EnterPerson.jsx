@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(3),
       width: 250,
     },
+    "& .MuiSelect-outlined": {
+      width: 250,
+    },
   },
   titlePaper: {
     margin: 10,
@@ -105,13 +108,15 @@ export default function EnterPerson() {
               <br />
             </>
           )}
+        </FormControl>
+        <FormControl className={classes.root}>
           <TextField
             className={classes.inputField}
             id="person-name"
             label="Enter Name"
             type="text"
             InputLabelProps={{
-              shrink: true,
+              shrink: selectedPerson.name,
             }}
             value={person?.name || selectedPerson.name}
             onChange={(event) =>
@@ -119,13 +124,15 @@ export default function EnterPerson() {
             }
             variant="outlined"
           />
+        </FormControl>
+        <FormControl className={classes.root}>
           <TextField
             className={classes.inputField}
             id="person-relationship"
             label="Enter Your Relationship"
             type="text"
             InputLabelProps={{
-              shrink: true,
+              shrink: selectedPerson.relationship,
             }}
             value={person?.relationship || selectedPerson.relationship}
             onChange={(event) =>

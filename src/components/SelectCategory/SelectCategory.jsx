@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // MUI
 import {
-  Grid,
+  InputLabel,
   Typography,
   MenuItem,
   makeStyles,
@@ -21,22 +21,28 @@ import RegisterDialog from "../RegisterDialog/RegisterDialog";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "25ch",
+    "& .MuiSelect-outlined": {
+      width: 250,
     },
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 400,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
+  },
+  titlePaper: {
+    margin: 10,
+    padding: 10,
+    marginTop: 20,
+  },
+  formPaper: {
+    margin: 8,
+    padding: 15,
+    marginTop: 100,
+    marginBottom: "16rem",
+  },
+  buttons: {
+    margin: 8,
   },
 }));
 
 export default function SelectCategory() {
-  // Confirm dialog state
+  // Register dialog state
   const [register, setRegister] = useState(false);
 
   // Hooks
@@ -44,7 +50,7 @@ export default function SelectCategory() {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  // State
+  // Redux
   const newEvent = useSelector((store) => store.event);
   const person = useSelector((store) => store.person);
   const categories = useSelector((store) => store.categories);
@@ -77,62 +83,58 @@ export default function SelectCategory() {
 
   return (
     <Container>
-      <div className={classes.root}>
-        <Grid container spacing={3}>
-          <Grid item xs={6} sm={3}></Grid>
-          <Grid item xs={12} sm={6}>
-            <Paper align="center" elevation={4} className={classes.paper}>
-              <Typography variant="h6">
-                What type of cards would you like to consider for this occasion?
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={6} sm={3}></Grid>
-          <Grid item xs={6} sm={3}></Grid>
-          <Grid align="center" item xs={12} sm={6}>
-            <Paper elevation={4}>
-              <FormControl>
-                <Select
-                  id="event-category"
-                  label="select category"
-                  type="text"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  style={{ width: 250, margin: 8 }}
-                  variant="outlined"
-                  value={newEvent?.category}
-                  onChange={(event) =>
-                    dispatch({
-                      type: "SET_CATEGORY",
-                      payload: event.target.value,
-                    })
-                  }
-                >
-                  {categories.map((category) => {
-                    return (
-                      <MenuItem value={category.id} key={category.id}>
-                        {category.category}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-
-              <div>
-                <Button variant="contained" color="secondary" onClick={handleBack}>
-                  Back
-                </Button>
-                <Button variant="contained" color="primary" onClick={handleContinue}>
-                  Continue
-                </Button>
-              </div>
-            </Paper>
-          </Grid>
-          <Grid item xs={6} sm={3}></Grid>
-        </Grid>
-        <RegisterDialog register={register} setRegister={setRegister} />
-      </div>
+      <Paper align="center" elevation={4} className={classes.titlePaper}>
+        <Typography variant="h6">
+          What type of cards would you like to consider for this occasion?
+        </Typography>
+      </Paper>
+      <Paper align="center" elevation={4} className={classes.formPaper}>
+        <FormControl variant="outlined" className={classes.root}>
+          <InputLabel id="select-label">Select Category</InputLabel>
+          <Select
+            labelId="select-label"
+            id="event-category"
+            label="Select Category"
+            type="text"
+            value={newEvent?.category}
+            onChange={(event) =>
+              dispatch({
+                type: "SET_CATEGORY",
+                payload: event.target.value,
+              })
+            }
+          >
+            {categories.map((category) => {
+              return (
+                <MenuItem value={category.id} key={category.id}>
+                  {category.category}
+                </MenuItem>
+              );
+            })}
+          </Select>
+          <br/>
+          <br/>
+        </FormControl>
+        <div>
+          <Button
+            className={classes.buttons}
+            variant="contained"
+            color="secondary"
+            onClick={handleBack}
+          >
+            Back
+          </Button>
+          <Button
+            className={classes.buttons}
+            variant="contained"
+            color="primary"
+            onClick={handleContinue}
+          >
+            Continue
+          </Button>
+        </div>
+      </Paper>
+      <RegisterDialog register={register} setRegister={setRegister} />
     </Container>
   );
 } // end SelectCategory
