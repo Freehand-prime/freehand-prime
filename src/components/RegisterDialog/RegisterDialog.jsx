@@ -85,6 +85,7 @@ export default function RegisterDialog({ register, setRegister }) {
               margin="dense"
               id="regName"
               label="Email"
+              color="secondary"
               type="email"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
@@ -94,6 +95,7 @@ export default function RegisterDialog({ register, setRegister }) {
               margin="dense"
               id="regPassword"
               label="Password"
+              color="secondary"
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}

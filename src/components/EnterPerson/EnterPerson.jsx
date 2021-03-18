@@ -105,11 +105,12 @@ export default function EnterPerson() {
         <FormControl variant="outlined" className={classes.root}>
           {user.id && (
             <>
-              <InputLabel id="select-label">Select Existing Person</InputLabel>
+              <InputLabel color="secondary" id="select-label">Select Existing Person</InputLabel>
               <Select
                 labelId="select-label"
                 id="select-person-name"
                 label="Select Existing Person"
+                color="secondary"
                 value={selectedPerson?.name}
                 onChange={handleSelectPerson}
               >
@@ -133,6 +134,7 @@ export default function EnterPerson() {
             id="person-name"
             label="Enter Name"
             type="text"
+            color="secondary"
             // InputLabelProps={{
             //   shrink: selectedPerson?.name,
             // }}
@@ -150,6 +152,7 @@ export default function EnterPerson() {
             id="person-relationship"
             label="Enter Your Relationship"
             type="text"
+            color="secondary"
             // InputLabelProps={{
             //   shrink: selectedPerson.relationship,
             // }}

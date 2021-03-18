@@ -69,6 +69,7 @@ export default function LoginDialog({ login, setLogin }) {
               autoFocus
               margin="dense"
               id="name"
+              color="secondary"
               label="Email"
               type="text"
               value={username}
@@ -81,6 +82,7 @@ export default function LoginDialog({ login, setLogin }) {
               id="password"
               label="Password"
               type="password"
+              color="secondary"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />

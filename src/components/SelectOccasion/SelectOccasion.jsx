@@ -85,12 +85,13 @@ export default function SelectOccasion() {
       </Paper>
       <Paper align="center" elevation={4} className={classes.formPaper}>
         <FormControl variant="outlined" className={classes.root}>
-          <InputLabel id="select-label">Select Occasion</InputLabel>
+          <InputLabel color="secondary" id="select-label">Select Occasion</InputLabel>
           <Select
             labelId="select-label"
             id="event-occasion"
             label="Select Occasion"
             type="text"
+            color="secondary"
             value={newEvent?.occasion}
             onChange={(event) =>
               dispatch({
@@ -108,11 +109,12 @@ export default function SelectOccasion() {
             })}
           </Select>
           </FormControl>
-          <FormControl className={classes.root}>
+          <FormControl color="secondary" className={classes.root}>
           <TextField
             id="event-date"
             label="enter date"
             type="date"
+            color="secondary"
             InputLabelProps={{
               shrink: true,
             }}

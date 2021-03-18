@@ -159,10 +159,11 @@ export default function ShippingConfirm() {
               </RadioGroup>
             </FormControl>
             {shipToMe === 'true' ? (
-              <FormControl>
+              <FormControl color="secondary">
                 <TextField
                   id="address_field"
                   label="address"
+                  color="secondary"
                   placeholder="enter address"
                   type="text"
                   onChange={(event) =>
@@ -177,10 +178,11 @@ export default function ShippingConfirm() {
             ) : (
               <div></div>
             )}
-            <FormControl>
+            <FormControl color="secondary">
               <TextField
                 id="inscription_field"
                 label="inscription"
+                color="secondary"
                 placeholder="enter inscription"
                 type="text"
                 onChange={(event) =>
