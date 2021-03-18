@@ -122,10 +122,11 @@ export default function EnterPerson() {
                 })}
               </Select>
               <br />
-              <br />
+              
             </>
           )}
         </FormControl>
+        <br />
         <FormControl className={classes.root}>
           <TextField
             className={classes.inputField}
@@ -142,6 +143,7 @@ export default function EnterPerson() {
             variant="outlined"
           />
         </FormControl>
+        <br />
         <FormControl className={classes.root}>
           <TextField
             className={classes.inputField}
