@@ -53,7 +53,9 @@ export default function EnterPerson() {
   const userPersons = useSelector((store) => store.persons);
 
   useEffect(() => {
-    dispatch({ type: "FETCH_PERSONS" });
+    if(user.id){
+      dispatch({ type: "FETCH_PERSONS" });
+    }  
   }, []);
 
   //onClick function to submit person & relationship details
@@ -99,7 +101,7 @@ export default function EnterPerson() {
                 value={selectedPerson?.name || ""}
                 onChange={handleSelectPerson}
               >
-                {userPersons.map((person) => {
+                {userPersons?.map((person) => {
                   return (
                     <MenuItem value={person.name} key={person.id}>
                       {person.name}

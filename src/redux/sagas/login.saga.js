@@ -56,7 +56,9 @@ function* logoutUser(action) {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     };
-    dispatch({ type: 'CLEAR_INPUT_STORE' });
+    yield put({ type: 'CLEAR_INPUT_STORE' });
+    yield put({ type: 'UNSET_PERSONS' });
+    yield put({ type: 'UNSET_EVENTS' });
     // the config includes credentials which
     // allow the server session to recognize the user
     // when the server recognizes the user session
