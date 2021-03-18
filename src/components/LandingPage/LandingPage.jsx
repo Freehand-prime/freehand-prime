@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from "react-redux";
 import { Grid, Paper, Button, makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
 export default function LandingPage() {
   const history = useHistory();
   const classes = useStyles();
-
+  const dispatch = useDispatch();
+  
   const enterPersonRedirect = () => {
       //debug
     console.log(`Who do you Appreciate?' - Clicked.`);
@@ -25,6 +27,10 @@ export default function LandingPage() {
     history.push('/person');
   };
 
+  //clear the person and event redux stores whenever we return to landing page
+  useEffect(() => {
+    dispatch({ type: 'CLEAR_INPUT_STORE' });
+  }, []);
   return (
     <div className={classes.root}>
     <Grid container spacing={3}>

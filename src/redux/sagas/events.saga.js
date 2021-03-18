@@ -25,9 +25,21 @@ function* fetchEvents() {
   }
 } // end fetchEvents
 
+//generator function to clear event and person redux stores on successful submission or return to dashboard.
+function* clearInputs() {
+  try {
+    yield put({type: 'UNSET_EVENT' });
+    yield put({type: 'UNSET_PERSON' });
+    yield put({type: 'UNSET_EDIT_EVENT'});
+  } catch (error) {
+    console.error('ERROR in clearing inputs', error);
+  }
+} // end fetchEvents
+
 function* eventsSaga() {
   yield takeEvery('UPDATE_SHIPPING', updateShipping);
   yield takeEvery('FETCH_EVENTS', fetchEvents);
+  yield takeEvery('CLEAR_INPUT_STORE', clearInputs);
 }
 
 export default eventsSaga;

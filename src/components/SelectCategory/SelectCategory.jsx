@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SelectCategory() {
   // Register dialog state
   const [register, setRegister] = useState(false);
+  const [thisEvent, setThisEvent] = useState({category: ''});
 
   // Hooks
   const history = useHistory();
@@ -58,23 +59,35 @@ export default function SelectCategory() {
 
   useEffect(() => {
     dispatch({ type: "FETCH_CATEGORIES" });
+      //if we've got a category in edit store, set the state.
+    if(newEvent.category){
+      setThisEvent({category: newEvent.category});
+    }
   }, []);
 
   // onClick function to go back to EnterOccasion
   const handleBack = () => {
+    dispatch({ type: "SET_CATEGORY", payload: thisEvent.category });
     history.push("/occasion");
   }; //end handleBack
 
+  const handleChange = (event) => {
+      //dispatch and set local state on selector change
+    dispatch({ type: "SET_CATEGORY", payload: event});
+    setThisEvent({...thisEvent, category: event});
+  }
   // onClick function to submit person & relationship details
   const handleContinue = () => {
     if (user.id) {
       // dispatches collected form data if user is logged in
-      dispatch({
-        type: "ADD_PERSON_AND_EVENT",
-        payload: { person, newEvent },
-      });
+      dispatch({ type: "SET_CATEGORY", payload: thisEvent.category });
+      //check to make sure the person and event are filled out
+      //TODO: add error dialogue or something if it fails.
+      if(person.name && person.relationship && newEvent.occasion && newEvent.date){
+      dispatch({ type: "ADD_PERSON_AND_EVENT", payload: { person, newEvent }});
       // Sends user to Dashboard with newly created Event
       history.push("/dashboard");
+      }
     } else {
       // triggers Registration Dialog to register new user
       setRegister(true);

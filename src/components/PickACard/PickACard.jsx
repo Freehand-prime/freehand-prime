@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 // MUI
 import { makeStyles } from "@material-ui/core/styles";
@@ -61,12 +61,17 @@ export default function PickACard() {
   // Hooks
   const classes = useStyles();
   const dispatch = useDispatch();
+  const history = useHistory();
   const { id } = useParams();
 
   // Shuffle function call
   const handleShuffle = () => {
     setCards(shuffleCards(sortedCards));
   };
+
+  const handleBack = () => {
+    history.goBack();
+  }
 
   // UseEffect for GET cards and GET event
   useEffect(() => {
@@ -102,6 +107,14 @@ export default function PickACard() {
         })}
       </Grid>
       <br />
+      <Button
+      className={classes.button}
+      variant="contained"
+      color="secondary"
+      onClick={handleBack}
+      >
+        Back
+      </Button>
       <Button
         className={classes.button}
         variant="contained"

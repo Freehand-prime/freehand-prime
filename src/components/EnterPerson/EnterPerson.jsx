@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnterPerson() {
   // State
-  const [selectedPerson, setSelectedPerson] = useState({});
+  const [selectedPerson, setSelectedPerson] = useState({name: '', relationship: ''});
 
   // Hooks
   const history = useHistory();
@@ -56,7 +56,9 @@ export default function EnterPerson() {
   const userPersons = useSelector((store) => store.persons);
 
   useEffect(() => {
-    dispatch({ type: "FETCH_PERSONS" });
+    if(user.id){
+      dispatch({ type: "FETCH_PERSONS" });
+    }  
   }, []);
 
   //onClick function to submit person & relationship details
@@ -68,6 +70,7 @@ export default function EnterPerson() {
     history.push("/occasion");
   }; //end handleContinue
 
+
   const handleSelectPerson = (event) => {
     event.preventDefault();
     userPersons.forEach((person) => {
@@ -76,6 +79,16 @@ export default function EnterPerson() {
       }
     });
   }; //end handleSelectPerson
+
+  // onClick function to go back to Dashboard
+  const handleBack = () => {
+    if(user.id){
+      history.push("/dashboard");
+    } else {
+      history.push("/home")
+    }
+    
+  }; //end handleBack
 
   return (
     <Container>
@@ -93,10 +106,10 @@ export default function EnterPerson() {
                 labelId="select-label"
                 id="select-person-name"
                 label="Select Existing Person"
-                value={selectedPerson?.name || ""}
+                value={selectedPerson?.name}
                 onChange={handleSelectPerson}
               >
-                {userPersons.map((person) => {
+                {userPersons?.map((person) => {
                   return (
                     <MenuItem value={person.name} key={person.id}>
                       {person.name}
@@ -145,6 +158,9 @@ export default function EnterPerson() {
           />
         </FormControl>
         <br />
+        <Button variant="contained" color="secondary" onClick={handleBack}>
+          Back
+        </Button>
         <Button variant="contained" color="primary" onClick={handleContinue}>
           Continue
         </Button>

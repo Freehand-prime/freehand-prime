@@ -58,15 +58,29 @@ export default function SelectOccasion() {
 
   //onClick function to go back to EnterPerson
   const handleBack = () => {
-    // sends user to EnterPerson page
+      // send data to store and user to SelectCategory page
+    dispatch({ type: "SET_OCCASION", payload: thisEvent.occasion });
+    dispatch({ type: "SET_DATE", payload: thisEvent.date });
+      // sends user to EnterPerson page
     history.push("/person");
   }; //end handleBack
 
   //onClick function to submit occasion & date details
   const handleContinue = () => {
-    // sends user to SelectCategory page
+    // send data to store and user to SelectCategory page
+    dispatch({ type: "SET_OCCASION", payload: thisEvent.occasion });
+    dispatch({ type: "SET_DATE", payload: thisEvent.date });
+
     history.push("/category");
   }; //end handleContinue
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_OCCASIONS" });
+      //if we've got an occasion and date in edit store, set the state.
+    if(newEvent.occasion){
+      setThisEvent({occasion: newEvent.occasion, date: newEvent.date});
+    }
+  }, []);
 
   return (
     <Container>

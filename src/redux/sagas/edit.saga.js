@@ -19,12 +19,18 @@ function* getEvent(action) {
 //generator PUT function to save changes from EDIT: will be fired on SAVE_EDIT
 function* saveEdit(action) {
     console.log(action);
-    yield axios.put(`/api/persons`, action.payload)
+    yield axios.put(`/api/persons`, action.payload);
 }; //end saveEdit
+
+//generator to clear the edit store when returning to the events address
+function* clearEdit() {
+    yield put({ type: 'UNSET_EDIT_EVENT' });
+}; //end clearEdit
 
 function* editSaga() {
     yield takeEvery('GET_EVENT', getEvent);
     yield takeEvery('SAVE_EDIT', saveEdit);
+    yield takeEvery('CLEAR_EDIT_STORE', clearEdit);
   }
 
 export default editSaga;

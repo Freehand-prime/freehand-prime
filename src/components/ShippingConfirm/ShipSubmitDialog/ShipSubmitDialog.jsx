@@ -54,7 +54,8 @@ export default function ShipSubmitDialog({ openSubmit, setOpenSubmit, personId, 
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Placeholder for passed summary of order.
+            Your card will be shipped to {event.ship_to_me ? <>YOU</>:<>person?.name at person?.address</>}
+            We will make sure it gets delivered on {event?.date}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

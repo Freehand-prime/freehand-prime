@@ -52,9 +52,9 @@ export default function Nav() {
     if (user.id != null) {
       switch (location.pathname) {
         case "/admin":
-          return "Admin";
+          return "Freehand Cards - Admin";
         case "/admincards":
-          return "Admin";
+          return "Freehand Cards - Admin";
         default:
           return "Freehand Cards";
       }

@@ -41,7 +41,9 @@ export default function Dashboard() {
   // fetches the most recent events from the database
   useEffect(() => {
     dispatch({ type: 'FETCH_EVENTS' });
-  }, []);
+    //clear the person and event redux stores whenever we return to dashboard
+    dispatch({ type: 'CLEAR_INPUT_STORE' });
+  }, [dispatch]);
 
   return (
     <>

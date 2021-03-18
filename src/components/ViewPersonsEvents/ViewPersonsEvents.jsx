@@ -45,10 +45,11 @@ export default function ViewPersonsEvent() {
     return event.id == page.id;
   });
 
-  // fetches the most recent events from the database
+  // fetches the most recent events from the database and clear the edit store
   useEffect(() => {
     dispatch({ type: 'FETCH_EVENTS' });
-  }, []);
+    dispatch({ type: 'CLEAR_EDIT_STORE'});
+  }, [dispatch]);
 
   return (
     <>
@@ -58,11 +59,12 @@ export default function ViewPersonsEvent() {
         <br></br>
         {personsEvents &&
           personsEvents.map((event) => (
-            <Box>
+            <Box key={event.date+event.name}>
               <EventCard event={event} includeName={false} />
               <br></br>
             </Box>
-          ))}
+          ))
+        }
         <Box align="center">
           <Button
             variant="contained"
