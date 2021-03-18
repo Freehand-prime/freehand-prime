@@ -2,16 +2,40 @@ html,
 body,
 #react-root {
   height: 100%;
-}
-
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  font-family: "Dosis", sans-serif;
 }
 
 img {
   display: inline-block;
   max-width: 100%;
+}
+
+/* font import */
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@600;800&display=swap');
+
+/* more scrollbar */
+:-webkit-scrollbar {
+  display: none;
+}
+
+/* background image - fixed and transparent overlay */
+.background::before {
+  content: "";
+  background-image: url("./background.jpeg");
+  background-size: cover;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  z-index: -10;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.07;
 }
 
 /* --------------------------------------------------------------------------------
