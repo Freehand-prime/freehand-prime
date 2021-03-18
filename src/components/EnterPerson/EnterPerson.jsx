@@ -77,8 +77,6 @@ export default function EnterPerson() {
 
   // onClick function to go back to Dashboard
   const handleBack = () => {
-    //clear the attempted person and event reducers if we return all the way back to the dashboard
-    dispatch({ type: 'CLEAR_INPUT_STORE', undefined});
     history.push("/dashboard");
   }; //end handleBack
 

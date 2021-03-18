@@ -25,6 +25,7 @@ function* fetchEvents() {
   }
 } // end fetchEvents
 
+//generator function to clear event and person redux stores on successful submission or return to dashboard.
 function* clearInputs() {
   try {
     yield put({type: 'UNSET_EVENT', undefined});
