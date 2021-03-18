@@ -1,3 +1,4 @@
+// React, Redux, Middleware
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
@@ -5,10 +6,55 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 
+// Root reducer and saga
 import rootReducer from './redux/reducers/_root.reducer'; // imports ./redux/reducers/index.js
 import rootSaga from './redux/sagas/_root.saga'; // imports ./redux/sagas/index.js
 
+// App
 import App from './components/App/App';
+
+// MUI
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { CssBaseline } from "@material-ui/core";
+
+// Theme/Palette/Font declaration
+const theme = createMuiTheme({
+  palette: {
+    type: "dark",
+    primary: {
+      main: "#20292e",
+    },
+    secondary: {
+      main: "#629508",
+    },
+    background: {
+      default: "#243b48",
+      paper: "#20292e",
+    },
+  },
+  typography: {
+    fontFamily: ["Dosis", "sans-serif"].join(","),
+    h5: {
+      color: "#629508",
+    },
+    h6: {
+      color: "#629508",
+    }
+  },
+
+});
+
+theme.overrides = {
+
+  MuiButton: {
+    containedPrimary: {
+      backgroundColor: theme.palette.secondary.main,
+    },
+    containedSecondary: {
+      backgroundColor: theme.palette.primary.light
+    }
+  },
+};
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -31,9 +77,13 @@ const store = createStore(
 // rootSaga contains all of our other sagas
 sagaMiddleware.run(rootSaga);
 
+// Render, ThemeProvider, Redux Provider, CSSBaseline
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <CssBaseline />
+      <App />
+    </Provider>
+  </ThemeProvider>,
   document.getElementById('react-root'),
 );
