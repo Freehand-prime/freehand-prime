@@ -65,6 +65,7 @@ export default function EnterPerson() {
     history.push("/occasion");
   }; //end handleContinue
 
+
   const handleSelectPerson = (event) => {
     event.preventDefault();
     userPersons.forEach((person) => {
@@ -73,6 +74,13 @@ export default function EnterPerson() {
       }
     });
   }; //end handleSelectPerson
+
+  // onClick function to go back to Dashboard
+  const handleBack = () => {
+    //clear the attempted person and event reducers if we return all the way back to the dashboard
+    dispatch({ type: 'CLEAR_INPUT_STORE', undefined});
+    history.push("/dashboard");
+  }; //end handleBack
 
   return (
     <Container>
@@ -138,6 +146,9 @@ export default function EnterPerson() {
           />
         </FormControl>
         <br />
+        <Button variant="contained" color="secondary" onClick={handleBack}>
+          Back
+        </Button>
         <Button variant="contained" color="primary" onClick={handleContinue}>
           Continue
         </Button>
