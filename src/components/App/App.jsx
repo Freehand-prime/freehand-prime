@@ -36,7 +36,7 @@ export default function App() {
 
   return (
     <Router>
-      <div>
+      <div className="background">
         <Nav />
         <Switch>
           <Redirect exact from="/" to="/home" />
