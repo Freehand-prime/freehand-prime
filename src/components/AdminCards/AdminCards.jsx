@@ -82,6 +82,8 @@ export default function AdminCards() {
                         <TableCell>Likes</TableCell>
                         <TableCell>Artist</TableCell>
                         <TableCell>Details</TableCell>
+                        <TableCell></TableCell>
+                        <TableCell></TableCell>
                         {/*If we really want to give the edit and delete rows titles add them here*/}
                     </TableRow>
                     </TableHead>

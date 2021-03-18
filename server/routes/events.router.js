@@ -65,7 +65,8 @@ router.put("/", rejectUnauthenticated, (req, res) => {
   const editAddressQuery = `
       UPDATE "persons"
       SET "address" = $1
-      WHERE id = $2`;
+      WHERE id = $2
+      `;
 
   pool.query(editAddressQuery, [
     req.body.person.address,

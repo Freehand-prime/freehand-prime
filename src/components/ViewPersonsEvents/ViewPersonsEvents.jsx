@@ -45,10 +45,11 @@ export default function ViewPersonsEvent() {
     return event.id == page.id;
   });
 
-  // fetches the most recent events from the database
+  // fetches the most recent events from the database and clear the edit store
   useEffect(() => {
     dispatch({ type: 'FETCH_EVENTS' });
-  }, []);
+    dispatch({ type: 'CLEAR_EDIT_STORE'});
+  }, [dispatch]);
 
   return (
     <>

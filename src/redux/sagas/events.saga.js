@@ -30,6 +30,7 @@ function* clearInputs() {
   try {
     yield put({type: 'UNSET_EVENT' });
     yield put({type: 'UNSET_PERSON' });
+    yield put({type: 'UNSET_EDIT_EVENT'});
   } catch (error) {
     console.error('ERROR in clearing inputs', error);
   }

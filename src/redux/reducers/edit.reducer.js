@@ -14,6 +14,8 @@ const editEvent = (state = {}, action) => {
             return {...state, category: action.payload};
         case 'PICK_CARD':
             return {...state, card_id: action.payload};
+        case 'UNSET_EDIT_EVENT':
+            return {};
         default:
             return state
     }
