@@ -52,17 +52,17 @@ export default function NavDrawer({ open, setOpen }) {
   const linkList = [
     {
       text: "Dashboard",
-      icon: <AccountCircleIcon />,
+      icon: <AccountCircleIcon color="secondary" />,
       onClick: () => history.push("/dashboard"),
     },
     {
       text: "View People",
-      icon: <SupervisedUserCircleIcon />,
+      icon: <SupervisedUserCircleIcon color="secondary" />,
       onClick: () => history.push("/persons"),
     },
     {
       text: "Add Event",
-      icon: <AddCircleIcon />,
+      icon: <AddCircleIcon color="secondary" />,
       onClick: () => history.push("/person"),
     },
   ];
@@ -98,7 +98,7 @@ export default function NavDrawer({ open, setOpen }) {
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
+            <ChevronLeftIcon color="secondary"/>
           </IconButton>
         </div>
         <Divider />
@@ -118,14 +118,14 @@ export default function NavDrawer({ open, setOpen }) {
             {user.id ? (
               <ListItem button key="logout" onClick={handleLogoutOpen}>
                 <ListItemIcon>
-                  <ExitToAppIcon />
+                  <ExitToAppIcon color="secondary" />
                 </ListItemIcon>
                 <ListItemText primary="Log Out" />
               </ListItem>
             ) : (
               <ListItem button key="login" onClick={handleLoginOpen}>
                 <ListItemIcon>
-                  <LockOpenIcon />
+                  <LockOpenIcon color="secondary" />
                 </ListItemIcon>
                 <ListItemText primary="Log In" />
               </ListItem>

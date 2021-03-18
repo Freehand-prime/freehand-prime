@@ -75,7 +75,7 @@ export default function Nav() {
               onClick={handleDrawerOpen}
               edge="start"
               className={classes.menuButton}
-              color="inherit"
+              color="secondary"
               aria-label="menu"
             >
               <MenuIcon />
