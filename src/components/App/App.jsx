@@ -45,7 +45,6 @@ export default function App() {
             <LandingPage />
           </Route>
 
-
           <Route exact path="/person">
             <EnterPerson />
           </Route>
