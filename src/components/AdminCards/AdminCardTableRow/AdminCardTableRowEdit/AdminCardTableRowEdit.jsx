@@ -117,7 +117,6 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
                 <FormHelperText>Select</FormHelperText>
             </FormControl>
         </TableCell>
-        <TableCell>{card.likes}</TableCell>
         <TableCell>
             <FormControl>
                 <InputLabel>Artist</InputLabel>
