@@ -7,11 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
-  Button,
-  ButtonGroup,
-  Card,
-  CardContent,
   Container,
+  Fab,
   Grid,
   IconButton,
   List,
@@ -107,10 +104,12 @@ export default function AdminOccasions() {
         </Typography>
         <br></br>
         <Grid container spacing={3}>
-          <Grid xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
             <Paper>
-              <Box display="flex" alignItems="center">
-                <Typography variant="h6">Occasions</Typography>
+              <Box display="flex" alignItems="center" p={2}>
+                <Box pr={2}>
+                  <Typography variant="h6">Occasions</Typography>
+                </Box>
                 <TextField
                   variant="outlined"
                   size="small"
@@ -120,14 +119,21 @@ export default function AdminOccasions() {
                   }}
                   fullWidth
                 />
-                <IconButton onClick={handleAddOccasion}>
-                  <AddIcon />
-                </IconButton>
+                <Box pl={2}>
+                  <Fab
+                    color="primary"
+                    size="small"
+                    aria-label="add"
+                    onClick={handleAddOccasion}
+                  >
+                    <AddIcon />
+                  </Fab>
+                </Box>
               </Box>
               {/* maps over occasions to render list items for each */}
               <List>
                 {occasions &&
-                  occasions.map((occasion) => (
+                  occasions.slice(1).map((occasion) => (
                     <ListItem key={occasion.id}>
                       {/* renders a textfield if editOccasion matches the occasion.id, else renders a listitem */}
                       {editOccasion == occasion.id ? (
@@ -145,7 +151,10 @@ export default function AdminOccasions() {
                       )}
                       <ListItemIcon>
                         {/* sets editOccasion to the id of this list entry if clicked, otherwise sets it to 0 */}
-                        <IconButton
+                        <Fab
+                          color="primary"
+                          size="small"
+                          aria-label="edit"
                           onClick={() =>
                             setEditOccasion(editOccasion > 0 ? 0 : occasion.id)
                           }
@@ -163,27 +172,32 @@ export default function AdminOccasions() {
                           ) : (
                             <EditIcon />
                           )}
-                        </IconButton>
+                        </Fab>
                       </ListItemIcon>
                       <ListItemIcon>
                         {/* deletes occasion */}
-                        <IconButton
+                        <Fab
+                          color="secondary"
+                          size="small"
+                          aria-label="delete"
                           onClick={() => {
                             handleDeleteOccasion(occasion.id);
                           }}
                         >
                           <DeleteIcon />
-                        </IconButton>
+                        </Fab>
                       </ListItemIcon>
                     </ListItem>
                   ))}
               </List>
             </Paper>
           </Grid>
-          <Grid xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
             <Paper>
-              <Box display="flex" alignItems="center">
-                <Typography variant="h6">Categories</Typography>
+              <Box display="flex" alignItems="center" p={2}>
+                <Box pr={2}>
+                  <Typography variant="h6">Categories</Typography>
+                </Box>
                 <TextField
                   variant="outlined"
                   size="small"
@@ -193,14 +207,21 @@ export default function AdminOccasions() {
                   }}
                   fullWidth
                 />
-                <IconButton onClick={handleAddCategory}>
-                  <AddIcon />
-                </IconButton>
+                <Box pl={2}>
+                  <Fab
+                    color="primary"
+                    size="small"
+                    aria-label="add"
+                    onClick={handleAddCategory}
+                  >
+                    <AddIcon />
+                  </Fab>
+                </Box>
               </Box>
               {/* maps over categories to render list items for each */}
               <List>
                 {categories &&
-                  categories.map((category) => (
+                  categories.slice(1).map((category) => (
                     <ListItem key={category.id}>
                       {/* renders a textfield if editCategory matches the category.id, else renders a listitem */}
                       {editCategory == category.id ? (
@@ -218,7 +239,10 @@ export default function AdminOccasions() {
                       )}
                       <ListItemIcon>
                         {/* sets editCategory to the id of this list entry if clicked, otherwise sets it to 0 */}
-                        <IconButton
+                        <Fab
+                          color="primary"
+                          size="small"
+                          aria-label="edit"
                           onClick={() =>
                             setEditCategory(editCategory > 0 ? 0 : category.id)
                           }
@@ -236,17 +260,20 @@ export default function AdminOccasions() {
                           ) : (
                             <EditIcon />
                           )}
-                        </IconButton>
+                        </Fab>
                       </ListItemIcon>
                       <ListItemIcon>
                         {/* deletes category */}
-                        <IconButton
+                        <Fab
+                          color="secondary"
+                          size="small"
+                          aria-label="delete"
                           onClick={() => {
                             handleDeleteCategory(category.id);
                           }}
                         >
                           <DeleteIcon />
-                        </IconButton>
+                        </Fab>
                       </ListItemIcon>
                     </ListItem>
                   ))}

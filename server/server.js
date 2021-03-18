@@ -60,7 +60,6 @@ app.use(
 
 // nodemailer
 app.post("/send", function (req, res, next) {
-
   const mailOptions = {
     from: `${process.env.GMAIL_ADDRESS}`,
     to: `${req.body.email}`,
@@ -80,46 +79,27 @@ app.post("/send", function (req, res, next) {
 });
 
 //node cron
-/*cron to schedule function run at midnight every day
-	function to check dates
-		parse the events
-		DATA:
-			SELECT "persons".name, "events".date, "events".id, "user".username FROM "events"
-      JOIN "persons" ON "persons".id = "events".person_id 
-      JOIN "user" ON "user".id = "persons".user_id;
-      
-
-		handling logic:
-		map over events =>
-			check the event.date
-			if current.date +14 === event.date =>
-				send email
-					email contains link to pick card*/
-
-  //check dates everyday at midnight
+//check dates everyday at midnight to send reminder emails
 cron.schedule('0 0 * * *', () => {
+  // debug log
   console.log('midnight queries');
-
   //get data from database "persons".name, "events".date, "events".id, "user".username
+  // store query string in route scope
   const eventQuery = `
   SELECT "persons".name, "events".date, "events".id, "user".username FROM "events"
   JOIN "persons" ON "persons".id = "events".person_id 
   JOIN "user" ON "user".id = "persons".user_id;
   `;
-
   pool
       .query(eventQuery)
       .then((result) => {
         //loop over the result rows to check dates
         const eventsToMap = result.rows;
         const fortnightAway = new Date(Date.now() + 12096e5).toLocaleDateString('en-US');
-
-        eventsToMap.forEach((emailEvent) => {
-          
+        // maps over all events
+        eventsToMap.forEach((emailEvent) => {          
           const dateToMatch = new Date(emailEvent.date).toLocaleDateString('en-US');
-          console.log(fortnightAway);
-          console.log(dateToMatch)
-
+          // checks if event date is 2 weeks away
           if (fortnightAway == dateToMatch) {
             const mailOptions = {
               from: `${process.env.GMAIL_ADDRESS}`,
@@ -147,7 +127,6 @@ cron.schedule('0 0 * * *', () => {
       .catch((error) => {
           console.error(error);
           //send response 500 'Internal Server Error' on pool query error
-          //todo: how to handle error outside of an express function?
       });
 });
 

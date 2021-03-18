@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(3),
       width: 250,
     },
+    "& .MuiSelect-outlined": {
+      width: 250,
+    },
   },
   titlePaper: {
     margin: 10,
@@ -118,38 +121,41 @@ export default function EnterPerson() {
               <br />
             </>
           )}
-          
-              <TextField
-              className={classes.inputField}
-              id="person-name"
-              label="Enter Name"
-              type="text"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={person?.name || selectedPerson.name}
-              onChange={(event) =>
-                dispatch({ type: "SET_NAME", payload: event.target.value })
-              }
-              variant="outlined"
-            />
-            <TextField
-              className={classes.inputField}
-              id="person-relationship"
-              label="Enter Your Relationship"
-              type="text"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={person?.relationship || selectedPerson.relationship}
-              onChange={(event) =>
-                dispatch({
-                  type: "SET_RELATIONSHIP",
-                  payload: event.target.value,
-                })
-              }
-              variant="outlined"
-            />
+        </FormControl>
+        <FormControl className={classes.root}>
+          <TextField
+            className={classes.inputField}
+            id="person-name"
+            label="Enter Name"
+            type="text"
+            InputLabelProps={{
+              shrink: selectedPerson.name,
+            }}
+            value={person?.name || selectedPerson.name}
+            onChange={(event) =>
+              dispatch({ type: "SET_NAME", payload: event.target.value })
+            }
+            variant="outlined"
+          />
+        </FormControl>
+        <FormControl className={classes.root}>
+          <TextField
+            className={classes.inputField}
+            id="person-relationship"
+            label="Enter Your Relationship"
+            type="text"
+            InputLabelProps={{
+              shrink: selectedPerson.relationship,
+            }}
+            value={person?.relationship || selectedPerson.relationship}
+            onChange={(event) =>
+              dispatch({
+                type: "SET_RELATIONSHIP",
+                payload: event.target.value,
+              })
+            }
+            variant="outlined"
+          />
         </FormControl>
         <br />
         <Button variant="contained" color="secondary" onClick={handleBack}>
