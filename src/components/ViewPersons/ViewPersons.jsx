@@ -27,6 +27,10 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  titlePaper: {
+    margin: 20,
+    padding: 10,
+  },
 });
 
 // this component shows the user the people they have entered events for
@@ -47,11 +51,11 @@ export default function ViewPersons() {
   return (
     <>
       <Container>
-        <br></br>
+      <Paper align="center" elevation={4} className={classes.titlePaper}>
         <Typography align="center" variant="h5">
           Your People
         </Typography>
-        <br></br>
+        </Paper>
         {/* maps over persons and creates a card for each */}
         {persons &&
           persons.map((person) => (
