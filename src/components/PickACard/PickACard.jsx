@@ -22,13 +22,13 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    padding: 20,
+    padding: 10,
   },
   button: {
-    margin: 10,
+    margin: 8,
   },
   titlePaper: {
-    margin: 20,
+    margin: 15,
     padding: 10,
     marginTop: 5,
   },
