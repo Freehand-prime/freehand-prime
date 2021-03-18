@@ -65,14 +65,23 @@ export default function SelectCategory() {
     history.push("/occasion");
   }; //end handleBack
 
+  const handleChange = (event) => {
+      //dispatch and set local state on selector change
+    dispatch({ type: "SET_CATEGORY", payload: event});
+    setThisEvent({...thisEvent, category: event});
+  }
   // onClick function to submit person & relationship details
   const handleContinue = () => {
     if (user.id) {
       // dispatches collected form data if user is logged in
       dispatch({ type: "SET_CATEGORY", payload: thisEvent.category });
+      //check to make sure the person and event are filled out
+      //TODO: add error dialogue or something if it fails.
+      if(person.name && person.relationship && newEvent.occasion && newEvent.date){
       dispatch({ type: "ADD_PERSON_AND_EVENT", payload: { person, newEvent }});
       // Sends user to Dashboard with newly created Event
       history.push("/dashboard");
+      }
     } else {
       // triggers Registration Dialog to register new user
       setRegister(true);
@@ -106,7 +115,7 @@ export default function SelectCategory() {
                   style={{ width: 250, margin: 8 }}
                   variant="outlined"
                   value={thisEvent.category}
-                  onChange={(event) => setThisEvent({...thisEvent, category: event.target.value})}
+                  onChange={(event) => handleChange(event.target.value)}
                 >
                   {categories.map((category) => {
                     return (
