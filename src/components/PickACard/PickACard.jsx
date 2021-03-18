@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonDiv: {
     marginTop: 20,
-  }
+  },
 }));
 
 // Durstenfeld shuffle, optimized Fisher Yates
@@ -79,8 +79,8 @@ export default function PickACard() {
   };
 
   const handleBack = () => {
-    history.goBack();
-  }
+    history.push(`/edit/${id}`);
+  };
 
   // UseEffect for GET cards and GET event
   useEffect(() => {
@@ -96,9 +96,9 @@ export default function PickACard() {
   return (
     <div className={classes.gridDiv}>
       <Paper align="center" elevation={4} className={classes.titlePaper}>
-      <Typography gutterBottom align="center" variant="h5" component="h2">
-        Tap a card Image to see the inside view
-      </Typography>
+        <Typography gutterBottom align="center" variant="h5" component="h2">
+          Tap a card Image to see the inside view
+        </Typography>
       </Paper>
       <Grid
         container
@@ -117,24 +117,27 @@ export default function PickACard() {
           );
         })}
       </Grid>
-      <br/>
+      <br />
       <div className={classes.buttonDiv}>
-      <Button
-      className={classes.button}
-      variant="contained"
-      color="secondary"
-      onClick={handleBack}
-      >
-        Back
-      </Button>
-      <Button
-        className={classes.button}
-        variant="contained"
-        color="primary"
-        onClick={handleShuffle}
-      >
-        Show me new cards
-      </Button>
+        <center>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            onClick={handleShuffle}
+          >
+            Show me new cards
+          </Button>
+          <br />
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="secondary"
+            onClick={handleBack}
+          >
+            Edit Event Details
+          </Button>
+        </center>
       </div>
     </div>
   );
