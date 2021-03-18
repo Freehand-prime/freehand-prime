@@ -132,9 +132,9 @@ export default function EnterPerson() {
             id="person-name"
             label="Enter Name"
             type="text"
-            InputLabelProps={{
-              shrink: selectedPerson?.name,
-            }}
+            // InputLabelProps={{
+            //   shrink: selectedPerson?.name,
+            // }}
             value={person?.name || selectedPerson.name}
             onChange={(event) =>
               dispatch({ type: "SET_NAME", payload: event.target.value })
@@ -148,9 +148,9 @@ export default function EnterPerson() {
             id="person-relationship"
             label="Enter Your Relationship"
             type="text"
-            InputLabelProps={{
-              shrink: selectedPerson.relationship,
-            }}
+            // InputLabelProps={{
+            //   shrink: selectedPerson.relationship,
+            // }}
             value={person?.relationship || selectedPerson.relationship}
             onChange={(event) =>
               dispatch({

@@ -59,6 +59,7 @@ export default function LandingPage() {
           align="center"
           variant="contained"
           color="primary"
+          size="large"
           onClick={enterPersonRedirect}
         >
           Who Do You Appreciate?
