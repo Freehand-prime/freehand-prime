@@ -25,6 +25,10 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  titlePaper: {
+    margin: 20,
+    padding: 10,
+  },
 });
 
 import EventCard from '../EventCard/EventCard';
@@ -48,11 +52,11 @@ export default function Dashboard() {
   return (
     <>
       <Container>
-        <br></br>
+        <Paper align="center" elevation={4} className={classes.titlePaper}>
         <Typography align="center" variant="h5">
           Dashboard
         </Typography>
-        <br></br>
+        </Paper>
         <Paper>
           {events[0] && <EventCard event={events[0]} includeName={true} />}
           {/* SEAN NOTE DON'T DELETE YET 3/17 <EventCard event={event} /> */}
