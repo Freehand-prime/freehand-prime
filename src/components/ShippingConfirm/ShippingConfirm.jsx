@@ -111,7 +111,7 @@ export default function ShippingConfirm() {
   const handleBack = () => {
     console.log("In handleBack");
     //return to pick a card view on back
-    history.push("/card");
+    history.push(`/card/${page.id}`);
   }; // end handleBack
 
   return (
