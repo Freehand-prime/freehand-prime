@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
 
 // Component
 import CardCard from "../CardCard/CardCard";
@@ -26,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: 10,
   },
+  titlePaper: {
+    margin: 20,
+    padding: 10,
+    marginTop: 5,
+  },
+  buttonDiv: {
+    marginTop: 20,
+  }
 }));
 
 // Durstenfeld shuffle, optimized Fisher Yates
@@ -86,9 +95,11 @@ export default function PickACard() {
 
   return (
     <div className={classes.gridDiv}>
+      <Paper align="center" elevation={4} className={classes.titlePaper}>
       <Typography gutterBottom align="center" variant="h5" component="h2">
         Tap a card Image to see the inside view
       </Typography>
+      </Paper>
       <Grid
         container
         spacing={3}
@@ -106,7 +117,8 @@ export default function PickACard() {
           );
         })}
       </Grid>
-      <br />
+      <br/>
+      <div className={classes.buttonDiv}>
       <Button
       className={classes.button}
       variant="contained"
@@ -123,6 +135,7 @@ export default function PickACard() {
       >
         Show me new cards
       </Button>
+      </div>
     </div>
   );
 }

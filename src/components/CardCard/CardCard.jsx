@@ -42,6 +42,8 @@ export default function CardCard({ card, buttonTitle, eventId }) {
     if (buttonTitle === "Pick a New Card") {
       setCardPicked(true);
     }
+    console.log(cardPicked);
+    console.log(buttonTitle);
   };
 
   // Check card button on component mount
@@ -93,13 +95,13 @@ export default function CardCard({ card, buttonTitle, eventId }) {
               {cardPicked ? (
                 <Button
                   size="small"
-                  color="primary"
+                  color="secondary"
                   onClick={() => history.push(`/card/${eventId}`)}
                 >
                   {buttonTitle}
                 </Button>
               ) : (
-                <Button size="small" color="primary" onClick={handleConfirm}>
+                <Button size="small" color="secondary" onClick={handleConfirm}>
                   {buttonTitle}
                 </Button>
               )}
