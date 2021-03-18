@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EnterPerson() {
   // State
-  const [selectedPerson, setSelectedPerson] = useState({});
+  const [selectedPerson, setSelectedPerson] = useState({name: '', relationship: ''});
 
   // Hooks
   const history = useHistory();
@@ -79,7 +79,12 @@ export default function EnterPerson() {
 
   // onClick function to go back to Dashboard
   const handleBack = () => {
-    history.push("/dashboard");
+    if(user.id){
+      history.push("/dashboard");
+    } else {
+      history.push("/home")
+    }
+    
   }; //end handleBack
 
   return (
@@ -98,7 +103,7 @@ export default function EnterPerson() {
                 labelId="select-label"
                 id="select-person-name"
                 label="Select Existing Person"
-                value={selectedPerson?.name || ""}
+                value={selectedPerson?.name}
                 onChange={handleSelectPerson}
               >
                 {userPersons?.map((person) => {
@@ -113,37 +118,38 @@ export default function EnterPerson() {
               <br />
             </>
           )}
-          <TextField
-            className={classes.inputField}
-            id="person-name"
-            label="Enter Name"
-            type="text"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={person?.name || selectedPerson.name}
-            onChange={(event) =>
-              dispatch({ type: "SET_NAME", payload: event.target.value })
-            }
-            variant="outlined"
-          />
-          <TextField
-            className={classes.inputField}
-            id="person-relationship"
-            label="Enter Your Relationship"
-            type="text"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            value={person?.relationship || selectedPerson.relationship}
-            onChange={(event) =>
-              dispatch({
-                type: "SET_RELATIONSHIP",
-                payload: event.target.value,
-              })
-            }
-            variant="outlined"
-          />
+          
+              <TextField
+              className={classes.inputField}
+              id="person-name"
+              label="Enter Name"
+              type="text"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={person?.name || selectedPerson.name}
+              onChange={(event) =>
+                dispatch({ type: "SET_NAME", payload: event.target.value })
+              }
+              variant="outlined"
+            />
+            <TextField
+              className={classes.inputField}
+              id="person-relationship"
+              label="Enter Your Relationship"
+              type="text"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              value={person?.relationship || selectedPerson.relationship}
+              onChange={(event) =>
+                dispatch({
+                  type: "SET_RELATIONSHIP",
+                  payload: event.target.value,
+                })
+              }
+              variant="outlined"
+            />
         </FormControl>
         <br />
         <Button variant="contained" color="secondary" onClick={handleBack}>

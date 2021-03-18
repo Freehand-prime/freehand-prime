@@ -56,6 +56,7 @@ function* logoutUser(action) {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     };
+    //clear input stores and unset persons and events
     yield put({ type: 'CLEAR_INPUT_STORE' });
     yield put({ type: 'UNSET_PERSONS' });
     yield put({ type: 'UNSET_EVENTS' });
