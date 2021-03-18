@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SelectCategory() {
   // Confirm dialog state
   const [register, setRegister] = useState(false);
+  const [thisEvent, setThisEvent] = useState({category: ''});
 
   // Hooks
   const history = useHistory();
@@ -52,10 +53,15 @@ export default function SelectCategory() {
 
   useEffect(() => {
     dispatch({ type: "FETCH_CATEGORIES" });
+      //if we've got a category in edit store, set the state.
+    if(newEvent.category){
+      setThisEvent({category: newEvent.category});
+    }
   }, []);
 
   // onClick function to go back to EnterOccasion
   const handleBack = () => {
+    dispatch({ type: "SET_CATEGORY", payload: thisEvent.category });
     history.push("/occasion");
   }; //end handleBack
 
@@ -63,10 +69,8 @@ export default function SelectCategory() {
   const handleContinue = () => {
     if (user.id) {
       // dispatches collected form data if user is logged in
-      dispatch({
-        type: "ADD_PERSON_AND_EVENT",
-        payload: { person, newEvent },
-      });
+      dispatch({ type: "SET_CATEGORY", payload: thisEvent.category });
+      dispatch({ type: "ADD_PERSON_AND_EVENT", payload: { person, newEvent }});
       // Sends user to Dashboard with newly created Event
       history.push("/dashboard");
     } else {
@@ -101,13 +105,8 @@ export default function SelectCategory() {
                   }}
                   style={{ width: 250, margin: 8 }}
                   variant="outlined"
-                  value={newEvent?.category}
-                  onChange={(event) =>
-                    dispatch({
-                      type: "SET_CATEGORY",
-                      payload: event.target.value,
-                    })
-                  }
+                  value={thisEvent.category}
+                  onChange={(event) => setThisEvent({...thisEvent, category: event.target.value})}
                 >
                   {categories.map((category) => {
                     return (

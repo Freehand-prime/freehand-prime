@@ -59,11 +59,12 @@ export default function ViewPersonsEvent() {
         <br></br>
         {personsEvents &&
           personsEvents.map((event) => (
-            <Box>
+            <Box key={event.date+event.name}>
               <EventCard event={event} includeName={false} />
               <br></br>
             </Box>
-          ))}
+          ))
+        }
         <Box align="center">
           <Button
             variant="contained"

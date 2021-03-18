@@ -31,29 +31,40 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SelectOccasion() {
+    //state
+  const [thisEvent, setThisEvent] = useState({occasion: '', date: ''});
+    //hooks
   const classes = useStyles();
-
   const history = useHistory();
   const dispatch = useDispatch();
-
   const newEvent = useSelector((store) => store.event);
   const occasions = useSelector((store) => store.occasions);
 
-  useEffect(() => {
-    dispatch({ type: "FETCH_OCCASIONS" });
-  }, []);
-
   //onClick function to go back to EnterPerson
   const handleBack = () => {
-    // sends user to EnterPerson page
+      // send data to store and user to SelectCategory page
+    dispatch({ type: "SET_OCCASION", payload: thisEvent.occasion });
+    dispatch({ type: "SET_DATE", payload: thisEvent.date });
+      // sends user to EnterPerson page
     history.push("/person");
   }; //end handleBack
 
   //onClick function to submit occasion & date details
   const handleContinue = () => {
-    // sends user to SelectCategory page
+    // send data to store and user to SelectCategory page
+    dispatch({ type: "SET_OCCASION", payload: thisEvent.occasion });
+    dispatch({ type: "SET_DATE", payload: thisEvent.date });
+
     history.push("/category");
   }; //end handleContinue
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_OCCASIONS" });
+      //if we've got an occasion and date in edit store, set the state.
+    if(newEvent.occasion){
+      setThisEvent({occasion: newEvent.occasion, date: newEvent.date});
+    }
+  }, []);
 
   return (
     <Container>
@@ -74,17 +85,14 @@ export default function SelectOccasion() {
                   id="event-occasion"
                   label="select occasion"
                   type="text"
-                  inputLabelProps={{
+                  InputLabelProps={{
                     shrink: true,
                   }}
                   style={{ width: 250, margin: 8 }}
                   variant="outlined"
-                  value={newEvent?.occasion}
+                  value={thisEvent.occasion}
                   onChange={(event) =>
-                    dispatch({
-                      type: "SET_OCCASION",
-                      payload: event.target.value,
-                    })
+                    setThisEvent({...thisEvent, occasion: event.target.value})
                   }
                 >
                   {occasions.map((occasion) => {
@@ -101,13 +109,13 @@ export default function SelectOccasion() {
                   id="event-date"
                   label="enter date"
                   type="date"
-                  inputLabelProps={{
+                  InputLabelProps={{
                     shrink: true,
                   }}
                   style={{ width: 250, margin: 8 }}
-                  value={newEvent?.date}
-                  onChange={(event) =>
-                    dispatch({ type: "SET_DATE", payload: event.target.value })
+                  value={thisEvent.date}
+                  onChange={(event) => 
+                    setThisEvent({...thisEvent, date: event.target.value})
                   }
                   variant="outlined"
                 />
