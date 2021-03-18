@@ -78,6 +78,7 @@ export default function LoginDialog() {
               autoFocus
               margin="dense"
               id="name"
+              color="secondary"
               label="Email"
               type="text"
               value={username}
@@ -88,6 +89,7 @@ export default function LoginDialog() {
               required
               margin="dense"
               id="password"
+              color="secondary"
               label="Password"
               type="password"
               value={password}
