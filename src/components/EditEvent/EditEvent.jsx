@@ -148,7 +148,7 @@ export default function EditEvent() {
                 value={editInput?.occasion_id || ""}
                 onChange={(event) =>
                   dispatch({
-                    type: "SET_OCCASION",
+                    type: "EDIT_OCCASION",
                     payload: event.target.value,
                   })
                 }
@@ -196,7 +196,7 @@ export default function EditEvent() {
                 value={editInput?.category_id || ""}
                 onChange={(event) =>
                   dispatch({
-                    type: "SET_CATEGORY",
+                    type: "EDIT_CATEGORY",
                     payload: event.target.value,
                   })
                 }
