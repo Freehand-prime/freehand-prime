@@ -24,6 +24,13 @@ Button,
 
   //MUI Styling
 const useStyles = makeStyles((theme) => ({
+    formPaper: {
+        marginBottom: 20,
+    },
+    titlePaper: {
+        marginBottom: 20,
+        padding: 10,
+    }
 }));
 
 /*
@@ -69,18 +76,17 @@ export default function AdminCards() {
             <Button onClick={handleAdminSwap}></Button>
             { isLoaded ? 
             <>
-                <br></br>
+            <Container>
+                <Paper className={classes.titlePaper}>
                 <Typography align="center" variant="h5">
                 Admin - Manage Cards
                 </Typography>
-                <br></br>
+                </Paper>
 
-                    <Container item xs={12} sm={6}>
-                        <Paper>
+                    
+                        <Paper className={classes.formPaper}>
                             <AdminAddForm categories={allCategories} occasions={allOccasions}/>
                         </Paper>
-                    </Container>
-                    <Container>
                         <TableContainer component={Paper}>
                         <Table aria-label="simple table">
                             <TableHead>
