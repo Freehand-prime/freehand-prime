@@ -11,9 +11,16 @@ import {
     InputLabel,
     FormHelperText,
     MenuItem,
-    Typography
+    Snackbar,
 } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert'
 import AddIcon from '@material-ui/icons/Add';
+import { AlertTitle } from '@material-ui/lab';
+
+// Alert for confirmation snackbar
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
     selectEmpty: {
@@ -22,9 +29,12 @@ const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
         minWidth: 140,
+        marginTop: 20,
+        marginLeft: 15,
     },
     button: {
-        margin: 10,
+        margin: 15,
+        marginTop: 25,
     },
 }));
 
@@ -40,6 +50,7 @@ export default function AdminAddForm({occasions, categories}) {
     }
         //state
     const [addCardData, setAddCardData] = useState(defaultAddCard);
+    const [alert, setAlert] = useState(false);
 
         //hooks
     const dispatch = useDispatch();
@@ -47,28 +58,42 @@ export default function AdminAddForm({occasions, categories}) {
         //functions
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('handleSubmit Clicked');
+        setAlert(true);
             //dispatch POST to cards.saga with form data
         dispatch({type: 'ADD_CARD', payload: addCardData});
             //reset the default add card data after submit
         setAddCardData(defaultAddCard);
-    }
+    };
+
+    const handleAlertClose = (e, reason) => {
+        if (reason === "clickaway") {
+          return;
+        }
+        setAlert(false);
+    };
 
     return(
+        <>
         <form onSubmit={handleSubmit}>   
 
             {/*Form Fields go Here*/}
             {categories? 
             <>
-            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'front'}/>
-            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'inside'}/>
             <FormControl className={classes.formControl}>
+            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'Front'}/>
+            </FormControl>
+            <FormControl className={classes.formControl}>
+            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'Inside'}/>
+            </FormControl>
+            <FormControl variant="outlined" className={classes.formControl}>
 
-                <InputLabel>Occasion</InputLabel>
+                <InputLabel color="secondary" id="select-occasion-label">Occasion</InputLabel>
                 <Select
-                    helpertext="Required"
+                    labelId="select-occasion-label"
+                    label="Occasion"
                     required
-                    defaultValue = "1"
+                    type="text"
+                    color="secondary"
                     value={addCardData.occasion_id}
                     onChange={(event) => setAddCardData({...addCardData, occasion_id: event.target.value})}
                 >
@@ -84,12 +109,14 @@ export default function AdminAddForm({occasions, categories}) {
                 </Select>
                 <FormHelperText>Select</FormHelperText>
             </FormControl>
-            <FormControl className={classes.formControl}>
-                <InputLabel>Category</InputLabel>
+            <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel color="secondary" id="select-category-label">Category</InputLabel>
                 <Select 
-                    helpertext="Required"
+                    labelId="select-category-label"
+                    label="Category"
                     required
-                    defaultValue = "1"
+                    type="text"
+                    color="secondary"
                     value={addCardData.category_id}
                     onChange={(event) => setAddCardData({...addCardData, category_id: event.target.value})}
                 >
@@ -105,25 +132,19 @@ export default function AdminAddForm({occasions, categories}) {
                 </Select>
                 <FormHelperText>Select</FormHelperText>
             </FormControl>
-            <FormControl>
-                <InputLabel>Artist</InputLabel>
+            <FormControl className={classes.formControl}>
                 <TextField 
-                    helpertext="Required"
-                    required
-                    margin="dense"
-                    variant="filled"
+                    label="Artist Name"
+                    variant="outlined"
                     value={addCardData.artist}
                     onChange={(event) => setAddCardData({...addCardData, artist: event.target.value})}
                 />
                 <FormHelperText>Enter Artist Name</FormHelperText>
             </FormControl>
-            <FormControl>
-                <InputLabel>Details</InputLabel>
+            <FormControl className={classes.formControl}>
                 <TextField 
-                    helpertext="Required"
-                    required
-                    margin="dense"
-                    variant="filled"
+                    label="Details"
+                    variant="outlined"
                     value={addCardData.details}
                     onChange={(event) => setAddCardData({...addCardData, details: event.target.value})}
                 />
@@ -138,11 +159,24 @@ export default function AdminAddForm({occasions, categories}) {
                 type="submit"
                 variant="contained"
                 color="primary" 
+                size="large"
                 className={classes.button}
             >
                 <AddIcon/>
                 ADD CARD
             </Button>
         </form>
+        <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={alert}
+        autoHideDuration={8000}
+        onClose={handleAlertClose}
+      >
+        <Alert onClose={handleAlertClose} variant="filled" severity="success">
+            <AlertTitle>Success</AlertTitle>
+          New card has been added successfully
+        </Alert>
+      </Snackbar>
+      </>
     )
 }

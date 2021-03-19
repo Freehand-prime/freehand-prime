@@ -97,7 +97,7 @@ export default function PickACard() {
     <div className={classes.gridDiv}>
       <Paper align="center" elevation={4} className={classes.titlePaper}>
         <Typography gutterBottom align="center" variant="h5" component="h2">
-          Tap a card Image to see the inside view
+          Tap a card image to see the inside view
         </Typography>
       </Paper>
       <Grid

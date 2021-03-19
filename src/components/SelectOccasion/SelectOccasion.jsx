@@ -92,7 +92,7 @@ export default function SelectOccasion() {
             label="Select Occasion"
             type="text"
             color="secondary"
-            value={newEvent?.occasion}
+            value={newEvent?.occasion_id}
             onChange={(event) =>
               dispatch({
                 type: "SET_OCCASION",

@@ -34,6 +34,10 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  titlePaper: {
+    marginBottom: 20,
+    padding: 10,
+  }
 });
 
 // this component allows admin users to manage the categories and occasions available for cards in the database
@@ -105,9 +109,11 @@ export default function AdminOccasions() {
       <Button onClick={handleAdminSwap}></Button>
       <Container>
         <br></br>
+        <Paper className={classes.titlePaper}>
         <Typography align="center" variant="h5">
           Admin - Manage Occasions and Categories
         </Typography>
+        </Paper>
         <br></br>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
