@@ -16,15 +16,7 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-      maxWidth: 300,
-    },
     addCardForm: {
-        '& .MuiTextField-addCardForm': {
-          margin: theme.spacing(1),
-          width: '25ch',
-        },
         formControl: {
           margin: theme.spacing(1),
           minWidth: 400,
@@ -33,16 +25,8 @@ const useStyles = makeStyles((theme) => ({
           marginTop: theme.spacing(2),
         },
     },
-    textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        width: '25ch',
-    },
     button: {
         margin: 10,
-    },
-    media: {
-        height: 140,
     },
 }));
 
@@ -73,7 +57,7 @@ export default function AdminAddForm({occasions, categories}) {
     }
 
     return(
-        <form className={classes.addCardForm} noValidate onSubmit={handleSubmit}>   
+        <form onSubmit={handleSubmit}>   
             < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'front'}/>
 
             < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'inside'}/>
@@ -83,7 +67,7 @@ export default function AdminAddForm({occasions, categories}) {
             <>
             <FormControl>
                 <InputLabel>Occasion</InputLabel>
-                <Select 
+                <Select
                     helpertext="Required"
                     required
                     defaultValue = "1"
@@ -126,7 +110,6 @@ export default function AdminAddForm({occasions, categories}) {
             <FormControl>
                 <InputLabel>Artist</InputLabel>
                 <TextField 
-                    className={classes.textField}
                     helpertext="Required"
                     required
                     margin="dense"
@@ -139,7 +122,6 @@ export default function AdminAddForm({occasions, categories}) {
             <FormControl>
                 <InputLabel>Details</InputLabel>
                 <TextField 
-                    className={classes.textField}
                     helpertext="Required"
                     required
                     margin="dense"
@@ -160,6 +142,7 @@ export default function AdminAddForm({occasions, categories}) {
                 color="primary" 
                 className={classes.button}
             >
+                <AddIcon/>
                 ADD CARD
             </Button>
         </form>

@@ -153,6 +153,7 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
                 color="primary"
                 onClick={handleSaveEdit}
             >
+                <SaveIcon/>
                 SAVE
             </Button>
         </TableCell>
@@ -162,6 +163,7 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
                 color="secondary"
                 onClick={handleDelete}
             >
+                <DeleteIcon/>
                 DELETE
             </Button>
         </TableCell>
