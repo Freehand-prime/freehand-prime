@@ -11,9 +11,16 @@ import {
     InputLabel,
     FormHelperText,
     MenuItem,
-    Typography
+    Snackbar,
 } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert'
 import AddIcon from '@material-ui/icons/Add';
+import { AlertTitle } from '@material-ui/lab';
+
+// Alert for confirmation snackbar
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
     selectEmpty: {
@@ -43,6 +50,7 @@ export default function AdminAddForm({occasions, categories}) {
     }
         //state
     const [addCardData, setAddCardData] = useState(defaultAddCard);
+    const [alert, setAlert] = useState(false);
 
         //hooks
     const dispatch = useDispatch();
@@ -50,14 +58,22 @@ export default function AdminAddForm({occasions, categories}) {
         //functions
     const handleSubmit = (event) => {
         event.preventDefault();
-
+        setAlert(true);
             //dispatch POST to cards.saga with form data
         dispatch({type: 'ADD_CARD', payload: addCardData});
             //reset the default add card data after submit
         setAddCardData(defaultAddCard);
-    }
+    };
+
+    const handleAlertClose = (e, reason) => {
+        if (reason === "clickaway") {
+          return;
+        }
+        setAlert(false);
+    };
 
     return(
+        <>
         <form onSubmit={handleSubmit}>   
 
             {/*Form Fields go Here*/}
@@ -150,5 +166,17 @@ export default function AdminAddForm({occasions, categories}) {
                 ADD CARD
             </Button>
         </form>
+        <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={alert}
+        autoHideDuration={8000}
+        onClose={handleAlertClose}
+      >
+        <Alert onClose={handleAlertClose} variant="filled" severity="success">
+            <AlertTitle>Success</AlertTitle>
+          New card has been added successfully
+        </Alert>
+      </Snackbar>
+      </>
     )
 }
