@@ -8,6 +8,7 @@ import Grid from "@material-ui/core/Grid";
 import Grow from "@material-ui/core/Grow";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
 
 // Component
 import CardCard from "../CardCard/CardCard";
@@ -21,10 +22,18 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    padding: 20,
+    padding: 10,
   },
   button: {
-    margin: 10,
+    margin: 8,
+  },
+  titlePaper: {
+    margin: 15,
+    padding: 10,
+    marginTop: 5,
+  },
+  buttonDiv: {
+    marginTop: 20,
   },
 }));
 
@@ -70,8 +79,8 @@ export default function PickACard() {
   };
 
   const handleBack = () => {
-    history.goBack();
-  }
+    history.push(`/edit/${id}`);
+  };
 
   // UseEffect for GET cards and GET event
   useEffect(() => {
@@ -86,9 +95,11 @@ export default function PickACard() {
 
   return (
     <div className={classes.gridDiv}>
-      <Typography gutterBottom align="center" variant="h5" component="h2">
-        Tap a card Image to see the inside view
-      </Typography>
+      <Paper align="center" elevation={4} className={classes.titlePaper}>
+        <Typography gutterBottom align="center" variant="h5" component="h2">
+          Tap a card Image to see the inside view
+        </Typography>
+      </Paper>
       <Grid
         container
         spacing={3}
@@ -107,22 +118,27 @@ export default function PickACard() {
         })}
       </Grid>
       <br />
-      <Button
-      className={classes.button}
-      variant="contained"
-      color="secondary"
-      onClick={handleBack}
-      >
-        Back
-      </Button>
-      <Button
-        className={classes.button}
-        variant="contained"
-        color="primary"
-        onClick={handleShuffle}
-      >
-        Show me new cards
-      </Button>
+      <div className={classes.buttonDiv}>
+        <center>
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="primary"
+            onClick={handleShuffle}
+          >
+            Show me new cards
+          </Button>
+          <br />
+          <Button
+            className={classes.button}
+            variant="contained"
+            color="secondary"
+            onClick={handleBack}
+          >
+            Edit Event Details
+          </Button>
+        </center>
+      </div>
     </div>
   );
 }

@@ -27,6 +27,10 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  titlePaper: {
+    margin: 20,
+    padding: 10,
+  },
 });
 
 import EventCard from '../EventCard/EventCard';
@@ -54,9 +58,9 @@ export default function ViewPersonsEvent() {
   return (
     <>
       <Container>
-        <br></br>
+        <Paper align="center" elevation={4} className={classes.titlePaper}>
         <Typography align="center" variant="h5">{personsEvents[0]?.name}'s Events</Typography>
-        <br></br>
+        </Paper>
         {personsEvents &&
           personsEvents.map((event) => (
             <Box key={event.date+event.name}>

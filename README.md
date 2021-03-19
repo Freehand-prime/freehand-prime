@@ -9,9 +9,7 @@
 
 ## Description
 
-_Duration: 2 Week Client Project_
-
-Directly above this is how long it took you to develop the project. Your project description goes here. What problem did you solve? How did you solve it? 
+_Duration: 2 Week Sprint_
 
 The Freehand Cards app is a service for busy people: people with bosses, employees, family and friends, who have Google calendars that quickly fill up with meetings, deadlines, school plays and doctor's appointments. It's an app for people who don't want to miss acknowledging important occasions for the people who they appreciate, but always seem to find themselves in the greeting card aisle at a drug store trying to find the best card from the available options. 
 
@@ -58,7 +56,7 @@ How does someone use this application? Tell a user story here.
 
 List technologies and frameworks here
 
-![Technologies Used](README_images/technologies-used.png)
+![Technologies Used](documentation/images/technologies-used.png)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
@@ -68,7 +66,7 @@ _Note, include this only if you have a license file. GitHub will generate one fo
 ## Acknowledgement
 Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. (Thank your people)
 
-![Dev Team](README_images/dev-team.png)
+![Dev Team](documentation/images/dev-team.png)
 
 ## Support
 If you have suggestions or issues, please email me at [youremail@whatever.com](www.google.com)

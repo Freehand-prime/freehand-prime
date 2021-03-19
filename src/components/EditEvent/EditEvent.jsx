@@ -116,11 +116,12 @@ export default function EditEvent() {
             </center>
           )}
           <Paper align="center" elevation={4} className={classes.formPaper}>
-            <FormControl className={classes.root}>
+            <FormControl color="secondary" className={classes.root}>
               <TextField
                 id="edit-person-name"
                 label="name"
                 type="text"
+                color="secondary"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -135,7 +136,7 @@ export default function EditEvent() {
               />
             </FormControl>
             <br />
-            <FormControl variant="outlined" className={classes.root}>
+            <FormControl color="secondary" variant="outlined" className={classes.root}>
               <InputLabel id="select-occasion-label">
                 Select Occasion
               </InputLabel>
@@ -162,11 +163,12 @@ export default function EditEvent() {
               </Select>
             </FormControl>
             <br />
-            <FormControl className={classes.root}>
+            <FormControl color="secondary" className={classes.root}>
               <TextField
                 id="edit-event-date"
                 label="date"
                 type="date"
+                color="secondary"
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -182,7 +184,7 @@ export default function EditEvent() {
             </FormControl>
             <br />
             <FormControl variant="outlined" className={classes.root}>
-              <InputLabel id="select-category-label">
+              <InputLabel color="secondary" id="select-category-label">
                 Select Category
               </InputLabel>
               <Select
@@ -190,6 +192,7 @@ export default function EditEvent() {
                 id="event-category"
                 label="Select Category"
                 type="text"
+                color="secondary"
                 value={editInput?.category_id || ""}
                 onChange={(event) =>
                   dispatch({

@@ -105,11 +105,12 @@ export default function EnterPerson() {
         <FormControl variant="outlined" className={classes.root}>
           {user.id && (
             <>
-              <InputLabel id="select-label">Select Existing Person</InputLabel>
+              <InputLabel color="secondary" id="select-label">Select Existing Person</InputLabel>
               <Select
                 labelId="select-label"
                 id="select-person-name"
                 label="Select Existing Person"
+                color="secondary"
                 value={selectedPerson?.name}
                 onChange={handleSelectPerson}
               >
@@ -122,19 +123,21 @@ export default function EnterPerson() {
                 })}
               </Select>
               <br />
-              <br />
+              
             </>
           )}
         </FormControl>
+        <br />
         <FormControl className={classes.root}>
           <TextField
             className={classes.inputField}
             id="person-name"
             label="Enter Name"
             type="text"
-            InputLabelProps={{
-              shrink: selectedPerson?.name,
-            }}
+            color="secondary"
+            // InputLabelProps={{
+            //   shrink: selectedPerson?.name,
+            // }}
             value={person?.name || selectedPerson.name}
             onChange={(event) =>
               dispatch({ type: "SET_NAME", payload: event.target.value })
@@ -142,15 +145,17 @@ export default function EnterPerson() {
             variant="outlined"
           />
         </FormControl>
+        <br />
         <FormControl className={classes.root}>
           <TextField
             className={classes.inputField}
             id="person-relationship"
             label="Enter Your Relationship"
             type="text"
-            InputLabelProps={{
-              shrink: selectedPerson.relationship,
-            }}
+            color="secondary"
+            // InputLabelProps={{
+            //   shrink: selectedPerson.relationship,
+            // }}
             value={person?.relationship || selectedPerson.relationship}
             onChange={(event) =>
               dispatch({
