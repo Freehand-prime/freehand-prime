@@ -50,7 +50,7 @@ export default function AdminAddForm({occasions, categories}) {
         //functions
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('handleSubmit Clicked');
+
             //dispatch POST to cards.saga with form data
         dispatch({type: 'ADD_CARD', payload: addCardData});
             //reset the default add card data after submit
