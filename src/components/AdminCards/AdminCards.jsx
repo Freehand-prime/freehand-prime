@@ -6,6 +6,7 @@ import AdminAddForm from './AdminAddForm/AdminAddForm';
 
   //MUI
 import { 
+Button,
   makeStyles,
   Paper,
   Container,
@@ -44,14 +45,19 @@ export default function AdminCards() {
     const allCards = useSelector((store) => store?.cards);
     const allCategories = useSelector((store) => store?.categories);
     const allOccasions = useSelector((store) => store?.occasions);
+    const history = useHistory();
     const dispatch = useDispatch();
     const classes = useStyles();
 
         //functions
+    const handleAdminSwap = () => {
+        history.push('/admin');    
+    };
+
     const fetchData = () => {
         dispatch({type: 'FETCH_ADMIN_CARDS'});
         setIsLoaded(true);
-    }
+    };
         //onRender (need to call on every dispatch so we can continouously fetch changes to the cards database)
     useEffect(() => {
             //GET to fill cards, categories, and occasions
@@ -60,11 +66,12 @@ export default function AdminCards() {
     }, [dispatch]);
     return (
         <div>
+            <Button onClick={handleAdminSwap}></Button>
             { isLoaded ? 
             <>
                 <br></br>
                 <Typography align="center" variant="h5">
-                Manage Cards
+                Admin - Manage Cards
                 </Typography>
                 <br></br>
 

@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Box,
+  Button,
   Container,
   Fab,
   Grid,
@@ -95,8 +96,13 @@ export default function AdminOccasions() {
     setEditCategoryString('');
   };
 
+  const handleAdminSwap = () => {
+    history.push('/adminCards');    
+  };
+
   return (
     <>
+      <Button onClick={handleAdminSwap}></Button>
       <Container>
         <br></br>
         <Typography align="center" variant="h5">

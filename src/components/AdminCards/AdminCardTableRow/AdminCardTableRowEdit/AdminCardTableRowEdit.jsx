@@ -19,9 +19,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-      maxWidth: 300,
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 80,
     },
     media: {
         height: 140,
@@ -118,7 +118,7 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
             </FormControl>
         </TableCell>
         <TableCell>
-            <FormControl>
+            <FormControl className={classes.formControl}>
                 <InputLabel>Artist</InputLabel>
                 <TextField 
                     className={classes.textField}
@@ -133,7 +133,7 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
             </FormControl>
         </TableCell>
         <TableCell>
-            <FormControl>
+            <FormControl className={classes.formControl}>
                 <InputLabel>Details</InputLabel>
                 <TextField 
                     className={classes.textField}

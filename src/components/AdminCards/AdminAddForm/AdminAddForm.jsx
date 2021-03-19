@@ -17,7 +17,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
     selectEmpty: {
-          marginTop: theme.spacing(2),
+          marginTop: theme.spacing(1),
         },
     formControl: {
         margin: theme.spacing(1),
