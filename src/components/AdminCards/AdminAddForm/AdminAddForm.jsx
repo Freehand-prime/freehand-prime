@@ -16,14 +16,12 @@ import {
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
-    addCardForm: {
-        formControl: {
-          margin: theme.spacing(1),
-          minWidth: 400,
-        },
-        selectEmpty: {
+    selectEmpty: {
           marginTop: theme.spacing(2),
         },
+    formControl: {
+        margin: theme.spacing(1),
+        minWidth: 140,
     },
     button: {
         margin: 10,
@@ -58,14 +56,14 @@ export default function AdminAddForm({occasions, categories}) {
 
     return(
         <form onSubmit={handleSubmit}>   
-            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'front'}/>
-
-            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'inside'}/>
 
             {/*Form Fields go Here*/}
             {categories? 
             <>
-            <FormControl>
+            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'front'}/>
+            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'inside'}/>
+            <FormControl className={classes.formControl}>
+
                 <InputLabel>Occasion</InputLabel>
                 <Select
                     helpertext="Required"
@@ -86,7 +84,7 @@ export default function AdminAddForm({occasions, categories}) {
                 </Select>
                 <FormHelperText>Select</FormHelperText>
             </FormControl>
-            <FormControl>
+            <FormControl className={classes.formControl}>
                 <InputLabel>Category</InputLabel>
                 <Select 
                     helpertext="Required"
