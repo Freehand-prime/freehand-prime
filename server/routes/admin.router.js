@@ -11,6 +11,31 @@ const {
  * adminCards routes for cards
  */
 
+ router.get("/", rejectUnauthenticated, (req, res) => {
+    if (req.isAuthenticated()) {
+      // store query string in route scope
+      const query = `
+        SELECT "cards".*, "categories".category, "occasions".occasion FROM "cards"
+        JOIN "categories" ON "cards".category_id = "categories".id
+        JOIN "occasions" ON "cards".occasion_id = "occasions".id
+        ORDER BY "id" ASC;`;
+      pool
+        .query(query)
+        .then((result) => {
+          // sends cards rows to client on successful pool query
+          res.send(result.rows);
+        })
+        .catch((error) => {
+          console.error(error);
+          // sends response 500 'Internal Server Error' on pool query error 
+          res.sendStatus(500);
+        });
+    } else {
+      // send response 403 'Forbidden' if user is not authenticated
+      res.sendStatus(403);
+    }
+});
+
 router.post('/card', rejectUnauthenticated, (req, res) => {
         //debug log
     console.log(req.body);
