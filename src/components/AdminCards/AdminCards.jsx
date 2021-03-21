@@ -100,7 +100,7 @@ export default function AdminCards() {
                             </TableHead>
                             <TableBody>
                             {allCards.map((card) => (
-            
+                                    
                                     <TableRow key={ card.id }>
                                         <AdminCardTableRow card={card} categories={allCategories} occasions={allOccasions}/>
                                     </TableRow> 

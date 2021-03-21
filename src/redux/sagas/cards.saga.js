@@ -28,7 +28,7 @@ function* addCard(action) {
     //POST request to admin API
     yield axios.post(`/api/admin/card`, newCardInfo);
     //GET updated cards data.
-    yield put({ type: 'FETCH_CARDS' });
+    yield put({ type: 'FETCH_ADMIN_CARDS' });
   } catch (error) {
     console.error(`ERROR in addCard: ${error}`);
   }
@@ -51,7 +51,7 @@ function* editCard(action) {
     //PUT request to admin API
     yield axios.put(`/api/admin/card`, editCardInfo);
     //GET updated cards data.
-    yield put({ type: 'FETCH_CARDS' });
+    yield put({ type: 'FETCH_ADMIN_CARDS' });
   } catch (error) {
     console.error(`ERROR in editCard: ${error}`);
   }
@@ -66,7 +66,7 @@ function* deleteCard(action) {
     //DELETE request to admin API
     yield axios.delete(`/api/admin/card/${deleteID}`);
     //GET updated cards data.
-    yield put({ type: 'FETCH_CARDS' });
+    yield put({ type: 'FETCH_ADMIN_CARDS' });
   } catch (error) {
     console.error(`ERROR in deleteCard: ${error}`);
   }
@@ -78,7 +78,7 @@ function* fetchAdminCards() {
   //triple-threat GET for admin-cards
   try {
     //GET cards and set cards reducer
-    const cards = yield axios.get('/api/cards');
+    const cards = yield axios.get('/api/admin');
     yield put({ type: 'SET_CARDS', payload: cards.data });
     //GET occasions and set occasions reducer
     const occasions = yield axios.get('/api/occasions');

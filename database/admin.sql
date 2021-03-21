@@ -17,6 +17,11 @@ VALUES (
 DELETE * FROM "cards"
 WHERE id = x;
 
+SELECT "cards".*, "categories".category, "occasions".occasion FROM "cards"
+        JOIN "categories" ON "cards".category_id = "categories".id
+        JOIN "occasions" ON "cards".occasion_id = "occasions".id
+        ORDER BY "id" ASC;
+		
 --CREATE TABLE "user" (
 --	"id" serial NOT NULL,
 --	"username" varchar(255) NOT NULL UNIQUE,

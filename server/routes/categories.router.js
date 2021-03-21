@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
   // debug log
   console.log('in get all categories');
   // store query string in route scope
-  const queryText = `SELECT * FROM "categories" ORDER BY "id" ASC;;`;
+  const queryText = `SELECT * FROM "categories" ORDER BY "id" ASC;`;
   pool
     .query(queryText)
     .then((result) => {
