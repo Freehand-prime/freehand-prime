@@ -7,7 +7,6 @@ function* getEvent(action) {
   try {
     const idToGet = action.payload;
     const response = yield axios.get(`/api/event/${idToGet}`);
-    console.log(response.data);
     yield put({ type: "SET_EDIT_EVENT", payload: response.data });
   } catch (error) {
     console.error("ERROR in get EVENT", error);
@@ -16,7 +15,6 @@ function* getEvent(action) {
 
 //generator PUT function to save changes from EDIT: will be fired on SAVE_EDIT
 function* saveEdit(action) {
-  console.log(action);
   yield axios.put(`/api/persons`, action.payload);
 } //end saveEdit
 

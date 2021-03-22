@@ -13,15 +13,6 @@ function* fetchCards() {
 }
 
 function* addCard(action) {
-  //debug log to user console
-  console.log(`
-    Front: ${action.payload.image_front}
-    Inside: ${action.payload.image_inside}
-    Occasion: ${action.payload.occasion_id}
-    Category: ${action.payload.category_id}
-    Artist: ${action.payload.artist}
-    Description: ${action.payload.details}
-    `);
   //store data of card to create
   const newCardInfo = action.payload;
   try {
@@ -35,16 +26,6 @@ function* addCard(action) {
 }
 
 function* editCard(action) {
-  //debug log to user console
-  console.log(`
-    ID: ${action.payload.id}
-    Front: ${action.payload.image_front}
-    Inside: ${action.payload.image_inside}
-    Occasion: ${action.payload.occasion_id}
-    Category: ${action.payload.category_id}
-    Artist: ${action.payload.artist}
-    Description: ${action.payload.details}
-    `);
   //store data of card to edit
   const editCardInfo = action.payload;
   try {
@@ -60,8 +41,6 @@ function* editCard(action) {
 function* deleteCard(action) {
   //store ID of card to delete
   const deleteID = action.payload;
-  //debug log to user console
-  console.log(`In deleteCard: ${deleteID}`);
   try {
     //DELETE request to admin API
     yield axios.delete(`/api/admin/card/${deleteID}`);
@@ -73,8 +52,6 @@ function* deleteCard(action) {
 }
 
 function* fetchAdminCards() {
-  //debug log to user console
-  console.log(`In fetchAdminCards`);
   //triple-threat GET for admin-cards
   try {
     //GET cards and set cards reducer

@@ -14,7 +14,6 @@ function* fetchCategories() {
 
 function* addCategory(action) {
   try {
-    console.log(action.payload);
     yield axios.post("/api/categories", { category: action.payload });
     yield put({ type: "FETCH_CATEGORIES" });
   } catch (error) {
@@ -24,7 +23,6 @@ function* addCategory(action) {
 
 function* updateCategory(action) {
   try {
-    console.log("received to update", action.payload);
     yield axios.put(`/api/categories/${action.payload[0]}`, {
       category: action.payload[1],
     });
@@ -36,7 +34,6 @@ function* updateCategory(action) {
 
 function* deleteCategory(action) {
   try {
-    console.log("in delete category for id", action.payload);
     yield axios.delete(`/api/categories/${action.payload}`);
     yield put({ type: "FETCH_CATEGORIES" });
   } catch (error) {

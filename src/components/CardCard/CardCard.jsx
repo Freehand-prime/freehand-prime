@@ -44,8 +44,6 @@ export default function CardCard({ card, buttonTitle, eventId }) {
     if (buttonTitle === "Pick a New Card") {
       setCardPicked(true);
     }
-    console.log(cardPicked);
-    console.log(buttonTitle);
   };
 
   // Check card button on component mount

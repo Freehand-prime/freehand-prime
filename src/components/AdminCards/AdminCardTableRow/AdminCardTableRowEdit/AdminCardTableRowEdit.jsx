@@ -46,15 +46,11 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
         //functions
     const handleSaveEdit = (event) => {
         event.preventDefault();
-        //DEBUG: function status log to console
-    console.log('handleEdit Clicked on:', card.id);
         dispatch({type: 'EDIT_CARD', payload: addCardData});
         //flip edit flag to render AdminCardTableRowEdit
     setEditFlag(!editFlag);
     }
     const handleDelete = () => {
-        //DEBUG: function status log to console
-    console.log('handleDelete Clicked:', card.id);
         //dispatching to card.saga 
     dispatch({type: 'DELETE_CARD', payload: card.id});
     }

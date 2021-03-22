@@ -6,11 +6,8 @@ import axios from "axios";
 // ADD_PERSON
 function* addPersonAndEvent(action) {
   try {
-    console.log("post new person and event");
-    console.log(action.payload);
     const newPersonAndEvent = action.payload;
     const response = yield axios.post("/api/persons", newPersonAndEvent);
-    console.log("NEW PERSON AND EVENT ADDED:", response);
   } catch (error) {
     console.error("ERROR in adding new person and event", error);
   }
@@ -21,7 +18,6 @@ function* addPersonAndEvent(action) {
 function* fetchPersons() {
   try {
     const persons = yield axios.get("/api/persons");
-    console.log("GET ALL PERSONS:", persons.data);
     yield put({ type: "SET_PERSONS", payload: persons.data });
   } catch (error) {
     console.error("ERROR in getting persons", error);

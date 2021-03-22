@@ -25,7 +25,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
       res.send(result.rows);
     })
     .catch((error) => {
-      console.log("error in get all events", error);
+      console.error("error in get all events", error);
       // sends response 500 'Internal Server Error' on pool query error
       res.sendStatus(500);
     });
@@ -91,7 +91,6 @@ router.put("/", rejectUnauthenticated, (req, res) => {
           req.body.eventId,
         ])
         .then((result) => {
-          console.log("Updated:", result.rows);
           // sends response 200 'OK' on successful pool query
           res.sendStatus(200);
         })

@@ -122,7 +122,7 @@ export default function AdminCards() {
           </Container>
         </>
       ) : (
-        <h1>Loading {console.log(isLoaded)}</h1>
+        <h1>Loading</h1>
       )}
     </div>
   );

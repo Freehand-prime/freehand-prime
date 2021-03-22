@@ -78,7 +78,6 @@ export default function EditEvent() {
 
   //onClick function DELETE an event
   const handleDelete = (id) => {
-    console.log("clicked handleDelete");
     dispatch({ type: "DELETE_EVENT", payload: page.id });
     // sends user to PersonsEvents page
     history.push("/dashboard");

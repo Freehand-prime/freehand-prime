@@ -25,7 +25,7 @@ function* fetchUser(action) {
       yield action.history.push("/dashboard");
     }
   } catch (error) {
-    console.log("User get request failed", error);
+    console.error("User get request failed", error);
   }
 }
 
@@ -34,7 +34,7 @@ function* sendMail(action) {
   try {
     yield axios.post("/send", action.payload);
   } catch (error) {
-    console.log("Send mail error:", error);
+    console.error("Send mail error:", error);
   }
 }
 

@@ -14,7 +14,6 @@ function* fetchOccasions() {
 
 function* addOccasion(action) {
   try {
-    console.log(action.payload);
     yield axios.post("/api/occasions", { occasion: action.payload });
     yield put({ type: "FETCH_OCCASIONS" });
   } catch (error) {
@@ -24,7 +23,6 @@ function* addOccasion(action) {
 
 function* updateOccasion(action) {
   try {
-    console.log("received to update", action.payload);
     yield axios.put(`/api/occasions/${action.payload[0]}`, {
       occasion: action.payload[1],
     });
@@ -36,7 +34,6 @@ function* updateOccasion(action) {
 
 function* deleteOccasion(action) {
   try {
-    console.log("in delete occasion for id", action.payload);
     yield axios.delete(`/api/occasions/${action.payload}`);
     yield put({ type: "FETCH_OCCASIONS" });
   } catch (error) {

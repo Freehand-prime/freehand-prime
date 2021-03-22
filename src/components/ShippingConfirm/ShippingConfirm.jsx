@@ -107,12 +107,10 @@ export default function ShippingConfirm() {
   // Handle change
   const handleChange = (event) => {
     setShipToMe(event.target.value);
-    console.log(shipToMe);
   }; // end handleChange
 
   // Handle back
   const handleBack = () => {
-    console.log("In handleBack");
     //return to pick a card view on back
     history.push(`/card/${page.id}`);
   }; // end handleBack

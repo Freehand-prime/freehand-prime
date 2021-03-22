@@ -72,7 +72,6 @@ app.post("/send", function (req, res, next) {
       console.error("there was an error: ", err);
       res.sendStatus(500);
     } else {
-      console.log("here is the res: ", res);
       res.sendStatus(200);
     }
   });
@@ -81,8 +80,6 @@ app.post("/send", function (req, res, next) {
 //node cron
 //check dates everyday at midnight to send reminder emails
 cron.schedule("0 0 * * *", () => {
-  // debug log
-  console.log("midnight queries");
   //get data from database "persons".name, "events".date, "events".id, "user".username
   // store query string in route scope
   const eventQuery = `
@@ -121,7 +118,6 @@ cron.schedule("0 0 * * *", () => {
               console.error("there was an error: ", err);
               res.sendStatus(500);
             } else {
-              console.log("here is the res: ", res);
               res.sendStatus(200);
             }
           });

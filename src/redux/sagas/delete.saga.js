@@ -9,7 +9,7 @@ function* deleteEvent(action) {
     yield axios.delete(`/api/event/${eventId}`);
     yield put({ type: "FETCH_EVENTS" });
   } catch (error) {
-    console.log("Error in DELETE event", error);
+    console.error("Error in DELETE event", error);
   }
 }
 

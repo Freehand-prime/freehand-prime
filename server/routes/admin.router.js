@@ -35,8 +35,6 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 });
 
 router.post("/card", rejectUnauthenticated, (req, res) => {
-  //debug log
-  console.log(req.body);
   //store data on body in route scope
   const newCardData = req.body;
   //store query string in route scope
