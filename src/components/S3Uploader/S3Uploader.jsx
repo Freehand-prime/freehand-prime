@@ -1,12 +1,15 @@
 // React-Dropzone-S3
 import DropzoneS3Uploader from "react-dropzone-s3-uploader";
-import { makeStyles } from "@material-ui/core"
 
+// MUI
+import { makeStyles } from "@material-ui/core";
+
+// MUI style
 const useStyles = makeStyles((theme) => ({
   root: {
     maxHeight: 140,
-    maxWidth: 120
-  }
+    maxWidth: 120,
+  },
 }));
 
 export default function S3Uploader({ addCardData, setAddCardData, image }) {
@@ -29,14 +32,14 @@ export default function S3Uploader({ addCardData, setAddCardData, image }) {
 
   return (
     <>
-    <DropzoneS3Uploader
-      className={classes.root}
-      onFinish={handleFinishedUpload}
-      s3Url={s3Url}
-      maxSize={1024 * 1024 * 5}
-      upload={uploadOptions}
-    />
-    {image} image
+      <DropzoneS3Uploader
+        className={classes.root}
+        onFinish={handleFinishedUpload}
+        s3Url={s3Url}
+        maxSize={1024 * 1024 * 5}
+        upload={uploadOptions}
+      />
+      {image} image
     </>
   );
 }

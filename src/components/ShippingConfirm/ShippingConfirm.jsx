@@ -1,3 +1,4 @@
+// React, Router, Redux
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,22 +11,20 @@ import {
   Typography,
   TextField,
   makeStyles,
-  InputLabel,
   FormControl,
   FormLabel,
   FormControlLabel,
-  Select,
   Paper,
   Button,
   Radio,
   RadioGroup,
 } from "@material-ui/core";
 
-// Component
+// Custom components
 import ShipSubmitDialog from "./ShipSubmitDialog/ShipSubmitDialog";
 import CardCard from "../CardCard/CardCard";
 
-//MUI Styling
+//MUI Style
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -57,21 +56,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ShippingConfirm() {
-  //state
+  // State
   const [openSubmit, setOpenSubmit] = useState(false);
   const [shipToMe, setShipToMe] = useState("false");
 
+  // Hooks
   const page = useParams();
-
-  //hooks
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
+
+  // Redux selectors
   const selectedEvent = useSelector((store) => store.edit);
   const cards = useSelector((store) => store.cards);
   const occasions = useSelector((store) => store.occasions);
   const categories = useSelector((store) => store.categories);
 
+  // Filters
   const card = cards.filter((card) => {
     if (card.id === selectedEvent.card_id) return card;
   });
@@ -84,6 +85,7 @@ export default function ShippingConfirm() {
     if (category.id === selectedEvent.category_id) return category;
   });
 
+  // Fetch all on mount
   useEffect(() => {
     dispatch({ type: "FETCH_CARDS" });
     dispatch({ type: "GET_EVENT", payload: page.id });
@@ -91,8 +93,7 @@ export default function ShippingConfirm() {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
 
-  //click handlers
-
+  // Confirm handler
   const handleConfirm = () => {
     // comment explaining why this is not why it should be
     if (shipToMe === "false") {
@@ -103,13 +104,13 @@ export default function ShippingConfirm() {
     setOpenSubmit(!openSubmit);
   };
 
+  // Handle change
   const handleChange = (event) => {
     setShipToMe(event.target.value);
-    console.log(shipToMe);
   }; // end handleChange
 
+  // Handle back
   const handleBack = () => {
-    console.log("In handleBack");
     //return to pick a card view on back
     history.push(`/card/${page.id}`);
   }; // end handleBack

@@ -4,14 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 // MUI
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Slide from "@material-ui/core/Slide";
-import TextField from "@material-ui/core/TextField";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Slide,
+  TextField,
+} from "@material-ui/core";
 
 // Transition for mount
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -23,7 +25,7 @@ export default function LoginDialog() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // Redux store
+  // Redux selectors
   const errors = useSelector((store) => store.errors);
   const login = useSelector((store) => store.login);
 

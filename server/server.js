@@ -7,7 +7,7 @@ const app = express();
 const sessionMiddleware = require("./modules/session-middleware");
 const passport = require("./strategies/user.strategy");
 const nodemailer = require("nodemailer");
-const pool = require('./modules/pool');
+const pool = require("./modules/pool");
 
 const cron = require("node-cron");
 const transporter = nodemailer.createTransport({
@@ -70,19 +70,16 @@ app.post("/send", function (req, res, next) {
   transporter.sendMail(mailOptions, function (err, res) {
     if (err) {
       console.error("there was an error: ", err);
-      res.sendStatus(500)
+      res.sendStatus(500);
     } else {
-      console.log("here is the res: ", res);
-      res.sendStatus(200)
+      res.sendStatus(200);
     }
   });
 });
 
 //node cron
 //check dates everyday at midnight to send reminder emails
-cron.schedule('0 0 * * *', () => {
-  // debug log
-  console.log('midnight queries');
+cron.schedule("0 0 * * *", () => {
   //get data from database "persons".name, "events".date, "events".id, "user".username
   // store query string in route scope
   const eventQuery = `
@@ -91,43 +88,46 @@ cron.schedule('0 0 * * *', () => {
   JOIN "user" ON "user".id = "persons".user_id;
   `;
   pool
-      .query(eventQuery)
-      .then((result) => {
-        //loop over the result rows to check dates
-        const eventsToMap = result.rows;
-        const fortnightAway = new Date(Date.now() + 12096e5).toLocaleDateString('en-US');
-        // maps over all events
-        eventsToMap.forEach((emailEvent) => {          
-          const dateToMatch = new Date(emailEvent.date).toLocaleDateString('en-US');
-          // checks if event date is 2 weeks away
-          if (fortnightAway == dateToMatch) {
-            const mailOptions = {
-              from: `${process.env.GMAIL_ADDRESS}`,
-              to: `${emailEvent.username}`,
-              subject: `You have an event for ${emailEvent.name} coming up in Freehand Cards!`,
-              text: `You have an event coming up for ${
-                emailEvent.name
-              } on ${new Date(emailEvent.date).toLocaleDateString("en-US")}
+    .query(eventQuery)
+    .then((result) => {
+      //loop over the result rows to check dates
+      const eventsToMap = result.rows;
+      const fortnightAway = new Date(Date.now() + 12096e5).toLocaleDateString(
+        "en-US"
+      );
+      // maps over all events
+      eventsToMap.forEach((emailEvent) => {
+        const dateToMatch = new Date(emailEvent.date).toLocaleDateString(
+          "en-US"
+        );
+        // checks if event date is 2 weeks away
+        if (fortnightAway == dateToMatch) {
+          const mailOptions = {
+            from: `${process.env.GMAIL_ADDRESS}`,
+            to: `${emailEvent.username}`,
+            subject: `You have an event for ${emailEvent.name} coming up in Freehand Cards!`,
+            text: `You have an event coming up for ${
+              emailEvent.name
+            } on ${new Date(emailEvent.date).toLocaleDateString("en-US")}
               To pick a card and confirm shipping options for this event, please visit:
               http://localhost:3000/#/card/${emailEvent.id}`,
-              replyTo: `${process.env.GMAIL_ADDRESS}`,
-            };
-            transporter.sendMail(mailOptions, function (err, res) {
-              if (err) {
-                console.error("there was an error: ", err);
-                res.sendStatus(500)
-              } else {
-                console.log("here is the res: ", res);
-                res.sendStatus(200)
-              }
-            });
-          }
-        })
-      })
-      .catch((error) => {
-          console.error(error);
-          //send response 500 'Internal Server Error' on pool query error
+            replyTo: `${process.env.GMAIL_ADDRESS}`,
+          };
+          transporter.sendMail(mailOptions, function (err, res) {
+            if (err) {
+              console.error("there was an error: ", err);
+              res.sendStatus(500);
+            } else {
+              res.sendStatus(200);
+            }
+          });
+        }
       });
+    })
+    .catch((error) => {
+      console.error(error);
+      //send response 500 'Internal Server Error' on pool query error
+    });
 });
 
 // Serve static files

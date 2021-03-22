@@ -1,15 +1,15 @@
-import { combineReducers } from 'redux';
-import errors from './errors.reducer';
-import user from './user.reducer';
-import login from './login.reducer';
-import person from './person.reducer';
-import persons from './persons.reducer';
-import event from './event.reducer';
-import events from './events.reducer';
-import edit from './edit.reducer';
-import cards from './cards.reducer';
-import occasions from './occasions.reducer';
-import categories from './categories.reducer';
+import { combineReducers } from "redux";
+import errors from "./errors.reducer";
+import user from "./user.reducer";
+import login from "./login.reducer";
+import person from "./person.reducer";
+import persons from "./persons.reducer";
+import event from "./event.reducer";
+import events from "./events.reducer";
+import edit from "./edit.reducer";
+import cards from "./cards.reducer";
+import occasions from "./occasions.reducer";
+import categories from "./categories.reducer";
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.

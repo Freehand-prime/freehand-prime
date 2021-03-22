@@ -25,7 +25,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
       res.send(result.rows);
     })
     .catch((error) => {
-      console.log("error in get all events", error);
+      console.error("error in get all events", error);
       // sends response 500 'Internal Server Error' on pool query error
       res.sendStatus(500);
     });
@@ -76,37 +76,35 @@ router.put("/", rejectUnauthenticated, (req, res) => {
       UPDATE "persons"
       SET "address" = $1
       WHERE id = $2`;
-  pool.query(editAddressQuery, [
-    req.body.person.address,
-    idToUpdate,
-  ])
-  .then(() => {
-    // store query string in route scope
-    const eventsQuery = `
+  pool
+    .query(editAddressQuery, [req.body.person.address, idToUpdate])
+    .then(() => {
+      // store query string in route scope
+      const eventsQuery = `
       UPDATE "events"
       SET ("inscription", "ship_to_me") = ($1, $2)
       WHERE id = $3;`;
-    pool.query(eventsQuery, [
-        req.body.event.inscription,
-        req.body.event.ship_to_me,
-        req.body.eventId,
-    ])
-    .then((result) => {
-      console.log('Updated:', result.rows);
-      // sends response 200 'OK' on successful pool query
-      res.sendStatus(200)
+      pool
+        .query(eventsQuery, [
+          req.body.event.inscription,
+          req.body.event.ship_to_me,
+          req.body.eventId,
+        ])
+        .then((result) => {
+          // sends response 200 'OK' on successful pool query
+          res.sendStatus(200);
+        })
+        .catch((error) => {
+          console.error("Error in UPDATE event and address", error);
+          // sends response 500 'Internal Server Error' on pool query error
+          res.sendStatus(500);
+        });
     })
     .catch((error) => {
-      console.error('Error in UPDATE event and address', error);
+      console.error("Error in UPDATE address", error);
       // sends response 500 'Internal Server Error' on pool query error
       res.sendStatus(500);
     });
-  })
-  .catch((error) => {
-    console.error('Error in UPDATE address', error);
-    // sends response 500 'Internal Server Error' on pool query error
-    res.sendStatus(500);
-  });
 });
 
 module.exports = router;

@@ -1,22 +1,21 @@
-// react, redux, routing
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+// React, Redux, Routing
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 
 // MUI
 import {
   Box,
   Button,
-  ButtonGroup,
   Card,
-  CardActions,
   CardContent,
   Container,
-  Grid,
   Paper,
   Typography,
-} from '@material-ui/core';
+} from "@material-ui/core";
+
+// MUI style
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -33,28 +32,27 @@ const useStyles = makeStyles({
   },
 });
 
-// this component shows the user the people they have entered events for
 export default function ViewPersons() {
-  // hooks
+  // Hooks
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  // state
+  // Redux selector
   const persons = useSelector((store) => store.persons);
 
-  // fetches most recent persons from database
+  // Fetches most recent persons from database
   useEffect(() => {
-    dispatch({ type: 'FETCH_PERSONS' });
+    dispatch({ type: "FETCH_PERSONS" });
   }, []);
 
   return (
     <>
       <Container>
-      <Paper align="center" elevation={4} className={classes.titlePaper}>
-        <Typography align="center" variant="h5">
-          Your People
-        </Typography>
+        <Paper align="center" elevation={4} className={classes.titlePaper}>
+          <Typography align="center" variant="h5">
+            Your People
+          </Typography>
         </Paper>
         {/* maps over persons and creates a card for each */}
         {persons &&
@@ -97,7 +95,7 @@ export default function ViewPersons() {
             variant="contained"
             color="secondary"
             onClick={() => {
-              history.push('/dashboard');
+              history.push("/dashboard");
             }}
           >
             Dashboard
