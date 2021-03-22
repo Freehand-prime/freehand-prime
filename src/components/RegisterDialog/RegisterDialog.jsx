@@ -78,6 +78,8 @@ export default function RegisterDialog({ register, setRegister }) {
                   {errors.registrationMessage}
                 </h3>
               )}
+              Enter an email and password to register. You will receive an email
+              reminder 2 weeks prior to your event!
             </DialogContentText>
             <TextField
               required

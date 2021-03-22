@@ -12,23 +12,19 @@ import {
     InputLabel,
     Select,
     MenuItem,
-    TextField,
-    Typography
+    TextField
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-      maxWidth: 300,
+    selectEmpty: {
+    marginTop: theme.spacing(1),
     },
-    media: {
-        height: 140,
-    },
-    button: {
-        margin: 10,
-    },
+  formControl: {
+      minWidth: 140,
+      marginTop: 20,
+  },
 }));
 
 export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, categories, occasions}) {
@@ -66,25 +62,27 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
     return(
         <>
         <TableCell className={classes.root}>
-            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'front'}/>
+            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'front'} />
         </TableCell>
         <TableCell>
-            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'inside'}/>
+            < S3Uploader addCardData={addCardData} setAddCardData={setAddCardData} image={'inside'} />
         </TableCell>
         <TableCell>
-            <FormControl>
-                <InputLabel>Occasion</InputLabel>
+            <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel color="secondary" id="select-occasion-edit-label">Occasion</InputLabel>
                 <Select 
-                    helpertext="Required"
+                    labelId="select-occasion-edit-label"
+                    label="Occasion"
                     required
-                    defaultValue = "1"
+                    type="text"
+                    color="secondary"
                     value={addCardData.occasion_id}
                     onChange={(event) => setAddCardData({...addCardData, occasion_id: event.target.value})}
                 >
                 {occasions?.map((occasion) => (
                         <MenuItem 
-                            key={occasion.id} 
-                            value={occasion.id} 
+                            key={occasion.id}
+                            value={occasion.id}
                         >
                             {occasion.occasion}
                         </MenuItem>
@@ -95,12 +93,14 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
             </FormControl>
         </TableCell>
         <TableCell>
-            <FormControl>
-                <InputLabel>Category</InputLabel>
-                <Select 
-                    helpertext="Required"
+            <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel color="secondary" id="select-category-edit-label">Category</InputLabel>
+                <Select
+                    labelId="select-category-edit-label"
+                    label="Occasion"
                     required
-                    defaultValue = "1"
+                    type="text"
+                    color="secondary"
                     value={addCardData.category_id}
                     onChange={(event) => setAddCardData({...addCardData, category_id: event.target.value})}
                 >
@@ -117,16 +117,12 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
                 <FormHelperText>Select</FormHelperText>
             </FormControl>
         </TableCell>
-        <TableCell>{card.likes}</TableCell>
         <TableCell>
-            <FormControl>
-                <InputLabel>Artist</InputLabel>
+            <FormControl className={classes.formControl}>
                 <TextField 
-                    className={classes.textField}
-                    helpertext="Required"
                     required
-                    margin="dense"
-                    variant="filled"
+                    label="Artist Name"
+                    variant="outlined"
                     value={addCardData.artist}
                     onChange={(event) => setAddCardData({...addCardData, artist: event.target.value})}
                 />
@@ -134,14 +130,11 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
             </FormControl>
         </TableCell>
         <TableCell>
-            <FormControl>
-                <InputLabel>Details</InputLabel>
+            <FormControl className={classes.formControl}>
                 <TextField 
-                    className={classes.textField}
-                    helpertext="Required"
                     required
-                    margin="dense"
-                    variant="filled"
+                    label="Details"
+                    variant="outlined"
                     value={addCardData.details}
                     onChange={(event) => setAddCardData({...addCardData, details: event.target.value})}
                 />
@@ -154,15 +147,18 @@ export default function AdminCardTableRowEdit({editFlag, setEditFlag, card, cate
                 color="primary"
                 onClick={handleSaveEdit}
             >
+                <SaveIcon/>
                 SAVE
             </Button>
         </TableCell>
         <TableCell>
             <Button 
+                
                 variant="contained"
                 color="secondary"
-                onClick={handleDelete}
+                onClick={handleDelete} 
             >
+                <DeleteIcon/>
                 DELETE
             </Button>
         </TableCell>

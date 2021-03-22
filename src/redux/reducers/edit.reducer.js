@@ -7,11 +7,11 @@ const editEvent = (state = {}, action) => {
         case 'EDIT_NAME':
             return {...state, name: action.payload};
         case 'EDIT_OCCASION':
-            return {...state, occasion: action.payload};
+            return {...state, occasion_id: action.payload};
         case 'EDIT_DATE':
             return {...state, date: action.payload};
         case 'EDIT_CATEGORY':
-            return {...state, category: action.payload};
+            return {...state, category_id: action.payload};
         case 'PICK_CARD':
             return {...state, card_id: action.payload};
         case 'UNSET_EDIT_EVENT':

@@ -8,16 +8,11 @@ import {
     makeStyles,
     Button,
     TableCell,
-    Typography
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-      maxWidth: 300,
-    },
 }));
 
 export default function AdminCardTableRow({card, categories, occasions}) {
@@ -55,8 +50,8 @@ export default function AdminCardTableRow({card, categories, occasions}) {
                 <AdminCardTableRowCard image={card.image_inside}/>
             </TableCell>
             {/*-1 required below since we're mapping a serial to an array id*/}
-            <TableCell>{occasions[card.occasion_id-1]?.occasion}</TableCell>
-            <TableCell>{categories[card.category_id-1]?.category}</TableCell>
+            <TableCell>{card.occasion}</TableCell>
+            <TableCell>{card.category}</TableCell>
             <TableCell>{card.artist}</TableCell>
             <TableCell>{card.details}</TableCell>
             <TableCell>
@@ -65,6 +60,7 @@ export default function AdminCardTableRow({card, categories, occasions}) {
                     color="primary"
                     onClick={handleEdit}
                 >
+                    <EditIcon/>
                     EDIT
                 </Button>
             </TableCell>
@@ -74,6 +70,7 @@ export default function AdminCardTableRow({card, categories, occasions}) {
                     color="secondary"
                     onClick={handleDelete}
                 >
+                    <DeleteIcon/>
                     DELETE
                 </Button>
             </TableCell>

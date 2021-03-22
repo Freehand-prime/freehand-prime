@@ -6,8 +6,11 @@ import AdminAddForm from './AdminAddForm/AdminAddForm';
 
   //MUI
 import { 
+Button,
   makeStyles,
   Paper,
+  Container,
+  Typography,
   Table,
   TableBody,
   TableCell,
@@ -18,18 +21,13 @@ import {
 
   //MUI Styling
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
+    formPaper: {
+        marginBottom: 20,
     },
-    displayCardTable: {
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        padding: 20,
-    },
-    tableRow: {
-        justifyContent: "center"
-    },
+    titlePaper: {
+        marginBottom: 20,
+        padding: 10,
+    }
 }));
 
 /*
@@ -43,61 +41,75 @@ populates the input fields with the card information. The Submit button saves ch
 */
 
 export default function AdminCards() {
+
         //state
     const [isLoaded, setIsLoaded] = useState(false);
+
         //hooks
     const allCards = useSelector((store) => store?.cards);
     const allCategories = useSelector((store) => store?.categories);
     const allOccasions = useSelector((store) => store?.occasions);
+    const history = useHistory();
     const dispatch = useDispatch();
     const classes = useStyles();
+
         //functions
-    const fetchData = async () => {
-        
+    const handleAdminSwap = () => {
+        history.push('/admin');    
+    };
+
+    const fetchData = () => {
         dispatch({type: 'FETCH_ADMIN_CARDS'});
-        
-            setIsLoaded(true);
-        
-    }
+        setIsLoaded(true);
+    };
         //onRender (need to call on every dispatch so we can continouously fetch changes to the cards database)
     useEffect(() => {
             //GET to fill cards, categories, and occasions
         fetchData();
-        //rerender on every dispatch
+            //rerender on every dispatch
     }, [dispatch]);
     return (
-        <div className={classes.root}>
+        <div>
+            <Button onClick={handleAdminSwap}></Button>
             { isLoaded ? 
             <>
-                <AdminAddForm categories={allCategories} occasions={allOccasions}/>
-                <div className={classes.displayCardTable}>
-                    <TableContainer component={Paper}>
-                    <Table aria-label="simple table">
-                        <TableHead>
-                        <TableRow>
-                            <TableCell>Front Image</TableCell>
-                            <TableCell>Inside Image</TableCell>
-                            <TableCell>Occasion</TableCell>
-                            <TableCell>Category</TableCell>
-                            <TableCell>Artist</TableCell>
-                            <TableCell>Details</TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                            {/*If we really want to give the edit and delete rows titles add them here*/}
-                        </TableRow>
-                        </TableHead>
-                        <TableBody>
-                        {allCards.map((card) => (
-        
-                                <TableRow key={ card.id } className={classes.tableRow}>
-                                    <AdminCardTableRow card={card} categories={allCategories} occasions={allOccasions}/>
-                                </TableRow> 
-                            )
-                        )}
-                        </TableBody>
-                    </Table>
-                    </TableContainer>
-                </div>
+            <Container>
+                <Paper className={classes.titlePaper}>
+                <Typography align="center" variant="h5">
+                Admin - Manage Cards
+                </Typography>
+                </Paper>
+
+                    
+                        <Paper className={classes.formPaper}>
+                            <AdminAddForm categories={allCategories} occasions={allOccasions}/>
+                        </Paper>
+                        <TableContainer component={Paper}>
+                        <Table aria-label="simple table">
+                            <TableHead>
+                            <TableRow>
+                                <TableCell>Front Image</TableCell>
+                                <TableCell>Inside Image</TableCell>
+                                <TableCell>Occasion</TableCell>
+                                <TableCell>Category</TableCell>
+                                <TableCell>Artist</TableCell>
+                                <TableCell>Details</TableCell>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
+                            </TableRow>
+                            </TableHead>
+                            <TableBody>
+                            {allCards.map((card) => (
+                                    
+                                    <TableRow key={ card.id }>
+                                        <AdminCardTableRow card={card} categories={allCategories} occasions={allOccasions}/>
+                                    </TableRow> 
+                                )
+                            )}
+                            </TableBody>
+                        </Table>
+                        </TableContainer>
+                    </Container>
             </> 
             :
             <h1>Loading {console.log(isLoaded)}</h1>

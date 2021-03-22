@@ -81,11 +81,11 @@ export default function App() {
             <ShippingConfirm />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/admin" notAdminRedirect="/dashboard">
+          <ProtectedRoute exact path="/admin"> {/*reAdd notAdminRedirect*/}
             <AdminOccasions />
           </ProtectedRoute>
 
-          <ProtectedRoute exact path="/adminCards" notAdminRedirect="/dashboard">
+          <ProtectedRoute exact path="/adminCards"> {/*reAdd notAdminRedirect*/}
             <AdminCards />
           </ProtectedRoute>
 

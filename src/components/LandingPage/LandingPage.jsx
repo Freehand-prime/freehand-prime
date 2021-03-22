@@ -46,14 +46,13 @@ export default function LandingPage() {
         />
         <Typography variant="h6">
           We all lead busy lives with so many things competing for our
-          attention. We all have people that we appreciate with important
-          occasions that we want to celebrate.
+          attention.
         </Typography>
         <Typography variant="h6">
-        Freehand Cards makes sure you
-          never miss another occasion.
+          Freehand Cards makes sure you never miss another occasion, and will
+          deliver our distinctive cards directly to the people you appreciate.
         </Typography>
-        <br/>
+        <br />
         <Button
           className={classes.buttons}
           align="center"

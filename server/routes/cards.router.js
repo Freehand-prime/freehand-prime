@@ -9,7 +9,7 @@ const {
  * routes for cards
  */
 
-// GET cards if authenticated - THIS IS NOT COMPLETE
+// GET cards if authenticated
 router.get("/", rejectUnauthenticated, (req, res) => {
   if (req.isAuthenticated()) {
     // store query string in route scope
