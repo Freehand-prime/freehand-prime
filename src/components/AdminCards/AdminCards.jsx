@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import AdminCardTableRow from './AdminCardTableRow/AdminCardTableRow';
-import AdminAddForm from './AdminAddForm/AdminAddForm';
+// React, Router, Redux
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-  //MUI
-import { 
-Button,
+//MUI
+import {
+  Button,
   makeStyles,
   Paper,
   Container,
@@ -16,18 +15,22 @@ Button,
   TableCell,
   TableContainer,
   TableHead,
-  TableRow
-} from '@material-ui/core';
+  TableRow,
+} from "@material-ui/core";
 
-  //MUI Styling
+// Custom components
+import AdminCardTableRow from "./AdminCardTableRow/AdminCardTableRow";
+import AdminAddForm from "./AdminAddForm/AdminAddForm";
+
+//MUI Styling
 const useStyles = makeStyles((theme) => ({
-    formPaper: {
-        marginBottom: 20,
-    },
-    titlePaper: {
-        marginBottom: 20,
-        padding: 10,
-    }
+  formPaper: {
+    marginBottom: 20,
+  },
+  titlePaper: {
+    marginBottom: 20,
+    padding: 10,
+  },
 }));
 
 /*
@@ -41,79 +44,86 @@ populates the input fields with the card information. The Submit button saves ch
 */
 
 export default function AdminCards() {
+  // State
+  const [isLoaded, setIsLoaded] = useState(false);
 
-        //state
-    const [isLoaded, setIsLoaded] = useState(false);
+  // Hooks
+  const allCards = useSelector((store) => store?.cards);
+  const allCategories = useSelector((store) => store?.categories);
+  const allOccasions = useSelector((store) => store?.occasions);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const classes = useStyles();
 
-        //hooks
-    const allCards = useSelector((store) => store?.cards);
-    const allCategories = useSelector((store) => store?.categories);
-    const allOccasions = useSelector((store) => store?.occasions);
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const classes = useStyles();
+  // Admin swap
+  const handleAdminSwap = () => {
+    history.push("/admin");
+  };
 
-        //functions
-    const handleAdminSwap = () => {
-        history.push('/admin');    
-    };
+  // Fetch data function
+  const fetchData = () => {
+    dispatch({ type: "FETCH_ADMIN_CARDS" });
+    setIsLoaded(true);
+  };
 
-    const fetchData = () => {
-        dispatch({type: 'FETCH_ADMIN_CARDS'});
-        setIsLoaded(true);
-    };
-        //onRender (need to call on every dispatch so we can continouously fetch changes to the cards database)
-    useEffect(() => {
-            //GET to fill cards, categories, and occasions
-        fetchData();
-            //rerender on every dispatch
-    }, [dispatch]);
-    return (
-        <div>
-            <Button onClick={handleAdminSwap}></Button>
-            { isLoaded ? 
-            <>
-            <Container>
-                <Paper className={classes.titlePaper}>
-                <Typography align="center" variant="h5">
+  // onRender (need to call on every dispatch so we can continuously fetch
+  // changes to the cards database)
+  useEffect(() => {
+    //GET to fill cards, categories, and occasions
+    fetchData();
+    //re-render on every dispatch
+  }, [dispatch]);
+
+  return (
+    <div>
+      <Button onClick={handleAdminSwap}></Button>
+      {isLoaded ? (
+        <>
+          <Container>
+            <Paper className={classes.titlePaper}>
+              <Typography align="center" variant="h5">
                 Admin - Manage Cards
-                </Typography>
-                </Paper>
+              </Typography>
+            </Paper>
 
-                    
-                        <Paper className={classes.formPaper}>
-                            <AdminAddForm categories={allCategories} occasions={allOccasions}/>
-                        </Paper>
-                        <TableContainer component={Paper}>
-                        <Table aria-label="simple table">
-                            <TableHead>
-                            <TableRow>
-                                <TableCell>Front Image</TableCell>
-                                <TableCell>Inside Image</TableCell>
-                                <TableCell>Occasion</TableCell>
-                                <TableCell>Category</TableCell>
-                                <TableCell>Artist</TableCell>
-                                <TableCell>Details</TableCell>
-                                <TableCell></TableCell>
-                                <TableCell></TableCell>
-                            </TableRow>
-                            </TableHead>
-                            <TableBody>
-                            {allCards.map((card) => (
-                                    
-                                    <TableRow key={ card.id }>
-                                        <AdminCardTableRow card={card} categories={allCategories} occasions={allOccasions}/>
-                                    </TableRow> 
-                                )
-                            )}
-                            </TableBody>
-                        </Table>
-                        </TableContainer>
-                    </Container>
-            </> 
-            :
-            <h1>Loading {console.log(isLoaded)}</h1>
-            }
-        </div>
-    )
+            <Paper className={classes.formPaper}>
+              <AdminAddForm
+                categories={allCategories}
+                occasions={allOccasions}
+              />
+            </Paper>
+            <TableContainer component={Paper}>
+              <Table aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Front Image</TableCell>
+                    <TableCell>Inside Image</TableCell>
+                    <TableCell>Occasion</TableCell>
+                    <TableCell>Category</TableCell>
+                    <TableCell>Artist</TableCell>
+                    <TableCell>Details</TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {allCards.map((card) => (
+                    <TableRow key={card.id}>
+                      <AdminCardTableRow
+                        card={card}
+                        categories={allCategories}
+                        occasions={allOccasions}
+                      />
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Container>
+        </>
+      ) : (
+        <h1>Loading</h1>
+      )}
+    </div>
+  );
 }

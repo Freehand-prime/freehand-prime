@@ -1,3 +1,4 @@
+// React, Redux, Router
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -25,28 +26,29 @@ export default function ShipSubmitDialog({
   event,
   eventId,
 }) {
-  //hooks
+  // Hooks
   const dispatch = useDispatch();
   const history = useHistory();
-  // const event = useSelector((store) => store.event);
+
+  // Redux selector
   const person = useSelector((store) => store.person);
 
-  //click handlers
+  // click handlers
   const handleSubmit = () => {
-    //close dialog
+    // close dialog
     setOpenSubmit(false);
     dispatch({
       type: "UPDATE_SHIPPING",
       payload: { event, person, personId, eventId },
     });
-    //TODO: dispatch for an order (If we want one to show on admin page)
+    //TODO: dispatch for an order
 
     //redirect to dashboard after order submitted
     history.push("/dashboard");
   };
 
   const handleBack = () => {
-    //close dialog
+    // close dialog
     setOpenSubmit(false);
   };
 
@@ -64,10 +66,17 @@ export default function ShipSubmitDialog({
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
             Your card will be shipped to{" "}
-            {event.ship_to_me ? <>YOU</> : <>{event?.name} at {person?.address}</>}
+            {event.ship_to_me ? (
+              <>YOU</>
+            ) : (
+              <>
+                {event?.name} at {person?.address}
+              </>
+            )}
           </DialogContentText>
           <DialogContentText>
-            We will make sure it gets delivered on {new Date(event?.date).toLocaleDateString('en-US')}
+            We will make sure it gets delivered on{" "}
+            {new Date(event?.date).toLocaleDateString("en-US")}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

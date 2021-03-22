@@ -24,7 +24,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
       })
       .catch((error) => {
         console.error(error);
-        // sends response 500 'Internal Server Error' on pool query error 
+        // sends response 500 'Internal Server Error' on pool query error
         res.sendStatus(500);
       });
   } else {

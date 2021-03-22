@@ -1,20 +1,19 @@
-// hooks
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+// React, Redux, Router
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 // MUI
 import {
+  makeStyles,
   Box,
   Button,
-  Card,
-  CardContent,
   Container,
-  Grid,
   Paper,
   Typography,
-} from '@material-ui/core';
+} from "@material-ui/core";
+
+// MUI style
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -32,62 +31,49 @@ const useStyles = makeStyles({
   },
   buttonBox: {
     marginTop: "6rem",
-    marginBottom: "7rem",
+    marginBottom: "4rem",
+  },
+  nextEvent: {
+    padding: 5,
+    paddingLeft: 15,
   }
 });
 
-import EventCard from '../EventCard/EventCard';
+// Custom components
+import EventCard from "../EventCard/EventCard";
 
-// this component renders the next upcoming event, and allows users to navigate to see their people and add new events
+// This component renders the next upcoming event, and allows users to navigate 
+// to see their people and add new events
 export default function Dashboard() {
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  // SEAN NOTE - still need logic fix for finding the next upcoming event 3/17
+  // NOTE - still need logic fix for finding the next upcoming event 3/17
   const events = useSelector((store) => store.events);
 
-  // fetches the most recent events from the database
+  // Fetches the most recent events from the database
   useEffect(() => {
-    dispatch({ type: 'FETCH_EVENTS' });
-    //clear the person and event redux stores whenever we return to dashboard
-    dispatch({ type: 'CLEAR_INPUT_STORE' });
+    dispatch({ type: "FETCH_EVENTS" });
+    // Clear the person and event redux stores whenever we return to dashboard
+    dispatch({ type: "CLEAR_INPUT_STORE" });
   }, [dispatch]);
 
   return (
     <>
       <Container>
         <Paper align="center" elevation={4} className={classes.titlePaper}>
-        <Typography align="center" variant="h5">
-          Dashboard
-        </Typography>
+          <Typography align="center" variant="h5">
+            Dashboard
+          </Typography>
+        </Paper>
+        <Paper elevation={4} className={classes.nextEvent}>
+          <Typography variant="h6">
+            Your next event is:
+          </Typography>
         </Paper>
         <Paper>
           {events[0] && <EventCard event={events[0]} includeName={true} />}
-          {/* SEAN NOTE DON'T DELETE YET 3/17 <EventCard event={event} /> */}
-          {/* <Card className={classes.root}>
-            <CardContent>
-              <Typography
-                className={classes.title}
-                color="textSecondary"
-                gutterBottom
-              >
-                Next Event - {events[0]?.date}
-              </Typography>
-              <Typography variant="h5" component="h2">
-                {events[0]?.name}
-              </Typography>
-              <Typography className={classes.pos} color="textSecondary">
-                {events[0]?.occasion} | {events[0]?.category}
-              </Typography>
-              <Button
-                size="small"
-                onClick={() => history.push(`/edit/${events[0].event_id}`)}
-              >
-                Edit Event
-              </Button>
-            </CardContent>
-          </Card> */}
         </Paper>
         <br></br>
         <Box justifyContent="center" className={classes.buttonBox}>
@@ -97,7 +83,7 @@ export default function Dashboard() {
               color="primary"
               size="large"
               onClick={() => {
-                history.push('/person');
+                history.push("/person");
               }}
             >
               Who Do You Appreciate?
@@ -110,7 +96,7 @@ export default function Dashboard() {
               variant="contained"
               size="small"
               onClick={() => {
-                history.push('/persons');
+                history.push("/persons");
               }}
             >
               View People

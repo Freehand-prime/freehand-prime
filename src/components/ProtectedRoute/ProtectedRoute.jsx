@@ -1,7 +1,10 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import LoginPage from '../LoginPage/LoginPage';
-import {useSelector} from 'react-redux';
+// React, Router, Redux
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+// Custom components
+import LoginPage from "../LoginPage/LoginPage";
 
 export default function ProtectedRoute(props) {
   const user = useSelector((store) => store.user);
@@ -10,7 +13,7 @@ export default function ProtectedRoute(props) {
   // prop and grabs all other props to pass them along to Route
   const {
     // redirect path to be used if the user is authorized
-    notAdminRedirect, 
+    notAdminRedirect,
     ...otherProps
   } = props;
 
@@ -19,24 +22,24 @@ export default function ProtectedRoute(props) {
 
   let ComponentToShow;
 
-      // if the user is logged in (only logged in users have ids)
-      // show the component that is protected
+  // if the user is logged in (only logged in users have ids)
+  // show the component that is protected
   if (user.id) {
     ComponentToShow = ComponentToProtect;
   } else {
-      // if they are not logged in, check the loginMode on Redux State
-      // if the mode is 'login', show the LoginPage
+    // if they are not logged in, check the loginMode on Redux State
+    // if the mode is 'login', show the LoginPage
     ComponentToShow = LoginPage;
   }
-  
-    //redirect a non-admin, logged in user for admin paths. otherwise, set the component.
+
+  //redirect a non-admin, logged in user for admin paths. otherwise, set the component.
   if (!user.isadmin && notAdminRedirect != null) {
     return <Redirect exact from={otherProps.path} to={notAdminRedirect} />;
-  } else if (user.isadmin){
+  } else if (user.isadmin) {
     ComponentToShow = ComponentToProtect;
   }
 
-    // We return a Route component that gets added to our list of routes
+  // We return a Route component that gets added to our list of routes
   return (
     <Route
       // all props like 'exact' and 'path' that were passed in
@@ -45,6 +48,5 @@ export default function ProtectedRoute(props) {
     >
       <ComponentToShow />
     </Route>
-
   );
 }

@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+// React, Router, Redux
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+// MUI
 import {
-  Grid,
   Typography,
   TextField,
   makeStyles,
@@ -15,6 +17,7 @@ import {
   Button,
 } from "@material-ui/core";
 
+// MUI style
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -22,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
       width: 250,
     },
     "& .MuiSelect-outlined": {
-        width: 250,
-      },
+      width: 250,
+    },
   },
   titlePaper: {
     margin: 10,
@@ -56,23 +59,23 @@ export default function SelectOccasion() {
     dispatch({ type: "FETCH_OCCASIONS" });
   }, []);
 
-  //onClick function to go back to EnterPerson
+  // onClick function to go back to EnterPerson
   const handleBack = () => {
-      // send data to store and user to SelectCategory page
+    // send data to store and user to SelectCategory page
     dispatch({ type: "SET_OCCASION", payload: newEvent.occasion });
     dispatch({ type: "SET_DATE", payload: newEvent.date });
-      // sends user to EnterPerson page
+    // sends user to EnterPerson page
     history.push("/person");
-  }; //end handleBack
+  }; // end handleBack
 
-  //onClick function to submit occasion & date details
+  // onClick function to submit occasion & date details
   const handleContinue = () => {
     // send data to store and user to SelectCategory page
     dispatch({ type: "SET_OCCASION", payload: newEvent.occasion });
     dispatch({ type: "SET_DATE", payload: newEvent.date });
 
     history.push("/category");
-  }; //end handleContinue
+  }; // end handleContinue
 
   useEffect(() => {
     dispatch({ type: "FETCH_OCCASIONS" });
@@ -85,7 +88,9 @@ export default function SelectOccasion() {
       </Paper>
       <Paper align="center" elevation={4} className={classes.formPaper}>
         <FormControl variant="outlined" className={classes.root}>
-          <InputLabel color="secondary" id="select-label">Select Occasion</InputLabel>
+          <InputLabel color="secondary" id="select-label">
+            Select Occasion
+          </InputLabel>
           <Select
             labelId="select-label"
             id="event-occasion"
@@ -108,8 +113,8 @@ export default function SelectOccasion() {
               );
             })}
           </Select>
-          </FormControl>
-          <FormControl color="secondary" className={classes.root}>
+        </FormControl>
+        <FormControl color="secondary" className={classes.root}>
           <TextField
             id="event-date"
             label="enter date"

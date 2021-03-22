@@ -1,7 +1,7 @@
 // React
 import React, { useState } from "react";
 
-// Component
+// Custom components
 import LoginForm from "../LoginForm/LoginForm";
 
 export default function LoginPage() {

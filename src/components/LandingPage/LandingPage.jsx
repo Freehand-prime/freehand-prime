@@ -1,6 +1,9 @@
+// React, Router, Redux
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
+// MUI
 import {
   Paper,
   Button,
@@ -9,6 +12,7 @@ import {
   Container,
 } from "@material-ui/core";
 
+// MUI style
 const useStyles = makeStyles((theme) => ({
   titlePaper: {
     margin: 15,
@@ -22,21 +26,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LandingPage() {
+  // Hooks
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  // Enter person handle
   const enterPersonRedirect = () => {
-    //debug
-    console.log(`Who do you Appreciate?' - Clicked.`);
-    //redirect`'
+    // redirect
     history.push("/person");
   };
 
-  //clear the person and event redux stores whenever we return to landing page
+  // Clear the person and event redux stores whenever we return to landing page
   useEffect(() => {
     dispatch({ type: "CLEAR_INPUT_STORE" });
   }, []);
+
   return (
     <Container>
       <Paper align="center" elevation={4} className={classes.titlePaper}>

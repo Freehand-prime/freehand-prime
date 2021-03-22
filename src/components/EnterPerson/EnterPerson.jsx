@@ -61,20 +61,21 @@ export default function EnterPerson() {
   const person = useSelector((store) => store.person);
   const userPersons = useSelector((store) => store.persons);
 
+  // Get persons if user
   useEffect(() => {
     if (user.id) {
       dispatch({ type: "FETCH_PERSONS" });
     }
   }, []);
 
-  //onClick function to submit person & relationship details
+  // onClick function to submit person & relationship details
   const handleContinue = () => {
     // sends user to EnterOccasion page
     if (selectedPerson.id) {
       dispatch({ type: "SET_EDIT_PERSON", payload: selectedPerson });
     }
     history.push("/occasion");
-  }; //end handleContinue
+  }; // end handleContinue
 
   const handleSelectPerson = (event) => {
     event.preventDefault();
@@ -83,7 +84,7 @@ export default function EnterPerson() {
         setSelectedPerson(person);
       }
     });
-  }; //end handleSelectPerson
+  }; // end handleSelectPerson
 
   // onClick function to go back to Dashboard
   const handleBack = () => {
@@ -92,7 +93,7 @@ export default function EnterPerson() {
     } else {
       history.push("/home");
     }
-  }; //end handleBack
+  }; // end handleBack
 
   return (
     <Container>
@@ -105,7 +106,9 @@ export default function EnterPerson() {
         <FormControl variant="outlined" className={classes.root}>
           {user.id && (
             <>
-              <InputLabel color="secondary" id="select-label">Select Existing Person</InputLabel>
+              <InputLabel color="secondary" id="select-label">
+                Select Existing Person
+              </InputLabel>
               <Select
                 labelId="select-label"
                 id="select-person-name"
@@ -123,7 +126,6 @@ export default function EnterPerson() {
                 })}
               </Select>
               <br />
-              
             </>
           )}
         </FormControl>

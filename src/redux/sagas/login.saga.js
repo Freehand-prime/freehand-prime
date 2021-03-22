@@ -35,7 +35,7 @@ function* loginUser(action) {
       // yield put({type: 'CLEAR_PERSON'})
     }
   } catch (error) {
-    console.log("Error with user login:", error);
+    console.error("Error with user login:", error);
     if (error.response.status === 401) {
       // The 401 is the error status sent from passport
       // if user isn't in the database or
@@ -57,21 +57,21 @@ function* logoutUser(action) {
       withCredentials: true,
     };
     //clear input stores and unset persons and events
-    yield put({ type: 'CLEAR_INPUT_STORE' });
-    yield put({ type: 'UNSET_PERSONS' });
-    yield put({ type: 'UNSET_EVENTS' });
+    yield put({ type: "CLEAR_INPUT_STORE" });
+    yield put({ type: "UNSET_PERSONS" });
+    yield put({ type: "UNSET_EVENTS" });
     // the config includes credentials which
     // allow the server session to recognize the user
     // when the server recognizes the user session
     // it will end the session
     yield axios.post("/api/user/logout", config);
-    
+
     // now that the session has ended on the server
     // remove the client-side user object to let
     // the client-side code know the user is logged out
     yield put({ type: "UNSET_USER" });
   } catch (error) {
-    console.log("Error with user logout:", error);
+    console.error("Error with user logout:", error);
   }
 }
 

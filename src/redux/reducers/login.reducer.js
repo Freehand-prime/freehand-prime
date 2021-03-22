@@ -1,5 +1,4 @@
-// Reducer for login dialog 
-
+// Reducer for login dialog
 const loginReducer = (state = false, action) => {
   switch (action.type) {
     case "LOGIN_OPEN":

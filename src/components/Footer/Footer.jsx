@@ -1,10 +1,10 @@
-// React, Router
+// React
 import React from "react";
 
 // MUI
 import { makeStyles } from "@material-ui/core/styles";
 
-// MUI styling
+// MUI style
 const useStyles = makeStyles({
   root: {
     marginTop: 40,

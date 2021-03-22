@@ -1,10 +1,10 @@
-// react, redux, routing
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+// React, Redux, Router
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-// MUI styling and components
-import { makeStyles } from '@material-ui/core/styles';
+// MUI
+import { makeStyles } from "@material-ui/core/styles";
 import {
   Box,
   Button,
@@ -19,11 +19,13 @@ import {
   Paper,
   TextField,
   Typography,
-} from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import SaveIcon from '@material-ui/icons/Save';
-import AddIcon from '@material-ui/icons/Add';
+} from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
+import SaveIcon from "@material-ui/icons/Save";
+import AddIcon from "@material-ui/icons/Add";
+
+// MUI style
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
@@ -37,71 +39,72 @@ const useStyles = makeStyles({
   titlePaper: {
     marginBottom: 20,
     padding: 10,
-  }
+  },
 });
 
 // this component allows admin users to manage the categories and occasions available for cards in the database
 // they can add new entries, edit existing entries, or delete entries
 export default function AdminOccasions() {
-  // hooks
+  // Hooks
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  // state
+  // State
   const occasions = useSelector((store) => store.occasions);
   const categories = useSelector((store) => store.categories);
 
-  // state for new entries, which entry is being edited, and edited occasion's new value
-  const [addOccasion, setAddOccasion] = useState('');
-  const [addCategory, setAddCategory] = useState('');
+  // State for new entries, which entry is being edited, and edited occasion's new value
+  const [addOccasion, setAddOccasion] = useState("");
+  const [addCategory, setAddCategory] = useState("");
   const [editOccasion, setEditOccasion] = useState(0);
   const [editCategory, setEditCategory] = useState(0);
-  const [editOccasionString, setEditOccasionString] = useState('');
-  const [editCategoryString, setEditCategoryString] = useState('');
+  const [editOccasionString, setEditOccasionString] = useState("");
+  const [editCategoryString, setEditCategoryString] = useState("");
 
-  // fetches most recent occasions and categories from database
+  // Fetches most recent occasions and categories from database
   useEffect(() => {
-    dispatch({ type: 'FETCH_OCCASIONS' });
-    dispatch({ type: 'FETCH_CATEGORIES' });
+    dispatch({ type: "FETCH_OCCASIONS" });
+    dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
 
-  // click listener handles adding new occasion
+  // Click listener handles adding new occasion
   const handleAddOccasion = () => {
-    dispatch({ type: 'ADD_OCCASION', payload: addOccasion });
-    setAddOccasion('');
+    dispatch({ type: "ADD_OCCASION", payload: addOccasion });
+    setAddOccasion("");
   };
 
-  // click listener handles adding new category
+  // Click listener handles adding new category
   const handleAddCategory = () => {
-    dispatch({ type: 'ADD_CATEGORY', payload: addCategory });
-    setAddCategory('');
+    dispatch({ type: "ADD_CATEGORY", payload: addCategory });
+    setAddCategory("");
   };
 
-  // click listener deletes occasion
+  // Click listener deletes occasion
   const handleDeleteOccasion = (id) => {
-    dispatch({ type: 'DELETE_OCCASION', payload: id });
+    dispatch({ type: "DELETE_OCCASION", payload: id });
   };
 
-  // click listener deletes occasion
+  // Click listener deletes occasion
   const handleDeleteCategory = (id) => {
-    dispatch({ type: 'DELETE_CATEGORY', payload: id });
+    dispatch({ type: "DELETE_CATEGORY", payload: id });
   };
 
-  // click listener handles sending updated state of edited occasion to db
+  // Click listener handles sending updated state of edited occasion to db
   const handleOccasionEdit = (occasionToUpdate) => {
-    dispatch({ type: 'UPDATE_OCCASION', payload: occasionToUpdate });
-    setEditOccasionString('');
+    dispatch({ type: "UPDATE_OCCASION", payload: occasionToUpdate });
+    setEditOccasionString("");
   };
 
-  // click listener handles sending updated state of edited category to db
+  // Click listener handles sending updated state of edited category to db
   const handleCategoryEdit = (categoryToUpdate) => {
-    dispatch({ type: 'UPDATE_CATEGORY', payload: categoryToUpdate });
-    setEditCategoryString('');
+    dispatch({ type: "UPDATE_CATEGORY", payload: categoryToUpdate });
+    setEditCategoryString("");
   };
 
+  // Admin swap
   const handleAdminSwap = () => {
-    history.push('/adminCards');    
+    history.push("/adminCards");
   };
 
   return (
@@ -110,9 +113,9 @@ export default function AdminOccasions() {
       <Container>
         <br></br>
         <Paper className={classes.titlePaper}>
-        <Typography align="center" variant="h5">
-          Admin - Manage Occasions and Categories
-        </Typography>
+          <Typography align="center" variant="h5">
+            Admin - Manage Occasions and Categories
+          </Typography>
         </Paper>
         <br></br>
         <Grid container spacing={3}>
