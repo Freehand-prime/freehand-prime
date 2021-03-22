@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from "react";
+// React, Router, Redux
+import React, { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+// MUI
 import {
   InputLabel,
   Typography,
@@ -14,8 +17,10 @@ import {
   Button,
 } from "@material-ui/core";
 
+// Custom components
 import CardCard from "../CardCard/CardCard";
 
+// MUI style
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -136,7 +141,11 @@ export default function EditEvent() {
               />
             </FormControl>
             <br />
-            <FormControl color="secondary" variant="outlined" className={classes.root}>
+            <FormControl
+              color="secondary"
+              variant="outlined"
+              className={classes.root}
+            >
               <InputLabel id="select-occasion-label">
                 Select Occasion
               </InputLabel>

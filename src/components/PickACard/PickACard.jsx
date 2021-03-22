@@ -1,19 +1,22 @@
+// React, Redux, Router
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 
 // MUI
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Grow from "@material-ui/core/Grow";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
+import {
+  makeStyles,
+  Grid,
+  Grow,
+  Button,
+  Typography,
+  Paper,
+} from "@material-ui/core";
 
-// Component
+// Custom components
 import CardCard from "../CardCard/CardCard";
 
-// MUI styling
+// MUI style
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -78,6 +81,7 @@ export default function PickACard() {
     setCards(shuffleCards(sortedCards));
   };
 
+  // Handle back
   const handleBack = () => {
     history.push(`/edit/${id}`);
   };
