@@ -11,7 +11,8 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  ListItemText, 
+  ListItemText,
+  IconButton, 
 } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
