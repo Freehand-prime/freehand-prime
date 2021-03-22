@@ -16,9 +16,6 @@ const useStyles = makeStyles({
   root: {
     minWidth: 275,
   },
-  title: {
-    fontSize: 14,
-  },
   pos: {
     marginBottom: 12,
   },
@@ -37,8 +34,9 @@ export default function EventCard({ event, includeName }) {
             className={classes.title}
             color="textSecondary"
             gutterBottom
+            variant="h6"
           >
-            Next Event - {new Date(event.date).toLocaleDateString("en-US")}
+            {new Date(event.date).toLocaleDateString("en-US")}
           </Typography>
           {includeName && (
             <Typography variant="h5" component="h2">

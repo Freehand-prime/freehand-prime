@@ -31,8 +31,12 @@ const useStyles = makeStyles({
   },
   buttonBox: {
     marginTop: "6rem",
-    marginBottom: "7rem",
+    marginBottom: "4rem",
   },
+  nextEvent: {
+    padding: 5,
+    paddingLeft: 15,
+  }
 });
 
 // Custom components
@@ -61,6 +65,11 @@ export default function Dashboard() {
         <Paper align="center" elevation={4} className={classes.titlePaper}>
           <Typography align="center" variant="h5">
             Dashboard
+          </Typography>
+        </Paper>
+        <Paper elevation={4} className={classes.nextEvent}>
+          <Typography variant="h6">
+            Your next event is:
           </Typography>
         </Paper>
         <Paper>
