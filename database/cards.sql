@@ -10,7 +10,7 @@ VALUES (9, 6, 'https://freehand-prime.s3.us-east-2.amazonaws.com/card1front.jpeg
 (10, 10, 'https://freehand-prime.s3.us-east-2.amazonaws.com/card9front.jpg', 'https://freehand-prime.s3.us-east-2.amazonaws.com/card9inside.jpg', 'Carol Danvers', 'Superhero woman wants some quality time');
 
 INSERT INTO "cards" ("occasion_id", "category_id", "image_front", "image_inside", "artist", "details")
-VALUES (3, 11, 'https://freehand-prime.s3.us-east-2.amazonaws.com/card10front.jpeg', 'https://freehand-prime.s3.us-east-2.amazonaws.com/card10inside.jpeg', 'Ford Prefect', 'Two aliens celebrating your birthday. Dont forget your towel!!'),
+VALUES (3, 10, 'https://freehand-prime.s3.us-east-2.amazonaws.com/card10front.jpeg', 'https://freehand-prime.s3.us-east-2.amazonaws.com/card10inside.jpeg', 'Ford Prefect', 'Two aliens celebrating your birthday. Dont forget your towel!!'),
 (10, 9, 'https://freehand-prime.s3.us-east-2.amazonaws.com/card11front.jpg', 'https://freehand-prime.s3.us-east-2.amazonaws.com/card11inside.jpg', 'Tess Truehart', 'Pop Art woman with something special on her mind'),
 (2, 6, 'https://freehand-prime.s3.us-east-2.amazonaws.com/card12front.jpg', 'https://freehand-prime.s3.us-east-2.amazonaws.com/card12inside.jpg', 'Arthur Dent', 'Woman at a scenic beach'),
 (10, 10, 'https://freehand-prime.s3.us-east-2.amazonaws.com/card13front.jpeg', 'https://freehand-prime.s3.us-east-2.amazonaws.com/card13inside.jpeg', 'Sam Spade', 'Noir Valentine'),
