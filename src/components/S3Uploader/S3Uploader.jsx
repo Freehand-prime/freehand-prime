@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 export default function S3Uploader({ addCardData, setAddCardData, image }) {
   // S3 details
 
-  const s3Url = `${process.env.S3_URL}`;
+  const s3Url = `${process.env.REACT_APP_S3_URL}`;
 
   const classes = useStyles();
 
