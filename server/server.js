@@ -110,7 +110,7 @@ cron.schedule("0 0 * * *", () => {
               emailEvent.name
             } on ${new Date(emailEvent.date).toLocaleDateString("en-US")}
               To pick a card and confirm shipping options for this event, please visit:
-              http://localhost:3000/#/card/${emailEvent.id}`,
+              ${process.env.PUBLIC_URL}/#/card/${emailEvent.id}`,
             replyTo: `${process.env.GMAIL_ADDRESS}`,
           };
           transporter.sendMail(mailOptions, function (err, res) {
