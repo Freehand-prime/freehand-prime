@@ -19,8 +19,6 @@ export default function S3Uploader({ addCardData, setAddCardData, image }) {
 
   const classes = useStyles();
 
-  console.log(s3Url);
-
   // On upload handler
   const handleFinishedUpload = (info) => {
     console.log("File uploaded with filename", info.filename);
