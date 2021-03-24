@@ -7,11 +7,7 @@
 
 ## Description
 
-<<<<<<< HEAD
-_Duration: 2 Week Client Project_
-=======
 _Duration: 2 Week Sprint_
->>>>>>> 9597c9cfb94f9a2c237dd2d4d6557465d35bc3c5
 
 The Freehand Cards app is a service for busy people: people with bosses, employees, family and friends, who have Google calendars that quickly fill up with meetings, deadlines, school plays and doctor's appointments. It's an app for people who don't want to miss acknowledging important occasions for the people who they appreciate, but always seem to find themselves in the greeting card aisle at a drug store trying to find the best card from the available options. 
 
@@ -25,7 +21,9 @@ To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.he
 
 ## Screen Shot
 
-Include one or two screen shots of your project here (optional). Remove if unused.
+![Landing Page](documentation/images/Freehand-V1.png)
+![Pick a Card View](documentation/images/Freehand-V8.png)
+![Admin Cards View](documentation/images/AdminCards.png)
 
 ### Prerequisites
 
