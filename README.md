@@ -18,6 +18,8 @@ To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.he
 ## Screen Shot
 
 ![Landing Page](documentation/images/Freehand-V1.png)
+![Dashboard View](documentation/images/Freehand-V4.png)
+![View Persons View](documentation/images/Freehand-V6.png)
 ![Pick a Card View](documentation/images/Freehand-V8.png)
 ![Admin Cards View](documentation/images/AdminCards.png)
 
