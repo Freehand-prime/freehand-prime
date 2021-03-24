@@ -12,6 +12,8 @@ import {
   Container,
 } from "@material-ui/core";
 
+import tplogo from "./tplogo.png";
+
 // MUI style
 const useStyles = makeStyles((theme) => ({
   titlePaper: {
@@ -46,7 +48,7 @@ export default function LandingPage() {
     <Container>
       <Paper align="center" elevation={4} className={classes.titlePaper}>
         <img
-          src="./tplogo.png"
+          src={tplogo}
           alt="Freehand Cards Logo"
         />
         <Typography variant="h6">
