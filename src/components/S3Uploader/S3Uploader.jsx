@@ -14,8 +14,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function S3Uploader({ addCardData, setAddCardData, image }) {
   // S3 details
-  const uploadOptions = { server: `https://freehand-cards.herokuapp.com/` };
-  const s3Url = `https://freehand-prime.s3.amazonaws.com`;
+
+  const s3Url = `${process.env.S3_URL}`;
 
   const classes = useStyles();
 
@@ -37,7 +37,7 @@ export default function S3Uploader({ addCardData, setAddCardData, image }) {
         onFinish={handleFinishedUpload}
         s3Url={s3Url}
         maxSize={1024 * 1024 * 5}
-        upload={uploadOptions}
+        upload={{}}
       />
       {image} image
     </>
