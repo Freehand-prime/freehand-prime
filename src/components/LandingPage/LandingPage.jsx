@@ -46,7 +46,7 @@ export default function LandingPage() {
     <Container>
       <Paper align="center" elevation={4} className={classes.titlePaper}>
         <img
-          src="https://freehand-prime.s3.us-east-2.amazonaws.com/tplogo.png"
+          src="./tplogo.png"
           alt="Freehand Cards Logo"
         />
         <Typography variant="h6">
