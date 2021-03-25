@@ -27,12 +27,36 @@ To see the fully functional site, please visit: [FREEHAND CARDS](https://freehan
 
 ## Prerequisites & Installation
 
-1. Create a database named `your database name`,
-2. The queries in the `tables.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries, 
-3. Open up your editor of choice and run an `npm install`
+1a. The project database is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. 
+
+1b.We recommend using Postico to run those queries as that was used to create the queries, or pgAdmin if running postgres from a Windows PC. If running on Windows, you will need to enter your username and password for your postgres server in the .env file as described below.
+
+1c. Create a local PostgreSQL database named `freehand`.
+
+1d. The queries in the `database.sql` file are set up to create all the necessary tables. `cards.sql` `categories.sql` `Events.sql` `Occasions.sql` and `Persons.sql` populate the needed data to allow the application to run correctly.
+
+1e. You may elevate accounts in "user" to administrators by setting the "isAdmin" flag to true. There is currently no in-app functionality to change this variable.
+
+2. Open up your javascript IDE of choice and install Node and its current dependencies by running an `npm install` from your terminal. Refer to package.json for a list of dependencies.
+
+3. You will need to set up a .env file with the following configuration settings. Note some of these settings are required for Heroku deployment only:
+
+SERVER_SESSION_SECRET (Heroku deployment) A random secret string for passport.js module security.
+    NOTE: ./server/constants/warnings.js will yell at you if your secret is < 8 characters or “superDuperSecret”.
+DATABASE_URL (Heroku deployment) database URL to connect to live database on Heroku. You can find this link 
+PG_USER – PostgreSQL username used in ./server/modules/pool.js module to connect to a LOCAL database.
+PG_SECRET - PostgreSQL password used in ./server/modules/pool.js module to connect to a LOCAL database.
+REACT_APP_S3_URL – Amazon AWS S3 bucket URL. Required for Dropzone S3 image upload.
+AWS_ACCESS_KEY_ID – Amazon AWS S3 bucket Access Key ID. Required for Dropzone S3 image upload.
+AWS_SECRET_ACCESS_KEY – Amazon AWS S3 bucket Secret Access Key. Required for Dropzone S3 image upload.
+AWS_S3_BUCKET - Amazon AWS S3 bucket name. Required for Dropzone S3 image upload.
+AWS_S3_REGION - Amazon AWS S3 region name. Required for Dropzone S3 image upload.
+GMAIL_ADDRESS – Outgoing email account for Nodemailer integration.
+GMAIL_PASS - Outgoing email account for Nodemailer integration.
+
 4. Run `npm run server` in your terminal
 5. Run `npm run client` in your terminal
-6. The `npm run client` command will open up a new browser tab for you!
+6. The `npm run client` command will open up a new browser tab for you which should launch the client app at localhost:3000 and the server at localhost:5000.
 
 ## Usage
 
