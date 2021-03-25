@@ -13,7 +13,7 @@ The app features a dashboard that highlights the next event that the user has re
 
 There are 2 Admin view pages, one to add new cards to the database and a second to add Categories and Occasions to the app, expanding the options for card selection/ management.
 
-To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
+To see the fully functional site, please visit: [FREEHAND CARDS](https://freehand-cards.herokuapp.com/)
 
 ## Screen Shot
 
@@ -27,10 +27,6 @@ To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.he
 
 ## Prerequisites & Installation
 
-How do you get your application up and running? This is a step by step list for how another developer could get this project up and running. The good target audience in terms of knowledge, would be a fellow Primer from another cohort being able to spin up this project. Note that you do not need a paragraph here to intro Installation. It should be step-by-step.
-
-If your application has secret keys (for example --  Twilio), make sure you tell them how to set that up, both in getting the key and then what to call it in the `.env` file.
-
 1. Create a database named `your database name`,
 2. The queries in the `tables.sql` file are set up to create all the necessary tables and populate the needed data to allow the application to run correctly. The project is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. We recommend using Postico to run those queries as that was used to create the queries, 
 3. Open up your editor of choice and run an `npm install`
@@ -39,7 +35,6 @@ If your application has secret keys (for example --  Twilio), make sure you tell
 6. The `npm run client` command will open up a new browser tab for you!
 
 ## Usage
-How does someone use this application? Tell a user story here.
 
 1. When the app opens, the user finds themselves at the landing page. There is a pleasant introduction to the purpose of the app and a button that says "Who do you appreciate?" The user presses the button. A returning user can press the hamburger menu and chose to log in and skip to Step 6.
 2. The user is asked to enter the name of a person they appreciate and their relationship. (if the user is logged in, they will also see a Select menu of people they've already included in the app). The user presses continue.
@@ -64,7 +59,7 @@ React, Redux, Nodejs, Express, PostgreSql, Material-UI, Nodemailer, Node-Cron, A
 
 
 ## Acknowledgement
-Thanks to our client, Paul Germo for allowing us to develop this app for him. We're excited to see where you take this idea next! We'd like to thank the instructors and staff at [Prime Digital Academy](www.primeacademy.io) who gave us the skills to develop this project, especially Dane Smith - we've grown into the coders that we are in your class. And thank you to our classmates in the Zhu Cohort for growing with us during the last 20 weeks!
+Thanks to our client, Paul Germo for allowing us to develop this app for him. We're excited to see where you take this idea next! We'd like to thank the instructors and staff at [Prime Digital Academy](https://www.primeacademy.io) who gave us the skills to develop this project, especially Dane Smith - we've grown into the coders that we are in your class. And thank you to our classmates in the Zhu Cohort for growing with us during the last 20 weeks!
 
 ![Dev Team](documentation/images/dev-team.png)
 
