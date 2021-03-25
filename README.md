@@ -37,7 +37,7 @@ To see the fully functional site, please visit: [FREEHAND CARDS](https://freehan
 
 1e. You may elevate accounts in "user" to administrators by setting the "isAdmin" flag to true. There is currently no in-app functionality to change this variable.
 
-<ERD GOES BRRRRRRRR>
+## ERD GOES BRRRRRRRR
 
 2. Open up your javascript IDE of choice and install Node and its current dependencies by running an `npm install` from your terminal. Refer to package.json for a list of dependencies.
 
