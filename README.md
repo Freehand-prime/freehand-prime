@@ -29,21 +29,21 @@ To see the fully functional site, please visit: [FREEHAND CARDS](https://freehan
 
 1a. The project database is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. 
 
-1b. We recommend using Postico to run those queries as that was used to create the queries, or pgAdmin if running postgres from a Windows PC. If running on Windows, you will need to enter your username and password for your postgres server in the .env file as described below.
+1b. We recommend using [Postico](https://eggerapps.at/postico/) to run those queries as that was used to create the queries, or [pgAdmin](https://www.pgadmin.org/) if running Postgres from a Windows PC. If running on Windows, you will need to enter your username and password for your Postgres server in the .env file as described below.
 
 1c. Create a local PostgreSQL database named `freehand`.
 
 1d. The queries in the `database.sql` file are set up to create all the necessary tables. `cards.sql` `categories.sql` `Events.sql` `Occasions.sql` and `Persons.sql` populate the needed data to allow the application to run correctly.
 
-1e. You may elevate accounts in "user" to administrators by setting the "isAdmin" flag to true. There is currently no in-app functionality to change this variable.
+1e. You may elevate accounts in `"user"` to administrators by setting the `isAdmin` flag to `TRUE`. There is currently no in-app functionality to change this variable.
 
-## ERD GOES BRRRRRRRR
+![Entity Relationship Diagram](documentation/images/ERD.png)
 
 2. Open up your javascript IDE of choice and install Node and its current dependencies by running an `npm install` from your terminal. Refer to `package.json` for a list of dependencies.
 
 3. You will need to set up a .env file with the following configuration settings. Note some of these settings are required for Heroku deployment only:
 
-- `SERVER_SESSION_SECRET` (Heroku deployment) A random secret string for passport.js module security.
+- `SERVER_SESSION_SECRET` (Heroku deployment) A random secret string for Heroku.
     NOTE: ./server/constants/warnings.js will yell at you if your secret is < 8 characters or “superDuperSecret”.
 - `DATABASE_URL` (Heroku deployment) database URL to connect to live database on Heroku. You can find this link.
 - `PG_USER` – PostgreSQL username used in ./server/modules/pool.js module to connect to a LOCAL database.
