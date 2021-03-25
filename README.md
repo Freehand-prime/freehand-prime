@@ -64,9 +64,13 @@ React, Redux, Nodejs, Express, PostgreSql, Material-UI, Nodemailer, Node-Cron, A
 
 
 ## Acknowledgement
-Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. (Thank your people)
+Thanks to our client, Paul Germo for allowing us to develop this app for him. We're excited to see where you take this idea next! We'd like to thank the instructors and staff at [Prime Digital Academy](www.primeacademy.io) who gave us the skills to develop this project, especially Dane Smith - we've grown into the coders that we are in your class. And thank you to our classmates in the Zhu Cohort for growing with us during the last 20 weeks!
 
 ![Dev Team](documentation/images/dev-team.png)
 
 ## Support
-If you have suggestions or issues, please email me at [youremail@whatever.com](www.google.com)
+If you have questions, concerns or suggestions, feel free to contact any of the developers behind this project:
+- [Mike Dunn](https://github.com/dunnmj42) -- dunnmj42@gmail.com
+- [Nate MacLaurin](https://github.com/NateMacLaurin) -- nathan.w.maclaurin@gmail.com
+- [Sean Wade](https://github.com/swadezy) -- smwade1115@gmail.com
+- [Thomas Rohde](https://github.com/trohde13) -- rohde.t@gmail.com
