@@ -44,8 +44,7 @@ To see the fully functional site, please visit: [FREEHAND CARDS](https://freehan
 3. You will need to set up a .env file with the following configuration settings. Note some of these settings are required for Heroku deployment only:
 
 - `SERVER_SESSION_SECRET` (Heroku deployment) A random secret string for Heroku.
-    NOTE: ./server/constants/warnings.js will yell at you if your secret is < 8 characters or “superDuperSecret”.
-- `DATABASE_URL` (Heroku deployment) database URL to connect to live database on Heroku. You can find this link.
+- `DATABASE_URL` (Heroku deployment) database URL to connect to live database on Heroku.
 - `PG_USER` – PostgreSQL username used in ./server/modules/pool.js module to connect to a LOCAL database.
 - `PG_SECRET` - PostgreSQL password used in ./server/modules/pool.js module to connect to a LOCAL database.
 - `REACT_APP_S3_URL` – Amazon AWS S3 bucket URL. Required for Dropzone S3 image upload.
