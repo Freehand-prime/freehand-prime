@@ -43,18 +43,18 @@ To see the fully functional site, please visit: [FREEHAND CARDS](https://freehan
 
 3. You will need to set up a .env file with the following configuration settings. Note some of these settings are required for Heroku deployment only:
 
-# SERVER_SESSION_SECRET (Heroku deployment) A random secret string for passport.js module security.
+- SERVER_SESSION_SECRET (Heroku deployment) A random secret string for passport.js module security.
     NOTE: ./server/constants/warnings.js will yell at you if your secret is < 8 characters or “superDuperSecret”.
-# DATABASE_URL (Heroku deployment) database URL to connect to live database on Heroku. You can find this link.
-# PG_USER – PostgreSQL username used in ./server/modules/pool.js module to connect to a LOCAL database.
-# PG_SECRET - PostgreSQL password used in ./server/modules/pool.js module to connect to a LOCAL database.
-# REACT_APP_S3_URL – Amazon AWS S3 bucket URL. Required for Dropzone S3 image upload.
-# AWS_ACCESS_KEY_ID – Amazon AWS S3 bucket Access Key ID. Required for Dropzone S3 image upload.
-# AWS_SECRET_ACCESS_KEY – Amazon AWS S3 bucket Secret Access Key. Required for Dropzone S3 image upload.
-# AWS_S3_BUCKET - Amazon AWS S3 bucket name. Required for Dropzone S3 image upload.
-# AWS_S3_REGION - Amazon AWS S3 region name. Required for Dropzone S3 image upload.
-# GMAIL_ADDRESS – Outgoing email account for Nodemailer integration.
-# GMAIL_PASS - Outgoing email account for Nodemailer integration.
+- DATABASE_URL (Heroku deployment) database URL to connect to live database on Heroku. You can find this link.
+- PG_USER – PostgreSQL username used in ./server/modules/pool.js module to connect to a LOCAL database.
+- PG_SECRET - PostgreSQL password used in ./server/modules/pool.js module to connect to a LOCAL database.
+- REACT_APP_S3_URL – Amazon AWS S3 bucket URL. Required for Dropzone S3 image upload.
+- AWS_ACCESS_KEY_ID – Amazon AWS S3 bucket Access Key ID. Required for Dropzone S3 image upload.
+- AWS_SECRET_ACCESS_KEY – Amazon AWS S3 bucket Secret Access Key. Required for Dropzone S3 image upload.
+- AWS_S3_BUCKET - Amazon AWS S3 bucket name. Required for Dropzone S3 image upload.
+- AWS_S3_REGION - Amazon AWS S3 region name. Required for Dropzone S3 image upload.
+- GMAIL_ADDRESS – Outgoing email account for Nodemailer integration.
+- GMAIL_PASS - Outgoing email account for Nodemailer integration.
 
 4. Run `npm run server` in your terminal
 5. Run `npm run client` in your terminal
