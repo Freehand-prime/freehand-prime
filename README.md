@@ -29,7 +29,7 @@ To see the fully functional site, please visit: [FREEHAND CARDS](https://freehan
 
 1a. The project database is built on [Postgres](https://www.postgresql.org/download/), so you will need to make sure to have that installed. 
 
-1b.We recommend using Postico to run those queries as that was used to create the queries, or pgAdmin if running postgres from a Windows PC. If running on Windows, you will need to enter your username and password for your postgres server in the .env file as described below.
+1b. We recommend using Postico to run those queries as that was used to create the queries, or pgAdmin if running postgres from a Windows PC. If running on Windows, you will need to enter your username and password for your postgres server in the .env file as described below.
 
 1c. Create a local PostgreSQL database named `freehand`.
 
@@ -45,7 +45,7 @@ To see the fully functional site, please visit: [FREEHAND CARDS](https://freehan
 
 SERVER_SESSION_SECRET (Heroku deployment) A random secret string for passport.js module security.
     NOTE: ./server/constants/warnings.js will yell at you if your secret is < 8 characters or “superDuperSecret”.
-DATABASE_URL (Heroku deployment) database URL to connect to live database on Heroku. You can find this link 
+DATABASE_URL (Heroku deployment) database URL to connect to live database on Heroku. You can find this link.
 PG_USER – PostgreSQL username used in ./server/modules/pool.js module to connect to a LOCAL database.
 PG_SECRET - PostgreSQL password used in ./server/modules/pool.js module to connect to a LOCAL database.
 REACT_APP_S3_URL – Amazon AWS S3 bucket URL. Required for Dropzone S3 image upload.
