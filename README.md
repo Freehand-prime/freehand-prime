@@ -55,9 +55,9 @@ To see the fully functional site, please visit: [FREEHAND CARDS](https://freehan
 - `GMAIL_ADDRESS` – Outgoing email account for Nodemailer integration.
 - `GMAIL_PASS` - Outgoing email account for Nodemailer integration.
 
-4. Run `npm run server` in your terminal
-5. Run `npm run client` in your terminal
-6. The `npm run client` command will open up a new browser tab for you which should launch the client app at localhost:3000 and the server at localhost:5000.
+4. Run `npm run server` in your terminal. This will launch the node server at localhost:5000
+5. Run `npm run client` in your terminal. This will launch the node client at localhost:3000
+6. The `npm run client` command will open up a new browser tab for you which should launch the client app.
 
 ## Usage
 
