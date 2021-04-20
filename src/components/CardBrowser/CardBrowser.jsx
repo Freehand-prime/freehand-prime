@@ -48,7 +48,7 @@ export default function CardBrowser() {
 
   // Handle back
   const handleBack = () => {
-    history.push(`/edit/${id}`);
+    history.push(`/home`);
   };
 
   // UseEffect for GET cards
