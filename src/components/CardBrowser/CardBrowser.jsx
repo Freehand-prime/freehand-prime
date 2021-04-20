@@ -1,3 +1,8 @@
+// React, Redux, Router
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
+
 // MUI
 import {
   makeStyles,
@@ -74,7 +79,7 @@ export default function CardBrowser() {
           return (
             <Grow in={true} key={i}>
               <Grid item key={i}>
-                <CardCard card={card} buttonTitle={buttonTitle} eventId={id} />
+                <CardCard card={card} />
               </Grid>
             </Grow>
           );
@@ -89,7 +94,7 @@ export default function CardBrowser() {
             color="secondary"
             onClick={handleBack}
           >
-            Edit Event Details
+            Back
           </Button>
         </center>
       </div>
