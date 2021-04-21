@@ -11,7 +11,11 @@ import {
   Button,
   Typography,
   Paper,
+  IconButton,
+  InputAdornment,
+  TextField,
 } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 
 // Custom components
 import CardCard from "../CardCard/CardCard";
@@ -38,12 +42,19 @@ const useStyles = makeStyles((theme) => ({
   buttonDiv: {
     marginTop: 20,
   },
+  searchPaper: {
+    marginBottom: 20,
+    alignItems: "center",
+  },
 }));
 
 export default function CardBrowser() {
 
+  // State for search
+  const [search, setSearch] = useState(null);
+
   // Cards selector
-  const cards = useSelector((store) => store?.cards);
+  const unsortedCards = useSelector((store) => store?.cards);
 
   // Hooks
   const classes = useStyles();
@@ -61,13 +72,48 @@ export default function CardBrowser() {
     dispatch({ type: "FETCH_CARDS" });
   }, []);
 
+  // SEARCH function
+  const cards = unsortedCards.filter((card) => {
+    if (search == null) return unsortedCards;
+    else if (card?.artist?.toLowerCase().includes(search.toLowerCase()) || card?.details?.toLowerCase().includes(search.toLowerCase()))
+      return card;
+  });
+
   return (
-    <div className={classes.gridDiv}>
+    <>
+      <div className={classes.gridDiv}>
       <Paper align="center" elevation={4} className={classes.titlePaper}>
         <Typography gutterBottom align="center" variant="h5" component="h2">
           Tap a card image to see the inside view
         </Typography>
       </Paper>
+      </div>
+      <div className={classes.gridDiv}>
+      <Grow in={true}>
+        <Paper component="form" className={classes.searchPaper}>
+          <TextField
+            id="search"
+            placeholder="Search"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    type="submit"
+                    className={classes.iconButton}
+                    aria-label="search"
+                  >
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            variant="outlined"
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </Paper>
+      </Grow>
+      </div>
+      <div className={classes.gridDiv}>
       <Grid
         container
         spacing={3}
@@ -99,5 +145,6 @@ export default function CardBrowser() {
         </center>
       </div>
     </div>
+    </>
   );
 }
