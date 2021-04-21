@@ -59,7 +59,7 @@ export default function NavDrawer({ open, setOpen }) {
       onClick: () => history.push("/dashboard"),
     },
     {
-      text: "View All Cards",
+      text: "Card Gallery",
       icon: <CollectionsIcon color="secondary" />,
       onClick: () => history.push("/cards"),
     },

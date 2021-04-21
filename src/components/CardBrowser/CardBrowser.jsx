@@ -1,7 +1,7 @@
 // React, Redux, Router
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // MUI
 import {
@@ -55,6 +55,8 @@ export default function CardBrowser() {
 
   // Cards selector
   const unsortedCards = useSelector((store) => store?.cards);
+  // User selector
+  const user = useSelector((store) => store.user);
 
   // Hooks
   const classes = useStyles();
@@ -64,7 +66,11 @@ export default function CardBrowser() {
 
   // Handle back
   const handleBack = () => {
-    history.push(`/home`);
+    if (user.id) {
+      history.push(`/dashboard`)
+    } else {
+      history.push(`/home`);
+    }
   };
 
   // UseEffect for GET cards
@@ -140,7 +146,7 @@ export default function CardBrowser() {
             color="secondary"
             onClick={handleBack}
           >
-            Back
+            Exit Gallery
           </Button>
         </center>
       </div>
