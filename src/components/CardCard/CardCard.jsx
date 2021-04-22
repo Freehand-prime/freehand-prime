@@ -89,10 +89,10 @@ export default function CardCard({ card, buttonTitle, eventId }) {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
-          {buttonTitle && (
-            <>
-              {cardPicked ? (
+        {buttonTitle && (
+          <>
+            {cardPicked ? (
+              <CardActions>
                 <Button
                   size="small"
                   color="secondary"
@@ -100,14 +100,16 @@ export default function CardCard({ card, buttonTitle, eventId }) {
                 >
                   {buttonTitle}
                 </Button>
-              ) : (
+              </CardActions>
+            ) : (
+              <CardActions>
                 <Button size="small" color="secondary" onClick={handleConfirm}>
                   {buttonTitle}
                 </Button>
-              )}
-            </>
-          )}
-        </CardActions>
+              </CardActions>
+            )}
+          </>
+        )}
       </Card>
       <ConfirmDialog
         openConfirm={openConfirm}
