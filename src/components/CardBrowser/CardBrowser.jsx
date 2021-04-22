@@ -49,7 +49,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CardBrowser() {
-
   // State for search
   const [search, setSearch] = useState(null);
 
@@ -63,11 +62,10 @@ export default function CardBrowser() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-
   // Handle back
   const handleBack = () => {
     if (user.id) {
-      history.push(`/dashboard`)
+      history.push(`/dashboard`);
     } else {
       history.push(`/home`);
     }
@@ -81,76 +79,79 @@ export default function CardBrowser() {
   // SEARCH function
   const cards = unsortedCards.filter((card) => {
     if (search == null) return unsortedCards;
-    else if (card?.artist?.toLowerCase().includes(search.toLowerCase()) || card?.details?.toLowerCase().includes(search.toLowerCase()))
+    else if (
+      card?.artist?.toLowerCase().includes(search.toLowerCase()) ||
+      card?.details?.toLowerCase().includes(search.toLowerCase())
+    )
       return card;
   });
 
   return (
     <>
       <div className={classes.gridDiv}>
-      <Paper align="center" elevation={4} className={classes.titlePaper}>
-        <Typography gutterBottom align="center" variant="h5" component="h2">
-          Tap a card image to see the inside view
-        </Typography>
-      </Paper>
-      </div>
-      <div className={classes.gridDiv}>
-      <Grow in={true}>
-        <Paper component="form" className={classes.searchPaper}>
-          <TextField
-            id="search"
-            placeholder="Search"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    type="submit"
-                    className={classes.iconButton}
-                    aria-label="search"
-                  >
-                    <SearchIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            variant="outlined"
-            onChange={(e) => setSearch(e.target.value)}
-          />
+        <Paper align="center" elevation={4} className={classes.titlePaper}>
+          <Typography gutterBottom align="center" variant="h5" component="h2">
+            Tap a card image to see the inside view
+          </Typography>
         </Paper>
-      </Grow>
       </div>
       <div className={classes.gridDiv}>
-      <Grid
-        container
-        spacing={3}
-        justify="center"
-        alignItems="center"
-        className={classes.root}
-      >
-        {cards?.map((card, i) => {
-          return (
-            <Grow in={true} key={i}>
-              <Grid item key={i}>
-                <CardCard card={card} />
-              </Grid>
-            </Grow>
-          );
-        })}
-      </Grid>
-      <br />
-      <div className={classes.buttonDiv}>
-        <center>
-          <Button
-            className={classes.button}
-            variant="contained"
-            color="secondary"
-            onClick={handleBack}
-          >
-            Exit Gallery
-          </Button>
-        </center>
+        <Grow in={true}>
+          <Paper component="form" className={classes.searchPaper}>
+            <TextField
+              id="search"
+              placeholder="Search"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      type="submit"
+                      className={classes.iconButton}
+                      aria-label="search"
+                    >
+                      <SearchIcon />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              variant="outlined"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </Paper>
+        </Grow>
       </div>
-    </div>
+      <div className={classes.gridDiv}>
+        <Grid
+          container
+          spacing={3}
+          justify="center"
+          alignItems="center"
+          className={classes.root}
+        >
+          {cards?.map((card, i) => {
+            return (
+              <Grow in={true} key={i}>
+                <Grid item key={i}>
+                  <CardCard card={card} />
+                </Grid>
+              </Grow>
+            );
+          })}
+        </Grid>
+        <br />
+        <div className={classes.buttonDiv}>
+          <center>
+            <Button
+              className={classes.button}
+              variant="contained"
+              color="secondary"
+              onClick={handleBack}
+            >
+              Exit Gallery
+            </Button>
+          </center>
+        </div>
+      </div>
     </>
   );
 }
