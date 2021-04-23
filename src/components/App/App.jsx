@@ -24,6 +24,7 @@ import PickACard from "../PickACard/PickACard";
 import ShippingConfirm from "../ShippingConfirm/ShippingConfirm";
 import AdminCards from "../AdminCards/AdminCards";
 import AdminOccasions from "../AdminOccasions/AdminOccasions";
+import CardBrowser from "../CardBrowser/CardBrowser";
 import "./App.css";
 
 export default function App() {
@@ -58,6 +59,10 @@ export default function App() {
             <SelectCategory />
           </Route>
 
+          <Route exact path="/cards">
+            <CardBrowser />
+          </Route>
+          
           <ProtectedRoute exact path="/dashboard">
             <Dashboard />
           </ProtectedRoute>

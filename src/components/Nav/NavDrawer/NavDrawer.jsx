@@ -20,6 +20,7 @@ import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
+import CollectionsIcon from '@material-ui/icons/Collections';
 
 // Custom components
 import LogoutDialog from "../../LogoutDialog/LogoutDialog";
@@ -56,6 +57,11 @@ export default function NavDrawer({ open, setOpen }) {
       text: "Dashboard",
       icon: <AccountCircleIcon color="secondary" />,
       onClick: () => history.push("/dashboard"),
+    },
+    {
+      text: "Card Gallery",
+      icon: <CollectionsIcon color="secondary" />,
+      onClick: () => history.push("/cards"),
     },
     {
       text: "View People",

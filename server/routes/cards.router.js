@@ -9,9 +9,8 @@ const {
  * routes for cards
  */
 
-// GET cards if authenticated
-router.get("/", rejectUnauthenticated, (req, res) => {
-  if (req.isAuthenticated()) {
+// GET cards
+router.get("/", (req, res) => {
     // store query string in route scope
     const query = `
       SELECT * FROM "cards"
@@ -27,10 +26,6 @@ router.get("/", rejectUnauthenticated, (req, res) => {
         // sends response 500 'Internal Server Error' on pool query error
         res.sendStatus(500);
       });
-  } else {
-    // send response 403 'Forbidden' if user is not authenticated
-    res.sendStatus(403);
-  }
 });
 
 module.exports = router;

@@ -89,25 +89,27 @@ export default function CardCard({ card, buttonTitle, eventId }) {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
           {buttonTitle && (
             <>
               {cardPicked ? (
-                <Button
-                  size="small"
-                  color="secondary"
-                  onClick={() => history.push(`/card/${eventId}`)}
-                >
-                  {buttonTitle}
-                </Button>
+                <CardActions>
+                  <Button
+                    size="small"
+                    color="secondary"
+                    onClick={() => history.push(`/card/${eventId}`)}
+                  >
+                    {buttonTitle}
+                  </Button>
+                </CardActions>
               ) : (
-                <Button size="small" color="secondary" onClick={handleConfirm}>
-                  {buttonTitle}
-                </Button>
+                <CardActions>
+                  <Button size="small" color="secondary" onClick={handleConfirm}>
+                    {buttonTitle}
+                  </Button>
+                </CardActions>
               )}
             </>
           )}
-        </CardActions>
       </Card>
       <ConfirmDialog
         openConfirm={openConfirm}
